@@ -240,7 +240,67 @@ define([
       return Number(n).toLocaleString('en-LY', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     };
 
-    self.handleActivated = function () {};
+    // ── Carousel scroll sync ──────────────────────────────────
+    var _scrollLock = false;
+
+    self._scrollCarouselTo = function (idx) {
+      _scrollLock = true;
+      var tracks = document.querySelectorAll('.card-crsl-track');
+      tracks.forEach(function (track) {
+        if (!track.offsetParent) return;
+        var cards = track.querySelectorAll('.ccard');
+        if (!cards[idx]) return;
+        var card = cards[idx];
+        var targetLeft = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+        track.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      });
+      setTimeout(function () { _scrollLock = false; }, 500);
+    };
+
+    // Only scroll when index changes from a dot/tab click (not from scroll itself)
+    var _indexChangedByUser = false;
+    self.activeIndex.subscribe(function (idx) {
+      if (!_indexChangedByUser) { _indexChangedByUser = true; self._scrollCarouselTo(idx); _indexChangedByUser = false; }
+    });
+
+    self.handleActivated = function () {
+      setTimeout(function () {
+        var tracks = document.querySelectorAll('.card-crsl-track');
+        tracks.forEach(function (track) {
+          var _debounce = null;
+          track.addEventListener('scroll', function () {
+            if (_scrollLock || !track.offsetParent) return;
+            clearTimeout(_debounce);
+            _debounce = setTimeout(function () {
+              var cards = Array.from(track.querySelectorAll('.ccard'));
+              if (!cards.length) return;
+              var trackCenter = track.scrollLeft + track.clientWidth / 2;
+              var closestIdx = 0;
+              var minDist = Infinity;
+              cards.forEach(function (c, i) {
+                var cCenter = c.offsetLeft + c.offsetWidth / 2;
+                var dist = Math.abs(cCenter - trackCenter);
+                if (dist < minDist) { minDist = dist; closestIdx = i; }
+              });
+              // Update via KO context ($parent is the CardsViewModel)
+              var firstCard = track.querySelector('.ccard');
+              if (firstCard) {
+                try {
+                  require(['knockout'], function (ko) {
+                    var ctx = ko.contextFor(firstCard);
+                    if (ctx && ctx.$parent && ctx.$parent.activeIndex) {
+                      ctx.$parent.activeIndex(closestIdx);
+                    }
+                  });
+                } catch (e) {}
+              }
+            }, 80);
+          }, { passive: true });
+        });
+        // Scroll to initial position
+        self._scrollCarouselTo(0);
+      }, 200);
+    };
   }
 
   return CardsViewModel;

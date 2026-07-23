@@ -1,0 +1,229 @@
+/* ==========================================================
+   Accounts Screen & Account Detail
+   ========================================================== */
+
+/* ── Account detail hero ── */
+.acct-det-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:0 16px 20px;flex-shrink:0}
+.acct-det-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-top:var(--status-h)}
+.acct-det-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.acct-det-icon svg{width:20px;height:20px;stroke:#fff;fill:none}
+
+/* ── Detail tabs ── */
+.det-tabs{display:flex;border-bottom:1.5px solid var(--c-border);background:var(--c-surface);flex-shrink:0}
+.det-tab{flex:1;padding:13px 0;font-size:13px;font-weight:600;color:var(--c-t3);cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;text-align:center;transition:all .2s}
+.det-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary);font-weight:700}
+.det-panel{display:none;padding:16px}
+.det-panel.active{display:block}
+.det-bottom-stats{display:flex;gap:8px;padding:10px 16px 12px;background:var(--c-surface);border-top:1px solid var(--c-border);flex-shrink:0}
+.det-stat-chip{flex:1;padding:8px 4px;border-radius:20px;border:1.5px solid var(--c-border);background:var(--c-bg);font-size:9px;font-weight:700;color:var(--c-t3);text-align:center;letter-spacing:.5px;text-transform:uppercase;cursor:pointer}
+.det-stat-chip.active{border-color:var(--c-primary);color:var(--c-primary);background:rgba(122,21,49,.05)}
+
+/* ── Detail info table ── */
+.det-info-table{margin:14px 20px 0;background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden}
+.det-info-row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--c-border);font-size:13px}
+.det-info-row:last-child{border-bottom:none}
+.det-info-row label{color:var(--c-t3);font-size:12px}
+.det-info-row span{font-weight:700;color:var(--c-t1)}
+.det-stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 20px 0}
+.det-stat-cell{background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;padding:12px;text-align:center}
+
+/* ── Cashflow card ── */
+.cashflow-card{margin:16px 20px 0;background:var(--c-surface);border-radius:var(--r-xl);padding:16px;border:1px solid var(--c-border);box-shadow:var(--shadow-sm)}
+.cashflow-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cashflow-header h4{font-size:13px;font-weight:800;color:var(--c-t1)}
+.cashflow-header span{font-size:12px;color:var(--c-t3)}
+.cashflow-nums{display:flex;gap:16px;margin-bottom:12px}
+.cf-num label{font-size:10px;color:var(--c-t3);font-weight:600;text-transform:uppercase;display:block;margin-bottom:2px}
+.cf-num span{font-size:14px;font-weight:800}
+
+/* ── IBAN sheet ── */
+.iban-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s}
+.iban-sheet-backdrop.open{opacity:1;pointer-events:auto}
+.iban-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:801;padding:0 20px 32px;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:85vh;overflow-y:auto;scrollbar-width:none;will-change:transform}
+.iban-sheet.open{transform:translateX(-50%) translateY(0)}
+
+/* ── Global picker sheet ── */
+.aman-picker-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:860;opacity:0;pointer-events:none;transition:opacity .3s}
+.aman-picker-backdrop.open{opacity:1;pointer-events:auto}
+.aman-picker-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:861;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:60vh;overflow-y:auto;scrollbar-width:none;will-change:transform}
+.aman-picker-sheet.open{transform:translateX(-50%) translateY(0)}
+.aman-picker-option{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;font-size:14px;font-weight:600;color:var(--c-t1);border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .15s}
+.aman-picker-option:last-child{border-bottom:none}
+.aman-picker-option:active{background:var(--c-bg)}
+.aman-picker-option--selected{color:var(--c-primary);font-weight:700;background:rgba(122,21,49,.04)}
+
+/* ── Custom select trigger ── */
+.aman-select{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--c-border);background:var(--c-surface);font-size:14px;font-weight:600;color:var(--c-t1);cursor:pointer;box-sizing:border-box;transition:border-color .2s;user-select:none}
+.aman-select:active{border-color:var(--c-primary)}
+.aman-select .aman-select__value{flex:1;text-align:left}
+.aman-select .aman-select__placeholder{color:var(--c-t3)}
+.aman-select svg{flex-shrink:0;color:var(--c-t3)}
+
+/* ── Cheque book selectors ── */
+.cb-leaf{border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-t1)}
+.cb-leaf-active{border:2px solid var(--c-primary);background:#FCE7EE;color:var(--c-primary)}
+.cb-delivery{border:1px solid var(--c-border);background:var(--c-bg)}
+.cb-delivery-active{border:2px solid var(--c-primary);background:#FCE7EE}
+.cb-radio-off{width:18px;height:18px;border-radius:50%;border:2px solid var(--c-border);flex-shrink:0}
+.cb-radio-on{width:18px;height:18px;border-radius:50%;background:var(--c-primary);border:2px solid var(--c-primary);flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");background-size:11px;background-repeat:no-repeat;background-position:center}
+
+/* ── Statement period row ── */
+.stmt-period-row{display:flex;align-items:center;justify-content:space-between;background:var(--c-bg);border:1px solid var(--c-border);border-radius:12px;padding:12px 14px}
+.stmt-period-row:has(.stmt-radio.active){border-color:var(--c-primary);background:rgba(122,21,49,.03)}
+.stmt-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--c-border);flex-shrink:0}
+.stmt-radio.active{background:var(--c-primary);border-color:var(--c-primary);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");background-size:12px;background-repeat:no-repeat;background-position:center}
+
+/* ── Transaction items v2 ── */
+.tx-item-v2{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--c-border)}
+.tx-icon-v2{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tx-info-v2{flex:1;min-width:0}
+.tx-name-v2{font-size:13px;font-weight:700;color:var(--c-t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-sub-v2{font-size:11px;color:var(--c-t3);margin-top:2px}
+.tx-right-v2{text-align:right;flex-shrink:0}
+.tx-badge{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+.tx-badge-credit{background:#DCFCE7;color:#16A34A}
+.tx-badge-debit{background:#FEE2E2;color:#DC2626}
+.tx-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.tx-chip.active{background:var(--c-primary);color:#fff;border:none}
+.tx-chip:not(.active){background:var(--c-surface);border:1px solid var(--c-border);color:var(--c-t2)}
+.tx-group-label{font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+
+/* ── Transaction detail ── */
+.tx-detail-status{display:flex;flex-direction:column;align-items:center;padding:28px 20px 20px}
+.tx-status-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.tx-status-icon svg{width:32px;height:32px}
+.tx-status-title{font-size:16px;font-weight:800;color:var(--c-t1);margin-bottom:4px}
+.tx-big-amount{font-size:34px;font-weight:800;color:var(--c-t1);letter-spacing:-1px;text-align:center;padding:8px 20px 20px}
+.tx-detail-table{margin:0 20px;background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);overflow:hidden}
+.tx-detail-row{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--c-border)}
+.tx-detail-row:last-child{border-bottom:none}
+.tx-detail-row label{font-size:12px;color:var(--c-t3);font-weight:600}
+.tx-detail-row span{font-size:13px;font-weight:700;color:var(--c-t1);text-align:right;max-width:60%}
+
+/* ── Loan / Deposit action grid ── */
+.lnd-action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px 20px 0}
+.lnd-act{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.lnd-act-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)}
+.lnd-act-icon svg{width:20px;height:20px}
+.lnd-act-label{font-size:9px;font-weight:700;color:var(--c-t2);text-align:center;line-height:1.3}
+
+/* ── Lock background scroll when sheet open ── */
+.aman-screen.sheet-open{overflow:hidden}
+
+/* ── Shared icon button (used in hero headers) ── */
+.icon-btn{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:var(--c-surface);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;position:relative;transition:box-shadow .2s}
+.icon-btn svg{width:18px;height:18px;color:var(--c-t2)}
+.icon-btn:active{box-shadow:none}
+
+/* ── Skeleton (loading state) ── */
+.skel{background:linear-gradient(90deg,var(--c-border) 25%,var(--c-surface2) 50%,var(--c-border) 75%);background-size:200% 100%;animation:skeletonShimmer 1.4s ease-in-out infinite;border-radius:var(--r-md)}
+
+/* ── accounts-main sub-component ── */
+.acc-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:16px 20px 24px}
+.acc-hero-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.acc-hero-header h2{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.4px}
+.acc-hero-header .icon-btn{background:rgba(255,255,255,.12);box-shadow:none}
+.acc-hero-header .icon-btn svg{color:rgba(255,255,255,.9)}
+.acc-tabs{display:flex;background:rgba(255,255,255,.1);border-radius:var(--r-full);padding:3px;gap:0;margin-bottom:20px}
+.acc-tab{flex:1;padding:7px 0;border-radius:var(--r-full);text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s}
+.acc-tab.active,.acc-tab--active{background:#fff;color:var(--c-primary);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.acc-total-label{font-size:12px;color:rgba(255,255,255,.6);font-weight:500;margin-bottom:4px}
+.acc-total-amount{font-size:32px;font-weight:800;color:#fff;letter-spacing:-1px}
+.acc-total-sub{font-size:12px;color:rgba(200,164,93,.9);margin-top:4px;font-weight:600}
+
+/* ── account-list sub-component ── */
+.acc-cards-list{padding:20px;display:flex;flex-direction:column;gap:12px}
+.acc-card{background:var(--c-surface);border-radius:var(--r-xl);padding:18px;border:1px solid var(--c-border);box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s,transform .15s}
+.acc-card:active{transform:scale(.99)}
+.acc-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.acc-card-icon-wrap{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.acc-card-icon-wrap svg{width:20px;height:20px}
+.acc-status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--r-full)}
+.acc-card-name{font-size:15px;font-weight:800;color:var(--c-t1);margin-bottom:2px}
+.acc-card-num{font-size:12px;color:var(--c-t3);font-family:monospace;font-weight:500}
+.acc-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--c-border)}
+.acc-footer-left label{font-size:11px;color:var(--c-t3);display:block;margin-bottom:2px}
+.acc-footer-left span{font-size:20px;font-weight:800;color:var(--c-t1);letter-spacing:-.5px}
+.acc-arrow-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;background:var(--c-bg);display:flex;align-items:center;justify-content:center}
+.acc-arrow-btn svg{width:16px;height:16px;color:var(--c-t2)}
+.acc-view-btn{width:30px;height:28px;border-radius:7px;border:none;cursor:pointer;background:transparent;color:var(--c-t3);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
+.acc-view-btn--active{background:var(--c-surface);color:var(--c-primary);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.acc-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 20px;gap:12px;scrollbar-width:none}
+.acc-carousel::-webkit-scrollbar{display:none}
+.acc-carousel .hero-card{scroll-snap-align:start;flex-shrink:0}
+.acc-list{padding:0 20px;display:flex;flex-direction:column;gap:12px}
+.acc-empty{padding:40px 20px;text-align:center;color:var(--c-t3);font-size:14px}
+.acc-card__header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.acc-card__type-label{font-size:13px;font-weight:700;color:var(--c-t1)}
+.acc-card__status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--r-full);background:var(--c-success-bg);color:var(--c-success)}
+.acc-card__number{font-size:12px;color:var(--c-t3);font-family:monospace;margin-bottom:12px}
+.acc-card__balance-row{display:flex;gap:20px;margin-bottom:12px}
+.acc-card__balance-label{font-size:11px;color:var(--c-t3);font-weight:500;margin-bottom:2px}
+.acc-card__balance{font-size:16px;font-weight:800;color:var(--c-t1)}
+.acc-card__footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)}
+.acc-card__branch{font-size:12px;color:var(--c-t3);font-weight:500}
+.acc-hero__label{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:4px}
+.acc-hero__amount{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.acc-hero__currency{font-size:16px;opacity:.7;margin-right:2px}
+.acc-carousel-track{display:flex;gap:12px;transition:transform .35s cubic-bezier(.32,1,.23,1);will-change:transform;padding-left:16px}
+.acc-carousel-track.no-transition{transition:none}
+.acc-carousel-wrap{overflow:hidden;width:100%;padding:12px 0 0;position:relative}
+.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 56px);background:linear-gradient(135deg,#7A1531 0%,#5C1025 50%,#3E0A1A 100%);border-radius:20px;padding:18px;position:relative;overflow:hidden;transition:opacity .25s,transform .25s;min-height:185px;display:flex;flex-direction:column;margin:0}
+.acc-carousel-wrap .hero-card.card-inactive{opacity:.7;transform:scale(0.97)}
+
+/* ── deposits sub-component ── */
+.dep-summary-strip{display:flex;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-xl);padding:16px;margin:16px;gap:0}
+.dep-summary-item{flex:1;text-align:center}
+.dep-summary-item+.dep-summary-item{border-left:1px solid var(--c-border)}
+.dep-summary-label{font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.dep-summary-value{font-size:15px;font-weight:800;color:var(--c-t1)}
+.dep-summary-value--positive{color:var(--c-success)}
+.dep-card{background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);padding:16px;margin:0 16px 12px}
+.dep-progress-bar{height:4px;background:var(--c-border);border-radius:2px;overflow:hidden;margin:8px 0}
+.dep-progress-fill{height:100%;background:var(--c-primary);border-radius:2px}
+
+/* ── loans sub-component ── */
+.loan-summary-hero{background:linear-gradient(135deg,#1E3A5F 0%,#0F1F3A 100%);border-radius:var(--r-xl);padding:20px;margin:16px;color:#fff}
+.loan-card{background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);padding:16px;margin:0 16px 12px}
+.loan-progress-bar{height:4px;background:var(--c-border);border-radius:2px;overflow:hidden;margin:8px 0}
+.loan-progress-fill{height:100%;background:#2563EB;border-radius:2px}
+
+/* ── sheets sub-component ── */
+.acc-bottom-sheet{position:absolute;inset:0;z-index:800;background:rgba(0,0,0,0);display:none;flex-direction:column;justify-content:flex-end;transition:background .25s}
+.acc-bottom-sheet.bs-open{background:rgba(0,0,0,.45)}
+.acc-sheet-card{background:var(--c-surface);border-radius:28px 28px 0 0;padding:16px 20px 32px;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,1,.23,1)}
+.acc-bottom-sheet.bs-open .acc-sheet-card{transform:translateY(0)}
+.acc-sheet-handle{width:40px;height:5px;border-radius:3px;background:var(--c-border);margin:14px auto 12px;cursor:grab;touch-action:none;flex-shrink:0}
+.acc-sheet-handle:active{cursor:grabbing;background:var(--c-t4)}
+.acc-sheet-title{font-size:17px;font-weight:800;color:var(--c-t1);text-align:center;margin-bottom:4px}
+.acc-sheet-opt{background:var(--c-bg);border:1px solid var(--c-border);border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s}
+.acc-sheet-opt:active{background:var(--c-border)}
+.acc-sheet-opt-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.acc-sheet-opt-label{font-size:12px;font-weight:700;color:var(--c-t1);text-align:center}
+.acc-sheet-opt-sub{font-size:10px;color:var(--c-t3);text-align:center}
+
+/* ── account-detail sub-component ── */
+.acct-detail-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:10px 20px 16px}
+.acct-detail-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.acct-detail-icon{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.acct-detail-icon svg{width:18px;height:18px;color:#fff}
+.acct-detail-meta{flex:1;min-width:0}
+.acct-detail-meta h3{font-size:14px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-detail-meta p{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px;font-family:monospace}
+.acct-bal-big{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:2px}
+.acct-bal-label{font-size:10px;color:rgba(255,255,255,.5);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.acct-action-row{display:flex;gap:0;margin-top:12px;background:rgba(255,255,255,.08);border-radius:var(--r-lg);overflow:hidden}
+.acct-action-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;cursor:pointer;border:none;background:none;border-right:1px solid rgba(255,255,255,.08);transition:background .15s}
+.acct-action-btn:last-child{border-right:none}
+.acct-action-btn:active{background:rgba(255,255,255,.1)}
+.acct-action-btn svg{width:18px;height:18px;color:rgba(255,255,255,.9)}
+.acct-action-btn span{font-size:10px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.2px}
+.detail-tabs{display:flex;border-bottom:2px solid var(--c-border);padding:0 20px;background:var(--c-surface)}
+.detail-tab{padding:14px 16px;font-size:13px;font-weight:700;color:var(--c-t3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.detail-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.acc-detail{padding:16px 20px}
+.acc-detail__balance-card{padding:20px;border-radius:var(--r-xl);background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);margin-bottom:16px}
+.acc-detail__balance-label{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:4px}
+.acc-detail__balance{font-size:28px;font-weight:800;color:#fff}
+.acc-detail__number{font-size:12px;color:rgba(255,255,255,.5);font-family:monospace;margin-top:6px}
+.acc-detail__actions{display:flex;gap:10px}

@@ -1,0 +1,187 @@
+/* ==========================================================
+   Pay Screen
+   ========================================================== */
+
+/* ── Screen wrapper ── */
+.aman-screen--pay{padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px)}
+
+/* ── Hub header ── */
+.pay-header{padding:16px 20px 0}
+.pay-header h2{font-size:20px;font-weight:800;color:var(--c-t1);letter-spacing:-.4px}
+
+/* ── Service tiles ── */
+.pay-services{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:8px 20px 16px}
+.pay-service-tile{background:var(--c-surface);border-radius:var(--r-lg);padding:18px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid var(--c-border);cursor:pointer;box-shadow:var(--shadow-sm);transition:.15s}
+.pay-service-tile:active{transform:scale(.95)}
+.pay-service-tile__icon{font-size:26px;line-height:1}
+.pay-service-tile__label{font-size:11px;color:var(--c-t2);font-weight:700;text-align:center;line-height:1.3}
+
+/* ── Quick transfer grid ── */
+.pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pay-tile{background:var(--c-surface);border-radius:var(--r-xl);padding:16px;border:1px solid var(--c-border);box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;gap:12px}
+.pay-tile:active{transform:scale(.97)}
+.pay-tile-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.pay-tile-icon svg{width:22px;height:22px}
+.pay-tile-name{font-size:13px;font-weight:800;color:var(--c-t1)}
+.pay-tile-sub{font-size:11px;font-weight:500;color:var(--c-t3);margin-top:2px}
+
+/* ── Transfer icon grid (hub) ── */
+.pay-transfer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 16px 16px;flex-shrink:0}
+.pay-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;background:none;border:none;padding:2px 0}
+.pay-icon-btn:active{opacity:.7}
+.pay-icon-circle{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pay-icon-circle svg{width:22px;height:22px}
+.pay-icon-label{font-size:10px;font-weight:700;color:var(--c-t2);text-align:center;line-height:1.3;max-width:60px}
+
+/* ── Menu list ── */
+.pay-menu-list{background:var(--c-surface);border-radius:var(--r-lg);margin:0 16px 16px;border:1px solid var(--c-border);overflow:hidden;flex-shrink:0}
+.pay-menu-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .1s}
+.pay-menu-row:last-child{border-bottom:none}
+.pay-menu-row:active{background:var(--c-surface2)}
+.pay-menu-icon{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pay-menu-icon svg{width:16px;height:16px}
+.pay-menu-text{flex:1;font-size:14px;font-weight:600;color:var(--c-t1)}
+.pay-menu-arrow{width:16px;height:16px;color:var(--c-t4)}
+.pay-menu-arrow svg{width:16px;height:16px}
+
+/* ── Contacts row ── */
+.contacts-row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.contacts-row::-webkit-scrollbar{display:none}
+.contact-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0}
+.contact-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.contact-name{font-size:11px;font-weight:600;color:var(--c-t2)}
+.contact-add{background:var(--c-border)}
+.contact-add svg{width:20px;height:20px;color:var(--c-t3)}
+
+/* ── Beneficiary quick-chip row ── */
+.pay-ben-row{display:flex;gap:12px;padding:4px 0 8px;overflow-x:auto}
+.pay-ben-chip{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;min-width:60px}
+.pay-ben-chip__avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+.pay-ben-chip__name{font-size:11px;color:var(--c-t2);font-weight:600;text-align:center;max-width:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── Bill list ── */
+.bill-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--c-border)}
+.bill-item:last-child{border-bottom:none}
+.bill-icon{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bill-icon svg{width:20px;height:20px}
+.bill-info{flex:1}
+.bill-name{font-size:14px;font-weight:700;color:var(--c-t1)}
+.bill-meta{font-size:11px;color:var(--c-t3);margin-top:2px;font-weight:500}
+.bill-right{text-align:right}
+.bill-amt{font-size:14px;font-weight:800;color:var(--c-t1)}
+.bill-status{font-size:11px;font-weight:700;margin-top:2px}
+
+/* ── Step progress bar ── */
+.pay-progress{display:flex;align-items:center;padding:12px 20px 16px}
+.pay-progress__item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pay-progress__dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--c-border2);background:var(--c-surface);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--c-t3);transition:.2s}
+.pay-step--active .pay-progress__dot{border-color:var(--c-primary);background:var(--c-primary);color:#fff}
+.pay-step--done .pay-progress__dot{border-color:var(--c-success);background:var(--c-success);color:#fff}
+.pay-progress__label{font-size:9px;color:var(--c-t3);font-weight:600;letter-spacing:.3px;white-space:nowrap}
+.pay-step--active .pay-progress__label{color:var(--c-primary);font-weight:700}
+.pay-step--done .pay-progress__label{color:var(--c-success)}
+.pay-progress__line{flex:1;height:2px;background:var(--c-border);margin:0 4px;margin-bottom:18px;transition:.2s}
+.pay-progress__line--done{background:var(--c-success)}
+/* Legacy progress bar */
+.pay-progress-bar{display:flex;align-items:center;gap:0;padding:16px 20px 0}
+.pay-prog-step{display:flex;flex-direction:column;align-items:center;flex:1}
+.pay-prog-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:2px solid var(--c-border);background:var(--c-bg);color:var(--c-t3);transition:all .3s}
+.pay-prog-dot.done{background:var(--c-success);border-color:var(--c-success);color:#fff}
+.pay-prog-dot.active{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
+.pay-prog-label{font-size:9px;font-weight:700;color:var(--c-t3);margin-top:4px;text-transform:uppercase;letter-spacing:.3px}
+.pay-prog-label.active{color:var(--c-primary)}
+.pay-prog-line{flex:1;height:2px;background:var(--c-border);margin-top:-18px;transition:background .3s}
+.pay-prog-line.done{background:var(--c-success)}
+
+/* ── Transfer type cards ── */
+.pay-transfer-type{padding:0 20px 16px}
+.pay-type-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:var(--c-surface);margin-bottom:8px;cursor:pointer}
+.pay-type-card--active{border-color:var(--c-primary);background:var(--c-primary-light)}
+.pay-type-card__icon{width:38px;height:38px;border-radius:10px;background:var(--c-surface2);flex-shrink:0}
+.pay-type-card__text{flex:1}
+.pay-type-card__label{display:block;font-size:14px;font-weight:700;color:var(--c-t1);margin-bottom:2px}
+.pay-type-card__sub{font-size:11px;color:var(--c-t3)}
+.pay-type-card__check{width:22px;height:22px;border-radius:50%;background:var(--c-primary);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* ── Beneficiary list rows (step 1) ── */
+.pay-ben-row-item{display:flex;align-items:center;gap:12px;padding:13px 20px;background:var(--c-surface);border-bottom:1px solid var(--c-border);cursor:pointer}
+.pay-ben-row-item:last-child{border-bottom:none}
+.pay-ben-row-item__avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.pay-ben-row-item__info{flex:1;min-width:0}
+.pay-ben-row-item__name{display:block;font-size:14px;font-weight:700;color:var(--c-t1);margin-bottom:2px}
+.pay-ben-row-item__bank{font-size:11px;color:var(--c-t3);font-family:monospace}
+
+/* Beneficiary tabs */
+.ben-tab{padding:7px 14px;border-radius:20px;border:1.5px solid var(--c-border);font-size:12px;font-weight:700;color:var(--c-t3);white-space:nowrap;cursor:pointer;background:var(--c-surface);transition:all .2s}
+.ben-tab.active{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
+.ben-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:box-shadow .2s}
+.ben-avatar{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
+
+/* ── Selected beneficiary chip (step 2) ── */
+.pay-ben-chip-selected{display:flex;align-items:center;gap:12px;margin:0 20px 16px;background:var(--c-primary-light);border-radius:var(--r-md);padding:12px 14px;border:1px solid rgba(var(--c-primary-rgb),.2)}
+.pay-ben-chip-selected__name{font-size:14px;font-weight:700;color:var(--c-t1);margin-bottom:2px}
+.pay-ben-chip-selected__bank{font-size:11px;color:var(--c-t3);font-family:monospace}
+
+/* ── Form fields ── */
+.pay-form-group{margin-bottom:14px}
+.pay-form-label{font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;display:block}
+.pay-form-input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--c-border);background:var(--c-surface);font-size:14px;font-weight:600;color:var(--c-t1);outline:none;box-sizing:border-box;transition:border-color .2s;font-family:inherit}
+.pay-form-input:focus{border-color:var(--c-primary)}
+.pay-amount-input{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.pay-field-group{margin:0 20px 16px}
+.pay-select-field{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);font-size:14px;color:var(--c-t1)}
+.pay-amount-field{background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);overflow:hidden}
+.pay-quick-amounts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pay-quick-amt{padding:6px 14px;border-radius:var(--r-full);border:1.5px solid var(--c-primary);color:var(--c-primary);font-size:12px;font-weight:700;background:transparent;cursor:pointer}
+.pay-text-input{width:100%;padding:13px 14px;font-size:14px;color:var(--c-t1);border:1.5px solid var(--c-border);border-radius:var(--r-md);outline:none;background:var(--c-surface)}
+.pay-text-input:focus{border-color:var(--c-primary)}
+.pay-field-label{font-size:12px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;display:block}
+
+/* ── Review card ── */
+.pay-review-card{margin:0 20px 12px;background:var(--c-surface);border-radius:var(--r-lg);border:1px solid var(--c-border);overflow:hidden}
+.pay-review-row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--c-border)}
+.pay-review-row:last-child{border-bottom:none}
+.pay-review-row--highlight{background:var(--c-surface2)}
+.pay-review-label{font-size:12px;color:var(--c-t3);font-weight:600}
+.pay-review-val{font-size:13px;font-weight:700;color:var(--c-t1);text-align:right;max-width:60%}
+.pay-review-row__label{font-size:12px;color:var(--c-t3);font-weight:600}
+.pay-review-row__value{font-size:13px;color:var(--c-t1);font-weight:700;text-align:right}
+.pay-review-row__value--large{font-size:18px;color:var(--c-primary)}
+.pay-review-row__value--success{color:var(--c-success)}
+.pay-terms-note{margin:0 20px 16px;font-size:11px;color:var(--c-t3);line-height:1.5;text-align:center}
+
+/* ── OTP screen ── */
+.pay-otp-screen{display:flex;flex-direction:column;align-items:center;padding:24px 20px}
+.pay-otp-icon{font-size:48px;margin-bottom:12px}
+.pay-otp-title{font-size:22px;font-weight:800;color:var(--c-t1);margin-bottom:6px}
+.pay-otp-sub{font-size:13px;color:var(--c-t3);margin-bottom:24px;text-align:center}
+.pay-otp-boxes{display:flex;gap:10px;margin-bottom:24px}
+.pay-otp-box{width:44px;height:52px;border-radius:12px;border:2px solid var(--c-border);background:var(--c-surface);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--c-t1);transition:.15s}
+.pay-otp-box--filled{border-color:var(--c-primary);background:var(--c-primary-light)}
+.pay-otp-resend{font-size:12px;color:var(--c-t3);margin-top:16px}
+/* Legacy OTP boxes */
+.otp-boxes{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.otp-box{width:44px;height:54px;border-radius:12px;border:2px solid var(--c-border);background:var(--c-surface);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--c-t1);cursor:text;transition:border-color .2s;position:relative}
+.otp-box.filled{border-color:var(--c-primary);background:#FCE7EE}
+.otp-box.active-box{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(var(--c-primary-rgb),.15)}
+.otp-key{height:56px;border-radius:14px;border:1.5px solid var(--c-border);background:var(--c-surface);font-size:20px;font-weight:700;color:var(--c-t1);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:background .15s}
+.otp-key:active{background:var(--c-bg)}
+.otp-key span{font-size:8px;font-weight:700;color:var(--c-t3);letter-spacing:.5px;line-height:1}
+
+/* ── Success screen ── */
+.pay-success-screen{display:flex;flex-direction:column;align-items:center;padding:32px 20px 16px}
+.pay-success-hero{text-align:center;margin-bottom:24px}
+.pay-success-check{width:72px;height:72px;border-radius:50%;background:var(--c-success);color:#fff;font-size:32px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 24px rgba(22,163,74,.3)}
+.pay-success-icon{width:72px;height:72px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+@keyframes pop-in{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.pay-success-icon svg{animation:pop-in .5s .1s both}
+.pay-success-title{font-size:22px;font-weight:800;color:var(--c-t1);margin-bottom:6px}
+.pay-success-sub{font-size:14px;color:var(--c-t3)}
+.pay-success-summary{width:100%;background:var(--c-surface);border-radius:var(--r-lg);border:1px solid var(--c-border);overflow:hidden;margin-bottom:20px}
+
+/* ── Pay step containers ── */
+.pay-step{display:none;flex-direction:column;flex:1}
+.pay-step.active{display:flex}
+
+/* ── CTA bar ── */
+.pay-cta{padding:16px 20px 8px}

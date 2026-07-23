@@ -2,12 +2,12 @@ define([
   'knockout',
   'services/AccountService',
   'services/UserService',
-  'text!./widgets/balance-summary/view.html',
-  'text!./widgets/spending-overview/view.html',
-  'text!./widgets/quick-actions/view.html',
-  'text!./widgets/recent-transactions/view.html',
-  'text!./widgets/notifications-panel/view.html',
-  'text!./widgets/analytics-panel/view.html',
+  'text!/components/home/widgets/balance-summary/view.html',
+  'text!/components/home/widgets/spending-overview/view.html',
+  'text!/components/home/widgets/quick-actions/view.html',
+  'text!/components/home/widgets/recent-transactions/view.html',
+  'text!/components/home/widgets/notifications-panel/view.html',
+  'text!/components/home/widgets/analytics-panel/view.html',
   'ojs/ojmodule-element',
   'ojs/ojknockout'
 ], function (ko, AccountService, UserService,
@@ -188,13 +188,20 @@ define([
       });
     };
 
-    // ── Widget configs (parent VM is viewModel so views share all observables) ──
-    self.balanceSummaryConfig    = ko.observable({ view: balanceSummaryView,    viewModel: self });
-    self.spendingOverviewConfig  = ko.observable({ view: spendingOverviewView,  viewModel: self });
-    self.quickActionsConfig      = ko.observable({ view: quickActionsView,      viewModel: self });
-    self.recentTxConfig          = ko.observable({ view: recentTxView,          viewModel: self });
-    self.notificationsPanelConfig = ko.observable({ view: notificationsPanelView, viewModel: self });
-    self.analyticsPanelConfig    = ko.observable({ view: analyticsPanelView,    viewModel: self });
+    // ── Widget configs ─────────────────────────────────────────
+    // oj-module config.view must be Array<Node>, not a string.
+    // config.viewModel must be an object instance (self), not a constructor.
+    function _nodes(html) {
+      var d = document.createElement('div');
+      d.innerHTML = html;
+      return Array.prototype.slice.call(d.childNodes);
+    }
+    self.balanceSummaryConfig     = ko.observable({ view: _nodes(balanceSummaryView),     viewModel: self });
+    self.spendingOverviewConfig   = ko.observable({ view: _nodes(spendingOverviewView),   viewModel: self });
+    self.quickActionsConfig       = ko.observable({ view: _nodes(quickActionsView),       viewModel: self });
+    self.recentTxConfig           = ko.observable({ view: _nodes(recentTxView),           viewModel: self });
+    self.notificationsPanelConfig = ko.observable({ view: _nodes(notificationsPanelView), viewModel: self });
+    self.analyticsPanelConfig     = ko.observable({ view: _nodes(analyticsPanelView),     viewModel: self });
 
     self._scheduleLoad();
   }
