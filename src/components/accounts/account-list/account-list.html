@@ -112,26 +112,6 @@
       </div>
     </div>
 
-    <!-- Recent activity (carousel view) -->
-    <div class="tx-section">
-      <div class="tx-section-header">
-        <span class="tx-section-title">Recent Activity</span>
-        <span class="tx-section-link">View All</span>
-      </div>
-      <div class="tx-modern-list" data-bind="foreach: transactions">
-        <div class="tx-modern-item">
-          <div class="tx-modern-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
-          <div class="tx-modern-body">
-            <div class="tx-modern-name" data-bind="text: description"></div>
-            <div class="tx-modern-date" data-bind="text: date"></div>
-          </div>
-          <div class="tx-modern-right">
-            <div class="tx-modern-amount" data-bind="text:(type==='CREDIT'?'+':'−')+' LYD '+$parent.formatAmount(Math.abs(amount)),css:{'credit':type==='CREDIT','debit':type!=='CREDIT'}"></div>
-            <span class="tx-modern-badge" data-bind="css:{'credit':type==='CREDIT','debit':type!=='CREDIT'},text:type==='CREDIT'?'Credit':'Debit'"></span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Carousel swipe JS -->
     <script>
@@ -190,26 +170,6 @@
       </div>
     </div>
 
-    <!-- Recent Activity (list view) -->
-    <div class="tx-section">
-      <div class="tx-section-header">
-        <span class="tx-section-title">Recent Activity</span>
-        <span class="tx-section-link">View All</span>
-      </div>
-      <div class="tx-modern-list" data-bind="foreach: transactions">
-        <div class="tx-modern-item">
-          <div class="tx-modern-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
-          <div class="tx-modern-body">
-            <div class="tx-modern-name" data-bind="text: description"></div>
-            <div class="tx-modern-date" data-bind="text: date"></div>
-          </div>
-          <div class="tx-modern-right">
-            <div class="tx-modern-amount" data-bind="text:(type==='CREDIT'?'+':'−')+' LYD '+$parent.formatAmount(Math.abs(amount)),css:{'credit':type==='CREDIT','debit':type!=='CREDIT'}"></div>
-            <span class="tx-modern-badge" data-bind="css:{'credit':type==='CREDIT','debit':type!=='CREDIT'},text:type==='CREDIT'?'Credit':'Debit'"></span>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="bottom-spacer"></div>
   </div>
 </div>
