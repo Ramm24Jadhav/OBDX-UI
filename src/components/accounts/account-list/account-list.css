@@ -4,6 +4,9 @@
 .acl-card-mode .acl-list-section{display:none}
 .acl-card-mode .acl-card-section{display:block}
 
+/* Section header count badge */
+.acc-section-count{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:var(--c-primary);color:#fff;border-radius:20px;padding:1px 7px;line-height:1.5;margin-left:6px;vertical-align:middle;}
+
 /* Account list — spacious row design */
 .acc-cards-list{display:flex;flex-direction:column;gap:10px;padding:12px 16px 0;}
 .acc-card{display:flex;align-items:center;gap:14px;padding:16px 14px;background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);cursor:pointer;transition:opacity .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 3px rgba(0,0,0,.05)}
@@ -42,11 +45,11 @@
 .acc-hero__amount{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px}
 .acc-hero__currency{font-size:16px;opacity:.7;margin-right:2px}
 /* Swipe carousel */
-.acc-carousel-track{display:flex;gap:16px;transition:transform .38s cubic-bezier(.32,1,.23,1);will-change:transform;padding:4px 20px 8px}
+.acc-carousel-track{display:flex;gap:12px;transition:transform .38s cubic-bezier(.32,1,.23,1);will-change:transform;padding:4px 12px 8px}
 .acc-carousel-track.no-transition{transition:none}
 .acc-carousel-wrap{overflow:hidden;width:100%;padding:12px 0 0;position:relative;perspective:1000px}
-.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 60px);background:linear-gradient(135deg,#7A1531 0%,#5C1025 50%,#3E0A1A 100%);border-radius:20px;padding:20px;position:relative;overflow:hidden;transition:opacity .3s,transform .38s cubic-bezier(.32,1,.23,1),box-shadow .3s;min-height:195px;display:flex;flex-direction:column;margin:0;box-shadow:0 12px 32px rgba(0,0,0,.45)}
-.acc-carousel-wrap .hero-card.card-inactive{opacity:0.72;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 36px);background:linear-gradient(135deg,#7A1531 0%,#5C1025 50%,#3E0A1A 100%);border-radius:20px;padding:20px;position:relative;overflow:hidden;transition:opacity .3s,transform .38s cubic-bezier(.32,1,.23,1);min-height:195px;display:flex;flex-direction:column;margin:0;}
+.acc-carousel-wrap .hero-card.card-inactive{opacity:0.72;}
 
 /* Hero card inner layout */
 .c-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
@@ -67,7 +70,7 @@
 .c-holo{position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,255,255,.04);pointer-events:none}
 
 /* ══ Shared widgets ══ */
-.acct-widgets{display:flex;flex-direction:column;gap:12px;padding:12px 16px 0}
+.acct-widgets{display:flex;flex-direction:column;gap:8px;padding:24px 16px 0;margin-top:auto;}
 
 /* Quick Actions */
 .w-quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -134,19 +137,39 @@
 .open-acc-sub{font-size:11px;color:var(--c-t3);margin-top:2px}
 
 /* Section heading inside widgets */
-.w-section-head{display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px}
-.w-section-title{font-size:14px;font-weight:800;color:var(--c-t1)}
-.w-section-link{font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer}
+.w-section-head{display:flex;align-items:center;justify-content:space-between;padding:2px 0 6px}
+.w-section-title{font-size:12px;font-weight:700;color:var(--c-t2);text-transform:uppercase;letter-spacing:.5px;}
+.w-section-link{font-size:11px;font-weight:600;color:var(--c-primary);cursor:pointer}
 
 /* Offers carousel */
 .offers-carousel-wrap{position:relative;touch-action:pan-y}
-.offers-track{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:10px;padding:0 16px 4px;scrollbar-width:none;cursor:grab}
+.offers-track{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:10px;padding:0 0 4px;scrollbar-width:none;cursor:grab}
 .offers-track::-webkit-scrollbar{display:none}
-.offer-card{flex-shrink:0;width:72%;scroll-snap-align:start;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
-.offer-eyebrow{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:20px;align-self:flex-start}
-.offer-title{font-size:14px;font-weight:800;color:#fff;line-height:1.25;letter-spacing:-.2px}
-.offer-sub{font-size:11px;color:rgba(255,255,255,.6);line-height:1.35}
-.offer-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:rgba(255,255,255,.9);margin-top:2px}
+
+/* Light promotional card — clearly distinct from dark account cards */
+.offer-card{flex-shrink:0;width:68%;scroll-snap-align:start;border-radius:12px;background:transparent;border:1.5px solid var(--c-border2);display:flex;flex-direction:row;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;transition:box-shadow .2s;}
+.offer-card:active{opacity:.8;}
+
+/* Coloured accent stripe on the left */
+.offer-accent{width:4px;flex-shrink:0;}
+.offer-card--savings  .offer-accent{background:var(--c-primary);}
+.offer-card--transfers .offer-accent{background:#1E6BAA;}
+.offer-card--cashback  .offer-accent{background:#D97706;}
+
+.offer-body{display:flex;flex-direction:column;gap:3px;padding:10px 12px 10px 10px;flex:1;min-width:0;}
+
+.offer-eyebrow{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 6px;border-radius:20px;align-self:flex-start;}
+.offer-card--savings  .offer-eyebrow{background:rgba(122,21,49,.1);color:var(--c-primary);}
+.offer-card--transfers .offer-eyebrow{background:rgba(30,107,170,.1);color:#1E6BAA;}
+.offer-card--cashback  .offer-eyebrow{background:rgba(217,119,6,.1);color:#D97706;}
+
+.offer-title{font-size:12px;font-weight:800;color:var(--c-t1);line-height:1.25;letter-spacing:-.1px;}
+.offer-sub{font-size:10px;color:var(--c-t3);line-height:1.35;}
+.offer-cta{display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700;margin-top:3px;}
+.offer-card--savings  .offer-cta{color:var(--c-primary);}
+.offer-card--transfers .offer-cta{color:#1E6BAA;}
+.offer-card--cashback  .offer-cta{color:#D97706;}
+
 .offers-dots{display:flex;justify-content:center;gap:5px;padding:8px 0 2px}
 .offer-dot{width:5px;height:5px;border-radius:3px;background:var(--c-border);transition:all .3s cubic-bezier(.32,1,.23,1)}
 .offer-dot.active{width:18px;background:var(--c-primary)}

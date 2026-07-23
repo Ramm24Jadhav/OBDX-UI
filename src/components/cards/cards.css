@@ -249,8 +249,8 @@
 /* ── Card detail fullscreen overlay ── */
 .aman-fullscreen-overlay{position:fixed;inset:0;background:var(--c-bg);z-index:200;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,0,.67,0)}
 .aman-fullscreen-overlay--open{transform:translateY(0);transition:transform .35s cubic-bezier(.33,1,.68,1)}
-.cards-detail-overlay{padding:20px;padding-bottom:calc(20px + var(--safe-bottom))}
-.cards-detail-close{position:absolute;top:20px;right:20px;background:var(--c-surface2);border:none;border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--c-t2)}
+.cards-detail-overlay{padding:var(--status-h,44px) 20px 20px;padding-bottom:calc(20px + var(--safe-bottom))}
+.cards-detail-close{position:absolute;top:var(--status-h,44px);right:20px;background:var(--c-surface2);border:none;border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--c-t2)}
 .cards-detail-title{font-size:20px;font-weight:800;color:var(--c-t1);margin-bottom:16px;padding-top:4px}
 .cards-detail-actions{display:flex;gap:10px;margin-top:20px}
 .cards-detail-action-btn{flex:1;padding:12px 8px;border-radius:var(--r-md);font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid var(--c-border);background:var(--c-surface);color:var(--c-t1)}

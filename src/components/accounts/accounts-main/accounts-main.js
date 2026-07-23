@@ -34,17 +34,20 @@ define([
     self.detailPanelOpen = ko.observable(false);
 
     self.activeTab = ko.observable('current_savings');
-    self.tabs = [
-      { id: 'current_savings', label: 'Current & Savings' },
-      { id: 'deposits',        label: 'Deposits'          },
-      { id: 'loans',           label: 'Loans'             }
-    ];
+    self.depositCount = ko.observable(3);
+    self.loanCount    = ko.observable(2);
     self.selectTab  = function (tab) { self.activeTab(tab.id); };
     self.tabClass   = function (tab) { return self.activeTab() === tab.id ? 'acc-tab active' : 'acc-tab'; };
 
     self.showCurrentSavings = ko.computed(function () { return self.activeTab() === 'current_savings'; });
     self.showDeposits       = ko.computed(function () { return self.activeTab() === 'deposits'; });
     self.showLoans          = ko.computed(function () { return self.activeTab() === 'loans'; });
+
+    self.heroTabClass = ko.computed(function () {
+      if (self.activeTab() === 'deposits') return 'acc-hero acc-hero--deposits';
+      if (self.activeTab() === 'loans')    return 'acc-hero acc-hero--loans';
+      return 'acc-hero';
+    });
 
     self.cardView      = ko.observable(true);
     self.setListView   = function () { self.cardView(false); };
@@ -56,6 +59,13 @@ define([
       return self.accounts().filter(function (a) {
         return a.type === 'CURRENT' || a.type === 'SAVINGS';
       });
+    });
+    self.tabs = ko.computed(function () {
+      return [
+        { id: 'current_savings', label: 'Current & Savings', count: self.currentAccounts().length || 2 },
+        { id: 'deposits',        label: 'Deposits',          count: self.depositCount() },
+        { id: 'loans',           label: 'Loans',             count: self.loanCount()   }
+      ];
     });
 
     // ── Detail tab state ──────────────────────────────────────
@@ -172,6 +182,16 @@ define([
       var screen = document.querySelector('.aman-screen');
       if (screen) { screen.dataset.scrollTop = screen.scrollTop; screen.style.overflow = 'hidden'; }
     };
+    self.openAccountAnalytics = function () {
+      var account = self.currentAccounts()[self.carouselIndex()] || self.currentAccounts()[0];
+      if (!account) return;
+      self.detailTab('analytics'); self.isPrimaryAccount(false);
+      self._resetAllSheets();
+      self.selectedAccount(account); self.detailPanelOpen(true);
+      window.amanApp && window.amanApp.setPanelOpen(true);
+      var screen = document.querySelector('.aman-screen');
+      if (screen) { screen.dataset.scrollTop = screen.scrollTop; screen.style.overflow = 'hidden'; }
+    };
     self.closeAccountDetail = function () {
       self.detailPanelOpen(false); self.selectedAccount(null);
       self._resetAllSheets();
@@ -206,7 +226,8 @@ define([
       transactions:      self.transactions,
       cardView:          self.cardView,
       carouselIndex:     self.carouselIndex,
-      openAccountDetail: self.openAccountDetail,
+      openAccountDetail:    self.openAccountDetail,
+      openAccountAnalytics: self.openAccountAnalytics,
       openStatementFor:  self.openStatementFor,
       openShareIBANFor:  self.openShareIBANFor,
       setListView:       function () { self.setListView(); },
@@ -288,7 +309,10 @@ define([
         self.transactions((res[1].transactions || []).slice(0, 4));
       }).catch(function () {
         window.amanApp && window.amanApp.showToast('Failed to load accounts', 'error');
-      }).finally(function () { self.isLoading(false); });
+      }).finally(function () {
+        self.isLoading(false);
+        if (self.cardView()) { setTimeout(function () { self.setCardView(); }, 100); }
+      });
     };
 
     /* ── Account card carousel ── */
@@ -371,10 +395,18 @@ define([
       }
       var _origSetCardView = self.setCardView;
       self.setCardView = function () { _origSetCardView(); setTimeout(initCarousel, 300); };
+      self.showCurrentSavings.subscribe(function (val) {
+        if (val && self.cardView()) { ready = false; setTimeout(initCarousel, 300); }
+      });
     }());
+
+    // Listen for origination events dispatched by deposits/loans sub-components
+    self._origHandler = function (e) { self.openOrigination(e.detail || 'account'); };
+    window.addEventListener('aman-origination', self._origHandler);
 
     var _loadTimer = null;
     self.handleActivated = function () { clearTimeout(_loadTimer); _loadTimer = setTimeout(function () { self._load(); }, 50); };
+    self.dispose = function () { window.removeEventListener('aman-origination', self._origHandler); };
     self._load();
   }
 

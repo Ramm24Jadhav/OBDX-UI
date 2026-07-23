@@ -17,7 +17,8 @@ define(['knockout'], function (ko) {
     self.transactions     = params.transactions;
     self.cardView         = params.cardView;
     self.carouselIndex    = params.carouselIndex;
-    self.openAccountDetail = params.openAccountDetail;
+    self.openAccountDetail    = params.openAccountDetail;
+    self.openAccountAnalytics = params.openAccountAnalytics;
     self.openStatementFor  = params.openStatementFor;
     self.openShareIBANFor  = params.openShareIBANFor;
     self.setListView       = params.setListView;

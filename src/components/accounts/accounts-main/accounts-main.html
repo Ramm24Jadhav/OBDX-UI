@@ -12,7 +12,10 @@
   <div data-bind="visible: !isLoading()" style="display:flex;flex-direction:column;flex:1;min-height:0;">
 
     <!-- Hero: gradient header + balance + tabs -->
-    <div class="acc-hero">
+    <div data-bind="css: heroTabClass()">
+      <div class="acc-hero-blob acc-hero-blob--1"></div>
+      <div class="acc-hero-blob acc-hero-blob--2"></div>
+      <div class="acc-hero-inner">
       <div class="acc-hero-header">
         <div>
           <h2>My Accounts</h2>
@@ -32,7 +35,6 @@
         <div style="flex:1;min-width:0;">
           <div style="display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">
             TOTAL BALANCE
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="11" height="11"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <div class="s-num" style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:10px;" data-bind="text: 'LYD ' + formatAmount(currentAccounts().reduce(function(s,a){return s+(a.availableBalance||0);},0))">LYD 133,649.25</div>
           <div style="display:flex;gap:12px;align-items:center;">
@@ -119,10 +121,11 @@
           <span data-bind="text: label"></span>
         </div>
       </div>
-    </div>
+      </div><!-- /acc-hero-inner -->
+    </div><!-- /acc-hero -->
 
-    <!-- Scrollable body -->
-    <div style="overflow-y:auto;flex:1;">
+    <!-- Scrollable body — rounded top corners overlap hero -->
+    <div style="overflow-y:auto;flex:1;border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
 
       <!-- Current & Savings tab -->
       <!-- ko if: showCurrentSavings() -->
