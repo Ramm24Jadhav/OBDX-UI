@@ -1,0 +1,217 @@
+<!-- Origination slide-in panel -->
+<div data-bind="css: {'orig-panel':true, 'orig-open': open()}">
+
+  <!-- ── Header ── -->
+  <div class="orig-header">
+    <button class="orig-back-btn" data-bind="click: close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="orig-title" data-bind="text: heading"></div>
+    <div style="width:36px;"></div>
+  </div>
+
+  <!-- ko if: !submitted() -->
+
+  <!-- ── Step indicator ── -->
+  <div class="orig-steps">
+    <div data-bind="css: {'orig-step-dot':true, 'cur': step()===1, 'done': step()>1}">1</div>
+    <div data-bind="css: {'orig-step-line':true, 'done': step()>1}"></div>
+    <div data-bind="css: {'orig-step-dot':true, 'cur': step()===2, 'done': step()>2}">2</div>
+    <div data-bind="css: {'orig-step-line':true, 'done': step()>2}"></div>
+    <div data-bind="css: {'orig-step-dot':true, 'cur': step()===3}">3</div>
+  </div>
+
+  <!-- ── Body ── -->
+  <div class="orig-body">
+
+    <!-- STEP 1: Product Selection -->
+    <!-- ko if: step() === 1 -->
+    <div>
+      <div class="orig-section-title" data-bind="text: step1Label"></div>
+      <div class="orig-section-sub">Select what you'd like to apply for</div>
+
+      <!-- ko foreach: products() -->
+      <div data-bind="css: {'orig-prod-card':true, 'sel': $parent.isSelected($data)}, click: $parent.selectProduct.bind($parent, $data)">
+        <div class="orig-prod-icon" data-bind="style:{background: $data.bg}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="20" height="20" data-bind="attr:{stroke: $data.stroke}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="orig-prod-info">
+          <div class="orig-prod-name" data-bind="text: $data.label"></div>
+          <div class="orig-prod-desc" data-bind="text: $data.desc"></div>
+        </div>
+        <div class="orig-prod-check">
+          <!-- ko if: $parent.isSelected($data) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+
+    <!-- STEP 2: Product Details -->
+    <!-- ko if: step() === 2 -->
+    <div>
+      <div class="orig-section-title">Product Details</div>
+      <div class="orig-section-sub">Confirm preferences for your application</div>
+
+      <!-- Pre-filled info banner -->
+      <div class="orig-prefill-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="orig-prefill-text">Your identity &amp; KYC details are already verified. No documents needed.</div>
+      </div>
+
+      <!-- Account: branch preference -->
+      <!-- ko if: context() === 'account' -->
+      <div class="orig-form-group">
+        <label class="orig-form-label">Preferred Branch</label>
+        <select class="orig-form-select" data-bind="value: detailBranch">
+          <option>Main Branch</option>
+          <option>Airport Branch</option>
+          <option>City Centre Branch</option>
+          <option>Online Only</option>
+        </select>
+      </div>
+      <div class="orig-form-group">
+        <label class="orig-form-label">Linked Debit Card</label>
+        <select class="orig-form-select">
+          <option>Yes, issue a debit card</option>
+          <option>No, not now</option>
+        </select>
+      </div>
+      <!-- /ko -->
+
+      <!-- Deposit: amount + tenure -->
+      <!-- ko if: context() === 'deposit' -->
+      <div class="orig-form-group">
+        <label class="orig-form-label">Deposit Amount (LYD)</label>
+        <input type="number" class="orig-form-input" placeholder="e.g. 10,000" data-bind="value: detailAmount">
+      </div>
+      <div class="orig-form-group">
+        <label class="orig-form-label">Tenure</label>
+        <select class="orig-form-select" data-bind="value: detailTenure">
+          <!-- ko foreach: tenureOptions() -->
+          <option data-bind="text: $data, value: $data"></option>
+          <!-- /ko -->
+        </select>
+      </div>
+      <div class="orig-form-group">
+        <label class="orig-form-label">Profit Payout</label>
+        <select class="orig-form-select">
+          <option>On Maturity</option>
+          <option>Monthly</option>
+          <option>Quarterly</option>
+        </select>
+      </div>
+      <!-- /ko -->
+
+      <!-- Loan: amount + tenure + purpose -->
+      <!-- ko if: context() === 'loan' -->
+      <div class="orig-form-group">
+        <label class="orig-form-label">Finance Amount (LYD)</label>
+        <input type="number" class="orig-form-input" placeholder="e.g. 50,000" data-bind="value: detailAmount">
+      </div>
+      <div class="orig-form-group">
+        <label class="orig-form-label">Tenure</label>
+        <select class="orig-form-select" data-bind="value: detailTenure">
+          <!-- ko foreach: tenureOptions() -->
+          <option data-bind="text: $data, value: $data"></option>
+          <!-- /ko -->
+        </select>
+      </div>
+      <div class="orig-form-group">
+        <label class="orig-form-label">Purpose</label>
+        <input type="text" class="orig-form-input" placeholder="e.g. Home renovation" data-bind="value: detailPurpose">
+      </div>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+
+    <!-- STEP 3: Review & Submit -->
+    <!-- ko if: step() === 3 -->
+    <div>
+      <div class="orig-section-title">Review &amp; Submit</div>
+      <div class="orig-section-sub">Confirm your application details</div>
+
+      <div class="orig-review-card">
+        <div class="orig-review-row">
+          <span class="orig-review-label">Product</span>
+          <span class="orig-review-value" data-bind="text: selectedProduct() ? selectedProduct().label : ''"></span>
+        </div>
+        <div class="orig-review-row">
+          <span class="orig-review-label">Applicant</span>
+          <span class="orig-review-value">Mohammed Al-Qahtani</span>
+        </div>
+        <div class="orig-review-row">
+          <span class="orig-review-label">ID Verified</span>
+          <span class="orig-review-value" style="color:#16A34A;">&#10003; National ID</span>
+        </div>
+        <!-- ko if: context() === 'account' -->
+        <div class="orig-review-row">
+          <span class="orig-review-label">Branch</span>
+          <span class="orig-review-value" data-bind="text: detailBranch"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: context() === 'deposit' || context() === 'loan' -->
+        <div class="orig-review-row">
+          <span class="orig-review-label" data-bind="text: context()==='deposit' ? 'Amount' : 'Finance Amount'"></span>
+          <span class="orig-review-value s-num" data-bind="text: 'LYD ' + (detailAmount() || '—')"></span>
+        </div>
+        <div class="orig-review-row">
+          <span class="orig-review-label">Tenure</span>
+          <span class="orig-review-value" data-bind="text: detailTenure() || '—'"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: context() === 'loan' -->
+        <div class="orig-review-row">
+          <span class="orig-review-label">Purpose</span>
+          <span class="orig-review-value" data-bind="text: detailPurpose() || '—'"></span>
+        </div>
+        <!-- /ko -->
+      </div>
+
+      <div class="orig-tnc-row">
+        <input type="checkbox" id="orig-tnc-chk">
+        <label for="orig-tnc-chk">I agree to the <span class="orig-tnc-link">Terms &amp; Conditions</span> and consent to Aman Bank processing this application</label>
+      </div>
+    </div>
+    <!-- /ko -->
+
+  </div><!-- /orig-body -->
+
+  <!-- ── Footer ── -->
+  <div class="orig-footer">
+    <!-- ko if: step() === 1 -->
+    <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 2)">Continue</button>
+    <!-- /ko -->
+    <!-- ko if: step() === 2 -->
+    <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 1)">Back</button>
+    <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 3)">Review</button>
+    <!-- /ko -->
+    <!-- ko if: step() === 3 -->
+    <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 2)">Back</button>
+    <button class="orig-btn-primary" data-bind="click: submit">Submit Application</button>
+    <!-- /ko -->
+  </div>
+
+  <!-- /ko --><!-- end !submitted -->
+
+  <!-- ── Success State ── -->
+  <!-- ko if: submitted() -->
+  <div class="orig-body">
+    <div class="orig-success">
+      <div class="orig-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="36" height="36"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="orig-success-title">Application Submitted!</div>
+      <div class="orig-success-sub">Your application has been received and is being processed. We'll update you within 2 business days.</div>
+      <div class="orig-ref-box">
+        <div class="orig-ref-label">Application Reference</div>
+        <div class="orig-ref-no" data-bind="text: refNo"></div>
+      </div>
+      <button class="orig-btn-primary" style="width:100%;" data-bind="click: done">Done</button>
+    </div>
+  </div>
+  <!-- /ko -->
+
+</div>

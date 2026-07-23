@@ -1,8 +1,9 @@
 <!-- account-list sub-component -->
-<div>
+<div data-bind="css: {'acl-card-mode': cardView(), 'acl-list-mode': !cardView()}">
+
   <!-- View toggle -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;">
-    <span style="font-size:13px;font-weight:700;color:var(--c-t1);">My Accounts</span>
+    <span style="font-size:13px;font-weight:700;color:var(--c-t1);">Accounts</span>
     <div style="display:flex;gap:4px;background:var(--c-surface2);border-radius:10px;padding:3px;">
       <button data-bind="click: setListView, css: {'acc-view-btn--active': !cardView()}" class="acc-view-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
@@ -13,8 +14,46 @@
     </div>
   </div>
 
+  <!-- ── LIST VIEW ── -->
+  <div class="acl-list-section">
+    <div class="acc-cards-list">
+      <!-- ko with: currentAccounts()[0] -->
+      <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="acc-card-body">
+          <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>
+          <div class="acc-card-num" data-bind="text: '•••• ' + $data.numberFull.slice(-4)"></div>
+        </div>
+        <div class="acc-card-right">
+          <div class="acc-card-balance s-num" data-bind="text: $parents[0].formatAmount($data.availableBalance)"></div>
+          <span class="acc-card-status" data-bind="text: $data.status === 'ACTIVE' ? 'Active' : $data.status"></span>
+        </div>
+        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <!-- /ko -->
+      <!-- ko with: currentAccounts()[1] -->
+      <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="acc-card-body">
+          <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>
+          <div class="acc-card-num" data-bind="text: '•••• ' + $data.numberFull.slice(-4)"></div>
+        </div>
+        <div class="acc-card-right">
+          <div class="acc-card-balance s-num" data-bind="text: $parents[0].formatAmount($data.availableBalance)"></div>
+          <span class="acc-card-status" data-bind="text: $data.status === 'ACTIVE' ? 'Active' : $data.status"></span>
+        </div>
+        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+
   <!-- ── CARD CAROUSEL VIEW ── -->
-  <div data-bind="visible: cardView()">
+  <div class="acl-card-section">
     <div class="acc-carousel-wrap" id="accCarouselWrap" style="padding-top:12px;">
       <div class="acc-carousel-track" id="accCarouselTrack">
         <!-- Card 1: Current -->
@@ -77,211 +116,93 @@
     </div>
   </div>
 
-  <!-- ── LIST VIEW ── -->
-  <div data-bind="visible: !cardView()">
-    <div class="acc-cards-list" data-bind="foreach: currentAccounts">
-      <div class="acc-card" data-bind="click: $parent.openAccountDetail">
-        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        </div>
-        <div class="acc-card-body">
-          <div class="acc-card-name" data-bind="text: typeLabel"></div>
-          <div class="acc-card-num" data-bind="text: '•••• ' + numberFull.slice(-4)"></div>
-        </div>
-        <div class="acc-card-right">
-          <div class="acc-card-balance s-num" data-bind="text: 'LYD ' + $parent.formatAmount(availableBalance)"></div>
-          <span class="acc-card-status">Active</span>
-        </div>
-        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </div>
-  </div>
 
-  <!-- ══ SHARED WIDGETS (shown in both card and list view) ══ -->
+  <!-- ══ SHARED WIDGETS ══ -->
   <div class="acct-widgets">
 
-    <!-- Widget 1: Quick Actions -->
-    <div class="w-quick-actions">
-      <button class="w-qa-btn" data-bind="click: function(){ openStatementFor(currentAccounts()[carouselIndex()]); }">
-        <div class="w-qa-icon" style="background:#FCE7EE;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="2" stroke-linecap="round" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-        <span>Statement</span>
-      </button>
-      <button class="w-qa-btn" data-bind="click: function(){ window.amanApp.navigate('pay'); }">
-        <div class="w-qa-icon" style="background:var(--c-primary);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </div>
-        <span>Transfer</span>
-      </button>
-      <button class="w-qa-btn" data-bind="click: function(){ openShareIBANFor(currentAccounts()[carouselIndex()]); }">
-        <div class="w-qa-icon" style="background:#EDE9FE;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" width="18" height="18"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        </div>
-        <span>Share IBAN</span>
-      </button>
-      <button class="w-qa-btn">
-        <div class="w-qa-icon" style="background:#FEF3C7;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" width="18" height="18"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <span>Pay Bill</span>
-      </button>
-    </div>
 
-    <!-- Widget 2: Monthly Summary -->
-    <div class="w-card">
-      <div class="w-card-header">
-        <div>
-          <div class="w-card-title">Monthly Summary</div>
-          <div class="w-card-sub">Jul 2026</div>
+
+    <!-- Offers (snap carousel with dots) -->
+    <div class="w-section-head">
+      <span class="w-section-title">Offers for You</span>
+      <span class="w-section-link">See All</span>
+    </div>
+    <div class="offers-carousel-wrap">
+      <div class="offers-track" id="offersTrack">
+        <div class="offer-card" style="background:linear-gradient(135deg,#7A1531 0%,#3E0A1A 100%);">
+          <div class="offer-eyebrow" style="background:rgba(255,255,255,.15);color:#fff;">Savings</div>
+          <div class="offer-title">Earn up to 4.5% p.a.</div>
+          <div class="offer-sub">Premium Savings Account — limited time</div>
+          <div class="offer-cta">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="w-month-net">+LYD 6,529</div>
-      </div>
-      <div class="w-month-bars">
-        <div class="w-month-bar-row">
-          <div class="w-month-bar-label">
-            <span class="w-month-dot" style="background:#16A34A;"></span>Income
-          </div>
-          <div class="w-month-bar-track">
-            <div class="w-month-bar-fill" style="width:100%;background:linear-gradient(90deg,#16A34A,#4ADE80);"></div>
-          </div>
-          <div class="w-month-bar-val" style="color:#16A34A;">+18,500</div>
+        <div class="offer-card" style="background:linear-gradient(135deg,#1E3A6E 0%,#0A1F42 100%);">
+          <div class="offer-eyebrow" style="background:rgba(147,197,253,.2);color:#93C5FD;">Transfers</div>
+          <div class="offer-title">Zero fees for 3 months</div>
+          <div class="offer-sub">Existing customers · Ends Aug 2026</div>
+          <div class="offer-cta">Activate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="w-month-bar-row">
-          <div class="w-month-bar-label">
-            <span class="w-month-dot" style="background:#DC2626;"></span>Expenses
-          </div>
-          <div class="w-month-bar-track">
-            <div class="w-month-bar-fill" style="width:65%;background:linear-gradient(90deg,#DC2626,#F87171);"></div>
-          </div>
-          <div class="w-month-bar-val" style="color:#DC2626;">−11,971</div>
+        <div class="offer-card" style="background:linear-gradient(135deg,#78350F 0%,#3B1408 100%);">
+          <div class="offer-eyebrow" style="background:rgba(253,211,77,.2);color:#FCD34D;">Cashback</div>
+          <div class="offer-title">5% back on groceries</div>
+          <div class="offer-sub">Use your Aman debit card · Jul–Aug</div>
+          <div class="offer-cta">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
       </div>
-      <div class="w-month-meta">
-        <span class="w-meta-pill" style="background:#DCFCE7;color:#16A34A;">↑ 12% vs last month</span>
-        <span class="w-meta-pill" style="background:#FEF3C7;color:#D97706;">Savings rate 35%</span>
+      <div class="offers-dots" id="offersDots">
+        <div class="offer-dot active"></div>
+        <div class="offer-dot"></div>
+        <div class="offer-dot"></div>
       </div>
     </div>
 
-    <!-- Widget 3: Spending by Category -->
-    <div class="w-card">
-      <div class="w-card-header">
-        <div>
-          <div class="w-card-title">Spending by Category</div>
-          <div class="w-card-sub">Top 4 this month</div>
-        </div>
-        <span class="w-card-link">Details</span>
-      </div>
-      <div class="w-cat-list">
-        <div class="w-cat-row">
-          <div class="w-cat-icon" style="background:#DBEAFE;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          </div>
-          <div class="w-cat-body">
-            <div class="w-cat-name">Shopping</div>
-            <div class="w-cat-track"><div class="w-cat-fill" style="width:78%;background:#2563EB;"></div></div>
-          </div>
-          <div class="w-cat-amt">4,700</div>
-        </div>
-        <div class="w-cat-row">
-          <div class="w-cat-icon" style="background:#FCE7EE;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="w-cat-body">
-            <div class="w-cat-name">Housing &amp; Bills</div>
-            <div class="w-cat-track"><div class="w-cat-fill" style="width:55%;background:#7A1531;"></div></div>
-          </div>
-          <div class="w-cat-amt">3,300</div>
-        </div>
-        <div class="w-cat-row">
-          <div class="w-cat-icon" style="background:#FEF3C7;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-          </div>
-          <div class="w-cat-body">
-            <div class="w-cat-name">Food &amp; Dining</div>
-            <div class="w-cat-track"><div class="w-cat-fill" style="width:32%;background:#D97706;"></div></div>
-          </div>
-          <div class="w-cat-amt">1,921</div>
-        </div>
-        <div class="w-cat-row">
-          <div class="w-cat-icon" style="background:#F3E8FF;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <div class="w-cat-body">
-            <div class="w-cat-name">Utilities</div>
-            <div class="w-cat-track"><div class="w-cat-fill" style="width:14%;background:#7C3AED;"></div></div>
-          </div>
-          <div class="w-cat-amt">840</div>
-        </div>
-      </div>
+    <!-- Help & Support — 2×2 grid -->
+    <div class="w-section-head">
+      <span class="w-section-title">Help &amp; Support</span>
     </div>
-
-    <!-- Widget 4: Upcoming Payments -->
-    <div class="w-card">
-      <div class="w-card-header">
-        <div>
-          <div class="w-card-title">Upcoming Payments</div>
-          <div class="w-card-sub">Next 7 days</div>
-        </div>
-        <span class="w-card-link">View All</span>
-      </div>
-      <div class="w-upcoming-list">
-        <div class="w-upcoming-item">
-          <div class="w-upcoming-icon" style="background:#FEE2E2;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    <div class="help-grid">
+        <button class="help-tile">
+          <div class="help-tile-icon" style="background:#DBEAFE;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.49 16z"/></svg>
           </div>
-          <div class="w-upcoming-body">
-            <div class="w-upcoming-name">Credit Card Bill</div>
-            <div class="w-upcoming-due w-due-urgent">Due in 2 days</div>
+          <div class="help-tile-label">Call Us</div>
+          <div class="help-tile-sub">24/7 · 1800-AMAN</div>
+          <div class="live-dot" style="position:absolute;top:10px;right:10px;"></div>
+        </button>
+        <button class="help-tile">
+          <div class="help-tile-icon" style="background:#EDE9FE;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="20" height="20"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <div class="w-upcoming-amt">LYD 2,450</div>
-        </div>
-        <div class="w-upcoming-item">
-          <div class="w-upcoming-icon" style="background:#FEF3C7;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div class="help-tile-label">Live Chat</div>
+          <div class="help-tile-sub">Avg. wait 2 min</div>
+        </button>
+        <button class="help-tile">
+          <div class="help-tile-icon" style="background:#FCE7EE;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <div class="w-upcoming-body">
-            <div class="w-upcoming-name">Electricity — DEWA</div>
-            <div class="w-upcoming-due">Due in 5 days</div>
+          <div class="help-tile-label">Help Centre</div>
+          <div class="help-tile-sub">200+ articles</div>
+        </button>
+        <button class="help-tile">
+          <div class="help-tile-icon" style="background:#FEF3C7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="20" height="20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <div class="w-upcoming-amt">LYD 420</div>
-        </div>
-        <div class="w-upcoming-item">
-          <div class="w-upcoming-icon" style="background:#DBEAFE;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.49 16z"/></svg>
-          </div>
-          <div class="w-upcoming-body">
-            <div class="w-upcoming-name">Phone Plan — Monthly</div>
-            <div class="w-upcoming-due">Due in 7 days</div>
-          </div>
-          <div class="w-upcoming-amt">LYD 89</div>
-        </div>
+          <div class="help-tile-label">Complaint</div>
+          <div class="help-tile-sub">Track cases</div>
+        </button>
       </div>
-    </div>
-
-    <!-- Widget 5: Savings Goal -->
-    <div class="w-card w-savings-card">
-      <div class="w-card-header">
-        <div>
-          <div class="w-card-title">Savings Goal</div>
-          <div class="w-card-sub">Emergency Fund · Target LYD 150,000</div>
-        </div>
-        <span class="w-savings-pct">61%</span>
-      </div>
-      <div class="w-savings-track">
-        <div class="w-savings-fill" style="width:61%;"></div>
-      </div>
-      <div class="w-savings-meta">
-        <span><strong>LYD 91,849</strong> saved</span>
-        <span>LYD 58,151 to go</span>
-      </div>
-      <div class="w-savings-milestone">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="12" height="12"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        On track — estimated to reach goal by March 2027
-      </div>
-    </div>
 
   </div><!-- /acct-widgets -->
 
   <div class="bottom-spacer"></div>
 </div>
+<script>
+(function(){
+  var track = document.getElementById('offersTrack');
+  var dots  = document.querySelectorAll('#offersDots .offer-dot');
+  if (!track || !dots.length) return;
+  track.addEventListener('scroll', function(){
+    var idx = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+  }, { passive: true });
+})();
+</script>

@@ -6,7 +6,8 @@ define([
   'acct-components/deposits/loader',
   'acct-components/loans/loader',
   'acct-components/account-detail/loader',
-  'acct-components/sheets/loader'
+  'acct-components/sheets/loader',
+  'acct-components/origination/loader'
 ], function (ko, AccountService) {
   'use strict';
 
@@ -45,7 +46,7 @@ define([
     self.showDeposits       = ko.computed(function () { return self.activeTab() === 'deposits'; });
     self.showLoans          = ko.computed(function () { return self.activeTab() === 'loans'; });
 
-    self.cardView      = ko.observable(false);
+    self.cardView      = ko.observable(true);
     self.setListView   = function () { self.cardView(false); };
     self.setCardView   = function () { self.cardView(true); };
     self.carouselIndex = ko.observable(0);
@@ -168,11 +169,15 @@ define([
       self._resetAllSheets();
       self.selectedAccount(account); self.detailPanelOpen(true);
       window.amanApp && window.amanApp.setPanelOpen(true);
+      var screen = document.querySelector('.aman-screen');
+      if (screen) { screen.dataset.scrollTop = screen.scrollTop; screen.style.overflow = 'hidden'; }
     };
     self.closeAccountDetail = function () {
       self.detailPanelOpen(false); self.selectedAccount(null);
       self._resetAllSheets();
       window.amanApp && window.amanApp.setPanelOpen(false);
+      var screen = document.querySelector('.aman-screen');
+      if (screen) { screen.style.overflow = ''; screen.scrollTop = screen.dataset.scrollTop || 0; }
     };
 
     // ── Helpers ───────────────────────────────────────────────
@@ -256,6 +261,19 @@ define([
       eStatFrequency:      self.eStatFrequency,
       showNickname:        self.showNickname,      closeNickname:      self.closeNickname,       saveNickname:       self.saveNickname,
       showBlockAccount:    self.showBlockAccount,  closeBlockAccount:  self.closeBlockAccount,   confirmBlockAccount: self.confirmBlockAccount
+    };
+
+    // ── Origination ───────────────────────────────────────────
+    self.origOpen    = ko.observable(false);
+    self.origContext = ko.observable('account');
+    self.openOrigination = function (ctx) {
+      self.origContext(ctx);
+      self.origOpen(true);
+    };
+    self.originationParams = {
+      open:    self.origOpen,
+      close:   function () { self.origOpen(false); },
+      context: self.origContext
     };
 
     // ── Data load ─────────────────────────────────────────────
