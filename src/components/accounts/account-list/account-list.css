@@ -61,6 +61,65 @@
 .c-mesh2{position:absolute;bottom:-30px;right:-30px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(255,255,255,.06);pointer-events:none}
 .c-holo{position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,255,255,.04);pointer-events:none}
 
+/* ══ Shared widgets ══ */
+.acct-widgets{display:flex;flex-direction:column;gap:12px;padding:12px 16px 0}
+
+/* Quick Actions */
+.w-quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.w-qa-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;padding:12px 4px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s;font-size:11px;font-weight:700;color:var(--c-t2)}
+.w-qa-btn:active{transform:scale(.95)}
+.w-qa-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* Widget card base */
+.w-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;padding:16px}
+.w-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.w-card-title{font-size:14px;font-weight:800;color:var(--c-t1);line-height:1.2}
+.w-card-sub{font-size:11px;color:var(--c-t3);margin-top:2px}
+.w-card-link{font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;white-space:nowrap;padding-top:2px}
+
+/* Monthly Summary */
+.w-month-net{font-size:18px;font-weight:800;color:#16A34A;letter-spacing:-.5px;line-height:1}
+.w-month-bars{display:flex;flex-direction:column;gap:10px}
+.w-month-bar-row{display:flex;align-items:center;gap:10px}
+.w-month-bar-label{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--c-t3);width:72px;flex-shrink:0}
+.w-month-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.w-month-bar-track{flex:1;height:7px;background:var(--c-border);border-radius:4px;overflow:hidden}
+.w-month-bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.32,1,.23,1)}
+.w-month-bar-val{font-size:12px;font-weight:800;width:56px;text-align:right;flex-shrink:0;letter-spacing:-.3px}
+.w-month-meta{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.w-meta-pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+
+/* Spending by Category */
+.w-cat-list{display:flex;flex-direction:column;gap:12px}
+.w-cat-row{display:flex;align-items:center;gap:10px}
+.w-cat-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.w-cat-body{flex:1;min-width:0}
+.w-cat-name{font-size:12px;font-weight:700;color:var(--c-t1);margin-bottom:4px}
+.w-cat-track{height:5px;background:var(--c-border);border-radius:3px;overflow:hidden}
+.w-cat-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.32,1,.23,1)}
+.w-cat-amt{font-size:12px;font-weight:800;color:var(--c-t1);width:44px;text-align:right;flex-shrink:0;letter-spacing:-.3px}
+
+/* Upcoming Payments */
+.w-upcoming-list{display:flex;flex-direction:column;gap:0}
+.w-upcoming-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--c-border)}
+.w-upcoming-item:last-child{border-bottom:none;padding-bottom:0}
+.w-upcoming-item:first-child{padding-top:0}
+.w-upcoming-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.w-upcoming-body{flex:1;min-width:0}
+.w-upcoming-name{font-size:13px;font-weight:700;color:var(--c-t1)}
+.w-upcoming-due{font-size:11px;color:var(--c-t3);margin-top:2px}
+.w-due-urgent{color:#DC2626;font-weight:700}
+.w-upcoming-amt{font-size:13px;font-weight:800;color:var(--c-t1);letter-spacing:-.3px;flex-shrink:0}
+
+/* Savings Goal */
+.w-savings-card{}
+.w-savings-pct{font-size:22px;font-weight:900;color:var(--c-primary);letter-spacing:-1px;line-height:1}
+.w-savings-track{height:10px;background:var(--c-border);border-radius:5px;overflow:hidden;margin-bottom:8px}
+.w-savings-fill{height:100%;background:linear-gradient(90deg,var(--c-primary),#C2185B);border-radius:5px;transition:width .8s cubic-bezier(.32,1,.23,1)}
+.w-savings-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--c-t3);margin-bottom:10px}
+.w-savings-meta strong{color:var(--c-t1);font-weight:800}
+.w-savings-milestone{display:flex;align-items:center;gap:5px;font-size:11px;color:#16A34A;font-weight:600;background:#DCFCE7;padding:7px 10px;border-radius:10px}
+
 /* View Details button */
 .view-details-btn{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;cursor:pointer;transition:background .2s,box-shadow .2s,border-color .2s;outline:none;line-height:1}
 .view-details-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);box-shadow:0 0 0 3px rgba(255,255,255,.15),0 0 12px rgba(255,255,255,.1)}
