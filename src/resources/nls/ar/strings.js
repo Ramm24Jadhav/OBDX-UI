@@ -1,0 +1,22 @@
+define({
+  appName: 'بنك أمان',
+  nav_home: 'الرئيسية', nav_accounts: 'الحسابات', nav_pay: 'الدفع', nav_cards: 'البطاقات', nav_more: 'المزيد',
+  login_title: 'مرحباً بعودتك', login_subtitle: 'تسجيل الدخول إلى بنك أمان',
+  login_mpin_label: 'أدخل رقم MPIN', login_btn_login: 'تسجيل الدخول',
+  home_greeting_morning: 'صباح الخير', home_greeting_afternoon: 'مساء الخير', home_greeting_evening: 'مساء الخير',
+  home_total_balance: 'إجمالي الرصيد', home_quick_actions: 'الإجراءات السريعة', home_recent_tx: 'آخر المعاملات',
+  home_see_all: 'عرض الكل',
+  home_qa_transfer: 'تحويل', home_qa_pay_bill: 'دفع الفواتير', home_qa_qr: 'QR للدفع',
+  home_qa_top_up: 'شحن', home_qa_forex: 'الفوركس', home_qa_loans: 'القروض',
+  home_qa_invest: 'الاستثمار', home_qa_more: 'المزيد',
+  acc_title: 'الحسابات', acc_tab_all: 'الكل', acc_tab_savings: 'التوفير',
+  acc_tab_current: 'الجاري', acc_tab_fd: 'الوديعة الثابتة',
+  pay_title: 'المدفوعات', pay_transfer: 'تحويل الأموال',
+  pay_btn_continue: 'متابعة', pay_btn_confirm: 'تأكيد وإرسال OTP',
+  pay_success_title: 'تم التحويل بنجاح!',
+  pay_otp_title: 'أدخل رمز OTP',
+  cards_title: 'بطاقاتي', cards_add: 'إضافة بطاقة',
+  more_title: 'المزيد', more_sign_out: 'تسجيل الخروج',
+  btn_cancel: 'إلغاء', btn_close: 'إغلاق', btn_save: 'حفظ', btn_confirm: 'تأكيد',
+  currency_aed: 'درهم'
+});

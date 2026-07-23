@@ -1,0 +1,190 @@
+define([
+  'knockout',
+  'services/AccountService',
+  'services/UserService',
+  'ojs/ojknockout'
+], function (ko, AccountService, UserService) {
+
+  function HomeViewModel() {
+    var self = this;
+
+    // ── State ─────────────────────────────────────────────────
+    self.isLoading         = ko.observable(true);
+    self.accounts          = ko.observableArray([]);
+    self.transactions      = ko.observableArray([]);
+    self.totalBalance      = ko.observable(0);
+    self.balanceMasked     = ko.observable(false);
+    self.notifications     = ko.observableArray([]);
+    self.unreadCount       = ko.observable(3);
+    self.currentLang       = ko.observable('en');
+    self.showNotifications = ko.observable(false);
+    self.showAnalytics     = ko.observable(false);
+
+    // ── Notification data ─────────────────────────────────────
+    self.notifList = ko.observableArray([
+      { title: 'Salary Credited', sub: 'LYD 18,500 from Aman Corporation', time: 'Today, 08:00', read: false,
+        iconBg: '#DCFCE7', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polyline points="6 9 12 15 18 9"/></svg>' },
+      { title: 'Transfer Successful', sub: 'LYD 500 sent to Mohammed Al-Qahtani', time: 'Today, 09:14', read: false,
+        iconBg: '#FCE7EE', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>' },
+      { title: 'Bill Due Soon', sub: 'DEWA Electricity · LYD 420 due in 3 days', time: 'Yesterday', read: false,
+        iconBg: '#FEF3C7', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' },
+      { title: 'Card Statement Ready', sub: 'Your July 2026 statement is available', time: '18 Jul', read: true,
+        iconBg: '#DBEAFE', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>' },
+      { title: 'New Offer Available', sub: 'Get 2% cashback on international transfers', time: '17 Jul', read: true,
+        iconBg: '#EDE9FE', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' }
+    ]);
+
+    // ── Analytics period ──────────────────────────────────────
+    self.anPeriod = ko.observable('month');
+    self.anSetPeriod = function (p) { self.anPeriod(p); };
+
+    var _anData = {
+      month:   { income: 'LYD 27,600', incomeK: 'LYD 27.6K', expense: 'LYD 12,420', expenseK: 'LYD 12.4K', savings: 'LYD 8,820', savingsK: 'LYD 8.8K', netK: '+6.4K' },
+      quarter: { income: 'LYD 82,800', incomeK: 'LYD 82.8K', expense: 'LYD 37,260', expenseK: 'LYD 37.3K', savings: 'LYD 26,460', savingsK: 'LYD 26.5K', netK: '+19K' },
+      year:    { income: 'LYD 331K',   incomeK: 'LYD 331K',  expense: 'LYD 149K',   expenseK: 'LYD 149K',  savings: 'LYD 105K',   savingsK: 'LYD 105K',  netK: '+77K' }
+    };
+    self.anSummary = ko.computed(function () { return _anData[self.anPeriod()] || _anData.month; });
+
+    // ── Analytics data ────────────────────────────────────────
+    self.analyticsCategories = [
+      { label: 'Food & Dining',   amount: '3,840', pct: 31, color: '#7A1531' },
+      { label: 'Shopping',        amount: '2,960', pct: 24, color: '#C8A45D' },
+      { label: 'Bills & Utilities',amount: '2,100', pct: 17, color: '#2563EB' },
+      { label: 'Transport',       amount: '1,490', pct: 12, color: '#16A34A' },
+      { label: 'Entertainment',   amount: '1,240', pct: 10, color: '#7C3AED' },
+      { label: 'Others',          amount: '790',   pct: 6,  color: '#9CA3AF' }
+    ];
+
+    // ── Computed ──────────────────────────────────────────────
+    self.greeting = ko.computed(function () {
+      var h = new Date().getHours();
+      if (h < 12) return 'Good morning';
+      if (h < 17) return 'Good afternoon';
+      return 'Good evening';
+    });
+
+    self.userName = ko.computed(function () {
+      return window.amanApp ? window.amanApp.currentUser().name.split(' ')[0] : 'Mohammed';
+    });
+
+    self.primaryAccount = ko.computed(function () {
+      return self.accounts().find(function (a) { return a.type === 'CURRENT'; }) || null;
+    });
+
+    self.displayTRV = ko.computed(function () {
+      if (self.balanceMasked()) return 'LYD •••,•••.••';
+      return 'LYD ' + _fmt(self.totalBalance() * 4.5 || 1245780.50);
+    });
+
+    self.displayAvailBal = ko.computed(function () {
+      if (self.balanceMasked()) return 'LYD •••,•••';
+      return 'LYD ' + _fmt(self.totalBalance() || 456780);
+    });
+
+    // ── Actions ───────────────────────────────────────────────
+    self.toggleBalance = function () {
+      self.balanceMasked(!self.balanceMasked());
+      window.amanApp && window.amanApp.toggleBalanceMask();
+      // Swap eye icon to show/hide state
+      var icon = document.getElementById('eye-header-icon');
+      if (icon) {
+        icon.innerHTML = self.balanceMasked()
+          ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+          : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+        icon.closest('button').style.opacity = self.balanceMasked() ? '0.5' : '1';
+      }
+    };
+
+    self.toggleLang = function () {
+      var next = self.currentLang() === 'en' ? 'ar' : 'en';
+      self.currentLang(next);
+      window.amanApp && window.amanApp.toggleLang && window.amanApp.toggleLang(next);
+    };
+
+    self.goToAccounts = function () {
+      window.amanApp && window.amanApp.navigate('accounts');
+    };
+
+    self.goToPay = function () {
+      window.amanApp && window.amanApp.navigate('pay');
+    };
+
+    self.goToMore = function () {
+      window.amanApp && window.amanApp.navigate('more');
+    };
+
+    self.openNotifications = function () { self.showNotifications(true); };
+    self.closeNotifications = function () { self.showNotifications(false); };
+    self.markAllRead = function () {
+      self.notifList().forEach(function (n) { n.read = true; });
+      self.notifList.valueHasMutated();
+      self.unreadCount(0);
+    };
+
+    self.openAnalytics  = function () { self.showAnalytics(true); };
+    self.closeAnalytics = function () { self.showAnalytics(false); };
+
+    self.goToNotifs = function () {
+      self.openNotifications();
+    };
+
+    self.formatAmount = function (amount) {
+      return _fmt(Math.abs(amount));
+    };
+
+    // ── Transaction icon helpers ───────────────────────────────
+    var _txIcons = {
+      transfer: { bg: '#FEE2E2', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>' },
+      salary:   { bg: '#DCFCE7', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' },
+      bill:     { bg: '#FEF3C7', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>' },
+      shop:     { bg: '#DBEAFE', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>' },
+      atm:      { bg: '#EDE9FE', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>' },
+      dine:     { bg: '#FCE7EE', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>' }
+    };
+
+    self.txIconBg = function (category) {
+      return (_txIcons[category] || _txIcons['shop']).bg;
+    };
+
+    self.txIconSvg = function (category) {
+      return (_txIcons[category] || _txIcons['shop']).svg;
+    };
+
+    // ── Lifecycle ─────────────────────────────────────────────
+    var _loadTimer = null;
+    self._scheduleLoad = function () {
+      clearTimeout(_loadTimer);
+      _loadTimer = setTimeout(function () { self._load(); }, 50);
+    };
+
+    self.handleActivated = function () { self._scheduleLoad(); };
+
+    self._load = function () {
+      self.isLoading(true);
+
+      Promise.all([
+        AccountService.getAccounts(),
+        AccountService.getTransactions('ACC-4829'),
+        UserService.getNotifications()
+      ]).then(function (results) {
+        self.accounts(results[0].accounts || []);
+        self.totalBalance(results[0].totalBalance.amount);
+        self.transactions((results[1].transactions || []).slice(0, 5));
+        self.notifications(results[2].notifications || []);
+        self.unreadCount(results[2].unreadCount || 0);
+      }).catch(function (err) {
+        console.error('Home load error', err);
+      }).finally(function () {
+        self.isLoading(false);
+      });
+    };
+
+    self._scheduleLoad();
+  }
+
+  function _fmt(n) {
+    return Number(n).toLocaleString('en-LY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  return HomeViewModel;
+});

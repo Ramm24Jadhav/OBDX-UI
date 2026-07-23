@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--
+  Aman Bank — OBDX Mobile Banking App
+  Oracle JET 14 + Knockout.js + RequireJS
+  Shell: splash + router outlet + nav + loaders only.
+  All screen content lives in src/js/views/ + viewModels/.
+-->
+<html lang="en" dir="ltr">
+  <head>
+    <title>Aman Bank — Digital Banking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#7A1531">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Aman Bank">
+    <link rel="icon" href="css/images/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Oracle JET Theme -->
+    <!-- injector:theme -->
+    <!-- endinjector -->
+
+    <!-- Aman Bank app styles -->
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
+  </head>
+
+  <body class="aman-app-body">
+
+    <!-- ── Page loading overlay (white screen until JET boots) ── -->
+    <div id="loading-overlay" style="position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="44" height="44" rx="12" fill="#7A1531"/>
+          <path d="M22 8L36 16V28C36 33.5 29.5 38 22 40C14.5 38 8 33.5 8 28V16L22 8Z" fill="rgba(255,255,255,0.15)"/>
+          <path d="M22 12L33 18.5V27.5C33 31.8 28 35.5 22 37C16 35.5 11 31.8 11 27.5V18.5L22 12Z" stroke="white" stroke-width="1.5" fill="none"/>
+          <path d="M17 22H27M22 17V27" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div style="font-size:24px;font-weight:900;color:#7A1531;letter-spacing:-.5px;">Aman Bank</div>
+          <div style="font-size:11px;color:#9CA3AF;font-weight:600;letter-spacing:.5px;">DIGITAL BANKING</div>
+        </div>
+      </div>
+      <div style="width:200px;height:4px;background:#F3F4F6;border-radius:2px;overflow:hidden;position:relative;">
+        <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,#7A1531,#A01A3B,#7A1531,transparent);border-radius:2px;animation:loadWave 1.4s ease-in-out infinite;"></div>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:#9CA3AF;font-weight:600;letter-spacing:.3px;">Securing your session…</div>
+      <style>@keyframes loadWave{0%{left:-100%}100%{left:100%}}</style>
+    </div>
+
+    <div id="globalBody">
+      <div id="announce" tabindex="-1" class="aman-sr-only"
+           :aria-live="[[manner]]" aria-atomic="true">
+        <p><oj-bind-text value="[[message]]"></oj-bind-text></p>
+      </div>
+
+      <!-- ── Phone shell ── -->
+      <div class="aman-phone-shell">
+        <div class="aman-phone" id="amanPhone">
+
+          <!-- Status bar (desktop only, hidden on mobile) -->
+          <div class="aman-status-bar" id="statusBar">
+            <span class="sb-time" id="statusTime">9:41</span>
+            <div class="sb-icons">
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
+                <rect x="0" y="3" width="3" height="9" rx="1"/><rect x="4" y="2" width="3" height="10" rx="1"/><rect x="8" y="0" width="3" height="12" rx="1"/><rect x="12" y="0" width="3" height="12" rx="1" opacity=".3"/>
+              </svg>
+              <svg width="16" height="12" viewBox="0 0 24 12" fill="currentColor">
+                <path d="M1 4.5C5.5 0 18.5 0 23 4.5L21 6.5C17 2.5 7 2.5 3 6.5L1 4.5zM5 8.5C8 5.5 16 5.5 19 8.5L17 10.5C15 8.5 9 8.5 7 10.5L5 8.5zM12 14a2 2 0 100-4 2 2 0 000 4z"/>
+              </svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="currentColor">
+                <rect x="0" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".5"/>
+                <rect x="2" y="3" width="15" height="6" rx="1"/>
+                <rect x="22" y="4" width="3" height="4" rx="1" opacity=".5"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ── Router outlet — all screens load here via MVVM ── -->
+          <oj-module role="main"
+                     class="aman-router-outlet"
+                     config="[[moduleAdapter.koObservableConfig]]">
+          </oj-module>
+
+          <!-- ── Floating Pill Nav Bar (hidden on login screen) ── -->
+          <nav class="aman-nav" role="navigation" aria-label="Main navigation"
+               data-bind="visible: isAuthenticated() && !anyPanelOpen()">
+            <button class="nav-btn" data-bind="click: function(){navigate('home')}, css:{'active': currentRoute()==='home'}" aria-label="Home">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-btn" data-bind="click: function(){navigate('accounts')}, css:{'active': currentRoute()==='accounts'}" aria-label="Accounts">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              </div>
+              <span class="nav-label">Accounts</span>
+            </button>
+            <button class="nav-btn nav-center" data-bind="click: function(){navigate('pay')}" aria-label="Pay">
+              <div class="nav-center-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </div>
+              <span class="nav-label">Pay</span>
+            </button>
+            <button class="nav-btn" data-bind="click: function(){navigate('cards')}, css:{'active': currentRoute()==='cards'}" aria-label="Cards">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </div>
+              <span class="nav-label">Cards</span>
+            </button>
+            <button class="nav-btn" data-bind="click: function(){navigate('more')}, css:{'active': currentRoute()==='more'}" aria-label="More">
+              <div class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
+              </div>
+              <span class="nav-label">More</span>
+            </button>
+          </nav>
+
+          <!-- ── Global Loader ── -->
+          <div id="amanLoader" class="aman-loader-overlay" style="display:none">
+            <div class="ldr-glass">
+              <div class="ldr-quantum">
+                <div class="ldr-guide"></div>
+                <div class="ldr-guide-inner"></div>
+                <div class="ldr-ring1"><div class="ldr-dot1"></div><div class="ldr-trail1"></div></div>
+                <div class="ldr-ring2"><div class="ldr-dot2"></div><div class="ldr-trail2"></div></div>
+                <div class="ldr-ring3"><div class="ldr-dot3"></div></div>
+                <div class="ldr-center"></div>
+              </div>
+              <div>
+                <div class="ldr-msg" id="amanLoaderMsg">Processing</div>
+                <div class="ldr-submsg" id="amanLoaderSubMsg">Please wait</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Toast ── -->
+          <div id="amanToast" class="aman-toast" role="status" aria-live="polite">
+            <span id="amanToastMsg"></span>
+          </div>
+
+          <!-- ── Global Picker Sheet (z:860 — above all other sheets) ── -->
+          <div class="aman-picker-backdrop" data-bind="css:{'open': pickerOpen()}, click: closePicker">
+            <div class="aman-picker-sheet" data-bind="css:{'open': pickerOpen()}" onclick="event.stopPropagation()">
+              <div style="width:36px;height:4px;border-radius:2px;background:var(--c-border);margin:12px auto 4px;"></div>
+              <div data-bind="text: pickerTitle()" style="font-size:15px;font-weight:800;color:var(--c-t1);padding:12px 20px 8px;"></div>
+              <div style="border-top:1px solid var(--c-border);">
+                <!-- ko foreach: pickerOptions() -->
+                <div class="aman-picker-option" data-bind="click: function(){ window.amanApp.selectPickerOption($data); }, css: {'aman-picker-option--selected': $root.pickerSelected() === $data.value}">
+                  <span data-bind="text: $data.label"></span>
+                  <!-- ko if: $root.pickerSelected() === $data.value -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                  <!-- /ko -->
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.aman-phone -->
+      </div><!-- /.aman-phone-shell -->
+    </div><!-- /#globalBody -->
+
+    <!-- RequireJS bootstrap -->
+    <!-- injector:scripts -->
+    <script type="text/javascript" src="js/libs/require/require.js" data-main="js/main"></script>
+    <!-- endinjector -->
+
+    <script>
+    // ── Drag-to-dismiss for all bottom sheets ──────────────────
+    (function () {
+      var phone, activeSheet, activeBackdrop;
+      var startY = 0, lastY = 0, lastTime = 0, dragY = 0, dragging = false;
+      var CLOSE_THRESHOLD = 140;   // px dragged to auto-close
+      var VELOCITY_THRESHOLD = 0.6; // px/ms flick velocity
+
+      function getSheet(target) {
+        var handle = target.closest('.acc-sheet-handle');
+        if (!handle) return null;
+        var sheet = handle.closest('.iban-sheet, .aman-picker-sheet');
+        if (!sheet) return null;
+        return sheet;
+      }
+
+      function onDown(e) {
+        var sheet = getSheet(e.target);
+        if (!sheet) return;
+        activeSheet = sheet;
+        activeBackdrop = sheet.parentElement;
+        startY = lastY = e.clientY;
+        lastTime = Date.now();
+        dragY = 0;
+        dragging = true;
+        activeSheet.style.transition = 'none';
+        if (activeBackdrop) activeBackdrop.style.transition = 'none';
+        phone.setPointerCapture && phone.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      }
+
+      function onMove(e) {
+        if (!dragging || !activeSheet) return;
+        var dy = e.clientY - startY;
+        if (dy < 0) dy = 0;
+        dragY = dy;
+        var now = Date.now();
+        lastY = e.clientY;
+        lastTime = now;
+        activeSheet.style.transform = 'translateX(-50%) translateY(' + dy + 'px)';
+        if (activeBackdrop) {
+          var opacity = Math.max(0, 0.5 * (1 - dy / 350));
+          activeBackdrop.style.background = 'rgba(0,0,0,' + opacity + ')';
+        }
+      }
+
+      function onUp(e) {
+        if (!dragging || !activeSheet) return;
+        dragging = false;
+        var elapsed = Date.now() - lastTime;
+        var velocity = elapsed > 0 ? (dragY / elapsed) : 0;
+        var shouldClose = dragY > CLOSE_THRESHOLD || velocity > VELOCITY_THRESHOLD;
+
+        if (shouldClose) {
+          activeSheet.style.transition = 'transform .28s cubic-bezier(.32,1,.23,1)';
+          activeSheet.style.transform = 'translateX(-50%) translateY(110%)';
+          if (activeBackdrop) {
+            activeBackdrop.style.transition = 'opacity .28s';
+            activeBackdrop.style.opacity = '0';
+          }
+          var _sheet = activeSheet, _bd = activeBackdrop;
+          setTimeout(function () {
+            _sheet.style.transform = '';
+            _sheet.style.transition = '';
+            if (_bd) { _bd.style.opacity = ''; _bd.style.background = ''; _bd.style.transition = ''; }
+            window.amanApp && window.amanApp.closeCurrentSheet();
+          }, 280);
+        } else {
+          activeSheet.style.transition = 'transform .35s cubic-bezier(.32,1,.23,1)';
+          activeSheet.style.transform = 'translateX(-50%) translateY(0)';
+          if (activeBackdrop) {
+            activeBackdrop.style.transition = 'background .35s';
+            activeBackdrop.style.background = '';
+          }
+          var _s = activeSheet, _b = activeBackdrop;
+          setTimeout(function () {
+            _s.style.transition = ''; _s.style.transform = '';
+            if (_b) { _b.style.transition = ''; }
+          }, 360);
+        }
+        activeSheet = null;
+        activeBackdrop = null;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        phone = document.getElementById('amanPhone');
+        if (!phone) return;
+        phone.addEventListener('pointerdown', onDown);
+        phone.addEventListener('pointermove', onMove);
+        phone.addEventListener('pointerup', onUp);
+        phone.addEventListener('pointercancel', onUp);
+      });
+    })();
+    </script>
+
+    <script>
+      // Live clock (status bar)
+      (function() {
+        function tick() {
+          var el = document.getElementById('statusTime');
+          if (el) {
+            var d = new Date();
+            el.textContent = d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0');
+          }
+        }
+        tick();
+        setInterval(tick, 30000);
+      })();
+
+      // Fade the initial white overlay — login view loads behind it via MVVM router
+      window.addEventListener('load', function() {
+        var overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+          setTimeout(function() {
+            overlay.style.opacity = '0';
+            setTimeout(function() { overlay.style.display = 'none'; }, 500);
+          }, 800);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+﻿{
+  "name": "home",
+  "description": "Home dashboard — account summary, quick actions and recent transactions",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "type": "composite",
+  "dependencies": {}
+}

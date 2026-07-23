@@ -1,0 +1,8 @@
+﻿{
+  "name": "login",
+  "description": "Login screen — splash, biometric, MPIN and password authentication",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "type": "composite",
+  "dependencies": {}
+}

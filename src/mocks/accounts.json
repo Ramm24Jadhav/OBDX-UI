@@ -1,0 +1,50 @@
+{
+  "status": "SUCCESS",
+  "accounts": [
+    {
+      "id": "ACC-4829",
+      "type": "CURRENT",
+      "typeLabel": "Current Account",
+      "number": "••••4829",
+      "numberFull": "AE07 0331 2345 6789 0123 456",
+      "currency": "AED",
+      "balance": 42350.75,
+      "availableBalance": 41800.00,
+      "branch": "Dubai Main",
+      "status": "ACTIVE",
+      "openDate": "2021-03-15"
+    },
+    {
+      "id": "ACC-7312",
+      "type": "SAVINGS",
+      "typeLabel": "Savings Account",
+      "number": "••••7312",
+      "numberFull": "AE07 0331 2345 6789 0123 789",
+      "currency": "AED",
+      "balance": 91849.25,
+      "availableBalance": 91849.25,
+      "branch": "Dubai Main",
+      "status": "ACTIVE",
+      "openDate": "2019-07-22"
+    },
+    {
+      "id": "ACC-FD-001",
+      "type": "FIXED_DEPOSIT",
+      "typeLabel": "Fixed Deposit",
+      "number": "FD-2024-001",
+      "numberFull": "FD-2024-0010047829",
+      "currency": "AED",
+      "balance": 50000.00,
+      "availableBalance": 0,
+      "interestRate": 4.75,
+      "maturityDate": "2026-12-31",
+      "branch": "Dubai Main",
+      "status": "ACTIVE",
+      "openDate": "2023-12-31"
+    }
+  ],
+  "totalBalance": {
+    "currency": "AED",
+    "amount": 184200.00
+  }
+}
