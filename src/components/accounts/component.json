@@ -1,8 +1,0 @@
-﻿{
-  "name": "accounts",
-  "description": "Accounts screen — account list, balances and transaction history",
-  "version": "1.0.0",
-  "jetVersion": "^14.0.0",
-  "type": "composite",
-  "dependencies": {}
-}

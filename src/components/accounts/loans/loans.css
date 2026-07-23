@@ -1,0 +1,5 @@
+/* Loans sub-component styles */
+.loan-summary-hero{background:linear-gradient(135deg,#1E3A5F 0%,#0F1F3A 100%);border-radius:var(--r-xl);padding:20px;margin:16px;color:#fff}
+.loan-card{background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);padding:16px;margin:0 16px 12px}
+.loan-progress-bar{height:4px;background:var(--c-border);border-radius:2px;overflow:hidden;margin:8px 0}
+.loan-progress-fill{height:100%;background:#2563EB;border-radius:2px}

@@ -1,0 +1,59 @@
+<!-- loans sub-component -->
+<div style="padding:16px;display:flex;flex-direction:column;gap:14px;">
+
+  <!-- Loan summary hero (dark blue) -->
+  <div style="background:linear-gradient(135deg,#1E3A5F 0%,#0F1F3A 100%);border-radius:20px;padding:20px;color:#fff;">
+    <div style="font-size:11px;font-weight:600;opacity:.7;text-transform:uppercase;letter-spacing:.5px;">Total Outstanding</div>
+    <div class="s-num" style="font-size:30px;font-weight:800;letter-spacing:-1px;margin:4px 0;">LYD 185,000</div>
+    <div style="display:flex;gap:20px;margin-top:12px;">
+      <div><div style="font-size:10px;opacity:.6;">Active Loans</div><div style="font-size:14px;font-weight:700;">2</div></div>
+      <div><div style="font-size:10px;opacity:.6;">Next EMI</div><div class="s-num" style="font-size:14px;font-weight:700;color:#FCA5A5;">LYD 3,240</div></div>
+      <div><div style="font-size:10px;opacity:.6;">Due Date</div><div style="font-size:14px;font-weight:700;">25 Jul</div></div>
+    </div>
+  </div>
+
+  <!-- Loan card 1: Personal Finance -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+      <div><div style="font-size:13px;font-weight:700;color:var(--c-t1);">Personal Finance</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">LN-00412-PF-001 · Disbursed Jan 2022</div></div>
+      <div style="background:#DCFCE7;color:#16A34A;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;">Active</div>
+    </div>
+    <div style="display:flex;border-top:1px solid var(--c-border);padding-top:12px;">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Outstanding</div><div class="s-num" style="font-size:13px;font-weight:800;color:var(--c-t1);">LYD 85,000</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate</div><div style="font-size:13px;font-weight:800;color:var(--c-error);">3.99%</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">EMI</div><div class="s-num" style="font-size:13px;font-weight:800;color:var(--c-t1);">LYD 2,140</div></div>
+    </div>
+    <div style="margin-top:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:10px;color:var(--c-t3);">Repaid</span><span style="font-size:10px;color:var(--c-t3);">57% · 20 of 36 months</span></div><div style="height:4px;background:var(--c-border);border-radius:2px;"><div style="height:4px;background:#2563EB;border-radius:2px;width:57%;"></div></div></div>
+    <div style="display:flex;gap:8px;margin-top:12px;">
+      <button style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:12px;font-weight:700;cursor:pointer;">View Details</button>
+      <button style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);font-size:12px;font-weight:700;color:var(--c-t1);cursor:pointer;">Schedule</button>
+      <button style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);font-size:12px;font-weight:700;color:var(--c-t1);cursor:pointer;">Statement</button>
+    </div>
+  </div>
+
+  <!-- Loan card 2: Home Finance -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+      <div><div style="font-size:13px;font-weight:700;color:var(--c-t1);">Home Finance</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">LN-00412-HF-001 · Disbursed Mar 2020</div></div>
+      <div style="background:#DCFCE7;color:#16A34A;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;">Active</div>
+    </div>
+    <div style="display:flex;border-top:1px solid var(--c-border);padding-top:12px;">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Outstanding</div><div class="s-num" style="font-size:13px;font-weight:800;color:var(--c-t1);">LYD 100,000</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate</div><div style="font-size:13px;font-weight:800;color:var(--c-error);">2.75%</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">EMI</div><div class="s-num" style="font-size:13px;font-weight:800;color:var(--c-t1);">LYD 1,100</div></div>
+    </div>
+    <div style="margin-top:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:10px;color:var(--c-t3);">Repaid</span><span style="font-size:10px;color:var(--c-t3);">38% · 62 of 180 months</span></div><div style="height:4px;background:var(--c-border);border-radius:2px;"><div style="height:4px;background:#2563EB;border-radius:2px;width:38%;"></div></div></div>
+    <div style="display:flex;gap:8px;margin-top:12px;">
+      <button style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:12px;font-weight:700;cursor:pointer;">View Details</button>
+      <button style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);font-size:12px;font-weight:700;color:var(--c-t1);cursor:pointer;">Schedule</button>
+      <button style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);font-size:12px;font-weight:700;color:var(--c-t1);cursor:pointer;">Statement</button>
+    </div>
+  </div>
+
+  <button style="width:100%;padding:14px;border-radius:14px;border:1.5px dashed var(--c-border);background:transparent;font-size:13px;font-weight:700;color:var(--c-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Apply for New Loan
+  </button>
+
+  <div class="bottom-spacer"></div>
+</div>

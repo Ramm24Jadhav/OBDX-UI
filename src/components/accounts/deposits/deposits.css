@@ -1,0 +1,10 @@
+/* Deposits sub-component styles */
+.dep-summary-strip{display:flex;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-xl);padding:16px;margin:16px;gap:0}
+.dep-summary-item{flex:1;text-align:center}
+.dep-summary-item+.dep-summary-item{border-left:1px solid var(--c-border)}
+.dep-summary-label{font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.dep-summary-value{font-size:15px;font-weight:800;color:var(--c-t1)}
+.dep-summary-value--positive{color:var(--c-success)}
+.dep-card{background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);padding:16px;margin:0 16px 12px}
+.dep-progress-bar{height:4px;background:var(--c-border);border-radius:2px;overflow:hidden;margin:8px 0}
+.dep-progress-fill{height:100%;background:var(--c-primary);border-radius:2px}

@@ -10,20 +10,41 @@ define([
   'ojs/ojknockoutrouteradapter',
   'ojs/ojurlparamadapter',
   'ojs/ojarraydataprovider',
+  'app-data',
+  'platform',
+  'framework/configurations/config',
+  'services/UserService',
+  'framework/interrupt-handler',
+  'framework/component-registry',
+  'framework/session-manager',
+  'framework/extensions/extension-registry',
+  'framework/analytics',
+  'framework/chatbot',
   'ojs/ojknockout'
 ], function (
   ko, Context,
   CoreRouter, KnockoutRouterAdapter,
-  UrlParamAdapter, ArrayDataProvider
+  UrlParamAdapter, ArrayDataProvider,
+  AppData, platform, config, UserService, InterruptHandler,
+  ComponentRegistry, SessionManager, ExtensionRegistry,
+  Analytics, Chatbot
 ) {
 
   // ── OBDX component loader ────────────────────────────────────────────────
-  // Loads view HTML and ViewModel directly from components/{name}/.
-  // Using absolute-from-baseUrl paths avoids the text! relative-path
-  // double-alias bug that occurs when loading through a loader.js intermediary.
+  // Maps route paths to their entry-point component folder.
+  // Module directories (e.g. accounts/) contain only sub-component folders;
+  // the actual entry component lives one level deeper.
+  var _componentMap = {
+    'accounts': 'accounts/accounts-main'
+  };
+
   function _loadComponent(path, configObservable) {
-    var viewId = 'text!../components/' + path + '/view.html';
-    var vmId   = '../components/' + path + '/viewModel';
+    // ExtensionRegistry overrides take priority over the static component map
+    var overridePath = ExtensionRegistry.getComponentPath(path);
+    var compPath = overridePath || _componentMap[path] || path;
+    var name   = compPath.split('/').pop();
+    var viewId = 'text!../components/' + compPath + '/' + name + '.html';
+    var vmId   = '../components/' + compPath + '/' + name;
     require([viewId, vmId, 'ojs/ojknockout'], function (view, ViewModel) {
       configObservable({ view: view, viewModel: ViewModel });
     }, function (err) {
@@ -45,6 +66,17 @@ define([
     // ── Auth state ─────────────────────────────────────────────
     self.isAuthenticated = ko.observable(false);
     self.anyPanelOpen   = ko.observable(false);  // hides nav when sheet/sub-panel is open
+
+    // ── Session modal state ────────────────────────────────────
+    self.sessionExpired   = ko.observable(false);
+    self.sessionSuspended = ko.observable(false);
+
+    document.addEventListener('aman:show:expired', function () {
+      self.sessionExpired(true);
+    });
+    document.addEventListener('aman:show:suspended', function () {
+      self.sessionSuspended(true);
+    });
     self.currentUser = ko.observable({
       name:       'Mohammed Al Jasem',
       initials:   'MJ',
@@ -115,12 +147,88 @@ define([
       router.go({ path: path });
     };
 
+    // ── Post-login bootstrap ───────────────────────────────────────
+    // Called by login ViewModel after credentials are verified.
+    // Loads /me, computes user segment, sets body class, then navigates home.
     self.login = function () {
+      AppData.currentEntity = config.system.defaultEntity;
       self.isAuthenticated(true);
-      self.navigate('home');
+      self.sessionExpired(false);
+      self.sessionSuspended(false);
+
+      // Bootstrap: /me + /me/components in parallel
+      Promise.all([
+        UserService.getProfile(),
+        UserService.getComponents()
+      ]).then(function (results) {
+        var profile    = results[0];
+        var components = results[1];
+
+        // Segment + context
+        AppData.userData    = profile;
+        var segment         = AppData.computeSegment(profile);
+        AppData.userSegment = segment;
+        AppData.jsonContext  = AppData.computeContext(segment);
+        AppData.isUserDataSet(true);
+
+        // Load entitlements into ComponentRegistry
+        ComponentRegistry.load(components);
+        AppData.allowedComponents = components;
+
+        // Apply segment-specific extensions (e.g. corporate overrides)
+        var segmentExts = ExtensionRegistry.evaluateSegment(segment);
+        if (segmentExts.componentMappings) {
+          ExtensionRegistry.setComponentMappings(segmentExts.componentMappings);
+        }
+
+        // Segment body class drives CSS theming
+        document.body.classList.remove(
+          'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
+        );
+        document.body.classList.add('segment-' + AppData.jsonContext);
+
+        // Update the global current-user observable from real profile data
+        if (profile && profile.customer) {
+          var c = profile.customer;
+          self.currentUser({
+            name:       c.displayName  || c.fullName || self.currentUser().name,
+            initials:   (c.displayName || c.fullName || 'MJ').charAt(0),
+            tier:       c.tier         || self.currentUser().tier,
+            customerId: c.id           || self.currentUser().customerId
+          });
+        }
+      }).catch(function (err) {
+        console.warn('[AppController] Bootstrap fetch failed — using defaults', err);
+        AppData.userSegment = 'RETAIL';
+        AppData.jsonContext  = 'retail';
+        document.body.classList.add('segment-retail');
+      }).then(function () {
+        SessionManager.start();
+        Analytics.track('session_start', { segment: AppData.userSegment });
+        Chatbot.init();
+        self.navigate('home');
+      });
     };
 
     self.logout = function () {
+      Analytics.track('session_end');
+      Analytics.resetSession();
+      SessionManager.stop();
+      ComponentRegistry.reset();
+      ExtensionRegistry.reset();
+      Chatbot.reset();
+      platform.logout();
+      AppData.userData          = {};
+      AppData.userSegment       = null;
+      AppData.jsonContext        = null;
+      AppData.currentEntity     = null;
+      AppData.allowedComponents = {};
+      AppData.isUserDataSet(false);
+      document.body.classList.remove(
+        'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
+      );
+      self.sessionExpired(false);
+      self.sessionSuspended(false);
       self.isAuthenticated(false);
       self.navigate('login');
     };
@@ -189,6 +297,44 @@ define([
       else self.pickerOpen(false);
     };
 
+    // ── Interrupt handler — exposed to index.html KO bindings ─────
+    self.interruptHandler = InterruptHandler;
+    self.interruptKeyPress = function (key) { InterruptHandler.keyPress(key); };
+
+    // Set global mock-mode flag so interrupt handler's _verifyOTP can skip the live call
+    window._AMAN_MOCK_MODE = config.development.mockMode;
+
+    // ── Service Worker registration ───────────────────────────────
+    if (config.serviceWorker.enabled && 'serviceWorker' in navigator) {
+      var _doRegisterSW = function () {
+        navigator.serviceWorker.register(config.serviceWorker.path).then(function (reg) {
+          console.log('[SW] Registered, scope:', reg.scope);
+        }).catch(function (err) {
+          console.warn('[SW] Registration failed:', err);
+        });
+      };
+      // By the time RequireJS finishes loading appController, window.load
+      // has usually already fired — register immediately in that case.
+      if (document.readyState === 'complete') {
+        _doRegisterSW();
+      } else {
+        window.addEventListener('load', _doRegisterSW);
+      }
+    }
+
+    // ── Analytics — track route changes ──────────────────────────
+    self.selection.path.subscribe(function (path) {
+      if (path && path !== 'login') Analytics.page(path);
+    });
+
+    // ── Chatbot — exposed to index.html KO bindings ───────────────
+    self.chatbot = Chatbot;
+    self.chatbotSend = function () { Chatbot.send(); };
+    self.chatbotKeyPress = function (data, event) {
+      if (event.key === 'Enter') { Chatbot.send(); }
+      return true;
+    };
+
     // ── Expose globals for child viewModels ────────────────────
     window.amanApp = {
       navigate:        self.navigate.bind(self),
@@ -207,7 +353,13 @@ define([
       closePicker:          self.closePicker.bind(self),
       selectPickerOption:   self.selectPickerOption.bind(self),
       registerSheetClose:   self.registerSheetClose.bind(self),
-      closeCurrentSheet:    self.closeCurrentSheet.bind(self)
+      closeCurrentSheet:    self.closeCurrentSheet.bind(self),
+      // Phase 3 — access control and session
+      componentRegistry:    ComponentRegistry,
+      isComponentAllowed:   ComponentRegistry.isAllowed.bind(ComponentRegistry),
+      // Phase 4 — analytics + chatbot
+      track:                Analytics.track.bind(Analytics),
+      chatbot:              Chatbot
     };
   }
 

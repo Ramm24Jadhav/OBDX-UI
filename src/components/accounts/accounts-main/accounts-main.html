@@ -1,0 +1,64 @@
+<div class="aman-screen">
+
+  <!-- Loading skeleton -->
+  <div data-bind="visible: isLoading()" style="padding:16px;display:flex;flex-direction:column;gap:12px;">
+    <div class="skel" style="height:160px;border-radius:20px;"></div>
+    <div class="skel" style="height:180px;border-radius:20px;"></div>
+    <div class="skel" style="height:80px;border-radius:14px;"></div>
+    <div class="skel" style="height:80px;border-radius:14px;"></div>
+  </div>
+
+  <!-- Content -->
+  <div data-bind="visible: !isLoading()" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+
+    <!-- Hero: gradient header + balance + tabs -->
+    <div class="acc-hero">
+      <div class="acc-hero-header">
+        <h2>My Accounts</h2>
+        <div style="display:flex;gap:8px;">
+          <button class="icon-btn" style="background:rgba(255,255,255,.12);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <button class="icon-btn" style="background:rgba(255,255,255,.12);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="acc-total-label">Total Balance</div>
+      <div class="acc-total-amount s-num" data-bind="text: 'LYD ' + formatAmount(totalBalance())"></div>
+      <div class="acc-total-sub" data-bind="text: currentAccounts().length + ' Active Accounts'"></div>
+      <div class="acc-tabs" style="margin-top:16px;" data-bind="foreach: tabs">
+        <div data-bind="css: $parent.tabClass($data), click: $parent.selectTab" class="acc-tab">
+          <span data-bind="text: label"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div style="overflow-y:auto;flex:1;">
+
+      <!-- Current & Savings tab -->
+      <!-- ko if: showCurrentSavings() -->
+      <acct-list params="[[accountListParams]]"></acct-list>
+      <!-- /ko -->
+
+      <!-- Deposits tab -->
+      <!-- ko if: showDeposits() -->
+      <acct-deposits params="[[{}]]"></acct-deposits>
+      <!-- /ko -->
+
+      <!-- Loans tab -->
+      <!-- ko if: showLoans() -->
+      <acct-loans params="[[{}]]"></acct-loans>
+      <!-- /ko -->
+
+    </div>
+  </div>
+
+  <!-- Account detail slide-in -->
+  <acct-detail params="[[accountDetailParams]]"></acct-detail>
+
+  <!-- All bottom sheets -->
+  <acct-sheets params="[[sheetsParams]]"></acct-sheets>
+
+</div>

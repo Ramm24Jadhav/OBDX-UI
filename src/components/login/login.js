@@ -4,8 +4,9 @@
  */
 define([
   'knockout',
+  'platform',
   'ojs/ojknockout'
-], function (ko) {
+], function (ko, platform) {
 
   function LoginViewModel() {
     var self = this;
@@ -83,12 +84,26 @@ define([
       self.isLoading(true);
       self.errorMsg('');
       window.amanApp && window.amanApp.showLoader('Authenticating', 'Verifying your credentials');
-      setTimeout(function () {
-        sessionStorage.setItem('aman_auth_token', 'mock_token_' + Date.now());
+
+      var credentials = {
+        type:   self.authMode() === 'mpin'     ? 'MPIN'
+               : self.authMode() === 'password' ? 'PASSWORD'
+               : 'BIOMETRIC',
+        userId: self.username() || 'CUST-0047829',
+        mpin:   self.mpinVal(),
+        password: self.password()
+      };
+
+      platform.login(credentials).then(function () {
         self.isLoading(false);
         window.amanApp && window.amanApp.hideLoader();
         window.amanApp && window.amanApp.login();
-      }, 2000);
+      }).catch(function (err) {
+        self.isLoading(false);
+        window.amanApp && window.amanApp.hideLoader();
+        var msg = (err && (err.message || err.errorCode)) || 'Authentication failed. Please try again.';
+        self.errorMsg(msg);
+      });
     };
 
     // ── Lifecycle ─────────────────────────────────────────────

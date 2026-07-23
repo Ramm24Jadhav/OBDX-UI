@@ -2,8 +2,17 @@ define([
   'knockout',
   'services/AccountService',
   'services/UserService',
+  'text!./widgets/balance-summary/view.html',
+  'text!./widgets/spending-overview/view.html',
+  'text!./widgets/quick-actions/view.html',
+  'text!./widgets/recent-transactions/view.html',
+  'text!./widgets/notifications-panel/view.html',
+  'text!./widgets/analytics-panel/view.html',
+  'ojs/ojmodule-element',
   'ojs/ojknockout'
-], function (ko, AccountService, UserService) {
+], function (ko, AccountService, UserService,
+             balanceSummaryView, spendingOverviewView, quickActionsView,
+             recentTxView, notificationsPanelView, analyticsPanelView) {
 
   function HomeViewModel() {
     var self = this;
@@ -178,6 +187,14 @@ define([
         self.isLoading(false);
       });
     };
+
+    // ── Widget configs (parent VM is viewModel so views share all observables) ──
+    self.balanceSummaryConfig    = ko.observable({ view: balanceSummaryView,    viewModel: self });
+    self.spendingOverviewConfig  = ko.observable({ view: spendingOverviewView,  viewModel: self });
+    self.quickActionsConfig      = ko.observable({ view: quickActionsView,      viewModel: self });
+    self.recentTxConfig          = ko.observable({ view: recentTxView,          viewModel: self });
+    self.notificationsPanelConfig = ko.observable({ view: notificationsPanelView, viewModel: self });
+    self.analyticsPanelConfig    = ko.observable({ view: analyticsPanelView,    viewModel: self });
 
     self._scheduleLoad();
   }

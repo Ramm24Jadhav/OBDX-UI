@@ -1,0 +1,83 @@
+<!-- deposits sub-component -->
+<div style="padding:16px;display:flex;flex-direction:column;gap:14px;">
+
+  <!-- Summary strip -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);padding:16px;display:flex;">
+    <div style="flex:1;text-align:center;border-right:1px solid var(--c-border);"><div style="font-size:10px;color:var(--c-t3);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Total</div><div class="s-num" style="font-size:18px;font-weight:800;color:var(--c-t1);margin-top:4px;">LYD 250,000</div></div>
+    <div style="flex:1;text-align:center;border-right:1px solid var(--c-border);"><div style="font-size:10px;color:var(--c-t3);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Interest YTD</div><div class="s-num" style="font-size:18px;font-weight:800;color:var(--c-success);margin-top:4px;">LYD 8,125</div></div>
+    <div style="flex:1;text-align:center;"><div style="font-size:10px;color:var(--c-t3);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Active</div><div style="font-size:18px;font-weight:800;color:var(--c-t1);margin-top:4px;">3</div></div>
+  </div>
+
+  <!-- Deposit card 1 -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+    <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">12-Month Fixed</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">TD-00412-001 · Opened 15 Jan 2025</div></div>
+      <span class="pill pill-success" style="font-size:10px;padding:3px 9px;">Active</span>
+    </div>
+    <div style="padding:14px 16px;display:flex;border-bottom:1px solid var(--c-border);">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Principal</div><div class="s-num" style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">LYD 100,000</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate p.a.</div><div style="font-size:15px;font-weight:800;color:var(--c-success);margin-top:3px;">5.00%</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Maturity</div><div style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">15 Jan 2026</div></div>
+    </div>
+    <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:var(--c-t3);">Progress to maturity</span><span style="font-size:11px;font-weight:700;color:var(--c-t1);">50%</span></div>
+      <div style="height:6px;background:var(--c-border);border-radius:3px;"><div style="height:6px;background:linear-gradient(90deg,var(--c-primary),var(--c-gold));border-radius:3px;width:50%;"></div></div>
+    </div>
+    <div style="padding:10px 16px;display:flex;gap:8px;">
+      <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Redeem</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">Edit Maturity</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">More</button>
+    </div>
+  </div>
+
+  <!-- Deposit card 2 -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+    <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">6-Month Fixed</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">TD-00412-002 · Opened 01 Apr 2025</div></div>
+      <span class="pill pill-warning" style="font-size:10px;padding:3px 9px;">Due Oct</span>
+    </div>
+    <div style="padding:14px 16px;display:flex;border-bottom:1px solid var(--c-border);">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Principal</div><div class="s-num" style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">LYD 100,000</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate p.a.</div><div style="font-size:15px;font-weight:800;color:var(--c-success);margin-top:3px;">4.75%</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Maturity</div><div style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">01 Oct 2025</div></div>
+    </div>
+    <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:var(--c-t3);">Progress to maturity</span><span style="font-size:11px;font-weight:700;color:var(--c-t1);">75%</span></div>
+      <div style="height:6px;background:var(--c-border);border-radius:3px;"><div style="height:6px;background:linear-gradient(90deg,var(--c-primary),var(--c-gold));border-radius:3px;width:75%;"></div></div>
+    </div>
+    <div style="padding:10px 16px;display:flex;gap:8px;">
+      <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Redeem</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">Top-Up</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">More</button>
+    </div>
+  </div>
+
+  <!-- Deposit card 3 -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+    <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">3-Month Flexi</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">TD-00412-003 · Opened 10 Jun 2025</div></div>
+      <span class="pill pill-success" style="font-size:10px;padding:3px 9px;">Active</span>
+    </div>
+    <div style="padding:14px 16px;display:flex;border-bottom:1px solid var(--c-border);">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Principal</div><div class="s-num" style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">LYD 50,000</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate p.a.</div><div style="font-size:15px;font-weight:800;color:var(--c-success);margin-top:3px;">4.50%</div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Maturity</div><div style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;">10 Sep 2025</div></div>
+    </div>
+    <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:var(--c-t3);">Progress to maturity</span><span style="font-size:11px;font-weight:700;color:var(--c-t1);">37%</span></div>
+      <div style="height:6px;background:var(--c-border);border-radius:3px;"><div style="height:6px;background:linear-gradient(90deg,var(--c-primary),var(--c-gold));border-radius:3px;width:37%;"></div></div>
+    </div>
+    <div style="padding:10px 16px;display:flex;gap:8px;">
+      <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Redeem</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">E-Statement</button>
+      <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-t1);font-size:11px;font-weight:700;cursor:pointer;">More</button>
+    </div>
+  </div>
+
+  <button style="width:100%;padding:14px;border-radius:14px;border:1.5px dashed var(--c-border);background:transparent;font-size:13px;font-weight:700;color:var(--c-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Open New Deposit
+  </button>
+
+  <div class="bottom-spacer"></div>
+</div>

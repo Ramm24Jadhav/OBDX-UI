@@ -1,8 +1,4 @@
-﻿/**
- * home component loader — OBDX pattern
- * AMD entry point: loads view template + ViewModel constructor.
- * oj-module instantiates the ViewModel automatically.
- */
-define(['text!./view.html', './viewModel', 'ojs/ojknockout'], function (view, ViewModel) {
-  return { view: view, viewModel: ViewModel };
+﻿define(['text!./home.html', './home', 'ojs/ojknockout'], function (view, viewModel) {
+  'use strict';
+  return { view: view, viewModel: viewModel };
 });

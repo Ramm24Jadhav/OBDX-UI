@@ -52,11 +52,35 @@
   ,
         'chai': 'libs/chai/chai-4.3.7',
 
-        // ── OBDX structure path aliases ──────────────────────────────
-        'framework':   '../framework',
-        'services':    '../framework/services',
-        'resources':   '../resources',
-        'nls':         '../resources/nls'
+        // ── OBDX canonical framework aliases ─────────────────────────
+        // These mirror require-config.js aliases in the OBDX reference app
+        // so that component code ported from the reference needs no path changes.
+
+        // Core framework modules
+        'framework':         '../framework',
+        'base-models':       '../framework/base-models',
+        'app-data':          '../framework/app-data',
+        'baseService':       '../framework/services/BaseService',
+        'platform':          '../framework/base-models/platform',
+        'baseLogger':        '../framework/base-models/logging-base',
+        'api-catalogue':     '../framework/configurations/api-catalogue',
+        'interrupt-handler': '../framework/interrupt-handler',
+        'formatter':            '../framework/utils/formatter',
+        'flow':                 '../framework/flow',
+        'component-registry':   '../framework/component-registry',
+        'session-manager':      '../framework/session-manager',
+        'extension-registry':   '../framework/extensions/extension-registry',
+        'analytics':            '../framework/analytics',
+        'chatbot':              '../framework/chatbot',
+
+        // Services and resources
+        'services':         '../framework/services',
+        'resources':        '../resources',
+        'nls':              '../resources/nls',
+
+        // Component structure
+        'components':       '../components',
+        'acct-components':  '../components/accounts'
       }
       // endinjector
     }

@@ -1,0 +1,189 @@
+<!-- analytics-panel widget — full-screen slide-in panel -->
+<div class="aman-sub-panel" data-bind="css: {'aman-sub-panel--open': showAnalytics()}">
+  <!-- Dark gradient hero header -->
+  <div style="background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:14px 16px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <button class="aman-back-btn" data-bind="click: closeAnalytics" style="background:rgba(255,255,255,.12);border:none;color:#fff;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span style="font-size:16px;font-weight:700;color:#fff;">Analytics &amp; Insights</span>
+      <div style="width:34px;"></div>
+    </div>
+    <!-- Period pills -->
+    <div style="display:flex;gap:8px;">
+      <button class="an-period-btn" data-bind="click: function(){ anSetPeriod('month'); }, css:{'an-period-btn--active': anPeriod()==='month','an-period-btn--inactive': anPeriod()!=='month'}">This Month</button>
+      <button class="an-period-btn" data-bind="click: function(){ anSetPeriod('quarter'); }, css:{'an-period-btn--active': anPeriod()==='quarter','an-period-btn--inactive': anPeriod()!=='quarter'}">Quarter</button>
+      <button class="an-period-btn" data-bind="click: function(){ anSetPeriod('year'); }, css:{'an-period-btn--active': anPeriod()==='year','an-period-btn--inactive': anPeriod()!=='year'}">This Year</button>
+    </div>
+  </div>
+
+  <div style="overflow-y:auto;flex:1;background:var(--c-bg);padding:16px;display:flex;flex-direction:column;gap:14px;">
+
+    <!-- Summary strip -->
+    <div class="an-summary-grid">
+      <div class="an-summary-cell">
+        <div style="font-size:9px;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Income</div>
+        <div style="font-size:14px;font-weight:800;color:#16A34A;" data-bind="text: anSummary().incomeK"></div>
+      </div>
+      <div class="an-summary-cell">
+        <div style="font-size:9px;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Expenses</div>
+        <div style="font-size:14px;font-weight:800;color:var(--c-primary);" data-bind="text: anSummary().expenseK"></div>
+      </div>
+      <div class="an-summary-cell">
+        <div style="font-size:9px;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Savings</div>
+        <div style="font-size:14px;font-weight:800;color:var(--c-gold);" data-bind="text: anSummary().savingsK"></div>
+      </div>
+    </div>
+
+    <!-- Cash Flow donut -->
+    <div class="an-section">
+      <div class="an-section-title">
+        <div class="an-section-accent" style="background:var(--c-primary);"></div>Cash Flow
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="position:relative;flex-shrink:0;width:100px;height:100px;">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--c-bg)" stroke-width="12"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#16A34A" stroke-width="12" stroke-dasharray="107 144" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#7A1531" stroke-width="12" stroke-dasharray="85 166" stroke-dashoffset="-107" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#C8A45D" stroke-width="12" stroke-dasharray="59 192" stroke-dashoffset="-192" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-size:8px;color:var(--c-t3);">Net</div>
+            <div style="font-size:11px;font-weight:800;color:var(--c-t1);" data-bind="text: anSummary().netK"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+          <div class="an-legend-row">
+            <div style="display:flex;align-items:center;gap:8px;"><div class="an-legend-dot" style="background:#16A34A;"></div><span style="font-size:12px;color:var(--c-t3);">Income</span></div>
+            <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: anSummary().income"></span>
+          </div>
+          <div class="an-legend-row">
+            <div style="display:flex;align-items:center;gap:8px;"><div class="an-legend-dot" style="background:#7A1531;"></div><span style="font-size:12px;color:var(--c-t3);">Expenses</span></div>
+            <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: anSummary().expense"></span>
+          </div>
+          <div class="an-legend-row">
+            <div style="display:flex;align-items:center;gap:8px;"><div class="an-legend-dot" style="background:#C8A45D;"></div><span style="font-size:12px;color:var(--c-t3);">Savings</span></div>
+            <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: anSummary().savings"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spending by Category donut + bars -->
+    <div class="an-section">
+      <div class="an-section-title">
+        <div class="an-section-accent" style="background:var(--c-gold);"></div>Spending by Category
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="position:relative;flex-shrink:0;width:96px;height:96px;">
+          <svg viewBox="0 0 100 100" width="96" height="96">
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#7A1531" stroke-width="15" stroke-dasharray="76 163" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#C8A45D" stroke-width="15" stroke-dasharray="43 196" stroke-dashoffset="-76" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#16A34A" stroke-width="15" stroke-dasharray="36 203" stroke-dashoffset="-119" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#D97706" stroke-width="15" stroke-dasharray="28 211" stroke-dashoffset="-155" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#64748B" stroke-width="15" stroke-dasharray="55 184" stroke-dashoffset="-183" stroke-linecap="butt" transform="rotate(-90 50 50)"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-size:8px;color:var(--c-t3);">Total</div>
+            <div style="font-size:10px;font-weight:800;color:var(--c-t1);">12,420</div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+          <div style="display:flex;justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:#7A1531;"></div><span style="font-size:11px;color:var(--c-t3);">Food &amp; Dining</span></div><span style="font-size:12px;font-weight:700;color:var(--c-t1);">32%</span></div>
+          <div class="an-cat-bar-wrap"><div class="an-cat-bar" style="width:32%;background:#7A1531;"></div></div>
+          <div style="display:flex;justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:#C8A45D;"></div><span style="font-size:11px;color:var(--c-t3);">Shopping</span></div><span style="font-size:12px;font-weight:700;color:var(--c-t1);">18%</span></div>
+          <div class="an-cat-bar-wrap"><div class="an-cat-bar" style="width:18%;background:#C8A45D;"></div></div>
+          <div style="display:flex;justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:#16A34A;"></div><span style="font-size:11px;color:var(--c-t3);">Transport</span></div><span style="font-size:12px;font-weight:700;color:var(--c-t1);">15%</span></div>
+          <div class="an-cat-bar-wrap"><div class="an-cat-bar" style="width:15%;background:#16A34A;"></div></div>
+          <div style="display:flex;justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:#D97706;"></div><span style="font-size:11px;color:var(--c-t3);">Bills</span></div><span style="font-size:12px;font-weight:700;color:var(--c-t1);">12%</span></div>
+          <div class="an-cat-bar-wrap"><div class="an-cat-bar" style="width:12%;background:#D97706;"></div></div>
+          <div style="display:flex;justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:2px;background:#64748B;"></div><span style="font-size:11px;color:var(--c-t3);">Others</span></div><span style="font-size:12px;font-weight:700;color:var(--c-t1);">23%</span></div>
+          <div class="an-cat-bar-wrap"><div class="an-cat-bar" style="width:23%;background:#64748B;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Trend SVG line chart -->
+    <div class="an-section">
+      <div class="an-section-title" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;"><div class="an-section-accent" style="background:var(--c-primary);"></div><span>Monthly Trend</span></div>
+        <div style="display:flex;gap:8px;font-size:10px;color:var(--c-t3);">
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:2px;background:#7A1531;display:inline-block;border-radius:1px;"></span>Income</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:2px;background:#C8A45D;display:inline-block;border-radius:1px;"></span>Expenses</span>
+        </div>
+      </div>
+      <svg viewBox="0 0 300 130" width="100%" style="overflow:visible;">
+        <defs>
+          <linearGradient id="anIncFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7A1531" stop-opacity=".2"/><stop offset="100%" stop-color="#7A1531" stop-opacity="0"/></linearGradient>
+          <linearGradient id="anExpFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8A45D" stop-opacity=".15"/><stop offset="100%" stop-color="#C8A45D" stop-opacity="0"/></linearGradient>
+        </defs>
+        <line x1="34" y1="8" x2="34" y2="105" stroke="var(--c-border)" stroke-width="1"/>
+        <line x1="34" y1="8" x2="298" y2="8" stroke="var(--c-border)" stroke-width=".5" stroke-dasharray="4 3"/>
+        <line x1="34" y1="40" x2="298" y2="40" stroke="var(--c-border)" stroke-width=".5" stroke-dasharray="4 3"/>
+        <line x1="34" y1="72" x2="298" y2="72" stroke="var(--c-border)" stroke-width=".5" stroke-dasharray="4 3"/>
+        <line x1="34" y1="105" x2="298" y2="105" stroke="var(--c-border)" stroke-width=".5" stroke-dasharray="4 3"/>
+        <text x="30" y="11" text-anchor="end" font-size="8" fill="var(--c-t3)">30K</text>
+        <text x="30" y="43" text-anchor="end" font-size="8" fill="var(--c-t3)">20K</text>
+        <text x="30" y="75" text-anchor="end" font-size="8" fill="var(--c-t3)">10K</text>
+        <text x="30" y="108" text-anchor="end" font-size="8" fill="var(--c-t3)">0</text>
+        <text x="50" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Jan</text>
+        <text x="84" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Feb</text>
+        <text x="118" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Mar</text>
+        <text x="152" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Apr</text>
+        <text x="186" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">May</text>
+        <text x="220" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Jun</text>
+        <text x="254" y="120" text-anchor="middle" font-size="8" fill="var(--c-t3)">Jul</text>
+        <path d="M50 82 C67 76 80 54 84 58 C98 64 110 42 118 35 C133 26 144 44 152 38 C167 30 178 14 186 10 C200 5 213 22 220 18 C234 14 246 8 254 5 L254 105 L50 105 Z" fill="url(#anIncFill)"/>
+        <path d="M50 82 C67 76 80 54 84 58 C98 64 110 42 118 35 C133 26 144 44 152 38 C167 30 178 14 186 10 C200 5 213 22 220 18 C234 14 246 8 254 5" fill="none" stroke="#7A1531" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M50 95 C67 92 80 82 84 84 C98 86 110 72 118 70 C133 66 144 78 152 75 C167 70 178 58 186 55 C200 51 213 64 220 60 C234 56 246 50 254 48 L254 105 L50 105 Z" fill="url(#anExpFill)"/>
+        <path d="M50 95 C67 92 80 82 84 84 C98 86 110 72 118 70 C133 66 144 78 152 75 C167 70 178 58 186 55 C200 51 213 64 220 60 C234 56 246 50 254 48" fill="none" stroke="#C8A45D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="50" cy="82" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="84" cy="58" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="118" cy="35" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="152" cy="38" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="186" cy="10" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="220" cy="18" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="254" cy="5" r="3" fill="#7A1531" stroke="white" stroke-width="1.5"/>
+        <circle cx="50" cy="95" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="84" cy="84" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="118" cy="70" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="152" cy="75" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="186" cy="55" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="220" cy="60" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+        <circle cx="254" cy="48" r="3" fill="#C8A45D" stroke="white" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <!-- Top Expenses -->
+    <div class="an-section" style="margin-bottom:16px;">
+      <div class="an-section-title"><div class="an-section-accent" style="background:var(--c-gold);"></div>Top Expenses</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="an-top-exp-row">
+          <div class="an-top-exp-icon" style="background:#FCE7EE;">🛒</div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--c-t1);">Online Shopping</div><div style="font-size:10px;color:var(--c-t3);">6 transactions</div></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--c-t1);">LYD 3,840</div><div style="font-size:9px;color:var(--c-primary);font-weight:600;">31%</div></div>
+        </div>
+        <div class="an-divider"></div>
+        <div class="an-top-exp-row">
+          <div class="an-top-exp-icon" style="background:#FEF9EC;">🍔</div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--c-t1);">Food &amp; Dining</div><div style="font-size:10px;color:var(--c-t3);">12 transactions</div></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--c-t1);">LYD 2,150</div><div style="font-size:9px;color:var(--c-primary);font-weight:600;">17%</div></div>
+        </div>
+        <div class="an-divider"></div>
+        <div class="an-top-exp-row">
+          <div class="an-top-exp-icon" style="background:#ECFDF5;">⚡</div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--c-t1);">Bills &amp; Utilities</div><div style="font-size:10px;color:var(--c-t3);">3 transactions</div></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--c-t1);">LYD 1,620</div><div style="font-size:9px;color:var(--c-primary);font-weight:600;">13%</div></div>
+        </div>
+        <div class="an-divider"></div>
+        <div class="an-top-exp-row">
+          <div class="an-top-exp-icon" style="background:#EFF6FF;">🚗</div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--c-t1);">Transport</div><div style="font-size:10px;color:var(--c-t3);">8 transactions</div></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--c-t1);">LYD 980</div><div style="font-size:9px;color:var(--c-primary);font-weight:600;">8%</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
