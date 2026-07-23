@@ -204,8 +204,8 @@ define([
       openAccountDetail: self.openAccountDetail,
       openStatementFor:  self.openStatementFor,
       openShareIBANFor:  self.openShareIBANFor,
-      setListView:       self.setListView,
-      setCardView:       self.setCardView,
+      setListView:       function () { self.setListView(); },
+      setCardView:       function () { self.setCardView(); },
       goToCard:          self.goToCard,
       formatAmount:      self.formatAmount,
       txIconBg:          self.txIconBg,
@@ -272,6 +272,88 @@ define([
         window.amanApp && window.amanApp.showToast('Failed to load accounts', 'error');
       }).finally(function () { self.isLoading(false); });
     };
+
+    /* ── Account card carousel ── */
+    (function () {
+      var ready = false, track, startX = 0, isDragging = false, idx = 0, TOTAL = 2;
+      function step() { var c = track && track.querySelector('.hero-card'); return (c && c.offsetWidth) ? c.offsetWidth + 16 : 400; }
+      /* Apply resting 3D perspective tilt to each card based on offset from active */
+      function applyRestingTilts(activeIdx) {
+        var cards = track ? track.querySelectorAll('.hero-card') : [];
+        cards.forEach(function (c, i) {
+          var offset = i - activeIdx;
+          if (offset === 0) {
+            /* Active card: slight left-back tilt like reference */
+            c.style.transform = 'perspective(700px) rotateY(-8deg) rotateZ(-1.5deg)';
+          } else if (offset > 0) {
+            /* Cards to the right: slight forward/right tilt, peeking */
+            c.style.transform = 'perspective(700px) rotateY(4deg) rotateZ(1deg) scale(0.94)';
+          } else {
+            /* Cards to the left (already swiped past) */
+            c.style.transform = 'perspective(700px) rotateY(-4deg) rotateZ(-1deg) scale(0.94)';
+          }
+        });
+      }
+      /* During drag: intensify tilt on active, counter-tilt on neighbours */
+      function applyDragTilt(diff) {
+        var cards = track ? track.querySelectorAll('.hero-card') : [];
+        var drag = Math.max(-1, Math.min(1, diff / 120));
+        cards.forEach(function (c, i) {
+          var offset = i - idx;
+          var baseY  = offset === 0 ? -8 : (offset > 0 ? 4 : -4);
+          var baseZ  = offset === 0 ? -1.5 : (offset > 0 ? 1 : -1);
+          var scale  = offset === 0 ? 1 : 0.94;
+          var tiltY  = baseY + drag * 10;
+          var tiltZ  = baseZ + drag * 3;
+          c.style.transform = 'perspective(700px) rotateY(' + tiltY + 'deg) rotateZ(' + tiltZ + 'deg) scale(' + scale + ')';
+        });
+      }
+      function goTo(n) {
+        idx = Math.max(0, Math.min(TOTAL - 1, n));
+        self.carouselIndex(idx);
+        if (!track) return;
+        track.style.transform = 'translateX(-' + (idx * step()) + 'px)';
+        document.querySelectorAll('.card-dot').forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+        track.querySelectorAll('.hero-card').forEach(function (c, i) { c.classList.toggle('card-inactive', i !== idx); });
+        applyRestingTilts(idx);
+      }
+      function initCarousel() {
+        track = document.getElementById('accCarouselTrack');
+        var card = track && track.querySelector('.hero-card');
+        if (!card || card.offsetWidth === 0) { setTimeout(initCarousel, 200); return; }
+        if (ready) { goTo(0); return; }
+        ready = true;
+        track.addEventListener('mousedown', function (e) { startX = e.clientX; isDragging = true; track.classList.add('no-transition'); });
+        document.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          var diff = e.clientX - startX;
+          track.style.transform = 'translateX(-' + (idx * step() - diff) + 'px)';
+          applyDragTilt(diff);
+        });
+        document.addEventListener('mouseup', function (e) {
+          if (!isDragging) return;
+          isDragging = false; track.classList.remove('no-transition');
+          var d = e.clientX - startX;
+          goTo(Math.abs(d) > 40 ? (d < 0 ? idx + 1 : idx - 1) : idx);
+        });
+        track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; isDragging = true; track.classList.add('no-transition'); }, { passive: true });
+        track.addEventListener('touchmove', function (e) {
+          if (!isDragging) return;
+          var diff = e.touches[0].clientX - startX;
+          track.style.transform = 'translateX(-' + (idx * step() - diff) + 'px)';
+          applyDragTilt(diff);
+        }, { passive: true });
+        track.addEventListener('touchend', function (e) {
+          isDragging = false; track.classList.remove('no-transition');
+          var d = e.changedTouches[0].clientX - startX;
+          goTo(Math.abs(d) > 40 ? (d < 0 ? idx + 1 : idx - 1) : idx);
+        });
+        document.querySelectorAll('.card-dot').forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
+        goTo(0);
+      }
+      var _origSetCardView = self.setCardView;
+      self.setCardView = function () { _origSetCardView(); setTimeout(initCarousel, 300); };
+    }());
 
     var _loadTimer = null;
     self.handleActivated = function () { clearTimeout(_loadTimer); _loadTimer = setTimeout(function () { self._load(); }, 50); };
