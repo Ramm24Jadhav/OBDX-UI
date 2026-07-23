@@ -113,18 +113,21 @@
     </div>
 
     <!-- Recent activity (carousel view) -->
-    <div style="padding:14px 16px 4px;display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-size:14px;font-weight:800;color:var(--c-t1);">Recent Activity</span>
-      <span style="font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;">View All</span>
-    </div>
-    <div style="padding:0 16px 16px;">
-      <div class="tx-list" data-bind="foreach: transactions">
-        <div class="tx-item">
-          <div class="tx-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
-          <div class="tx-info"><div class="tx-name" data-bind="text: description"></div></div>
-          <div class="tx-right">
-            <div class="tx-amount" data-bind="text:(type==='CREDIT'?'+':'−')+'LYD '+$parent.formatAmount(Math.abs(amount)),css:type==='CREDIT'?'credit':'debit'"></div>
-            <div class="tx-date" data-bind="text: date"></div>
+    <div class="tx-section">
+      <div class="tx-section-header">
+        <span class="tx-section-title">Recent Activity</span>
+        <span class="tx-section-link">View All</span>
+      </div>
+      <div class="tx-modern-list" data-bind="foreach: transactions">
+        <div class="tx-modern-item">
+          <div class="tx-modern-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
+          <div class="tx-modern-body">
+            <div class="tx-modern-name" data-bind="text: description"></div>
+            <div class="tx-modern-date" data-bind="text: date"></div>
+          </div>
+          <div class="tx-modern-right">
+            <div class="tx-modern-amount" data-bind="text:(type==='CREDIT'?'+':'−')+' LYD '+$parent.formatAmount(Math.abs(amount)),css:{'credit':type==='CREDIT','debit':type!=='CREDIT'}"></div>
+            <span class="tx-modern-badge" data-bind="css:{'credit':type==='CREDIT','debit':type!=='CREDIT'},text:type==='CREDIT'?'Credit':'Debit'"></span>
           </div>
         </div>
       </div>
@@ -169,43 +172,40 @@
 
   <!-- ── LIST VIEW ── -->
   <div data-bind="visible: !cardView()">
+    <!-- Compact account rows -->
     <div class="acc-cards-list" data-bind="foreach: currentAccounts">
       <div class="acc-card" data-bind="click: $parent.openAccountDetail">
-        <div class="acc-card-header">
-          <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          </div>
-          <span class="acc-status pill pill-success">Active</span>
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
-        <div class="acc-card-name" data-bind="text: typeLabel"></div>
-        <div class="acc-card-num" data-bind="text: numberFull"></div>
-        <div class="acc-card-footer">
-          <div class="acc-footer-left">
-            <label>Available Balance</label>
-            <span class="s-num" data-bind="text: 'LYD ' + $parent.formatAmount(availableBalance)"></span>
-          </div>
-          <button class="acc-arrow-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
+        <div class="acc-card-body">
+          <div class="acc-card-name" data-bind="text: typeLabel"></div>
+          <div class="acc-card-num" data-bind="text: '•••• ' + numberFull.slice(-4)"></div>
         </div>
+        <div class="acc-card-right">
+          <div class="acc-card-balance s-num" data-bind="text: 'LYD ' + $parent.formatAmount(availableBalance)"></div>
+          <span class="acc-card-status">Active</span>
+        </div>
+        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>
 
     <!-- Recent Activity (list view) -->
-    <div style="padding:4px 16px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:14px;font-weight:800;color:var(--c-t1);">Recent Activity</span>
-        <span style="font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;">Filter</span>
+    <div class="tx-section">
+      <div class="tx-section-header">
+        <span class="tx-section-title">Recent Activity</span>
+        <span class="tx-section-link">View All</span>
       </div>
-      <div class="tx-list" data-bind="foreach: transactions">
-        <div class="tx-item">
-          <div class="tx-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
-          <div class="tx-info">
-            <div class="tx-name" data-bind="text: description"></div>
+      <div class="tx-modern-list" data-bind="foreach: transactions">
+        <div class="tx-modern-item">
+          <div class="tx-modern-icon" data-bind="style:{background:$parent.txIconBg(category)},html:$parent.txIconSvg(category)"></div>
+          <div class="tx-modern-body">
+            <div class="tx-modern-name" data-bind="text: description"></div>
+            <div class="tx-modern-date" data-bind="text: date"></div>
           </div>
-          <div class="tx-right">
-            <div class="tx-amount" data-bind="text:(type==='CREDIT'?'+':'−')+'LYD '+$parent.formatAmount(Math.abs(amount)),css:type==='CREDIT'?'credit':'debit'"></div>
-            <div class="tx-date" data-bind="text: date"></div>
+          <div class="tx-modern-right">
+            <div class="tx-modern-amount" data-bind="text:(type==='CREDIT'?'+':'−')+' LYD '+$parent.formatAmount(Math.abs(amount)),css:{'credit':type==='CREDIT','debit':type!=='CREDIT'}"></div>
+            <span class="tx-modern-badge" data-bind="css:{'credit':type==='CREDIT','debit':type!=='CREDIT'},text:type==='CREDIT'?'Credit':'Debit'"></span>
           </div>
         </div>
       </div>

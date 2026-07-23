@@ -1,18 +1,22 @@
-/* Account list — cards, list/grid toggle, carousel */
-.acc-cards-list{padding:20px;display:flex;flex-direction:column;gap:12px}
-.acc-card{background:var(--c-surface);border-radius:var(--r-xl);padding:18px;border:1px solid var(--c-border);box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s,transform .15s}
-.acc-card:active{transform:scale(.99)}
-.acc-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
-.acc-card-icon-wrap{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center}
-.acc-card-icon-wrap svg{width:20px;height:20px}
-.acc-status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--r-full)}
-.acc-card-name{font-size:15px;font-weight:800;color:var(--c-t1);margin-bottom:2px}
-.acc-card-num{font-size:12px;color:var(--c-t3);font-family:monospace;font-weight:500}
-.acc-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--c-border)}
-.acc-footer-left label{font-size:11px;color:var(--c-t3);display:block;margin-bottom:2px}
-.acc-footer-left span{font-size:20px;font-weight:800;color:var(--c-t1);letter-spacing:-.5px}
-.acc-arrow-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;background:var(--c-bg);display:flex;align-items:center;justify-content:center}
-.acc-arrow-btn svg{width:16px;height:16px;color:var(--c-t2)}
+/* Account list — compact row design */
+.acc-cards-list{padding:8px 16px 16px;display:flex;flex-direction:column;gap:0;background:var(--c-surface);border-radius:16px;margin:12px 16px 0;border:1px solid var(--c-border)}
+.acc-card{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--c-border);cursor:pointer;transition:opacity .15s;-webkit-tap-highlight-color:transparent}
+.acc-card:last-child{border-bottom:none}
+.acc-card:active{opacity:.7}
+.acc-card-icon-wrap{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.acc-card-icon-wrap svg{width:18px;height:18px}
+.acc-card-body{flex:1;min-width:0}
+.acc-card-name{font-size:13px;font-weight:700;color:var(--c-t1);line-height:1.2}
+.acc-card-num{font-size:11px;color:var(--c-t3);font-family:monospace;margin-top:1px;letter-spacing:.3px}
+.acc-card-right{text-align:right;flex-shrink:0}
+.acc-card-balance{font-size:14px;font-weight:800;color:var(--c-t1);letter-spacing:-.3px}
+.acc-card-status{display:inline-block;margin-top:3px;font-size:10px;font-weight:700;color:#16A34A;background:#DCFCE7;border-radius:20px;padding:1px 7px}
+.acc-card-chevron{width:16px;height:16px;color:var(--c-t3);flex-shrink:0}
+/* keep legacy classes harmless */
+.acc-card-header{display:none}
+.acc-status{display:none}
+.acc-card-footer{display:none}
+.acc-arrow-btn{display:none}
 .acc-view-btn{width:30px;height:28px;border-radius:7px;border:none;cursor:pointer;background:transparent;color:var(--c-t3);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
 .acc-view-btn--active{background:var(--c-surface);color:var(--c-primary);box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .acc-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 20px;gap:12px;scrollbar-width:none}
@@ -61,6 +65,27 @@
 .view-details-btn{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;cursor:pointer;transition:background .2s,box-shadow .2s,border-color .2s;outline:none;line-height:1}
 .view-details-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);box-shadow:0 0 0 3px rgba(255,255,255,.15),0 0 12px rgba(255,255,255,.1)}
 .view-details-btn:active{background:rgba(255,255,255,.28);box-shadow:0 0 0 4px rgba(255,255,255,.2)}
+
+/* Modern transaction list */
+.tx-section{margin:16px 16px 0}
+.tx-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tx-section-title{font-size:14px;font-weight:800;color:var(--c-t1)}
+.tx-section-link{font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer}
+.tx-modern-list{background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden}
+.tx-modern-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--c-border)}
+.tx-modern-item:last-child{border-bottom:none}
+.tx-modern-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tx-modern-icon svg{width:18px;height:18px}
+.tx-modern-body{flex:1;min-width:0}
+.tx-modern-name{font-size:13px;font-weight:700;color:var(--c-t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-modern-date{font-size:11px;color:var(--c-t3);margin-top:2px}
+.tx-modern-right{text-align:right;flex-shrink:0}
+.tx-modern-amount{font-size:14px;font-weight:800;letter-spacing:-.3px}
+.tx-modern-amount.credit{color:#16A34A}
+.tx-modern-amount.debit{color:#DC2626}
+.tx-modern-badge{display:inline-block;margin-top:3px;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700}
+.tx-modern-badge.credit{background:#DCFCE7;color:#16A34A}
+.tx-modern-badge.debit{background:#FEE2E2;color:#DC2626}
 
 /* Dots */
 .card-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 4px}
