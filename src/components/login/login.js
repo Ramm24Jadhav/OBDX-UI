@@ -1,29 +1,34 @@
-/**
- * Login ViewModel — Splash + Biometric / MPIN / Password auth
- * OBDX MVVM pattern: AMD define, KO observables, handleActivated lifecycle
- */
-define([
+﻿define([
   'knockout',
   'platform',
-  'ojs/ojknockout'
-], function (ko, platform) {
+  'shared-components/utils',
+  'ojs/ojknockout',
+  'login-components/login-splash/loader',
+  'login-components/login-hero/loader',
+  'login-components/login-bio-view/loader',
+  'login-components/login-mpin-view/loader',
+  'login-components/login-password-view/loader',
+  'login-components/login-quick-access/loader',
+  'origination-components/loader'
+], function (ko, platform, utils) {
 
   function LoginViewModel() {
     var self = this;
 
-    // ── Splash state ───────────────────────────────────────────
+    utils.loadCss('/components/login/login.css');
+
+    // ── Splash ────────────────────────────────────────────────
     self.showSplash = ko.observable(true);
     var _splashTimer = null;
 
-    // Start splash countdown immediately — KO will hide it when the timer fires
     _splashTimer = setTimeout(function () {
       self.showSplash(false);
     }, 2200);
 
-    // ── Auth mode: 'bio' | 'mpin' | 'password' ────────────────
-    self.authMode   = ko.observable('bio');
-    self.isLoading  = ko.observable(false);
-    self.errorMsg   = ko.observable('');
+    // ── Auth mode: 'bio' | 'faceid' | 'mpin' | 'password' ───
+    self.authMode  = ko.observable('bio');
+    self.isLoading = ko.observable(false);
+    self.errorMsg  = ko.observable('');
 
     // ── MPIN ──────────────────────────────────────────────────
     self.mpinVal = ko.observable('');
@@ -53,9 +58,9 @@ define([
     self.password     = ko.observable('');
     self.showPassword = ko.observable(false);
 
-    // ── User info (from global app state) ─────────────────────
+    // ── User info ─────────────────────────────────────────────
     self.userName = ko.computed(function () {
-      return window.amanApp ? window.amanApp.currentUser().name : 'Mohammed Al Jasem';
+      return window.obdxApp ? window.obdxApp.currentUser().name : 'Mohammed Al Jasem';
     });
     self.userInitial = ko.computed(function () {
       return self.userName().charAt(0);
@@ -63,10 +68,24 @@ define([
 
     // ── Language ──────────────────────────────────────────────
     self.currentLang = ko.computed(function () {
-      return window.amanApp ? window.amanApp.currentLang() : 'en';
+      return window.obdxApp ? window.obdxApp.currentLang() : 'en';
     });
     self.toggleLang = function () {
-      window.amanApp && window.amanApp.toggleLang();
+      window.obdxApp && window.obdxApp.toggleLang();
+    };
+
+    // ── Origination (pre-login) ───────────────────────────────
+    self.showOrigination     = ko.observable(false);
+    self.originationContext  = ko.observable('account');
+    self.openOrigination     = function (ctx) {
+      self.originationContext(ctx || 'account');
+      self.showOrigination(true);
+    };
+    self.closeOrigination    = function () { self.showOrigination(false); };
+    self.originationParams   = {
+      open:    self.showOrigination,
+      close:   self.closeOrigination,
+      context: self.originationContext
     };
 
     // ── Actions ───────────────────────────────────────────────
@@ -77,30 +96,30 @@ define([
     };
 
     self.openTrackApp = function () {
-      window.amanApp && window.amanApp.showToast('Track Application — no login needed', 'info');
+      window.obdxApp && window.obdxApp.showToast('Track Application — no login needed', 'info');
     };
 
     self.doLogin = function () {
       self.isLoading(true);
       self.errorMsg('');
-      window.amanApp && window.amanApp.showLoader('Authenticating', 'Verifying your credentials');
+      window.obdxApp && window.obdxApp.showLoader('Authenticating', 'Verifying your credentials');
 
       var credentials = {
-        type:   self.authMode() === 'mpin'     ? 'MPIN'
-               : self.authMode() === 'password' ? 'PASSWORD'
-               : 'BIOMETRIC',
-        userId: self.username() || 'CUST-0047829',
-        mpin:   self.mpinVal(),
+        type:     self.authMode() === 'mpin'     ? 'MPIN'
+                : self.authMode() === 'password' ? 'PASSWORD'
+                : 'BIOMETRIC',
+        userId:   self.username() || 'CUST-0047829',
+        mpin:     self.mpinVal(),
         password: self.password()
       };
 
       platform.login(credentials).then(function () {
         self.isLoading(false);
-        window.amanApp && window.amanApp.hideLoader();
-        window.amanApp && window.amanApp.login();
+        window.obdxApp && window.obdxApp.hideLoader();
+        window.obdxApp && window.obdxApp.login();
       }).catch(function (err) {
         self.isLoading(false);
-        window.amanApp && window.amanApp.hideLoader();
+        window.obdxApp && window.obdxApp.hideLoader();
         var msg = (err && (err.message || err.errorCode)) || 'Authentication failed. Please try again.';
         self.errorMsg(msg);
       });
@@ -114,15 +133,12 @@ define([
       self.errorMsg('');
       self.username('');
       self.password('');
-      console.log('[Login] handleActivated called');
+      self.showOrigination(false);
     };
 
-    // handleBindingsApplied fires after KO has bound the view — safe to update observables
     self.handleBindingsApplied = function () {
-      console.log('[Login] handleBindingsApplied — starting splash timer');
       clearTimeout(_splashTimer);
       _splashTimer = setTimeout(function () {
-        console.log('[Login] splash timer fired — hiding splash');
         self.showSplash(false);
       }, 2200);
     };

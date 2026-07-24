@@ -1,13 +1,15 @@
-define([
+﻿define([
   'knockout',
   'services/AccountService',
   'ojs/ojknockout',
+  'shared-components/picker-sheet/loader',
+  'shared-components/account-dropdown/loader',
   'acct-components/account-list/loader',
-  'acct-components/deposits/loader',
-  'acct-components/loans/loader',
+  'deposit-components/loader',
+  'loan-components/loader',
   'acct-components/account-detail/loader',
   'acct-components/sheets/loader',
-  'acct-components/origination/loader'
+  'origination-components/loader'
 ], function (ko, AccountService) {
   'use strict';
 
@@ -76,7 +78,7 @@ define([
 
     self.setTxFilter = function (f) { self.txFilter(f); };
     self.openTxPeriodPicker = function () {
-      window.amanApp && window.amanApp.openPicker('Filter by Period', [
+      window.obdxApp && window.obdxApp.openPicker('Filter by Period', [
         { label: 'Today',         value: 'today'      },
         { label: 'Last 7 Days',   value: '7d'         },
         { label: 'This Month',    value: 'month'      },
@@ -85,12 +87,12 @@ define([
         { label: 'Last 6 Months', value: '6m'         },
         { label: 'This Year',     value: 'year'       },
         { label: 'Custom Range',  value: 'custom'     }
-      ], function (opt) { self.txPeriod(opt.label); window.amanApp.showToast('Showing: ' + opt.label, 'info'); });
+      ], function (opt) { self.txPeriod(opt.label); window.obdxApp.showToast('Showing: ' + opt.label, 'info'); });
     };
-    self.openTransfer = function () { window.amanApp && window.amanApp.navigate('pay'); };
+    self.openTransfer = function () { window.obdxApp && window.obdxApp.navigate('pay'); };
 
     // ── Sheet state ───────────────────────────────────────────
-    function _reg(fn) { window.amanApp && window.amanApp.registerSheetClose(fn); }
+    function _reg(fn) { window.obdxApp && window.obdxApp.registerSheetClose(fn); }
 
     self.showShareIBAN      = ko.observable(false);
     self.showStatement      = ko.observable(false);
@@ -120,31 +122,31 @@ define([
     self.openShareIBAN  = function () { self.showShareIBAN(true);   _reg(self.closeShareIBAN);  };
     self.closeShareIBAN = function () {
       self.showShareIBAN(false);
-      if (!self.detailPanelOpen()) { self.selectedAccount(null); window.amanApp && window.amanApp.setPanelOpen(false); }
+      if (!self.detailPanelOpen()) { self.selectedAccount(null); window.obdxApp && window.obdxApp.setPanelOpen(false); }
     };
     self.openShareIBANFor = function (account) {
       self.showStatement(false); self.showMoreActions(false);
       self.selectedAccount(account); self.showShareIBAN(true);
-      window.amanApp && window.amanApp.setPanelOpen(true); _reg(self.closeShareIBAN);
+      window.obdxApp && window.obdxApp.setPanelOpen(true); _reg(self.closeShareIBAN);
     };
 
     self.openStatement  = function () { self.showStatement(true); _reg(self.closeStatement); };
     self.closeStatement = function () {
       self.showStatement(false);
-      if (!self.detailPanelOpen()) { self.selectedAccount(null); window.amanApp && window.amanApp.setPanelOpen(false); }
+      if (!self.detailPanelOpen()) { self.selectedAccount(null); window.obdxApp && window.obdxApp.setPanelOpen(false); }
     };
     self.setStatementPeriod = function (p) { self.statementPeriod(p); };
     self.openStatementFor = function (account) {
       self.showShareIBAN(false); self.showMoreActions(false);
       self.selectedAccount(account); self.showStatement(true);
-      window.amanApp && window.amanApp.setPanelOpen(true); _reg(self.closeStatement);
+      window.obdxApp && window.obdxApp.setPanelOpen(true); _reg(self.closeStatement);
     };
 
     self.openMoreActions  = function () { self.showMoreActions(true); _reg(self.closeMoreActions); };
     self.closeMoreActions = function () { self.showMoreActions(false); };
     self.setPrimaryAccount = function () {
       self.isPrimaryAccount(true); self.showMoreActions(false);
-      window.amanApp && window.amanApp.showToast('Primary account updated', 'success');
+      window.obdxApp && window.obdxApp.showToast('Primary account updated', 'success');
     };
 
     self.openAccountAlerts  = function () { self.closeMoreActions(); self.showAccountAlerts(true);  _reg(self.closeAccountAlerts); };
@@ -166,20 +168,20 @@ define([
     self.selectCBDelivery  = function (d) { self.chequeDelivery(d); };
     self.switchStopTab     = function (t) { self.stopChequeTab(t); };
 
-    self.confirmChequeBook   = function () { self.closeChequeBook();  window.amanApp && window.amanApp.showToast('Cheque book requested', 'success'); };
-    self.confirmStopCheque   = function () { self.closeStopCheque();  window.amanApp && window.amanApp.showToast('Stop request submitted', 'success'); };
-    self.saveAlerts          = function () { self.closeAccountAlerts(); window.amanApp && window.amanApp.showToast('Alert preferences saved', 'success'); };
-    self.subscribeEStatement = function () { self.closeEStatement();  window.amanApp && window.amanApp.showToast('E-statement updated', 'success'); };
-    self.saveNickname        = function () { self.closeNickname();     window.amanApp && window.amanApp.showToast('Nickname saved', 'success'); };
-    self.confirmBlockAccount = function () { self.closeBlockAccount(); window.amanApp && window.amanApp.showToast('Account blocked', 'error'); };
+    self.confirmChequeBook   = function () { self.closeChequeBook();  window.obdxApp && window.obdxApp.showToast('Cheque book requested', 'success'); };
+    self.confirmStopCheque   = function () { self.closeStopCheque();  window.obdxApp && window.obdxApp.showToast('Stop request submitted', 'success'); };
+    self.saveAlerts          = function () { self.closeAccountAlerts(); window.obdxApp && window.obdxApp.showToast('Alert preferences saved', 'success'); };
+    self.subscribeEStatement = function () { self.closeEStatement();  window.obdxApp && window.obdxApp.showToast('E-statement updated', 'success'); };
+    self.saveNickname        = function () { self.closeNickname();     window.obdxApp && window.obdxApp.showToast('Nickname saved', 'success'); };
+    self.confirmBlockAccount = function () { self.closeBlockAccount(); window.obdxApp && window.obdxApp.showToast('Account blocked', 'error'); };
 
     // ── Account detail open/close ─────────────────────────────
     self.openAccountDetail = function (account) {
       self.detailTab('overview'); self.isPrimaryAccount(false);
       self._resetAllSheets();
       self.selectedAccount(account); self.detailPanelOpen(true);
-      window.amanApp && window.amanApp.setPanelOpen(true);
-      var screen = document.querySelector('.aman-screen');
+      window.obdxApp && window.obdxApp.setPanelOpen(true);
+      var screen = document.querySelector('.app-screen');
       if (screen) { screen.dataset.scrollTop = screen.scrollTop; screen.style.overflow = 'hidden'; }
     };
     self.openAccountAnalytics = function () {
@@ -188,15 +190,15 @@ define([
       self.detailTab('analytics'); self.isPrimaryAccount(false);
       self._resetAllSheets();
       self.selectedAccount(account); self.detailPanelOpen(true);
-      window.amanApp && window.amanApp.setPanelOpen(true);
-      var screen = document.querySelector('.aman-screen');
+      window.obdxApp && window.obdxApp.setPanelOpen(true);
+      var screen = document.querySelector('.app-screen');
       if (screen) { screen.dataset.scrollTop = screen.scrollTop; screen.style.overflow = 'hidden'; }
     };
     self.closeAccountDetail = function () {
       self.detailPanelOpen(false); self.selectedAccount(null);
       self._resetAllSheets();
-      window.amanApp && window.amanApp.setPanelOpen(false);
-      var screen = document.querySelector('.aman-screen');
+      window.obdxApp && window.obdxApp.setPanelOpen(false);
+      var screen = document.querySelector('.app-screen');
       if (screen) { screen.style.overflow = ''; screen.scrollTop = screen.dataset.scrollTop || 0; }
     };
 
@@ -296,6 +298,9 @@ define([
       close:   function () { self.origOpen(false); },
       context: self.origContext
     };
+    self.origOpen.subscribe(function (v) {
+      window.obdxApp && window.obdxApp.setPanelOpen(v);
+    });
 
     // ── Data load ─────────────────────────────────────────────
     self._load = function () {
@@ -308,7 +313,7 @@ define([
         self.totalBalance(res[0].totalBalance.amount);
         self.transactions((res[1].transactions || []).slice(0, 4));
       }).catch(function () {
-        window.amanApp && window.amanApp.showToast('Failed to load accounts', 'error');
+        window.obdxApp && window.obdxApp.showToast('Failed to load accounts', 'error');
       }).finally(function () {
         self.isLoading(false);
         if (self.cardView()) { setTimeout(function () { self.setCardView(); }, 100); }
@@ -402,11 +407,21 @@ define([
 
     // Listen for origination events dispatched by deposits/loans sub-components
     self._origHandler = function (e) { self.openOrigination(e.detail || 'account'); };
-    window.addEventListener('aman-origination', self._origHandler);
+    window.addEventListener('app-origination', self._origHandler);
 
     var _loadTimer = null;
-    self.handleActivated = function () { clearTimeout(_loadTimer); _loadTimer = setTimeout(function () { self._load(); }, 50); };
-    self.dispose = function () { window.removeEventListener('aman-origination', self._origHandler); };
+    self.handleActivated = function () {
+      clearTimeout(_loadTimer);
+      _loadTimer = setTimeout(function () {
+        if (window._amanDeepLink) {
+          self.activeTab(window._amanDeepLink);
+          window._amanDeepLink = null;
+        }
+        self._load();
+      }, 50);
+    };
+    self.connected = self.handleActivated;
+    self.dispose = function () { window.removeEventListener('app-origination', self._origHandler); };
     self._load();
   }
 

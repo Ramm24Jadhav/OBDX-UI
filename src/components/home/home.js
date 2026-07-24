@@ -1,21 +1,21 @@
-define([
+﻿define([
   'knockout',
+  'shared-components/utils',
   'services/AccountService',
   'services/UserService',
-  'text!/components/home/widgets/balance-summary/view.html',
-  'text!/components/home/widgets/spending-overview/view.html',
-  'text!/components/home/widgets/quick-actions/view.html',
-  'text!/components/home/widgets/recent-transactions/view.html',
-  'text!/components/home/widgets/notifications-panel/view.html',
-  'text!/components/home/widgets/analytics-panel/view.html',
-  'ojs/ojmodule-element',
-  'ojs/ojknockout'
-], function (ko, AccountService, UserService,
-             balanceSummaryView, spendingOverviewView, quickActionsView,
-             recentTxView, notificationsPanelView, analyticsPanelView) {
+  'ojs/ojknockout',
+  'home-components/home-appbar/loader',
+  'home-components/home-balance-summary/loader',
+  'home-components/home-spending-overview/loader',
+  'home-components/home-quick-actions/loader',
+  'home-components/home-recent-tx/loader',
+  'home-components/home-notifications-panel/loader',
+  'home-components/home-analytics-panel/loader'
+], function (ko, utils, AccountService, UserService) {
 
   function HomeViewModel() {
     var self = this;
+    utils.loadCss('/components/home/home.css');
 
     // ── State ─────────────────────────────────────────────────
     self.isLoading         = ko.observable(true);
@@ -54,14 +54,13 @@ define([
     };
     self.anSummary = ko.computed(function () { return _anData[self.anPeriod()] || _anData.month; });
 
-    // ── Analytics data ────────────────────────────────────────
     self.analyticsCategories = [
-      { label: 'Food & Dining',   amount: '3,840', pct: 31, color: '#7A1531' },
-      { label: 'Shopping',        amount: '2,960', pct: 24, color: '#C8A45D' },
+      { label: 'Food & Dining',    amount: '3,840', pct: 31, color: '#7A1531' },
+      { label: 'Shopping',         amount: '2,960', pct: 24, color: '#C8A45D' },
       { label: 'Bills & Utilities',amount: '2,100', pct: 17, color: '#2563EB' },
-      { label: 'Transport',       amount: '1,490', pct: 12, color: '#16A34A' },
-      { label: 'Entertainment',   amount: '1,240', pct: 10, color: '#7C3AED' },
-      { label: 'Others',          amount: '790',   pct: 6,  color: '#9CA3AF' }
+      { label: 'Transport',        amount: '1,490', pct: 12, color: '#16A34A' },
+      { label: 'Entertainment',    amount: '1,240', pct: 10, color: '#7C3AED' },
+      { label: 'Others',           amount: '790',   pct: 6,  color: '#9CA3AF' }
     ];
 
     // ── Computed ──────────────────────────────────────────────
@@ -73,11 +72,7 @@ define([
     });
 
     self.userName = ko.computed(function () {
-      return window.amanApp ? window.amanApp.currentUser().name.split(' ')[0] : 'Mohammed';
-    });
-
-    self.primaryAccount = ko.computed(function () {
-      return self.accounts().find(function (a) { return a.type === 'CURRENT'; }) || null;
+      return window.obdxApp ? window.obdxApp.currentUser().name.split(' ')[0] : 'Mohammed';
     });
 
     self.displayTRV = ko.computed(function () {
@@ -93,36 +88,21 @@ define([
     // ── Actions ───────────────────────────────────────────────
     self.toggleBalance = function () {
       self.balanceMasked(!self.balanceMasked());
-      window.amanApp && window.amanApp.toggleBalanceMask();
-      // Swap eye icon to show/hide state
-      var icon = document.getElementById('eye-header-icon');
-      if (icon) {
-        icon.innerHTML = self.balanceMasked()
-          ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
-          : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
-        icon.closest('button').style.opacity = self.balanceMasked() ? '0.5' : '1';
-      }
+      window.obdxApp && window.obdxApp.toggleBalanceMask();
     };
 
     self.toggleLang = function () {
       var next = self.currentLang() === 'en' ? 'ar' : 'en';
       self.currentLang(next);
-      window.amanApp && window.amanApp.toggleLang && window.amanApp.toggleLang(next);
+      window.obdxApp && window.obdxApp.toggleLang && window.obdxApp.toggleLang(next);
     };
 
-    self.goToAccounts = function () {
-      window.amanApp && window.amanApp.navigate('accounts');
-    };
+    self.goToAccounts = function () { window.obdxApp && window.obdxApp.navigate('accounts'); };
+    self.goToPay      = function () { window.obdxApp && window.obdxApp.navigate('pay'); };
+    self.goToMore     = function () { window.obdxApp && window.obdxApp.navigate('more'); };
+    self.goToNotifs   = function () { self.showNotifications(true); };
 
-    self.goToPay = function () {
-      window.amanApp && window.amanApp.navigate('pay');
-    };
-
-    self.goToMore = function () {
-      window.amanApp && window.amanApp.navigate('more');
-    };
-
-    self.openNotifications = function () { self.showNotifications(true); };
+    self.openNotifications  = function () { self.showNotifications(true); };
     self.closeNotifications = function () { self.showNotifications(false); };
     self.markAllRead = function () {
       self.notifList().forEach(function (n) { n.read = true; });
@@ -133,13 +113,7 @@ define([
     self.openAnalytics  = function () { self.showAnalytics(true); };
     self.closeAnalytics = function () { self.showAnalytics(false); };
 
-    self.goToNotifs = function () {
-      self.openNotifications();
-    };
-
-    self.formatAmount = function (amount) {
-      return _fmt(Math.abs(amount));
-    };
+    self.formatAmount = function (amount) { return _fmt(Math.abs(amount)); };
 
     // ── Transaction icon helpers ───────────────────────────────
     var _txIcons = {
@@ -151,59 +125,37 @@ define([
       dine:     { bg: '#FCE7EE', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>' }
     };
 
-    self.txIconBg = function (category) {
-      return (_txIcons[category] || _txIcons['shop']).bg;
-    };
-
-    self.txIconSvg = function (category) {
-      return (_txIcons[category] || _txIcons['shop']).svg;
-    };
+    self.txIconBg  = function (category) { return (_txIcons[category] || _txIcons['shop']).bg; };
+    self.txIconSvg = function (category) { return (_txIcons[category] || _txIcons['shop']).svg; };
 
     // ── Lifecycle ─────────────────────────────────────────────
     var _loadTimer = null;
-    self._scheduleLoad = function () {
+    self.handleActivated = function () {
       clearTimeout(_loadTimer);
       _loadTimer = setTimeout(function () { self._load(); }, 50);
     };
-
-    self.handleActivated = function () { self._scheduleLoad(); };
+    self.connected = self.handleActivated;
 
     self._load = function () {
       self.isLoading(true);
-
       Promise.all([
         AccountService.getAccounts(),
-        AccountService.getTransactions('ACC-4829'),
-        UserService.getNotifications()
+        AccountService.getTransactions('ACC-4829')
       ]).then(function (results) {
         self.accounts(results[0].accounts || []);
         self.totalBalance(results[0].totalBalance.amount);
         self.transactions((results[1].transactions || []).slice(0, 5));
-        self.notifications(results[2].notifications || []);
-        self.unreadCount(results[2].unreadCount || 0);
       }).catch(function (err) {
         console.error('Home load error', err);
       }).finally(function () {
         self.isLoading(false);
       });
+      // Load notifications in background — don't block initial render
+      UserService.getNotifications().then(function (r) {
+        self.notifications(r.notifications || []);
+        self.unreadCount(r.unreadCount || 0);
+      }).catch(function () {});
     };
-
-    // ── Widget configs ─────────────────────────────────────────
-    // oj-module config.view must be Array<Node>, not a string.
-    // config.viewModel must be an object instance (self), not a constructor.
-    function _nodes(html) {
-      var d = document.createElement('div');
-      d.innerHTML = html;
-      return Array.prototype.slice.call(d.childNodes);
-    }
-    self.balanceSummaryConfig     = ko.observable({ view: _nodes(balanceSummaryView),     viewModel: self });
-    self.spendingOverviewConfig   = ko.observable({ view: _nodes(spendingOverviewView),   viewModel: self });
-    self.quickActionsConfig       = ko.observable({ view: _nodes(quickActionsView),       viewModel: self });
-    self.recentTxConfig           = ko.observable({ view: _nodes(recentTxView),           viewModel: self });
-    self.notificationsPanelConfig = ko.observable({ view: _nodes(notificationsPanelView), viewModel: self });
-    self.analyticsPanelConfig     = ko.observable({ view: _nodes(analyticsPanelView),     viewModel: self });
-
-    self._scheduleLoad();
   }
 
   function _fmt(n) {

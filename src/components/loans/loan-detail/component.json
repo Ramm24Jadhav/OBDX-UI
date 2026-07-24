@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-detail",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Detail Panel",
+  "description": "Right-slide loan detail panel.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

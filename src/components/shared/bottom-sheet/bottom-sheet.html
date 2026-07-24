@@ -1,0 +1,10 @@
+<!-- ko if: open() -->
+<div class="dep-sheet-backdrop" data-bind="click: onClose"></div>
+<!-- /ko -->
+<div class="dep-sheet" data-bind="css: {'dep-sheet--open': open()}">
+  <div class="dep-sheet-handle"></div>
+  <div class="dep-sheet-title" data-bind="text: title"></div>
+  <div class="dep-sheet-actions">
+    <!-- ko template: { nodes: $componentTemplateNodes } --><!-- /ko -->
+  </div>
+</div>

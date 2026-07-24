@@ -1,0 +1,37 @@
+﻿<div class="dep-panel" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Repayment Schedule</div>
+    <div style="width:36px;"></div>
+  </div>
+  <!-- ko with: loan() -->
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-summary-card" style="margin-bottom:14px;">
+      <div class="dep-summary-row"><span>Finance</span><strong data-bind="text: name"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Monthly EMI</span><strong class="s-num" style="color:var(--c-primary);" data-bind="text: $parent.fmt(emi)"></strong></div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="loan-sched-table">
+        <thead><tr><th>Month</th><th>Principal</th><th>Profit</th><th>Balance</th></tr></thead>
+        <tbody data-bind="foreach: schedule">
+          <tr>
+            <td data-bind="text: month"></td>
+            <td class="s-num" data-bind="text: $parents[1].fmt(principal)"></td>
+            <td class="s-num" data-bind="text: $parents[1].fmt(interest)"></td>
+            <td class="s-num" style="color:var(--c-t2);" data-bind="text: $parents[1].fmt(balance)"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:12px;color:var(--c-t3);margin-top:10px;text-align:center;">Full schedule available for download below</div>
+  </div>
+  <!-- /ko -->
+  <div class="dep-panel-footer" style="gap:10px;">
+    <button class="dep-btn dep-btn--ghost" style="display:flex;align-items:center;gap:6px;"
+            data-bind="click: function(){ window.obdxApp && window.obdxApp.showToast('Schedule downloading…', 'success'); }">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
+    </button>
+    <button class="dep-btn dep-btn--primary" data-bind="click: onClose">Close</button>
+  </div>
+</div>

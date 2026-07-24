@@ -1,0 +1,7 @@
+.login-hero{background:linear-gradient(160deg,var(--c-primary-dd) 0%,var(--c-primary-d) 50%,var(--c-primary-dd) 100%);padding:52px 28px 56px;display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;overflow:visible}
+.login-hero::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:60px solid rgba(200,164,93,.05);top:-120px;right:-80px}
+.login-hero-logo{display:flex;align-items:center;gap:10px}
+.login-hero-logo svg{width:32px;height:32px}
+.login-hero-logo span{font-size:18px;font-weight:900;color:#fff;letter-spacing:2px}
+.login-hero h2{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.3px;margin-top:4px}
+.login-hero p{font-size:13px;color:rgba(255,255,255,.5);font-weight:500}

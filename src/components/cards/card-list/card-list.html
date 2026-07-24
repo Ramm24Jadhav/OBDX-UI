@@ -1,0 +1,89 @@
+<div style="flex-shrink:0;">
+  <!-- Header -->
+  <div class="cards-hdr">
+    <div>
+      <div style="font-size:20px;font-weight:800;color:var(--c-t1);">My Cards</div>
+      <div style="font-size:12px;color:var(--c-t3);margin-top:2px;">Tap a card to view details</div>
+    </div>
+    <button class="cards-new-btn" data-bind="click: openNewCard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      New Card
+    </button>
+  </div>
+
+  <!-- Type pills -->
+  <div class="card-type-pills">
+    <button data-bind="css: tabClass('DEBIT'), click: function(){ selectTab('DEBIT'); }">Debit (3)</button>
+    <button data-bind="css: tabClass('CREDIT'), click: function(){ selectTab('CREDIT'); }">Credit (2)</button>
+    <button data-bind="css: tabClass('VIRTUAL'), click: function(){ selectTab('VIRTUAL'); }">Virtual (2)</button>
+  </div>
+</div>
+
+<!-- Scrollable body with carousels -->
+<div style="flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;">
+
+  <!-- Debit carousel -->
+  <div data-bind="visible: activeTab() === 'DEBIT'">
+    <div class="card-crsl-outer">
+      <div class="card-crsl-track" data-bind="foreach: debitCards">
+        <div class="ccard" data-bind="html: $parent.renderCardInner($data), css: {'crsl-active': $parent.activeIndex() === $index()}, click: function(){ $parent.onCardTap($data, $index()); }"></div>
+      </div>
+    </div>
+    <div class="ccrsl-dots" data-bind="foreach: debitCards">
+      <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
+    </div>
+    <div class="csel-strip" data-bind="with: activeCard()">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
+        <span style="font-size:11px;color:var(--c-t3);">Active</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credit carousel -->
+  <div data-bind="visible: activeTab() === 'CREDIT'" style="display:none;">
+    <div class="card-crsl-outer">
+      <div class="card-crsl-track" data-bind="foreach: creditCards">
+        <div class="ccard" data-bind="html: $parent.renderCardInner($data), css: {'crsl-active': $parent.activeIndex() === $index()}, click: function(){ $parent.onCardTap($data, $index()); }"></div>
+      </div>
+    </div>
+    <div class="ccrsl-dots" data-bind="foreach: creditCards">
+      <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
+    </div>
+    <div class="csel-strip" data-bind="with: activeCard()">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
+        <span style="font-size:11px;color:var(--c-t3);">Active</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Virtual carousel -->
+  <div data-bind="visible: activeTab() === 'VIRTUAL'" style="display:none;">
+    <div class="card-crsl-outer">
+      <div class="card-crsl-track" data-bind="foreach: virtualCards">
+        <div class="ccard" data-bind="html: $parent.renderCardInner($data), css: {'crsl-active': $parent.activeIndex() === $index()}, click: function(){ $parent.onCardTap($data, $index()); }"></div>
+      </div>
+    </div>
+    <div class="ccrsl-dots" data-bind="foreach: virtualCards">
+      <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
+    </div>
+    <div class="csel-strip" data-bind="with: activeCard()">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
+        <span style="font-size:11px;color:var(--c-t3);">Active</span>
+      </div>
+    </div>
+  </div>

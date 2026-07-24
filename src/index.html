@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
-  Aman Bank — OBDX Mobile Banking App
+  OBDX Mobile — OBDX Mobile Banking App
   Oracle JET 14 + Knockout.js + RequireJS
   Shell: splash + router outlet + nav + loaders only.
   All screen content lives in src/js/views/ + viewModels/.
 -->
 <html lang="en" dir="ltr">
   <head>
-    <title>Aman Bank — Digital Banking</title>
+    <title>OBDX Mobile — Digital Banking</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="theme-color" content="#7A1531">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Aman Bank">
+    <meta name="apple-mobile-web-app-title" content="OBDX Mobile">
     <link rel="icon" href="css/images/favicon.ico" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="css/images/icon-192.png">
@@ -23,22 +23,22 @@
     <!-- injector:theme -->
     <!-- endinjector -->
 
-    <!-- Aman Bank app styles -->
+    <!-- OBDX Mobile app styles -->
     <link rel="stylesheet" href="css/app.css" type="text/css"/>
     <!-- Component styles -->
     <link rel="stylesheet" href="css/splash.css" type="text/css"/>
     <link rel="stylesheet" href="css/login.css" type="text/css"/>
+    <link rel="stylesheet" href="css/sub-screen.css" type="text/css"/>
     <link rel="stylesheet" href="css/interrupt.css" type="text/css"/>
     <link rel="stylesheet" href="css/session.css" type="text/css"/>
     <link rel="stylesheet" href="css/chatbot.css" type="text/css"/>
     <link rel="stylesheet" href="components/home/home.css" type="text/css"/>
-    <link rel="stylesheet" href="components/pay/pay.css" type="text/css"/>
-    <link rel="stylesheet" href="components/cards/cards.css" type="text/css"/>
+    <!-- pay and cards CSS now loaded dynamically per sub-component via utils.loadCss -->
     <link rel="stylesheet" href="components/more/more.css" type="text/css"/>
     <link rel="stylesheet" href="components/accounts/accounts.css" type="text/css"/>
   </head>
 
-  <body class="aman-app-body">
+  <body class="app-app-body">
 
     <!-- ── Page loading overlay (white screen until JET boots) ── -->
     <div id="loading-overlay" style="position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease;">
@@ -50,7 +50,7 @@
           <path d="M17 22H27M22 17V27" stroke="white" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <div>
-          <div style="font-size:24px;font-weight:900;color:#7A1531;letter-spacing:-.5px;">Aman Bank</div>
+          <div style="font-size:24px;font-weight:900;color:#7A1531;letter-spacing:-.5px;">OBDX Mobile</div>
           <div style="font-size:11px;color:#9CA3AF;font-weight:600;letter-spacing:.5px;">DIGITAL BANKING</div>
         </div>
       </div>
@@ -62,17 +62,17 @@
     </div>
 
     <div id="globalBody">
-      <div id="announce" tabindex="-1" class="aman-sr-only"
+      <div id="announce" tabindex="-1" class="app-sr-only"
            :aria-live="[[manner]]" aria-atomic="true">
         <p><oj-bind-text value="[[message]]"></oj-bind-text></p>
       </div>
 
       <!-- ── Phone shell ── -->
-      <div class="aman-phone-shell">
-        <div class="aman-phone" id="amanPhone">
+      <div class="app-phone-shell">
+        <div class="app-phone" id="amanPhone">
 
           <!-- Status bar (desktop only, hidden on mobile) -->
-          <div class="aman-status-bar" id="statusBar">
+          <div class="app-status-bar" id="statusBar">
             <span class="sb-time" id="statusTime">9:41</span>
             <div class="sb-icons">
               <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
@@ -91,12 +91,12 @@
 
           <!-- ── Router outlet — all screens load here via MVVM ── -->
           <oj-module role="main"
-                     class="aman-router-outlet"
+                     class="app-router-outlet"
                      config="[[moduleAdapter.koObservableConfig]]">
           </oj-module>
 
           <!-- ── Floating Pill Nav Bar (hidden on login screen) ── -->
-          <nav class="aman-nav" role="navigation" aria-label="Main navigation"
+          <nav class="app-nav" role="navigation" aria-label="Main navigation"
                data-bind="visible: isAuthenticated() && !anyPanelOpen()">
             <button class="nav-btn" data-bind="click: function(){navigate('home')}, css:{'active': currentRoute()==='home'}" aria-label="Home">
               <div class="nav-icon-wrap">
@@ -131,7 +131,7 @@
           </nav>
 
           <!-- ── Global Loader ── -->
-          <div id="amanLoader" class="aman-loader-overlay" style="display:none">
+          <div id="amanLoader" class="app-loader-overlay" style="display:none">
             <div class="ldr-glass">
               <div class="ldr-quantum">
                 <div class="ldr-guide"></div>
@@ -148,19 +148,17 @@
             </div>
           </div>
 
-          <!-- ── Toast ── -->
-          <div id="amanToast" class="aman-toast" role="status" aria-live="polite">
-            <span id="amanToastMsg"></span>
-          </div>
+          <!-- ── Toast / Snackbar — rendered by obdx-toast CCA ── -->
+          <obdx-toast></obdx-toast>
 
           <!-- ── Global Picker Sheet (z:860 — above all other sheets) ── -->
-          <div class="aman-picker-backdrop" data-bind="css:{'open': pickerOpen()}, click: closePicker">
-            <div class="aman-picker-sheet" data-bind="css:{'open': pickerOpen()}" onclick="event.stopPropagation()">
+          <div class="app-picker-backdrop" data-bind="css:{'open': pickerOpen()}, click: closePicker">
+            <div class="app-picker-sheet" data-bind="css:{'open': pickerOpen()}" onclick="event.stopPropagation()">
               <div style="width:36px;height:4px;border-radius:2px;background:var(--c-border);margin:12px auto 4px;"></div>
               <div data-bind="text: pickerTitle()" style="font-size:15px;font-weight:800;color:var(--c-t1);padding:12px 20px 8px;"></div>
               <div style="border-top:1px solid var(--c-border);">
                 <!-- ko foreach: pickerOptions() -->
-                <div class="aman-picker-option" data-bind="click: function(){ window.amanApp.selectPickerOption($data); }, css: {'aman-picker-option--selected': $root.pickerSelected() === $data.value}">
+                <div class="app-picker-option" data-bind="click: function(){ window.obdxApp.selectPickerOption($data); }, css: {'app-picker-option--selected': $root.pickerSelected() === $data.value}">
                   <span data-bind="text: $data.label"></span>
                   <!-- ko if: $root.pickerSelected() === $data.value -->
                   <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
@@ -172,8 +170,8 @@
           </div>
 
           <!-- ── Session Expired Modal (z:960 — above interrupt overlay) ── -->
-          <div class="aman-session-modal" data-bind="css:{'aman-session-modal--open': sessionExpired()}">
-            <div class="aman-session-sheet">
+          <div class="app-session-modal" data-bind="css:{'app-session-modal--open': sessionExpired()}">
+            <div class="app-session-sheet">
               <div class="session-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </div>
@@ -184,21 +182,21 @@
           </div>
 
           <!-- ── Account Suspended Modal (z:960) ── -->
-          <div class="aman-session-modal" data-bind="css:{'aman-session-modal--open': sessionSuspended()}">
-            <div class="aman-session-sheet">
+          <div class="app-session-modal" data-bind="css:{'app-session-modal--open': sessionSuspended()}">
+            <div class="app-session-sheet">
               <div class="session-icon" style="background:#FEF2F2;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
               </div>
               <h3 class="session-title">Account Suspended</h3>
-              <p class="session-sub">Your account has been temporarily suspended. Please contact Aman Bank support for assistance.</p>
+              <p class="session-sub">Your account has been temporarily suspended. Please contact OBDX Mobile support for assistance.</p>
               <button class="session-action-btn" data-bind="click: logout">Back to Login</button>
             </div>
           </div>
 
           <!-- ── OTP / Interrupt Overlay (z:950 — above everything) ── -->
-          <div id="amanInterruptOverlay" class="aman-interrupt-overlay"
-               data-bind="css:{'aman-interrupt-overlay--open': interruptHandler.isVisible()}">
-            <div class="aman-interrupt-sheet" onclick="event.stopPropagation()">
+          <div id="amanInterruptOverlay" class="app-interrupt-overlay"
+               data-bind="css:{'app-interrupt-overlay--open': interruptHandler.isVisible()}">
+            <div class="app-interrupt-sheet" onclick="event.stopPropagation()">
               <!-- drag handle -->
               <div style="width:36px;height:4px;border-radius:2px;background:var(--c-border);margin:14px auto 0;"></div>
 
@@ -259,7 +257,7 @@
 
           <!-- ── Chatbot FAB (z:940, hidden on login) ── -->
           <!-- ko if: isAuthenticated() -->
-          <button class="aman-chat-fab" data-bind="click: chatbot.toggle, css:{'aman-chat-fab--open': chatbot.isOpen()}" aria-label="Chat with Aman Assistant">
+          <button class="app-chat-fab" data-bind="click: chatbot.toggle, css:{'app-chat-fab--open': chatbot.isOpen()}" aria-label="Chat with Aman Assistant">
             <!-- Chat icon -->
             <!-- ko ifnot: chatbot.isOpen() -->
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -270,7 +268,7 @@
           </button>
 
           <!-- ── Chat Panel (z:930, slides up) ── -->
-          <div class="aman-chat-panel" data-bind="css:{'aman-chat-panel--open': chatbot.isOpen()}">
+          <div class="app-chat-panel" data-bind="css:{'app-chat-panel--open': chatbot.isOpen()}">
             <!-- Header -->
             <div class="chat-header">
               <div class="chat-avatar">
@@ -326,8 +324,8 @@
           </div>
           <!-- /ko -->
 
-        </div><!-- /.aman-phone -->
-      </div><!-- /.aman-phone-shell -->
+        </div><!-- /.app-phone -->
+      </div><!-- /.app-phone-shell -->
     </div><!-- /#globalBody -->
 
     <!-- RequireJS bootstrap -->
@@ -346,7 +344,7 @@
       function getSheet(target) {
         var handle = target.closest('.acc-sheet-handle');
         if (!handle) return null;
-        var sheet = handle.closest('.iban-sheet, .aman-picker-sheet');
+        var sheet = handle.closest('.iban-sheet, .app-picker-sheet');
         if (!sheet) return null;
         return sheet;
       }
@@ -400,7 +398,7 @@
             _sheet.style.transform = '';
             _sheet.style.transition = '';
             if (_bd) { _bd.style.opacity = ''; _bd.style.background = ''; _bd.style.transition = ''; }
-            window.amanApp && window.amanApp.closeCurrentSheet();
+            window.obdxApp && window.obdxApp.closeCurrentSheet();
           }, 280);
         } else {
           activeSheet.style.transition = 'transform .35s cubic-bezier(.32,1,.23,1)';

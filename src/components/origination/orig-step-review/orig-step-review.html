@@ -1,0 +1,63 @@
+﻿<div>
+  <div class="orig-section-title">Review &amp; Submit</div>
+  <div class="orig-section-sub">Confirm your application details</div>
+
+  <div class="orig-review-card">
+    <div class="orig-review-row">
+      <span class="orig-review-label">Product</span>
+      <span class="orig-review-value" data-bind="text: selectedProduct() ? selectedProduct().label : ''"></span>
+    </div>
+    <div class="orig-review-row">
+      <span class="orig-review-label">Applicant</span>
+      <span class="orig-review-value">Mohammed Al-Qahtani</span>
+    </div>
+    <div class="orig-review-row">
+      <span class="orig-review-label">ID Verified</span>
+      <span class="orig-review-value" style="color:#16A34A;">&#10003; National ID</span>
+    </div>
+    <!-- ko if: context() === 'account' -->
+    <div class="orig-review-row"><span class="orig-review-label">Branch</span><span class="orig-review-value" data-bind="text: detailBranch"></span></div>
+    <!-- /ko -->
+    <!-- ko if: context() === 'deposit' -->
+    <div class="orig-review-row"><span class="orig-review-label">Source Account</span><span class="orig-review-value" data-bind="text: sourceAccount()"></span></div>
+    <!-- /ko -->
+    <!-- ko if: context() === 'deposit' || context() === 'loan' -->
+    <div class="orig-review-row">
+      <span class="orig-review-label" data-bind="text: context()==='deposit' ? 'Amount' : 'Finance Amount'"></span>
+      <span class="orig-review-value s-num" data-bind="text: 'LYD ' + (detailAmount() || '—')"></span>
+    </div>
+    <div class="orig-review-row"><span class="orig-review-label">Tenure</span><span class="orig-review-value" data-bind="text: detailTenure() || '—'"></span></div>
+    <!-- /ko -->
+    <!-- ko if: context() === 'deposit' -->
+    <div class="orig-review-row"><span class="orig-review-label">Maturity Instruction</span><span class="orig-review-value" data-bind="text: maturityInstruction()"></span></div>
+    <!-- ko if: showRollover() -->
+    <div class="orig-review-row"><span class="orig-review-label">Rollover Amount</span><span class="orig-review-value s-num" data-bind="text: rolloverAmount() ? 'LYD ' + rolloverAmount() : '—'"></span></div>
+    <!-- /ko -->
+    <!-- ko if: showPayTo() -->
+    <div class="orig-review-row"><span class="orig-review-label">Pay To</span><span class="orig-review-value" data-bind="text: payToMode()"></span></div>
+    <!-- ko if: payToMode() === 'Own Accounts' -->
+    <div class="orig-review-row"><span class="orig-review-label">Payout Account</span><span class="orig-review-value" data-bind="text: payToOwnAccount() || '—'"></span></div>
+    <!-- /ko -->
+    <!-- ko if: payToMode() === 'Internal Bank Account' -->
+    <div class="orig-review-row"><span class="orig-review-label">Beneficiary Acc No.</span><span class="orig-review-value" data-bind="text: payToInternalAccNo() || '—'"></span></div>
+    <div class="orig-review-row"><span class="orig-review-label">Beneficiary Name</span><span class="orig-review-value" data-bind="text: payToInternalAccHolder() || '—'"></span></div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <div class="orig-review-row">
+      <span class="orig-review-label">Nominee</span>
+      <span class="orig-review-value" data-bind="text: addNominee() === 'Yes' ? (nomineeName() || '—') : 'Not Added'"></span>
+    </div>
+    <!-- ko if: addNominee() === 'Yes' && nomineeName() -->
+    <div class="orig-review-row"><span class="orig-review-label">Relationship</span><span class="orig-review-value" data-bind="text: nomineeRelationship() || '—'"></span></div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: context() === 'loan' -->
+    <div class="orig-review-row"><span class="orig-review-label">Purpose</span><span class="orig-review-value" data-bind="text: detailPurpose() || '—'"></span></div>
+    <!-- /ko -->
+  </div>
+
+  <div class="orig-tnc-row">
+    <input type="checkbox" id="orig-tnc-chk">
+    <label for="orig-tnc-chk">I agree to the <span class="orig-tnc-link">Terms &amp; Conditions</span> and consent to OBDX Mobile processing this application</label>
+  </div>
+</div>

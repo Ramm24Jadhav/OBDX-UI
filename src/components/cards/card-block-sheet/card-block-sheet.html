@@ -1,0 +1,22 @@
+<!-- ko if: open() -->
+<div class="cbs-backdrop" data-bind="click: onClose"></div>
+<!-- /ko -->
+<div class="cbs-sheet" data-bind="css: {'cbs-sheet--open': open()}">
+  <div class="cbs-handle"></div>
+  <div class="cbs-title">Block Card</div>
+  <div class="cbs-body">
+    <div style="font-size:13px;color:var(--c-t3);margin-bottom:16px;">Select a reason for blocking this card. This action can be reversed.</div>
+    <div class="cbs-reasons">
+      <!-- ko foreach: blockReasons -->
+      <label class="cbs-reason-row">
+        <input type="radio" name="block-reason" data-bind="value: $data, checked: $parent.blockReason">
+        <span data-bind="text: $data"></span>
+      </label>
+      <!-- /ko -->
+    </div>
+    <div class="cbs-actions">
+      <button class="cbs-btn cbs-btn--ghost" data-bind="click: onClose">Cancel</button>
+      <button class="cbs-btn cbs-btn--danger" data-bind="click: confirmBlock">Block Card</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-/* ==========================================================
+﻿/* ==========================================================
    Accounts Screen & Account Detail
    ========================================================== */
 
@@ -43,21 +43,21 @@
 .iban-sheet.open{transform:translateX(-50%) translateY(0)}
 
 /* ── Global picker sheet ── */
-.aman-picker-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:860;opacity:0;pointer-events:none;transition:opacity .3s}
-.aman-picker-backdrop.open{opacity:1;pointer-events:auto}
-.aman-picker-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:861;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:60vh;overflow-y:auto;scrollbar-width:none;will-change:transform}
-.aman-picker-sheet.open{transform:translateX(-50%) translateY(0)}
-.aman-picker-option{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;font-size:14px;font-weight:600;color:var(--c-t1);border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .15s}
-.aman-picker-option:last-child{border-bottom:none}
-.aman-picker-option:active{background:var(--c-bg)}
-.aman-picker-option--selected{color:var(--c-primary);font-weight:700;background:rgba(122,21,49,.04)}
+.app-picker-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:860;opacity:0;pointer-events:none;transition:opacity .3s}
+.app-picker-backdrop.open{opacity:1;pointer-events:auto}
+.app-picker-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:861;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:60vh;overflow-y:auto;scrollbar-width:none;will-change:transform}
+.app-picker-sheet.open{transform:translateX(-50%) translateY(0)}
+.app-picker-option{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;font-size:14px;font-weight:600;color:var(--c-t1);border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .15s}
+.app-picker-option:last-child{border-bottom:none}
+.app-picker-option:active{background:var(--c-bg)}
+.app-picker-option--selected{color:var(--c-primary);font-weight:700;background:rgba(122,21,49,.04)}
 
 /* ── Custom select trigger ── */
-.aman-select{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--c-border);background:var(--c-surface);font-size:14px;font-weight:600;color:var(--c-t1);cursor:pointer;box-sizing:border-box;transition:border-color .2s;user-select:none}
-.aman-select:active{border-color:var(--c-primary)}
-.aman-select .aman-select__value{flex:1;text-align:left}
-.aman-select .aman-select__placeholder{color:var(--c-t3)}
-.aman-select svg{flex-shrink:0;color:var(--c-t3)}
+.app-select{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--c-border);background:var(--c-surface);font-size:14px;font-weight:600;color:var(--c-t1);cursor:pointer;box-sizing:border-box;transition:border-color .2s;user-select:none}
+.app-select:active{border-color:var(--c-primary)}
+.app-select .app-select__value{flex:1;text-align:left}
+.app-select .app-select__placeholder{color:var(--c-t3)}
+.app-select svg{flex-shrink:0;color:var(--c-t3)}
 
 /* ── Cheque book selectors ── */
 .cb-leaf{border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-t1)}
@@ -108,7 +108,7 @@
 .lnd-act-label{font-size:9px;font-weight:700;color:var(--c-t2);text-align:center;line-height:1.3}
 
 /* ── Lock background scroll when sheet open ── */
-.aman-screen.sheet-open{overflow:hidden}
+.app-screen.sheet-open{overflow:hidden}
 
 /* ── Shared icon button (used in hero headers) ── */
 .icon-btn{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:var(--c-surface);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;position:relative;transition:box-shadow .2s}
@@ -168,7 +168,7 @@
 .acc-carousel-track{display:flex;gap:12px;transition:transform .35s cubic-bezier(.32,1,.23,1);will-change:transform;padding-left:16px}
 .acc-carousel-track.no-transition{transition:none}
 .acc-carousel-wrap{overflow:hidden;width:100%;padding:12px 0 0;position:relative}
-.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 56px);background:linear-gradient(135deg,#7A1531 0%,#5C1025 50%,#3E0A1A 100%);border-radius:20px;padding:18px;position:relative;overflow:hidden;transition:opacity .25s,transform .25s;min-height:185px;display:flex;flex-direction:column;margin:0}
+.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 56px);background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-primary-d) 50%,var(--c-primary-dd) 100%);border-radius:20px;padding:18px;position:relative;overflow:hidden;transition:opacity .25s,transform .25s;min-height:185px;display:flex;flex-direction:column;margin:0}
 .acc-carousel-wrap .hero-card.card-inactive{opacity:.7;transform:scale(0.97)}
 
 /* ── deposits sub-component ── */
@@ -183,16 +183,12 @@
 .dep-progress-fill{height:100%;background:var(--c-primary);border-radius:2px}
 
 /* ── loans sub-component ── */
-.loan-summary-hero{background:linear-gradient(135deg,#1E3A5F 0%,#0F1F3A 100%);border-radius:var(--r-xl);padding:20px;margin:16px;color:#fff}
+.loan-summary-hero{background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);border-radius:var(--r-xl);padding:20px;margin:16px;color:#fff}
 .loan-card{background:var(--c-surface);border-radius:var(--r-xl);border:1px solid var(--c-border);padding:16px;margin:0 16px 12px}
 .loan-progress-bar{height:4px;background:var(--c-border);border-radius:2px;overflow:hidden;margin:8px 0}
 .loan-progress-fill{height:100%;background:#2563EB;border-radius:2px}
 
-/* ── sheets sub-component ── */
-.acc-bottom-sheet{position:absolute;inset:0;z-index:800;background:rgba(0,0,0,0);display:none;flex-direction:column;justify-content:flex-end;transition:background .25s}
-.acc-bottom-sheet.bs-open{background:rgba(0,0,0,.45)}
-.acc-sheet-card{background:var(--c-surface);border-radius:28px 28px 0 0;padding:16px 20px 32px;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,1,.23,1)}
-.acc-bottom-sheet.bs-open .acc-sheet-card{transform:translateY(0)}
+/* .acc-bottom-sheet / .acc-sheet-card rules live in sheets/sheets.css */
 .acc-sheet-handle{width:40px;height:5px;border-radius:3px;background:var(--c-border);margin:14px auto 12px;cursor:grab;touch-action:none;flex-shrink:0}
 .acc-sheet-handle:active{cursor:grabbing;background:var(--c-t4)}
 .acc-sheet-title{font-size:17px;font-weight:800;color:var(--c-t1);text-align:center;margin-bottom:4px}

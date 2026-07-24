@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-list",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Card List",
+  "description": "Scrollable list of loan cards.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

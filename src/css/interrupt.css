@@ -1,10 +1,10 @@
-/* ==========================================================
+﻿/* ==========================================================
    Interrupt / OTP Overlay  (z-index 950)
    ========================================================== */
-.aman-interrupt-overlay{position:absolute;inset:0;z-index:950;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.aman-interrupt-overlay--open{opacity:1;pointer-events:auto}
-.aman-interrupt-sheet{width:100%;background:var(--c-surface);border-radius:28px 28px 0 0;padding-bottom:env(safe-area-inset-bottom,16px);transform:translateY(100%);transition:transform .4s cubic-bezier(.32,1,.23,1)}
-.aman-interrupt-overlay--open .aman-interrupt-sheet{transform:translateY(0)}
+.app-interrupt-overlay{position:absolute;inset:0;z-index:950;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.app-interrupt-overlay--open{opacity:1;pointer-events:auto}
+.app-interrupt-sheet{width:100%;background:var(--c-surface);border-radius:28px 28px 0 0;padding-bottom:env(safe-area-inset-bottom,16px);transform:translateY(100%);transition:transform .4s cubic-bezier(.32,1,.23,1)}
+.app-interrupt-overlay--open .app-interrupt-sheet{transform:translateY(0)}
 .interrupt-body{padding:20px 24px 8px;text-align:center}
 .interrupt-icon{width:56px;height:56px;border-radius:50%;background:var(--c-primary-light);display:flex;align-items:center;justify-content:center;margin:12px auto 16px}
 .interrupt-title{font-size:18px;font-weight:800;color:var(--c-t1);margin-bottom:6px}

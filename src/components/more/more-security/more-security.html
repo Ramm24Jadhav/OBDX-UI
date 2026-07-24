@@ -1,0 +1,238 @@
+﻿<!-- more-security CCA — Security & Privacy slide panel -->
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': open()}">
+
+  <div class="app-sub-panel__header app-sub-panel__header--dark">
+    <button class="app-back-btn" data-bind="click: view() === 'main' ? onClose : goView.bind($data,'main')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <!-- ko if: view() === 'main' -->
+    <h2 class="app-sub-panel__title">Security &amp; Privacy</h2>
+    <!-- /ko -->
+    <!-- ko if: view() === 'mpin' -->
+    <h2 class="app-sub-panel__title">Change MPIN</h2>
+    <!-- /ko -->
+    <!-- ko if: view() === 'password' -->
+    <h2 class="app-sub-panel__title">Change Password</h2>
+    <!-- /ko -->
+    <div style="width:36px;"></div>
+  </div>
+
+  <div class="app-sub-body">
+  <!-- ══ MAIN VIEW ══ -->
+  <!-- ko if: view() === 'main' -->
+  <div class="app-panel-body" style="padding-top:8px;">
+
+    <!-- Access & Authentication -->
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding:12px 0 8px;">Access &amp; Authentication</div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <div class="more-security-row">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="more-row-icon" style="background:#DCFCE7;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Face ID / Biometrics</div><div style="font-size:11px;color:var(--c-t3);">Login with fingerprint or face</div></div>
+        </div>
+        <div class="more-toggle" data-bind="css: {'more-toggle--on': faceId()}, click: toggleFaceId"></div>
+      </div>
+      <div class="more-security-row">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="more-row-icon" style="background:#EDE9FE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">MPIN Lock</div><div style="font-size:11px;color:var(--c-t3);">6-digit PIN required on launch</div></div>
+        </div>
+        <div class="more-toggle" data-bind="css: {'more-toggle--on': mpinLock()}, click: toggleMpin"></div>
+      </div>
+      <div class="more-security-row" style="border:none;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="more-row-icon" style="background:#DBEAFE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">2-Factor Auth (OTP)</div><div style="font-size:11px;color:var(--c-t3);">SMS OTP for transactions</div></div>
+        </div>
+        <div class="more-toggle" data-bind="css: {'more-toggle--on': twoFactor()}, click: toggleTwoFactor"></div>
+      </div>
+    </div>
+
+    <!-- Change credentials -->
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;">Credentials</div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <div class="more-security-row" data-bind="click: goView.bind($data,'mpin')">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="more-row-icon" style="background:#EDE9FE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01M8 12h.01M16 12h.01"/></svg>
+          </div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Change MPIN</div><div style="font-size:11px;color:var(--c-t3);">Update your 6-digit PIN</div></div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="more-security-row" style="border:none;" data-bind="click: goView.bind($data,'password')">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="more-row-icon" style="background:#FCE7EE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Change Password</div><div style="font-size:11px;color:var(--c-t3);">Update your login password</div></div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
+    <!-- Active Sessions -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;">
+      <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;">Active Sessions</div>
+      <!-- ko if: sessions().filter(function(s){return !s.current;}).length > 0 -->
+      <button style="font-size:11px;font-weight:700;color:var(--c-error);background:none;border:none;cursor:pointer;" data-bind="click: endAllSessions">End all others</button>
+      <!-- /ko -->
+    </div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <!-- ko foreach: sessions() -->
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;" data-bind="style:{borderBottom: $index() < $parent.sessions().length - 1 ? '1px solid var(--c-border)' : 'none'}">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--c-bg);border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t2)" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);display:flex;align-items:center;gap:6px;">
+            <span data-bind="text: device"></span>
+            <!-- ko if: current -->
+            <span style="font-size:9px;font-weight:700;background:var(--c-success-bg);color:var(--c-success);border-radius:20px;padding:2px 7px;">THIS DEVICE</span>
+            <!-- /ko -->
+          </div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: location + ' · ' + time"></div>
+        </div>
+        <!-- ko ifnot: current -->
+        <button data-bind="click: $parent.endSession.bind($parent, $data)"
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;">End</button>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+    </div>
+
+    <!-- Trusted Devices -->
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;">Trusted Devices</div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:24px;">
+      <!-- ko foreach: trustedDevices() -->
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;" data-bind="style:{borderBottom: $index() < $parent.trustedDevices().length - 1 ? '1px solid var(--c-border)' : 'none'}">
+        <div style="width:36px;height:36px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: added"></div>
+        </div>
+        <button data-bind="click: $parent.removeTrusted.bind($parent, $data)"
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;">Remove</button>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: trustedDevices().length === 0 -->
+      <div style="padding:16px;font-size:13px;color:var(--c-t3);text-align:center;">No trusted devices</div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+
+  <!-- ══ CHANGE MPIN VIEW ══ -->
+  <!-- ko if: view() === 'mpin' -->
+  <div class="app-panel-body" style="padding-top:20px;">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:24px;">
+      <div style="width:56px;height:56px;border-radius:16px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="26" height="26"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01M8 12h.01M16 12h.01"/></svg>
+      </div>
+      <div style="font-size:15px;font-weight:800;color:var(--c-t1);">Update MPIN</div>
+      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Enter your 6-digit PIN</div>
+    </div>
+
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Current MPIN</div>
+        <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinCurrent, valueUpdate: 'input'" placeholder="••••••">
+      </div>
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">New MPIN</div>
+        <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinNew, valueUpdate: 'input'" placeholder="••••••">
+        <!-- ko if: mpinNew().length > 0 && !mpinNewValid() -->
+        <div style="font-size:11px;color:var(--c-error);margin-top:5px;">Must be exactly 6 digits</div>
+        <!-- /ko -->
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Confirm New MPIN</div>
+        <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinConfirm, valueUpdate: 'input'" placeholder="••••••">
+        <!-- ko if: mpinConfirm().length > 0 && !mpinMatch() -->
+        <div style="font-size:11px;color:var(--c-error);margin-top:5px;">PINs do not match</div>
+        <!-- /ko -->
+        <!-- ko if: mpinMatch() -->
+        <div style="font-size:11px;color:var(--c-success);margin-top:5px;">✓ PINs match</div>
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>
+  <div class="app-panel-footer">
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: saveMpin, disable: !mpinCanSave()">Update MPIN</button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main')">Cancel</button>
+  </div>
+  <!-- /ko -->
+
+  <!-- ══ CHANGE PASSWORD VIEW ══ -->
+  <!-- ko if: view() === 'password' -->
+  <div class="app-panel-body" style="padding-top:20px;">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:24px;">
+      <div style="width:56px;height:56px;border-radius:16px;background:#FCE7EE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="26" height="26"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div style="font-size:15px;font-weight:800;color:var(--c-t1);">Update Password</div>
+      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Min 8 chars · Uppercase · Number · Symbol</div>
+    </div>
+
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Current Password</div>
+        <div style="position:relative;">
+          <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdCurrent, valueUpdate: 'input', attr: {type: showPwdCurrent() ? 'text' : 'password'}" placeholder="Enter current password">
+          <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdCurrent(!showPwdCurrent()); }">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">New Password</div>
+        <div style="position:relative;">
+          <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdNew, valueUpdate: 'input', attr: {type: showPwdNew() ? 'text' : 'password'}" placeholder="Create new password">
+          <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdNew(!showPwdNew()); }">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <!-- ko if: pwdNew().length > 0 -->
+        <div style="margin-top:8px;">
+          <div style="display:flex;gap:4px;margin-bottom:4px;">
+            <!-- ko foreach: [1,2,3,4] -->
+            <div style="flex:1;height:3px;border-radius:2px;transition:background .2s;" data-bind="style:{background: $parent.pwdStrength() >= $data ? $parent.pwdStrengthColor() : 'var(--c-border)'}"></div>
+            <!-- /ko -->
+          </div>
+          <div style="font-size:11px;font-weight:700;" data-bind="text: pwdStrengthLabel, style:{color: pwdStrengthColor()}"></div>
+        </div>
+        <!-- /ko -->
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Confirm New Password</div>
+        <div style="position:relative;">
+          <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdConfirm, valueUpdate: 'input', attr: {type: showPwdConfirm() ? 'text' : 'password'}" placeholder="Repeat new password">
+          <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdConfirm(!showPwdConfirm()); }">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <!-- ko if: pwdConfirm().length > 0 && !pwdMatch() -->
+        <div style="font-size:11px;color:var(--c-error);margin-top:5px;">Passwords do not match</div>
+        <!-- /ko -->
+        <!-- ko if: pwdMatch() -->
+        <div style="font-size:11px;color:var(--c-success);margin-top:5px;">✓ Passwords match</div>
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>
+  <div class="app-panel-footer">
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: savePassword, disable: !pwdCanSave()">Update Password</button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main')">Cancel</button>
+  </div>
+  <!-- /ko -->
+  </div><!-- /.app-sub-body -->
+
+</div>

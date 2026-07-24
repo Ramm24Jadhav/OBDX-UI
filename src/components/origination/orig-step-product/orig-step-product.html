@@ -1,0 +1,167 @@
+<div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <div class="orig-section-sub" style="margin-bottom:0;">Select what you'd like to apply for</div>
+    <div class="orig-kyc-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <div class="orig-kyc-tooltip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="13" height="13" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+        Identity &amp; KYC verified — no documents needed.
+      </div>
+    </div>
+  </div>
+
+  <!-- Deposit: plan dropdown + source account + amount + tenure -->
+  <!-- ko if: context() === 'deposit' -->
+  <div class="orig-form-group">
+    <label class="orig-form-label">Deposit Plan</label>
+    <div class="orig-dropdown">
+      <button class="orig-dropdown-trigger" data-bind="click: togglePlanDropdown">
+        <!-- ko if: selectedProduct() -->
+        <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+          <div class="orig-dd-icon" data-bind="style:{background: selectedProduct().bg}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="14" height="14" data-bind="attr:{stroke: selectedProduct().stroke}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div style="flex:1;min-width:0;text-align:left;">
+            <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: selectedProduct().label"></div>
+            <div style="font-size:11px;color:var(--c-t3);" data-bind="text: selectedProduct().desc"></div>
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: selectedProduct() -->
+        <span style="color:var(--c-t3);">Choose a deposit plan</span>
+        <!-- /ko -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;margin-left:8px;transition:transform .2s;" data-bind="style:{transform: planDropdownOpen() ? 'rotate(180deg)' : 'rotate(0deg)'}"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <!-- ko if: planDropdownOpen() -->
+      <div class="orig-dropdown-menu">
+        <!-- ko foreach: products() -->
+        <div class="orig-dropdown-item" data-bind="click: $parent.selectPlan.bind($parent, $data), css: {'orig-dropdown-item--sel': $parent.isSelected($data)}">
+          <div class="orig-dd-icon" data-bind="style:{background: $data.bg}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="14" height="14" data-bind="attr:{stroke: $data.stroke}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div class="orig-dd-body">
+            <div class="orig-dd-label" data-bind="text: $data.label"></div>
+            <div class="orig-dd-sub" data-bind="text: $data.desc"></div>
+          </div>
+          <!-- ko if: $parent.isSelected($data) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Source Account</label>
+    <div class="orig-dropdown">
+      <button class="orig-dropdown-trigger" data-bind="click: toggleSourceDropdown">
+        <div style="display:flex;align-items:center;gap:8px;flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: sourceAccount()"></span>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;transition:transform .2s;" data-bind="style:{transform: sourceDropdownOpen() ? 'rotate(180deg)' : 'rotate(0deg)'}"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <!-- ko if: sourceDropdownOpen() -->
+      <div class="orig-dropdown-menu">
+        <!-- ko foreach: sourceAccounts -->
+        <div class="orig-dropdown-item" data-bind="click: $parent.selectSourceAccDD.bind($parent, $data), css: {'orig-dropdown-item--sel': $parent.sourceAccount()===$data}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15" style="flex-shrink:0;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <div class="orig-dd-body"><div class="orig-dd-label" data-bind="text: $data"></div></div>
+          <!-- ko if: $parent.sourceAccount()===$data -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Deposit Amount (LYD)</label>
+    <input type="number" class="orig-form-input" placeholder="e.g. 10,000" data-bind="value: detailAmount, valueUpdate: 'input'">
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Tenure</label>
+    <div class="orig-pill-list">
+      <!-- ko foreach: tenureOptions() -->
+      <div data-bind="css: {'orig-pill':true,'orig-pill--sel': $parent.detailTenure()===$data}, click: $parent.selectTenure.bind($parent,$data)">
+        <span data-bind="text: $data"></span>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- Best return tip -->
+  <!-- ko if: bestReturnTip() -->
+  <div class="orig-tip-card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2" stroke-linecap="round" width="14" height="14" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>Choose <strong data-bind="text: bestReturnTip().tenure"></strong> for maximum returns — earn up to <strong>LYD <span data-bind="text: bestReturnTip().interest"></span></strong> in interest.</span>
+  </div>
+  <!-- /ko -->
+  <!-- Maturity amount card -->
+  <!-- ko if: maturityCalc() -->
+  <div class="orig-maturity-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div>
+        <div class="orig-maturity-label">Maturity Amount</div>
+        <div class="orig-maturity-amount">LYD <span data-bind="text: maturityCalc().maturity"></span></div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div class="orig-maturity-detail" style="margin-bottom:2px;">Principal: <span data-bind="text: 'LYD ' + Number(detailAmount()).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})"></span></div>
+        <div class="orig-maturity-detail" style="color:var(--c-primary);font-weight:700;">+ LYD <span data-bind="text: maturityCalc().interest"></span> (<span data-bind="text: maturityCalc().rate"></span>%)</div>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko --><!-- end deposit -->
+
+  <!-- Account / Loan: card list + detail fields -->
+  <!-- ko if: context() !== 'deposit' -->
+  <!-- ko foreach: products() -->
+  <div data-bind="css: {'orig-prod-card':true, 'sel': $parent.isSelected($data)}, click: $parent.selectProduct.bind($parent, $data)">
+    <div class="orig-prod-icon" data-bind="style:{background: $data.bg}">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="20" height="20" data-bind="attr:{stroke: $data.stroke}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    </div>
+    <div class="orig-prod-info">
+      <div class="orig-prod-name" data-bind="text: $data.label"></div>
+      <div class="orig-prod-desc" data-bind="text: $data.desc"></div>
+    </div>
+    <div class="orig-prod-check">
+      <!-- ko if: $parent.isSelected($data) -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- Account extra fields -->
+  <!-- ko if: context() === 'account' -->
+  <div class="orig-form-group" style="margin-top:6px;">
+    <label class="orig-form-label">Preferred Branch</label>
+    <select class="orig-form-select" data-bind="value: detailBranch">
+      <option>Main Branch</option><option>Airport Branch</option><option>City Centre Branch</option><option>Online Only</option>
+    </select>
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Linked Debit Card</label>
+    <select class="orig-form-select"><option>Yes, issue a debit card</option><option>No, not now</option></select>
+  </div>
+  <!-- /ko -->
+  <!-- Loan extra fields -->
+  <!-- ko if: context() === 'loan' -->
+  <div class="orig-form-group" style="margin-top:6px;">
+    <label class="orig-form-label">Finance Amount (LYD)</label>
+    <input type="number" class="orig-form-input" placeholder="e.g. 50,000" data-bind="value: detailAmount">
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Tenure</label>
+    <select class="orig-form-select" data-bind="value: detailTenure">
+      <!-- ko foreach: tenureOptions() --><option data-bind="text: $data, value: $data"></option><!-- /ko -->
+    </select>
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Purpose</label>
+    <input type="text" class="orig-form-input" placeholder="e.g. Home renovation" data-bind="value: detailPurpose">
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

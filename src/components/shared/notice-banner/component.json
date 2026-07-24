@@ -1,0 +1,14 @@
+{
+  "name": "acct-notice-banner",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Notice banner",
+  "description": "Inline alert banner. type: 'warn' | 'info'.",
+  "properties": {
+    "type":    { "type": "string" },
+    "message": { "type": "string" }
+  },
+  "methods": {},
+  "events": {},
+  "slots": {}
+}

@@ -1,5 +1,5 @@
-/**
- * Aman Bank OBDX — Root Application Controller
+﻿/**
+ * OBDX Mobile — Root Application Controller
  * Follows Oracle OBDX ControllerViewModel pattern.
  * Manages: routing, auth state, language/RTL, global loader, toast.
  */
@@ -20,7 +20,8 @@ define([
   'framework/extensions/extension-registry',
   'framework/analytics',
   'framework/chatbot',
-  'ojs/ojknockout'
+  'ojs/ojknockout',
+  'components/shared/obdx-toast/loader'
 ], function (
   ko, Context,
   CoreRouter, KnockoutRouterAdapter,
@@ -35,8 +36,14 @@ define([
   // Module directories (e.g. accounts/) contain only sub-component folders;
   // the actual entry component lives one level deeper.
   var _componentMap = {
-    'accounts': 'accounts/accounts-main'
+    'accounts': 'accounts/accounts-main',
+    'cards':    'cards/cards-main',
+    'pay':      'pay/pay-main'
   };
+
+  // Tracks the most recently requested path — used to discard stale AMD callbacks
+  // when multiple _loadComponent calls race (e.g. initial load + subscribe fire).
+  var _pendingPath = null;
 
   function _loadComponent(path, configObservable) {
     // ExtensionRegistry overrides take priority over the static component map
@@ -45,7 +52,15 @@ define([
     var name   = compPath.split('/').pop();
     var viewId = 'text!../components/' + compPath + '/' + name + '.html';
     var vmId   = '../components/' + compPath + '/' + name;
+
+    _pendingPath = path;
+    // Reset to empty so oj-module unmounts the old view before mounting the new one.
+    configObservable({ view: [], viewModel: null });
+
     require([viewId, vmId, 'ojs/ojknockout'], function (view, ViewModel) {
+      // Discard if a newer navigation superseded this one.
+      if (_pendingPath !== path) return;
+      _pendingPath = null;
       configObservable({ view: view, viewModel: ViewModel });
     }, function (err) {
       console.error('[AmanBank] Component load failed: ' + path, err);
@@ -62,6 +77,19 @@ define([
       self.message(e.detail.message);
       self.manner(e.detail.manner);
     }, false);
+
+    // ── Force-clear session on every page boot ─────────────────
+    // Hard reload / fresh tab must always start from login with a clean state.
+    platform.logout();
+    AppData.userData          = {};
+    AppData.userSegment       = null;
+    AppData.jsonContext        = null;
+    AppData.currentEntity     = null;
+    AppData.allowedComponents = {};
+    AppData.isUserDataSet(false);
+    document.body.classList.remove(
+      'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
+    );
 
     // ── Auth state ─────────────────────────────────────────────
     self.isAuthenticated = ko.observable(false);
@@ -126,15 +154,28 @@ define([
     var _moduleConfig = ko.observable({ view: [], viewModel: {} });
     self.moduleAdapter = { koObservableConfig: _moduleConfig };
 
+    // Protected routes — require an authenticated session.
+    var _protectedRoutes = ['home', 'accounts', 'pay', 'cards', 'more'];
+
+    function _guardedLoad(path) {
+      if (!path) return;
+      if (_protectedRoutes.indexOf(path) !== -1 && !platform.getToken()) {
+        // No valid session — bounce to login regardless of the URL.
+        router.go({ path: 'login' });
+        return;
+      }
+      _loadComponent(path, _moduleConfig);
+    }
+
     // Use selection.path (KnockoutRouterAdapter's KO observable) — guaranteed API in JET 14.
     // Fires whenever the route changes; also read immediately for the initial load.
     self.selection.path.subscribe(function (path) {
-      if (path) _loadComponent(path, _moduleConfig);
+      _guardedLoad(path);
     });
 
     // Initial load: read the current path from the adapter (already synced via router.sync())
     var _initPath = (self.selection.path && self.selection.path()) || 'login';
-    _loadComponent(_initPath, _moduleConfig);
+    _guardedLoad(_initPath);
 
     // Only show nav items that are not hidden (exclude login route)
     var visibleNavData = navData.filter(function (r) {
@@ -255,18 +296,12 @@ define([
       if (el) el.style.display = 'none';
     };
 
-    // ── Global Toast ──────────────────────────────────────────
-    var _toastTimer = null;
-    self.showToast = function (msg, type) {
-      var el     = document.getElementById('amanToast');
-      var msg_el = document.getElementById('amanToastMsg');
-      if (!el || !msg_el) return;
-      msg_el.textContent = msg;
-      el.className = 'aman-toast aman-toast--' + (type || 'info') + ' aman-toast--show';
-      clearTimeout(_toastTimer);
-      _toastTimer = setTimeout(function () {
-        el.className = 'aman-toast';
-      }, 3000);
+    // ── Toast — delegates to obdx-toast CCA (src/components/shared/obdx-toast/)
+    self.showToast = function (msgOrOpts, type) {
+      if (window.obdxToast) window.obdxToast.show(msgOrOpts, type);
+    };
+    self.clearToasts = function () {
+      if (window.obdxToast) window.obdxToast.clearToasts();
     };
 
     // ── Global Picker ──────────────────────────────────────────
@@ -336,7 +371,7 @@ define([
     };
 
     // ── Expose globals for child viewModels ────────────────────
-    window.amanApp = {
+    window.obdxApp = {
       navigate:        self.navigate.bind(self),
       login:           self.login.bind(self),
       logout:          self.logout.bind(self),

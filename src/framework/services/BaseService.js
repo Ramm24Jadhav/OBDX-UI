@@ -1,4 +1,4 @@
-define([
+﻿define([
   'framework/configurations/config',
   'app-data',
   'platform',
@@ -119,17 +119,17 @@ define([
   // ── Session event handlers ────────────────────────────────────────
   document.addEventListener('aman:auth:expired', function () {
     platform.logout();
-    if (window.amanApp) window.amanApp.navigate('login');
+    if (window.obdxApp) window.obdxApp.navigate('login');
   });
   document.addEventListener('aman:session:expired', function () {
     platform.logout();
-    if (window.amanApp) window.amanApp.navigate('login');
+    if (window.obdxApp) window.obdxApp.navigate('login');
   });
   document.addEventListener('aman:session:suspended', function () {
     platform.logout();
-    if (window.amanApp) {
-      window.amanApp.showToast('Your account has been suspended. Please contact support.', 'error');
-      window.amanApp.navigate('login');
+    if (window.obdxApp) {
+      window.obdxApp.showToast('Your account has been suspended. Please contact support.', 'error');
+      window.obdxApp.navigate('login');
     }
   });
 

@@ -1,0 +1,221 @@
+﻿<div data-bind="visible: showHub()" style="display:none;flex:1;overflow-y:auto;position:relative;">
+  <div style="padding:16px 20px 0;flex-shrink:0;">
+    <h2 style="font-size:22px;font-weight:800;color:var(--c-t1);letter-spacing:-.4px;margin:0 0 16px;">Payments</h2>
+  </div>
+
+  <!-- Transfer section -->
+  <div style="margin-bottom:4px;">
+    <div style="padding:0 20px 8px;font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;">Transfer</div>
+    <div class="pay-transfer-grid">
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('own'); }">
+        <div class="pay-icon-circle" style="background:#FCE7EE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <span class="pay-icon-label">Own Account</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('within'); }">
+        <div class="pay-icon-circle" style="background:#DBEAFE;"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <span class="pay-icon-label">Within Bank</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('domestic'); }">
+        <div class="pay-icon-circle" style="background:#DCFCE7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <span class="pay-icon-label">Domestic</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('international'); }">
+        <div class="pay-icon-circle" style="background:#EDE9FE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"/></svg></div>
+        <span class="pay-icon-label">International</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Payments section -->
+  <div style="margin-bottom:4px;">
+    <div style="padding:0 20px 8px;font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;">More Payments</div>
+    <div class="pay-transfer-grid">
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('gcc'); }">
+        <div class="pay-icon-circle" style="background:#FEF3C7;"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <span class="pay-icon-label">GCC RTGS</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('afaq'); }">
+        <div class="pay-icon-circle" style="background:#DCFCE7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <span class="pay-icon-label">AFAQ</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: openQR">
+        <div class="pay-icon-circle" style="background:#EDE9FE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg></div>
+        <span class="pay-icon-label">QR Pay</span>
+      </div>
+      <div class="pay-icon-btn" data-bind="click: function(){ startPayFlow('adhoc'); }">
+        <div class="pay-icon-circle" style="background:#FEF2F2;"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/><line x1="12" y1="13" x2="12" y2="17"/><line x1="10" y1="15" x2="14" y2="15"/></svg></div>
+        <span class="pay-icon-label">Adhoc</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu list -->
+  <div class="pay-menu-list">
+    <div class="pay-menu-row" data-bind="click: openBeneficiaries">
+      <div class="pay-menu-icon" style="background:#FCE7EE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <span class="pay-menu-text">Beneficiaries</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="pay-menu-row" data-bind="click: openScheduled">
+      <div class="pay-menu-icon" style="background:#DCFCE7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <span class="pay-menu-text">Scheduled Payments</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="pay-menu-row">
+      <div class="pay-menu-icon" style="background:#FEF3C7;"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+      <span class="pay-menu-text">Standing Instructions</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="pay-menu-row" data-bind="click: openTracker">
+      <div class="pay-menu-icon" style="background:#FCE7EE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <span class="pay-menu-text">Payment Tracker</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="pay-menu-row" data-bind="click: openBills">
+      <div class="pay-menu-icon" style="background:#DCFCE7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <span class="pay-menu-text">Bill Payments</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="pay-menu-row">
+      <div class="pay-menu-icon" style="background:#EDE9FE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+      <span class="pay-menu-text">Bulk Payments</span>
+      <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+
+  <!-- SUB-PANEL: QR PAY -->
+  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showQR()}">
+    <div class="app-sub-panel__header">
+      <button class="app-back-btn" data-bind="click: closeQR"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="app-sub-panel__title">QR Pay</h2>
+      <div style="width:36px;"></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:20px;">
+      <div style="width:220px;height:220px;border-radius:20px;border:2px solid var(--c-border);background:var(--c-surface);display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 100 100" width="180" height="180" fill="none" stroke="var(--c-t2)" stroke-width="3">
+          <rect x="10" y="10" width="30" height="30" rx="3"/><rect x="15" y="15" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
+          <rect x="60" y="10" width="30" height="30" rx="3"/><rect x="65" y="15" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
+          <rect x="10" y="60" width="30" height="30" rx="3"/><rect x="15" y="65" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
+          <rect x="60" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="72" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
+          <rect x="84" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="60" y="72" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
+          <rect x="84" y="72" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="60" y="84" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
+          <rect x="72" y="84" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
+        </svg>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:16px;font-weight:800;color:var(--c-t1);">Mohammed Al-Qahtani</div>
+        <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Scan to pay · LY44 2000 •••• 2341</div>
+      </div>
+      <div style="display:flex;gap:10px;width:100%;">
+        <button class="app-btn app-btn--ghost" style="flex:1;">Share QR</button>
+        <button class="app-btn app-btn--primary" style="flex:1;">Scan &amp; Pay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: BENEFICIARIES -->
+  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showBeneficiaries()}">
+    <div class="app-sub-panel__header">
+      <button class="app-back-btn" data-bind="click: closeBeneficiaries"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="app-sub-panel__title">Beneficiaries</h2>
+      <button style="font-size:12px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;">+ Add</button>
+    </div>
+    <div style="overflow-y:auto;flex:1;" data-bind="foreach: beneficiaries">
+      <div class="pay-ben-row-item" data-bind="click: function(){ $parent.selectBeneficiary($data); $parent.closeBeneficiaries(); }">
+        <div class="pay-ben-chip__avatar" style="width:44px;height:44px;border-radius:50%;font-size:16px;" data-bind="text: initials, style:{background: avatarColor}"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+          <div style="font-size:12px;color:var(--c-t3);" data-bind="text: bank + ' · ' + accountNo"></div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t4)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: SCHEDULED PAYMENTS -->
+  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showScheduled()}">
+    <div class="app-sub-panel__header">
+      <button class="app-back-btn" data-bind="click: closeScheduled"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="app-sub-panel__title">Scheduled Payments</h2>
+      <div style="width:36px;"></div>
+    </div>
+    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Rent Payment</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">To: Ahmed Al-Mansoori</div></div>
+          <span class="pill pill-success">Active</span>
+        </div>
+        <div style="padding:12px 16px;display:flex;gap:16px;border-bottom:1px solid var(--c-border);">
+          <div><div style="font-size:10px;color:var(--c-t3);">Amount</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">LYD 3,500</div></div>
+          <div><div style="font-size:10px;color:var(--c-t3);">Next Date</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">01 Aug</div></div>
+          <div><div style="font-size:10px;color:var(--c-t3);">Frequency</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">Monthly</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;gap:8px;">
+          <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Edit</button>
+          <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-error);font-size:11px;font-weight:700;cursor:pointer;">Cancel</button>
+        </div>
+      </div>
+      <button class="app-btn app-btn--ghost app-btn--full">+ New Scheduled Payment</button>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: BILL PAYMENTS -->
+  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showBills()}">
+    <div class="app-sub-panel__header">
+      <button class="app-back-btn" data-bind="click: closeBills"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="app-sub-panel__title">Bill Payments</h2>
+      <div style="width:36px;"></div>
+    </div>
+    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div style="background:var(--c-surface);border-radius:14px;border:1px solid var(--c-border);padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;align-items:flex-start;">
+          <div style="width:38px;height:38px;border-radius:11px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Electricity</div>
+          <div style="font-size:10px;color:var(--c-t3);">GECOL</div>
+        </div>
+        <div style="background:var(--c-surface);border-radius:14px;border:1px solid var(--c-border);padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;align-items:flex-start;">
+          <div style="width:38px;height:38px;border-radius:11px;background:#DBEAFE;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Mobile</div>
+          <div style="font-size:10px;color:var(--c-t3);">Libyana / Madar</div>
+        </div>
+      </div>
+      <div style="background:var(--c-surface);border-radius:16px;border:1.5px solid var(--c-warning, #F59E0B);overflow:hidden;">
+        <div style="padding:12px 16px;background:rgba(245,158,11,.08);border-bottom:1px solid rgba(245,158,11,.2);display:flex;align-items:center;gap:8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span style="font-size:12px;font-weight:700;color:#D97706;">Due in 3 days</span>
+        </div>
+        <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Electricity Bill</div><div style="font-size:11px;color:var(--c-t3);">Account: 1234567890</div></div>
+          <div style="text-align:right;"><div style="font-size:16px;font-weight:800;color:var(--c-t1);">LYD 420</div><button style="margin-top:4px;padding:6px 12px;border-radius:8px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Pay Now</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: PAYMENT TRACKER -->
+  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showTracker()}">
+    <div class="app-sub-panel__header">
+      <button class="app-back-btn" data-bind="click: closeTracker"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="app-sub-panel__title">Payment Tracker</h2>
+      <div style="width:36px;"></div>
+    </div>
+    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">International Wire</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">Ref: TXN-2026-00891</div></div>
+          <span class="pill pill-warning">Processing</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div class="track-steps">
+            <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Initiated<span>24 Jul 2026</span></div></div>
+            <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Authorised<span>24 Jul 2026</span></div></div>
+            <div class="track-step track-step--active"><div class="track-step__dot"></div><div class="track-step__label">Processing<span>In Progress</span></div></div>
+            <div class="track-step" style="padding-bottom:0;"><div class="track-step__dot"></div><div class="track-step__label">Completed<span>Pending</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

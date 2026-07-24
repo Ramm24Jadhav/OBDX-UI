@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+﻿define(['knockout'], function (ko) {
   'use strict';
 
   var _pending   = null;
@@ -81,12 +81,12 @@ define(['knockout'], function (ko) {
               }
             } else {
               InterruptHandler.otpValue('');
-              if (window.amanApp) window.amanApp.showToast('Invalid OTP. Try again.', 'error');
+              if (window.obdxApp) window.obdxApp.showToast('Invalid OTP. Try again.', 'error');
             }
           })
           .catch(function () {
             InterruptHandler.otpValue('');
-            if (window.amanApp) window.amanApp.showToast('OTP verification failed.', 'error');
+            if (window.obdxApp) window.obdxApp.showToast('OTP verification failed.', 'error');
           });
       });
     },
@@ -99,7 +99,7 @@ define(['knockout'], function (ko) {
       if (refNo && !window._AMAN_MOCK_MODE) {
         require(['services/UserService'], function (UserService) {
           UserService.generateOTP(refNo).catch(function () {
-            if (window.amanApp) window.amanApp.showToast('Could not resend OTP.', 'error');
+            if (window.obdxApp) window.obdxApp.showToast('Could not resend OTP.', 'error');
           });
         });
       }

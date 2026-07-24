@@ -1,0 +1,22 @@
+<!-- deposits component -->
+<div style="position:relative;overflow:hidden;">
+
+  <!-- Deposit card list -->
+  <acct-dep-list params="[[$data]]"></acct-dep-list>
+
+  <!-- Backdrop for list-level action panels -->
+  <div class="dep-backdrop" data-bind="visible: showRedeem() || showEditMaturity() || showTopUp(), click: closeAll" style="display:none;"></div>
+
+  <!-- List-level action panels -->
+  <acct-dep-redeem         params="[[$data]]"></acct-dep-redeem>
+  <acct-dep-edit-maturity  params="[[$data]]"></acct-dep-edit-maturity>
+  <acct-dep-top-up         params="[[$data]]"></acct-dep-top-up>
+  <acct-dep-more-sheet     params="[[$data]]"></acct-dep-more-sheet>
+
+  <!-- Detail panel (owns its own inner panels) -->
+  <acct-dep-detail params="[[$data]]"></acct-dep-detail>
+
+  <!-- Global picker sheet -->
+  <acct-picker-sheet params="[[$data]]"></acct-picker-sheet>
+
+</div>

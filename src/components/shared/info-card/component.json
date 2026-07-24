@@ -1,0 +1,13 @@
+{
+  "name": "acct-info-card",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Info card",
+  "description": "Bordered card rendering an array of {label, value} rows.",
+  "properties": {
+    "rows": { "type": "array" }
+  },
+  "methods": {},
+  "events": {},
+  "slots": {}
+}

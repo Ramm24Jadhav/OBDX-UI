@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-elig-calc",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Eligibility Calc",
+  "description": "Eligibility calculator panel.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

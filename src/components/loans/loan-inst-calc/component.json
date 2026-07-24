@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-inst-calc",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Installment Calc",
+  "description": "Installment calculator panel.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

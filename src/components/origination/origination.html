@@ -1,0 +1,43 @@
+<!-- Origination slide-in panel -->
+<div data-bind="css: {'orig-panel':true, 'orig-open': open()}">
+
+  <orig-header params="[[$data]]"></orig-header>
+
+  <!-- ko if: !submitted() -->
+  <orig-step-indicator params="[[$data]]"></orig-step-indicator>
+
+  <div class="orig-body">
+    <!-- Account: Step 1 = Personal Details -->
+    <!-- ko if: step() === 1 && context() === 'account' -->
+    <orig-step-personal params="[[$data]]"></orig-step-personal>
+    <!-- /ko -->
+
+    <!-- Account: Step 2 = Product; Deposit/Loan: Step 1 = Product -->
+    <!-- ko if: (step() === 2 && context() === 'account') || (step() === 1 && context() !== 'account') -->
+    <orig-step-product params="[[$data]]"></orig-step-product>
+    <!-- /ko -->
+
+    <!-- Deposit: Step 2 = Maturity -->
+    <!-- ko if: step() === 2 && context() === 'deposit' -->
+    <orig-step-maturity params="[[$data]]"></orig-step-maturity>
+    <!-- /ko -->
+
+    <!-- Deposit: Step 3 = Nominee -->
+    <!-- ko if: step() === 3 && context() === 'deposit' -->
+    <orig-step-nominee params="[[$data]]"></orig-step-nominee>
+    <!-- /ko -->
+
+    <!-- Account: Step 3 = Review; Loan: Step 2 = Review; Deposit: Step 4 = Review -->
+    <!-- ko if: (step() === 3 && context() === 'account') || (step() === 2 && context() === 'loan') || step() === 4 -->
+    <orig-step-review params="[[$data]]"></orig-step-review>
+    <!-- /ko -->
+  </div>
+
+  <orig-footer params="[[$data]]"></orig-footer>
+  <!-- /ko -->
+
+  <!-- ko if: submitted() -->
+  <orig-success params="[[$data]]"></orig-success>
+  <!-- /ko -->
+
+</div>

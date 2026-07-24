@@ -1,5 +1,5 @@
-/**
- * Aman Bank — CSS Utility
+﻿/**
+ * OBDX Mobile — CSS Utility
  * Mirrors OBDX framework/js/base-models/css.js.
  *
  * Two key responsibilities:

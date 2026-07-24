@@ -48,7 +48,7 @@
 .acc-carousel-track{display:flex;gap:12px;transition:transform .38s cubic-bezier(.32,1,.23,1);will-change:transform;padding:4px 12px 8px}
 .acc-carousel-track.no-transition{transition:none}
 .acc-carousel-wrap{overflow:hidden;width:100%;padding:12px 0 0;position:relative;perspective:1000px}
-.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 36px);background:linear-gradient(135deg,#7A1531 0%,#5C1025 50%,#3E0A1A 100%);border-radius:20px;padding:20px;position:relative;overflow:hidden;transition:opacity .3s,transform .38s cubic-bezier(.32,1,.23,1);min-height:195px;display:flex;flex-direction:column;margin:0;}
+.acc-carousel-wrap .hero-card{flex-shrink:0;width:calc(100% - 36px);background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-primary-d) 50%,var(--c-primary-dd) 100%);border-radius:20px;padding:20px;position:relative;overflow:hidden;transition:opacity .3s,transform .38s cubic-bezier(.32,1,.23,1);min-height:195px;display:flex;flex-direction:column;margin:0;}
 .acc-carousel-wrap .hero-card.card-inactive{opacity:0.72;}
 
 /* Hero card inner layout */

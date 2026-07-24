@@ -1,0 +1,12 @@
+/* Sub-screen slide-in panel — shared by More, Pay, Cards sub-panels */
+.sub-screen{position:absolute;inset:0;z-index:auto;background:var(--c-bg);border-radius:0;overflow:hidden;display:none;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.32,1,.23,1)}
+.sub-screen.sub-open{transform:translateX(0)}
+.sub-header{display:flex;align-items:center;gap:12px;padding:52px 20px 16px;background:var(--c-bg);flex-shrink:0}
+.sub-header.dark{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%)}
+.back-btn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sub-header:not(.dark) .back-btn{background:var(--c-surface);box-shadow:var(--shadow-sm)}
+.back-btn svg{width:18px;height:18px;color:#fff}
+.sub-header:not(.dark) .back-btn svg{color:var(--c-t1)}
+.sub-header h2{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;flex:1}
+.sub-header:not(.dark) h2{color:var(--c-t1)}
+@media(max-width:360px){.sub-header{padding:10px 14px 6px}}

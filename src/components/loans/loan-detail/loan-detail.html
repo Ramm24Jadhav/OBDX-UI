@@ -1,0 +1,263 @@
+﻿<div class="dep-det-panel" data-bind="css: {'dep-det-panel--open': open()}">
+  <!-- ko if: open() -->
+  <!-- ko with: loan() -->
+  <div style="display:flex;flex-direction:column;height:100%;">
+
+    <!-- Hero -->
+    <div class="dep-det-hero dep-det-hero--loan" style="background:#1A3353;">
+      <div class="dep-det-top-bar">
+        <button class="dep-det-back" data-bind="click: $parent.onClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span style="font-size:16px;font-weight:700;color:#fff;">Finance Details</span>
+        <div style="width:34px;"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:14px;">
+        <div class="dep-det-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:15px;font-weight:800;color:#fff;" data-bind="text: name"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px;" data-bind="text: ref"></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.4px;">Outstanding</div>
+          <div class="s-num" style="font-size:20px;font-weight:800;color:#fff;" data-bind="text: $parent.fmt(outstanding)"></div>
+        </div>
+      </div>
+      <div class="dep-det-actions">
+        <button class="dep-det-action-btn" data-bind="click: function(){ $parent.onPayNow(); }">
+          <div class="dep-det-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+          <span>Pay Now</span>
+        </button>
+        <button class="dep-det-action-btn" data-bind="click: function(){ $parent.showDetSchedule(true); }">
+          <div class="dep-det-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <span>Schedule</span>
+        </button>
+        <button class="dep-det-action-btn" data-bind="click: function(){ $parent.showDisbInquiry(true); }">
+          <div class="dep-det-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <span>Disbursement</span>
+        </button>
+        <button class="dep-det-action-btn" data-bind="click: function(){ $parent.showMore(true); }">
+          <div class="dep-det-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg></div>
+          <span>More</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="dep-det-tabs">
+      <div class="dep-det-tab" data-bind="css:{active: $parent.activeTab()==='details'},   click: function(){ $parent.activeTab('details'); }">Details</div>
+      <div class="dep-det-tab" data-bind="css:{active: $parent.activeTab()==='statement'}, click: function(){ $parent.activeTab('statement'); }">Statement</div>
+      <div class="dep-det-tab" data-bind="css:{active: $parent.activeTab()==='analytics'}, click: function(){ $parent.activeTab('analytics'); }">Analytics</div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div style="overflow-y:auto;flex:1;background:var(--c-bg);">
+
+      <!-- ── DETAILS TAB ── -->
+      <div class="dep-det-content" data-bind="css:{active: $parent.activeTab()==='details'}">
+        <div style="padding:16px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+            <div class="dep-kpi-card"><div class="dep-kpi-label">Rate</div><div style="font-size:16px;font-weight:800;color:var(--c-t1);" data-bind="text: rate.toFixed(2) + '%'"></div><div class="dep-kpi-sub">per annum</div></div>
+            <div class="dep-kpi-card"><div class="dep-kpi-label">Monthly EMI</div><div class="s-num" style="font-size:14px;font-weight:800;color:var(--c-primary);" data-bind="text: $parent.fmt(emi).replace('LYD ','')"></div><div class="dep-kpi-sub">due monthly</div></div>
+            <div class="dep-kpi-card"><div class="dep-kpi-label">Repaid</div><div style="font-size:16px;font-weight:800;color:var(--c-success);" data-bind="text: repaidPct + '%'"></div><div class="dep-kpi-sub">of tenure</div></div>
+          </div>
+
+          <div class="dep-info-card" style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:13px;font-weight:700;color:var(--c-t1);">Repayment Progress</span>
+              <span style="font-size:11px;color:var(--c-t3);" data-bind="text: repaidLabel"></span>
+            </div>
+            <div style="height:10px;background:var(--c-bg);border-radius:5px;overflow:hidden;margin-bottom:8px;">
+              <div style="height:100%;background:linear-gradient(90deg,var(--c-primary),#86EFAC);border-radius:5px;" data-bind="style:{width: repaidPct + '%'}"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span class="s-num" style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.fmt(original - outstanding) + ' paid'"></span>
+              <span class="s-num" style="font-size:11px;font-weight:700;color:#EF4444;" data-bind="text: $parent.fmt(outstanding) + ' remaining'"></span>
+            </div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Repayment Details</div>
+          <div class="dep-info-card" style="margin-bottom:14px;padding:0;overflow:hidden;">
+            <div class="dep-info-row dep-info-row--2col"><label>Net Outstanding Balance</label><span class="s-num" style="font-weight:800;color:#EF4444;" data-bind="text: $parent.fmt(outstanding)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Amount Re-paid till Date</label><span class="s-num" style="font-weight:700;color:var(--c-success);" data-bind="text: $parent.fmt(repaidAmount)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Repayment Mode</label><span data-bind="text: repaymentMode"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Total Installments</label><span data-bind="text: totalInstallments"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Remaining Installments</label><span data-bind="text: remainingInstallments"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Next Installment Date</label><span style="font-weight:700;" data-bind="text: nextInstallmentDate"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Next Installment Amount</label><span class="s-num" style="font-weight:700;color:var(--c-primary);" data-bind="text: $parent.fmt(nextInstallmentAmount)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Principal Frequency</label><span data-bind="text: principalFrequency"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Interest Frequency</label><span data-bind="text: interestFrequency"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Principal Arrears</label><span class="s-num" data-bind="text: $parent.fmt(principalArrears)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Interest Arrears</label><span class="s-num" data-bind="text: $parent.fmt(interestArrears)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Late Payment Charges</label><span class="s-num" data-bind="text: $parent.fmt(latePaymentCharges)"></span></div>
+            <div class="dep-info-row dep-info-row--2col dep-info-row--last"><label>Other Fees</label><span class="s-num" data-bind="text: $parent.fmt(otherFees)"></span></div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Loan Specifications</div>
+          <div class="dep-info-card" style="margin-bottom:14px;padding:0;overflow:hidden;">
+            <div class="dep-info-row dep-info-row--2col"><label>Opening Date</label><span data-bind="text: openingDate"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Maturity Date</label><span data-bind="text: maturityDate"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Sanctioned Loan Amount</label><span class="s-num" style="font-weight:700;" data-bind="text: $parent.fmt(sanctionedAmount)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Total Amount Disbursed</label><span class="s-num" style="font-weight:700;" data-bind="text: $parent.fmt(totalDisbursed)"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Loan Tenure</label><span data-bind="text: loanTenure"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Interest Rate</label><span style="color:var(--c-success);font-weight:700;" data-bind="text: interestRate.toFixed(2) + '%'"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Late Payment Penalty</label><span data-bind="text: latePaymentPenalty"></span></div>
+            <div class="dep-info-row dep-info-row--2col dep-info-row--last"><label>Prepayment Penalty</label><span data-bind="text: prepaymentPenalty"></span></div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">General Details</div>
+          <div class="dep-info-card" style="margin-bottom:14px;padding:0;overflow:hidden;">
+            <div class="dep-info-row dep-info-row--2col"><label>Product Name</label><span data-bind="text: productName"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Nickname</label><span data-bind="text: nickname"></span></div>
+            <div class="dep-info-row dep-info-row--2col"><label>Primary Account Holder</label><span data-bind="text: primaryHolder"></span></div>
+            <div class="dep-info-row dep-info-row--2col dep-info-row--last"><label>Branch</label><span data-bind="text: branch"></span></div>
+          </div>
+
+          <div class="dep-info-card" style="padding:0;overflow:hidden;margin-bottom:14px;">
+            <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);font-size:13px;font-weight:700;color:var(--c-t1);">Upcoming Instalments</div>
+            <div style="overflow-x:auto;">
+              <table class="loan-sched-table">
+                <thead><tr><th>Month</th><th>Principal</th><th>Profit</th><th>Balance</th></tr></thead>
+                <tbody data-bind="foreach: schedule">
+                  <tr>
+                    <td data-bind="text: month"></td>
+                    <td class="s-num" data-bind="text: $parents[1].fmt(principal)"></td>
+                    <td class="s-num" data-bind="text: $parents[1].fmt(interest)"></td>
+                    <td class="s-num" style="color:var(--c-t2);" data-bind="text: $parents[1].fmt(balance)"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="bottom-spacer"></div>
+        </div>
+      </div>
+
+      <!-- ── STATEMENT TAB ── -->
+      <div class="dep-det-content" data-bind="css:{active: $parent.activeTab()==='statement'}">
+        <div style="padding:16px;">
+          <!-- ko if: !$parent.submitted() -->
+          <div class="dep-summary-card">
+            <div class="dep-summary-row"><span>Finance</span><strong data-bind="text: name"></strong></div>
+            <div class="dep-summary-row" style="border:none;"><span>Reference</span><strong data-bind="text: ref"></strong></div>
+          </div>
+          <div class="dep-form-group">
+            <label class="dep-form-label">Statement Period</label>
+            <button class="app-picker-btn" data-bind="click: function(){ $parent.openPicker('Statement Period', ['Last 3 months','Last 6 months','Current year','Previous year','Full tenure'], $parent.statementPeriod); }">
+              <span data-bind="text: $parent.statementPeriod()"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+          <div class="dep-form-group">
+            <label class="dep-form-label">Format</label>
+            <button class="app-picker-btn" data-bind="click: function(){ $parent.openPicker('Format', ['PDF','Excel'], $parent.statementFormat); }">
+              <span data-bind="text: $parent.statementFormat()"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+          <div class="dep-info-card" style="padding:0;overflow:hidden;margin-bottom:14px;">
+            <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);font-size:13px;font-weight:700;color:var(--c-t1);">Recent Payments</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--c-border);">
+              <div><div style="font-size:13px;font-weight:600;color:var(--c-t1);">Jun 2026</div><div style="font-size:11px;color:var(--c-t3);">Monthly EMI</div></div>
+              <div class="s-num" style="font-size:13px;font-weight:700;color:var(--c-success);" data-bind="text: $parent.fmt(emi)"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--c-border);">
+              <div><div style="font-size:13px;font-weight:600;color:var(--c-t1);">May 2026</div><div style="font-size:11px;color:var(--c-t3);">Monthly EMI</div></div>
+              <div class="s-num" style="font-size:13px;font-weight:700;color:var(--c-success);" data-bind="text: $parent.fmt(emi)"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;">
+              <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Total Paid (YTD)</div>
+              <div class="s-num" style="font-size:14px;font-weight:800;color:var(--c-success);" data-bind="text: $parent.fmt(emi * 6)"></div>
+            </div>
+          </div>
+          <button class="dep-btn-primary" data-bind="click: $parent.requestStatement">Send to Email</button>
+          <!-- /ko -->
+          <!-- ko if: $parent.submitted() -->
+          <div class="dep-success">
+            <div class="dep-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="36" height="36"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="dep-success-title">Statement Requested</div>
+            <div class="dep-success-sub" data-bind="text: $parent.submittedMsg"></div>
+            <button class="dep-btn-primary" style="width:100%;margin-top:24px;" data-bind="click: function(){ $parent.submitted(false); }">Request Another</button>
+          </div>
+          <!-- /ko -->
+          <div class="bottom-spacer"></div>
+        </div>
+      </div>
+
+      <!-- ── ANALYTICS TAB ── -->
+      <div class="dep-det-content" data-bind="css:{active: $parent.activeTab()==='analytics'}">
+        <div style="padding:16px;">
+          <div class="dep-info-card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:800;color:var(--c-t1);margin-bottom:12px;">Outstanding Balance Trend</div>
+            <svg viewBox="0 0 320 100" fill="none" style="width:100%;height:100px;">
+              <defs><linearGradient id="lnOSGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EF4444" stop-opacity=".15"/><stop offset="100%" stop-color="#EF4444" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0 5 C50 8 100 18 150 35 C200 52 250 72 320 92 L320 100 L0 100 Z" fill="url(#lnOSGrad)"/>
+              <path d="M0 5 C50 8 100 18 150 35 C200 52 250 72 320 92" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="160" cy="40" r="4" fill="#EF4444"/>
+              <text x="163" y="35" font-size="9" fill="#EF4444" font-weight="700">Now</text>
+              <text x="0" y="98" font-size="8" fill="#9CA3AF">Start</text>
+              <text x="148" y="98" font-size="8" fill="#9CA3AF">Now</text>
+              <text x="300" y="98" font-size="8" fill="#9CA3AF">End</text>
+            </svg>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;">
+              <span class="s-num" style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.fmt(original) + ' disbursed'"></span>
+              <span class="s-num" style="font-size:11px;color:#EF4444;font-weight:700;" data-bind="text: $parent.fmt(outstanding) + ' remaining'"></span>
+            </div>
+          </div>
+          <div class="dep-info-card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:800;color:var(--c-t1);margin-bottom:12px;">EMI Breakdown (Monthly)</div>
+            <!-- ko with: schedule[0] -->
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--c-t2);">Principal Component</span><span class="s-num" style="font-size:12px;font-weight:700;color:var(--c-primary);" data-bind="text: $parents[1].fmt(principal)"></span></div>
+                <div style="height:8px;background:var(--c-bg);border-radius:4px;overflow:hidden;"><div style="height:100%;background:var(--c-primary);border-radius:4px;" data-bind="style:{width: (principal/(principal+interest)*100).toFixed(0)+'%'}"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--c-t2);">Profit Component</span><span class="s-num" style="font-size:12px;font-weight:700;color:#F59E0B;" data-bind="text: $parents[1].fmt(interest)"></span></div>
+                <div style="height:8px;background:var(--c-bg);border-radius:4px;overflow:hidden;"><div style="height:100%;background:#F59E0B;border-radius:4px;" data-bind="style:{width: (interest/(principal+interest)*100).toFixed(0)+'%'}"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--c-border);margin-top:12px;">
+              <span style="font-size:13px;font-weight:700;color:var(--c-t1);">Total Monthly EMI</span>
+              <span class="s-num" style="font-size:15px;font-weight:800;color:var(--c-primary);" data-bind="text: $parents[1].fmt($parent.emi)"></span>
+            </div>
+            <!-- /ko -->
+          </div>
+          <div class="dep-info-card" style="margin-bottom:14px;">
+            <div style="font-size:13px;font-weight:800;color:var(--c-t1);margin-bottom:12px;">Total Cost of Finance</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--c-t2);">Amount Borrowed</span><span class="s-num" style="font-size:12px;font-weight:700;" data-bind="text: $parent.fmt(original)"></span></div>
+                <div style="height:8px;background:var(--c-bg);border-radius:4px;overflow:hidden;"><div style="height:100%;background:var(--c-primary);border-radius:4px;" data-bind="style:{width: (original/(original*1.15)*100).toFixed(0)+'%'}"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--c-t2);">Total Profit Cost (est.)</span><span class="s-num" style="font-size:12px;font-weight:700;color:#F59E0B;" data-bind="text: $parent.fmt(Math.round(original*0.15))"></span></div>
+                <div style="height:8px;background:var(--c-bg);border-radius:4px;overflow:hidden;"><div style="height:100%;width:13%;background:#F59E0B;border-radius:4px;"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--c-border);margin-top:12px;">
+              <span style="font-size:13px;font-weight:700;color:var(--c-t1);">Total Repayment</span>
+              <span class="s-num" style="font-size:15px;font-weight:800;color:var(--c-t1);" data-bind="text: $parent.fmt(Math.round(original*1.15))"></span>
+            </div>
+          </div>
+          <div class="bottom-spacer"></div>
+        </div>
+      </div>
+
+    </div><!-- /scrollable -->
+  </div><!-- /flex column -->
+  <!-- /ko --><!-- /with loan() -->
+  <!-- /ko --><!-- /if open() -->
+
+  <!-- Inner panels — pass LoanDetailViewModel as params -->
+  <acct-loan-detail-more  params="[[$data]]"></acct-loan-detail-more>
+  <acct-loan-disb-inquiry params="[[$data]]"></acct-loan-disb-inquiry>
+  <acct-loan-det-schedule params="[[$data]]"></acct-loan-det-schedule>
+  <acct-loan-inst-calc    params="[[$data]]"></acct-loan-inst-calc>
+  <acct-loan-elig-calc    params="[[$data]]"></acct-loan-elig-calc>
+  <acct-loan-estatement   params="[[$data]]"></acct-loan-estatement>
+  <acct-loan-nickname     params="[[$data]]"></acct-loan-nickname>
+
+</div>

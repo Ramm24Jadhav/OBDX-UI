@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-nickname",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Nickname",
+  "description": "Loan nickname editor panel.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

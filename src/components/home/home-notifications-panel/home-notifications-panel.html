@@ -1,0 +1,24 @@
+﻿<!-- notifications-panel widget — overlay + slide-in panel -->
+<div class="app-overlay" data-bind="visible: showNotifications(), click: closeNotifications" style="display:none;"></div>
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showNotifications()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: closeNotifications">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h2 class="app-sub-panel__title">Notifications</h2>
+    <button style="font-size:11px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;" data-bind="click: markAllRead">Mark all read</button>
+  </div>
+  <div style="overflow-y:auto;flex:1;">
+    <!-- ko foreach: notifList -->
+    <div class="notif-row" data-bind="css: {'notif-row--unread': !read}">
+      <div class="notif-row__dot" data-bind="visible: !read"></div>
+      <div class="notif-row__icon" data-bind="style: {background: iconBg}, html: icon"></div>
+      <div class="notif-row__body">
+        <div class="notif-row__title" data-bind="text: title"></div>
+        <div class="notif-row__sub" data-bind="text: sub"></div>
+        <div class="notif-row__time" data-bind="text: time"></div>
+      </div>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>

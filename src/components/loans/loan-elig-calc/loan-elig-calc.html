@@ -1,0 +1,37 @@
+<div class="dep-panel" style="z-index:515;" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Eligibility Calculator</div>
+    <div style="width:36px;"></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-notice dep-notice--info">Based on a 40% debt-service ratio. Adjust tenure and rate for different scenarios.</div>
+    <div class="dep-form-group"><label class="dep-form-label">Monthly Net Income (LYD)</label><input type="number" class="dep-form-input" placeholder="e.g. 5,000" data-bind="value: income"></div>
+    <div class="dep-form-group"><label class="dep-form-label">Existing Monthly Obligations (LYD)</label><input type="number" class="dep-form-input" placeholder="0" data-bind="value: obligation"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div class="dep-form-group" style="margin-bottom:0;"><label class="dep-form-label">Tenure (months)</label><input type="number" class="dep-form-input" placeholder="36" data-bind="value: tenure"></div>
+      <div class="dep-form-group" style="margin-bottom:0;"><label class="dep-form-label">Rate (% p.a.)</label><input type="number" class="dep-form-input" step="0.01" placeholder="3.99" data-bind="value: rate"></div>
+    </div>
+    <button class="dep-btn-primary" style="margin-bottom:16px;" data-bind="click: onCalculate">Check Eligibility</button>
+    <!-- ko if: result() -->
+    <!-- ko if: result().eligible -->
+    <div class="dep-info-card" style="text-align:center;">
+      <div class="dep-success-icon" style="margin:0 auto 12px;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="28" height="28"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--c-t1);margin-bottom:4px;">You are eligible!</div>
+      <div class="s-num" style="font-size:24px;font-weight:800;color:var(--c-success);margin-bottom:8px;" data-bind="text: result().maxLoan"></div>
+      <div style="font-size:12px;color:var(--c-t3);">maximum eligible amount</div>
+      <div class="dep-summary-row" style="margin-top:12px;"><span>Available EMI capacity</span><strong class="s-num" data-bind="text: result().availEmi"></strong></div>
+      <div class="dep-summary-row"><span>Tenure used</span><strong data-bind="text: result().tenure + ' months'"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Rate used</span><strong data-bind="text: result().rate + '% p.a.'"></strong></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !result().eligible -->
+    <div class="dep-info-card" style="text-align:center;">
+      <div class="dep-success-icon" style="margin:0 auto 12px;background:#FEE2E2;"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--c-t1);margin-bottom:8px;">Not eligible at this time</div>
+      <div style="font-size:13px;color:var(--c-t3);" data-bind="text: result().msg"></div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+</div>

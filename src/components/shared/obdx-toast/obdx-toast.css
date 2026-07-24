@@ -1,0 +1,149 @@
+﻿/* ── Aman Toast / Snackbar Component ─────────────────────────────────────────
+   Override any rule here to customise the toast without touching app.css or
+   appController.js. This file is the single source of truth for toast styling.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Host element — zero-size overlay so it doesn't push sibling content down */
+obdx-toast {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Blur backdrop */
+.obdx-toast-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.obdx-toast-backdrop--show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Stack container — positioned at 20% from top */
+.obdx-toast-container {
+  position: absolute;
+  top: 20%;
+  left: 16px;
+  right: 16px;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* "Clear all" pill — top-right, frosted glass */
+.obdx-toast-clear-all {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2px 6px;
+  pointer-events: auto;
+}
+.obdx-toast-clear-all button {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, .22);
+  border: 1.5px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  padding: 5px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background .15s ease;
+}
+.obdx-toast-clear-all button:hover {
+  background: rgba(255, 255, 255, .35);
+}
+
+/* Individual toast item */
+.obdx-toast {
+  display: flex;
+  align-items: center;
+  background: var(--c-surface);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .1);
+  opacity: 0;
+  transform: translateX(110%);
+  /* Bounce-settle entry from right */
+  transition: opacity .35s cubic-bezier(.34, 1.56, .64, 1),
+              transform .45s cubic-bezier(.34, 1.56, .64, 1);
+  pointer-events: none;
+}
+.obdx-toast--show {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+/* Slide-out to right */
+.obdx-toast--exit {
+  opacity: 0;
+  transform: translateX(110%);
+  transition: opacity .18s ease, transform .18s cubic-bezier(.4, 0, 1, 1);
+}
+
+/* Coloured icon block */
+.obdx-toast__icon {
+  flex-shrink: 0;
+  width: 52px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Message text */
+.obdx-toast__msg {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-t1);
+  padding: 14px 10px 14px 14px;
+  line-height: 1.4;
+}
+
+/* Optional action button */
+.obdx-toast__action {
+  flex-shrink: 0;
+  background: none;
+  border: 1.5px solid var(--c-border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-primary);
+  padding: 5px 11px;
+  margin: 0 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Dismiss × button */
+.obdx-toast__close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--c-t3);
+  padding: 14px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+}
+.obdx-toast__close:hover { color: var(--c-t1); }
+
+/* Type — icon block colours */
+.obdx-toast--success .obdx-toast__icon { background: #16A34A; }
+.obdx-toast--error   .obdx-toast__icon { background: #DC2626; }
+.obdx-toast--warning .obdx-toast__icon { background: #D97706; }
+.obdx-toast--info    .obdx-toast__icon { background: var(--c-primary); }
+.obdx-toast--push    .obdx-toast__icon { background: #7C3AED; }

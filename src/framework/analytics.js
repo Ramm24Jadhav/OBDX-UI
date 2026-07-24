@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Analytics Event Bus
+﻿/**
+ * OBDX Mobile — Analytics Event Bus
  * Lightweight wrapper around the bank's analytics endpoint.
  *
  * In mock mode: events are logged to console only.

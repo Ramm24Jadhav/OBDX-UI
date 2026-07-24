@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Extension / Override Registry
+﻿/**
+ * OBDX Mobile — Extension / Override Registry
  * Mirrors OBDX extensions pattern.
  *
  * Allows segment-specific or bank-specific code to:

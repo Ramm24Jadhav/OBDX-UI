@@ -1,10 +1,10 @@
-/**
- * Aman Bank — Shared Application State Singleton
+﻿/**
+ * OBDX Mobile — Shared Application State Singleton
  * Mirrors OBDX framework/js/app-data.js.
  *
  * This module is the single source of truth for cross-component state.
  * All components require it via the 'app-data' alias rather than reading
- * from window.amanApp — keeping state structured and testable.
+ * from window.obdxApp — keeping state structured and testable.
  *
  * Key values populated during bootstrap (Phase 1):
  *   userSegment   — set by computeSegment() after GET /me

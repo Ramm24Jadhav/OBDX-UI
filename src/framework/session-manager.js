@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Session Manager
+﻿/**
+ * OBDX Mobile — Session Manager
  * Handles:
  *   - Inactivity timeout with warning before expiry
  *   - Heartbeat keep-alive on user activity
@@ -71,8 +71,8 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
 
     // ── Show warning banner 2 min before expiry ───────────────────
     _showWarning: function () {
-      if (window.amanApp && window.amanApp.showToast) {
-        window.amanApp.showToast('Your session will expire in 2 minutes due to inactivity.', 'warning');
+      if (window.obdxApp && window.obdxApp.showToast) {
+        window.obdxApp.showToast('Your session will expire in 2 minutes due to inactivity.', 'warning');
       }
     },
 

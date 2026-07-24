@@ -1,0 +1,30 @@
+<div class="dep-panel" style="z-index:515;" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Disbursement Inquiry</div>
+    <div style="width:36px;"></div>
+  </div>
+  <!-- ko with: loan() -->
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-summary-card">
+      <div class="dep-summary-row"><span>Finance</span><strong data-bind="text: name"></strong></div>
+      <div class="dep-summary-row"><span>Disbursed On</span><strong data-bind="text: disbursedFull"></strong></div>
+      <div class="dep-summary-row"><span>Disbursed Amount</span><strong class="s-num" data-bind="text: $parent.fmt(original)"></strong></div>
+      <div class="dep-summary-row"><span>Disbursement A/c</span><strong data-bind="text: disbursementAccount"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Branch</span><strong data-bind="text: branch"></strong></div>
+    </div>
+    <div style="font-size:13px;font-weight:700;color:var(--c-t1);margin-bottom:10px;">Disbursement Record</div>
+    <div class="dep-info-card" style="padding:0;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--c-border);">
+        <div><div style="font-size:13px;font-weight:600;color:var(--c-t1);">Initial Disbursement</div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: disbursedFull"></div></div>
+        <div class="s-num" style="font-size:13px;font-weight:700;color:var(--c-primary);" data-bind="text: $parent.fmt(original)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;">
+        <div><div style="font-size:13px;font-weight:600;color:var(--c-t1);">Total Disbursed</div></div>
+        <div class="s-num" style="font-size:14px;font-weight:800;color:var(--c-primary);" data-bind="text: $parent.fmt(original)"></div>
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="dep-panel-footer"><button class="dep-btn-primary" data-bind="click: onClose">Close</button></div>
+</div>

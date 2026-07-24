@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Component Access Registry
+﻿/**
+ * OBDX Mobile — Component Access Registry
  * Mirrors OBDX componentRegistry — stores the list of components
  * the current user is entitled to, loaded from GET /me/components.
  *

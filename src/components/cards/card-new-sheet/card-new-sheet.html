@@ -1,0 +1,42 @@
+<!-- ko if: open() -->
+<div class="cns-backdrop" data-bind="click: onClose"></div>
+<!-- /ko -->
+<div class="cns-sheet" data-bind="css: {'cns-sheet--open': open()}">
+  <div class="cns-handle"></div>
+  <div class="cns-title">Request New Card</div>
+  <div class="cns-body">
+    <div class="cns-options">
+      <button class="cns-option">
+        <div class="cns-opt-icon cns-opt-icon--debit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="cns-opt-info">
+          <div class="cns-opt-title">Debit Card</div>
+          <div class="cns-opt-sub">Linked to your current account</div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <button class="cns-option">
+        <div class="cns-opt-icon cns-opt-icon--credit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/><circle cx="18" cy="15" r="2"/><circle cx="22" cy="15" r="2"/></svg>
+        </div>
+        <div class="cns-opt-info">
+          <div class="cns-opt-title">Credit Card</div>
+          <div class="cns-opt-sub">Subject to credit approval</div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <button class="cns-option">
+        <div class="cns-opt-icon cns-opt-icon--virtual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="cns-opt-info">
+          <div class="cns-opt-title">Virtual Card</div>
+          <div class="cns-opt-sub">Instant, for online purchases</div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <button class="cns-cancel-btn" data-bind="click: onClose">Cancel</button>
+  </div>
+</div>

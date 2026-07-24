@@ -1,0 +1,52 @@
+﻿<div class="dep-panel" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Make Payment</div>
+    <div style="width:36px;"></div>
+  </div>
+  <!-- ko if: !submitted() -->
+  <!-- ko with: loan() -->
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-summary-card">
+      <div class="dep-summary-row"><span>Finance</span><strong data-bind="text: name"></strong></div>
+      <div class="dep-summary-row"><span>Outstanding</span><strong class="s-num" style="color:#EF4444;" data-bind="text: $parent.fmt(outstanding)"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Next Due</span><strong data-bind="text: nextDue"></strong></div>
+    </div>
+    <div class="dep-form-group">
+      <label class="dep-form-label">Payment Amount (LYD)</label>
+      <input type="number" class="dep-form-input" data-bind="attr:{placeholder: 'Monthly EMI: ' + $parent.fmt(emi)}, value: $parent.payAmount">
+    </div>
+    <div class="dep-form-group">
+      <label class="dep-form-label">Payment Type</label>
+      <button class="app-picker-btn" data-bind="click: function(){ $parent.openPicker('Payment Type', ['Regular EMI','Partial Prepayment','Full Settlement'], $parent.paymentType, $parent.onPaymentTypeSelect); }">
+        <span data-bind="text: $parent.paymentType()"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <!-- ko if: $parent.settlementBreakdown() -->
+    <div class="dep-info-card" style="margin-bottom:14px;padding:0;overflow:hidden;">
+      <div style="padding:10px 16px;font-size:12px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--c-border);">Settlement Breakdown</div>
+      <div class="dep-info-row dep-info-row--2col"><label>Outstanding Principal</label><span class="s-num" style="font-weight:700;color:#EF4444;" data-bind="text: $parent.settlementBreakdown().principal"></span></div>
+      <div class="dep-info-row dep-info-row--2col"><label>Accrued Interest</label><span class="s-num" data-bind="text: $parent.settlementBreakdown().interest"></span></div>
+      <div class="dep-info-row dep-info-row--2col"><label>Charges &amp; Penalties</label><span class="s-num" data-bind="text: $parent.settlementBreakdown().charges"></span></div>
+      <div class="dep-info-row dep-info-row--2col dep-info-row--last"><label style="font-weight:700;color:var(--c-t1);">Total Payable</label><span class="s-num" style="font-weight:800;font-size:15px;color:var(--c-primary);" data-bind="text: $parent.settlementBreakdown().total"></span></div>
+    </div>
+    <!-- /ko -->
+    <div class="dep-form-group">
+      <label class="dep-form-label">Deduct from</label>
+      <acct-account-dd params="[[$parent]]"></acct-account-dd>
+    </div>
+    <div class="dep-notice dep-notice--info">Leave amount blank to pay the monthly EMI amount.</div>
+  </div>
+  <!-- /ko -->
+  <div class="dep-panel-footer"><button class="dep-btn-primary" data-bind="click: onConfirm">Confirm Payment</button></div>
+  <!-- /ko -->
+  <!-- ko if: submitted() -->
+  <div class="dep-success">
+    <div class="dep-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="36" height="36"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="dep-success-title">Payment Initiated</div>
+    <div class="dep-success-sub" data-bind="text: submittedMsg"></div>
+    <button class="dep-btn-primary" style="width:100%;margin-top:24px;" data-bind="click: onClose">Done</button>
+  </div>
+  <!-- /ko -->
+</div>

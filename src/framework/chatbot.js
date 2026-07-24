@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Oracle Digital Assistant (ODA) Chatbot Integration
+﻿/**
+ * OBDX Mobile — Oracle Digital Assistant (ODA) Chatbot Integration
  *
  * In mock mode: renders a stub chat UI with canned responses.
  * In live mode: loads the ODA Web SDK from config.oda.sdkUrl and

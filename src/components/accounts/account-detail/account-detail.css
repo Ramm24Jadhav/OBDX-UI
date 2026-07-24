@@ -1,4 +1,4 @@
-/* .aman-sub-panel / .aman-back-btn base styles live in app.css (shared pattern) */
+﻿/* .app-sub-panel / .app-back-btn base styles live in app.css (shared pattern) */
 /* Detail hero */
 .acct-detail-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:10px 20px 16px}
 .acct-detail-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}

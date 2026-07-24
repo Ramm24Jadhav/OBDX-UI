@@ -1,0 +1,32 @@
+<div class="dep-det-panel" data-bind="css: {'dep-det-panel--open': open()}">
+
+  <!-- Hero header -->
+  <div class="dep-det-hero" data-bind="css: heroClass()">
+    <div class="dep-det-top-bar">
+      <button class="dep-det-back" data-bind="click: onBack">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+    </div>
+    <!-- Hero slot: icon, title, amount, action buttons row -->
+    <!-- ko template: { nodes: $componentTemplateNodes, data: $data, name: 'hero' } --><!-- /ko -->
+  </div>
+
+  <!-- Tab bar -->
+  <!-- ko if: tabs() && tabs().length -->
+  <div class="dep-det-tabs">
+    <!-- ko foreach: tabs() -->
+    <div class="dep-det-tab"
+         data-bind="css: {active: $parent.activeTab() === $data.id},
+                    click: function () { $parent.onTabChange($data.id); },
+                    text: $data.label">
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+
+  <!-- Tab content slot -->
+  <div style="flex:1;overflow-y:auto;scrollbar-width:none;">
+    <!-- ko template: { nodes: $componentTemplateNodes, data: $data, name: activeTab() } --><!-- /ko -->
+  </div>
+
+</div>

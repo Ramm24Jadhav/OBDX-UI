@@ -1,0 +1,29 @@
+﻿<div class="app-screen app-screen--pay">
+  <pay-hub          params="[[$data]]"></pay-hub>
+
+  <!-- Step header + progress bar (steps 1-4) -->
+  <div data-bind="visible: !showHub() && step() <= 4" style="display:none;flex-shrink:0;">
+    <div class="app-page-header">
+      <button class="app-back-btn" data-bind="click: goBack" aria-label="Back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <h1 class="app-page-header__title">Fund Transfer</h1>
+    </div>
+    <div class="pay-progress" data-bind="foreach: [1,2,3,4]">
+      <div class="pay-progress__item" data-bind="css: $parent.stepClass($data)">
+        <div class="pay-progress__dot">
+          <span data-bind="visible: $parent.step() > $data">✓</span>
+          <span data-bind="visible: $parent.step() <= $data, text: $data"></span>
+        </div>
+        <span class="pay-progress__label" data-bind="text: $parent.stepLabel($data)"></span>
+      </div>
+      <div class="pay-progress__line" data-bind="visible: $data < 4, css: {'pay-progress__line--done': $parent.step() > $data}"></div>
+    </div>
+  </div>
+
+  <pay-step-recipient params="[[$data]]"></pay-step-recipient>
+  <pay-step-amount    params="[[$data]]"></pay-step-amount>
+  <pay-step-review    params="[[$data]]"></pay-step-review>
+  <pay-step-otp       params="[[$data]]"></pay-step-otp>
+  <pay-step-success   params="[[$data]]"></pay-step-success>
+</div>

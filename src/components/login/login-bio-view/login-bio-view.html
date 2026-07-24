@@ -1,0 +1,41 @@
+<div data-bind="visible: authMode() === 'bio' || authMode() === 'faceid'" style="display:none;width:100%;">
+  <!-- User chip -->
+  <div class="lb-user-chip">
+    <div class="lb-user-avatar" data-bind="text: userInitial"></div>
+    <div class="lb-user-info">
+      <div class="lb-user-name" data-bind="text: userName"></div>
+      <div class="lb-user-sub">Last login: Today, 9:12 AM</div>
+    </div>
+    <button class="lb-user-switch" data-bind="click: function(){ setMode('password'); }">Switch</button>
+  </div>
+
+  <div class="lb-bio-view">
+    <div class="lb-bio-wrap">
+      <div class="lb-bio-ring lb-bio-ring3"></div>
+      <div class="lb-bio-ring lb-bio-ring2"></div>
+      <div class="lb-bio-ring lb-bio-ring1"></div>
+      <div class="lb-bio-circle" data-bind="click: doLogin">
+        <svg data-bind="visible: authMode() === 'bio'" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="44" height="44" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3C7 3 3 7 3 12"/><path d="M12 3c5 0 9 4 9 9"/>
+          <path d="M12 7c-2.8 0-5 2.2-5 5"/><path d="M12 7c2.8 0 5 2.2 5 5"/>
+          <path d="M12 11v4"/><path d="M10 17s.5 2 2 2 2-2 2-2"/>
+        </svg>
+        <svg data-bind="visible: authMode() === 'faceid'" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="44" height="44" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          <circle cx="12" cy="12" r="3"/><path d="M12 7v1m0 8v1M7 12H6m12 0h-1"/>
+        </svg>
+      </div>
+    </div>
+    <div class="lb-bio-label" data-bind="text: authMode()==='faceid' ? 'Look to Authenticate' : 'Touch to Authenticate'"></div>
+    <div class="lb-bio-sub" data-bind="text: authMode()==='faceid' ? 'Use Face ID to sign in' : 'Use your registered fingerprint'"></div>
+    <div class="lb-alt-methods">
+      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'faceid', click: function(){ setMode('faceid'); }">Face ID</button>
+      <span data-bind="visible: authMode() !== 'faceid'">·</span>
+      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'bio', click: function(){ setMode('bio'); }">Fingerprint</button>
+      <span data-bind="visible: authMode() !== 'bio'">·</span>
+      <button class="lb-alt-btn" data-bind="click: function(){ setMode('mpin'); }">MPIN</button>
+      <span>·</span>
+      <button class="lb-alt-btn" data-bind="click: function(){ setMode('password'); }">Password</button>
+    </div>
+  </div>
+</div>

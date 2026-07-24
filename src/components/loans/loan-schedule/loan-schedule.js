@@ -1,0 +1,14 @@
+define(['shared-components/utils'], function (utils) {
+  'use strict';
+  function LoanScheduleViewModel(context) {
+    var self = this;
+    var p = context.properties ? context.properties.params : context;
+    utils.loadCss('/components/shared/panel-system.css');
+    utils.loadCss('/components/loans/loans.css');
+    self.open    = p.showSchedule;
+    self.loan    = p.selected;
+    self.fmt     = p.fmt;
+    self.onClose = function () { p.showSchedule(false); };
+  }
+  return LoanScheduleViewModel;
+});

@@ -1,0 +1,42 @@
+﻿<!-- more-tracking CCA — Track Application slide panel -->
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': open()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h2 class="app-sub-panel__title">Track Application</h2>
+    <div style="width:36px;"></div>
+  </div>
+
+  <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+    <!-- ko foreach: applications -->
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+      <div style="padding:16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: title"></div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;font-family:monospace;" data-bind="text: 'Ref: ' + ref"></div>
+        </div>
+        <span data-bind="attr: { class: statusClass }, text: status"></span>
+      </div>
+      <div style="padding:16px;">
+        <div class="track-steps">
+          <!-- ko foreach: steps -->
+          <div data-bind="attr: { class: $parents[1].stepClass($data) }">
+            <div class="track-step__dot"></div>
+            <div class="track-step__label">
+              <span data-bind="text: label"></span>
+              <span data-bind="text: date"></span>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+        <div style="margin-top:16px;padding:12px;background:var(--c-bg);border-radius:12px;font-size:12px;color:var(--c-t2);">
+          <strong>Note:</strong> <span data-bind="text: note"></span>
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: contactOfficer">Contact Assigned Officer</button>
+  </div>
+</div>

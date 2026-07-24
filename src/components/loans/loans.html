@@ -1,0 +1,19 @@
+<!-- loans component -->
+<div style="position:relative;overflow:hidden;">
+
+  <!-- Loan list -->
+  <acct-loan-list params="[[$data]]"></acct-loan-list>
+
+  <!-- List-level panels -->
+  <acct-loan-make-payment params="[[$data]]"></acct-loan-make-payment>
+  <acct-loan-schedule     params="[[$data]]"></acct-loan-schedule>
+  <acct-loan-statement    params="[[$data]]"></acct-loan-statement>
+  <acct-loan-more-sheet   params="[[$data]]"></acct-loan-more-sheet>
+
+  <!-- Detail panel (owns all detail-level inner panels) -->
+  <acct-loan-detail params="[[$data]]"></acct-loan-detail>
+
+  <!-- Global picker sheet -->
+  <acct-picker-sheet params="[[$data]]"></acct-picker-sheet>
+
+</div>

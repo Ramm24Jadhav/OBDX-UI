@@ -1,4 +1,4 @@
-<div class="aman-screen">
+﻿<div class="app-screen">
 
   <!-- Loading skeleton -->
   <div data-bind="visible: isLoading()" style="padding:16px;display:flex;flex-direction:column;gap:12px;">
@@ -128,19 +128,13 @@
     <div style="overflow-y:auto;flex:1;border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
 
       <!-- Current & Savings tab -->
-      <!-- ko if: showCurrentSavings() -->
-      <acct-list params="[[accountListParams]]"></acct-list>
-      <!-- /ko -->
+      <acct-list params="[[accountListParams]]" data-bind="visible: showCurrentSavings()"></acct-list>
 
       <!-- Deposits tab -->
-      <!-- ko if: showDeposits() -->
-      <acct-deposits params="[[{}]]"></acct-deposits>
-      <!-- /ko -->
+      <acct-deposits params="[[{}]]" data-bind="visible: showDeposits()"></acct-deposits>
 
       <!-- Loans tab -->
-      <!-- ko if: showLoans() -->
-      <acct-loans params="[[{}]]"></acct-loans>
-      <!-- /ko -->
+      <acct-loans params="[[{}]]" data-bind="visible: showLoans()"></acct-loans>
 
     </div>
   </div>

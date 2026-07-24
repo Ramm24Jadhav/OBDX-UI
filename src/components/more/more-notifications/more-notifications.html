@@ -1,0 +1,130 @@
+﻿<!-- more-notifications CCA -->
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': open()}">
+
+  <!-- Header -->
+  <div class="app-sub-panel__header app-sub-panel__header--dark">
+    <button class="app-back-btn" data-bind="click: onClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h2 class="app-sub-panel__title">
+      Notifications
+      <!-- ko if: unreadCount() > 0 -->
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:9px;background:var(--c-primary);color:#fff;font-size:10px;font-weight:800;padding:0 4px;margin-left:6px;vertical-align:middle;" data-bind="text: unreadCount"></span>
+      <!-- /ko -->
+    </h2>
+    <!-- ko if: unreadCount() > 0 -->
+    <button style="font-size:12px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;padding:6px 0;white-space:nowrap;" data-bind="click: markAllRead">Mark all read</button>
+    <!-- /ko -->
+    <!-- ko if: unreadCount() === 0 -->
+    <div style="width:60px;"></div>
+    <!-- /ko -->
+  </div>
+
+  <div class="app-sub-body">
+  <!-- Filter tabs -->
+  <div style="display:flex;border-bottom:2px solid var(--c-border);padding:0 20px;background:var(--c-bg);flex-shrink:0;">
+    <div style="padding:10px 16px 10px 0;font-size:13px;font-weight:700;cursor:pointer;margin-right:4px;"
+         data-bind="click: function(){ setFilter('all'); }, style: { color: filter()==='all' ? 'var(--c-primary)' : 'var(--c-t3)', borderBottom: filter()==='all' ? '2px solid var(--c-primary)' : '2px solid transparent', marginBottom: '-2px' }">All</div>
+    <div style="padding:10px 16px 10px 0;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;"
+         data-bind="click: function(){ setFilter('unread'); }, style: { color: filter()==='unread' ? 'var(--c-primary)' : 'var(--c-t3)', borderBottom: filter()==='unread' ? '2px solid var(--c-primary)' : '2px solid transparent', marginBottom: '-2px' }">
+      Unread
+      <!-- ko if: unreadCount() > 0 -->
+      <span style="font-size:10px;font-weight:800;background:var(--c-primary);color:#fff;border-radius:9px;padding:1px 6px;" data-bind="text: unreadCount"></span>
+      <!-- /ko -->
+    </div>
+  </div>
+
+  <!-- Notification list -->
+  <div class="app-panel-body" style="padding:0;">
+
+    <!-- ko if: filtered().length === 0 -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px;gap:12px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t4)" stroke-width="1.5" stroke-linecap="round" width="48" height="48"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <div style="font-size:15px;font-weight:700;color:var(--c-t2);">All caught up</div>
+      <div style="font-size:13px;color:var(--c-t3);text-align:center;">No unread notifications right now.</div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko foreach: filtered() -->
+    <div data-bind="css: {'more-notif-item': true, 'more-notif-item--unread': unread()}, click: $parent.markRead.bind($parent, $data)" style="position:relative;">
+      <!-- Category chip -->
+      <div style="position:absolute;top:12px;right:44px;font-size:9px;font-weight:700;border-radius:20px;padding:2px 7px;"
+           data-bind="text: category, style: { background: $parent.categoryBg(category), color: $parent.categoryColor(category) }"></div>
+
+      <div class="more-notif-icon" data-bind="style: { background: iconBg, color: stroke }, html: iconHtml"></div>
+      <div class="more-notif-body" style="padding-right:32px;">
+        <div class="more-notif-title" data-bind="text: title"></div>
+        <div class="more-notif-sub" data-bind="text: sub"></div>
+        <div class="more-notif-time" data-bind="text: time"></div>
+      </div>
+      <!-- Unread dot -->
+      <!-- ko if: unread() -->
+      <div class="more-notif-dot" style="flex-shrink:0;"></div>
+      <!-- /ko -->
+      <!-- Delete button -->
+      <button data-bind="click: $parent.deleteItem.bind($parent, $data)"
+              style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:6px;color:var(--c-t4);line-height:0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <!-- /ko -->
+
+    <!-- Notification Preferences -->
+    <!-- ko if: filter() === 'all' -->
+    <div style="margin:8px 16px 0;">
+      <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding:16px 0 10px;">Notification Channels</div>
+      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
+        <div class="more-security-row">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:10px;background:#DBEAFE;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div><div style="font-size:14px;font-weight:600;color:var(--c-t1);">Push Notifications</div><div style="font-size:11px;color:var(--c-t3);">In-app alerts</div></div>
+          </div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefPush()}, click: function(){ prefPush(!prefPush()); }"></div>
+        </div>
+        <div class="more-security-row">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div><div style="font-size:14px;font-weight:600;color:var(--c-t1);">SMS Alerts</div><div style="font-size:11px;color:var(--c-t3);">Text to registered mobile</div></div>
+          </div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefSms()}, click: function(){ prefSms(!prefSms()); }"></div>
+        </div>
+        <div class="more-security-row" style="border:none;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div style="font-size:14px;font-weight:600;color:var(--c-t1);">Email Notifications</div><div style="font-size:11px;color:var(--c-t3);">Statements &amp; monthly reports</div></div>
+          </div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefEmail()}, click: function(){ prefEmail(!prefEmail()); }"></div>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:10px;">Alert Categories</div>
+      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:24px;">
+        <div class="more-security-row">
+          <div style="font-size:14px;font-weight:600;color:var(--c-t1);">Security Alerts</div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefCatSecurity()}, click: function(){ prefCatSecurity(!prefCatSecurity()); }"></div>
+        </div>
+        <div class="more-security-row">
+          <div style="font-size:14px;font-weight:600;color:var(--c-t1);">Transaction Alerts</div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefCatTransactions()}, click: function(){ prefCatTransactions(!prefCatTransactions()); }"></div>
+        </div>
+        <div class="more-security-row">
+          <div style="font-size:14px;font-weight:600;color:var(--c-t1);">Payment Reminders</div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefCatReminders()}, click: function(){ prefCatReminders(!prefCatReminders()); }"></div>
+        </div>
+        <div class="more-security-row" style="border:none;">
+          <div style="font-size:14px;font-weight:600;color:var(--c-t1);">Offers &amp; Promotions</div>
+          <div class="more-toggle" data-bind="css: {'more-toggle--on': prefCatOffers()}, click: function(){ prefCatOffers(!prefCatOffers()); }"></div>
+        </div>
+      </div>
+    </div>
+    <!-- /ko -->
+
+  </div>
+  </div><!-- /.app-sub-body -->
+</div>

@@ -1,0 +1,18 @@
+{
+  "name": "acct-detail-panel",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Right-slide detail panel",
+  "description": "Slides in from the right. Provides hero header, action bar, and tab switcher. Tab body content provided as inner HTML (slot).",
+  "properties": {
+    "open":        { "type": "boolean", "writeback": true },
+    "onBack":      { "type": "function" },
+    "heroClass":   { "type": "string" },
+    "tabs":        { "type": "array" },
+    "activeTab":   { "type": "string", "writeback": true },
+    "onTabChange": { "type": "function" }
+  },
+  "methods": {},
+  "events": {},
+  "slots": { "": {} }
+}

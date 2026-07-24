@@ -1,0 +1,42 @@
+<div class="home-rv-card">
+  <div class="home-rv-card__ring home-rv-card__ring--lg"></div>
+  <div class="home-rv-card__ring home-rv-card__ring--sm"></div>
+  <div style="margin-bottom:4px;">
+    <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.8px;text-transform:uppercase;">Relationship Value</span>
+  </div>
+  <div class="s-num" style="font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:4px;" data-bind="text: displayTRV()"></div>
+  <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.25);border-radius:20px;padding:3px 9px;margin-bottom:14px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="18 15 12 9 6 15"/></svg>
+    <span style="font-size:11px;font-weight:700;color:#4ADE80;">+12.5% vs last month</span>
+  </div>
+  <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:12px;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">NET WORTH</div>
+      <div style="font-size:13px;font-weight:700;color:#fff;">LYD 2.45M</div>
+    </div>
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">AVAILABLE BAL</div>
+      <div class="s-num" style="font-size:13px;font-weight:700;color:#fff;" data-bind="text: displayAvailBal()"></div>
+    </div>
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">CASH POSITION</div>
+      <div style="font-size:13px;font-weight:700;color:#fff;">LYD 125,430</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:center;">
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">INVESTMENTS</div>
+      <div style="font-size:13px;font-weight:700;color:#fff;">LYD 1.20M</div>
+    </div>
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">LOAN EXPOSURE</div>
+      <div style="font-size:13px;font-weight:700;color:#FCA5A5;">LYD 350,000</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;">
+      <button data-bind="click: goToAccounts" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>

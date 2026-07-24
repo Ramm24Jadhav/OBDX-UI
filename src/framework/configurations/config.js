@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Application Configuration Singleton
+﻿/**
+ * OBDX Mobile — Application Configuration Singleton
  * Mirrors the OBDX framework/js/configurations/config.js pattern.
  * Deep-frozen at module load time — no runtime mutation.
  * Phase 1 will merge api-catalogue into this object.

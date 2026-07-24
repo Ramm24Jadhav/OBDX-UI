@@ -1,4 +1,4 @@
-<!-- sheets sub-component: all account bottom sheets wrapped in a single root -->
+﻿<!-- sheets sub-component: all account bottom sheets wrapped in a single root -->
 <div>
 
   <!-- ── Share IBAN sheet ── -->
@@ -172,8 +172,8 @@
       <div class="pay-form-group"><label class="pay-form-label">Cheque Number</label><input type="number" class="pay-form-input" placeholder="e.g. 000005"></div>
       <div class="pay-form-group">
         <label class="pay-form-label">Reason</label>
-        <div class="aman-select" data-bind="click: function(){ window.amanApp.openPicker('Reason', [{label:'Lost',value:'Lost'},{label:'Stolen',value:'Stolen'},{label:'Wrong Amount',value:'Wrong Amount'},{label:'Other',value:'Other'}], function(opt){ stopChequeReason(opt.value); }); }">
-          <span class="aman-select__value" data-bind="text: stopChequeReason() || 'Select reason', css: {'aman-select__placeholder': !stopChequeReason()}"></span>
+        <div class="app-select" data-bind="click: function(){ window.obdxApp.openPicker('Reason', [{label:'Lost',value:'Lost'},{label:'Stolen',value:'Stolen'},{label:'Wrong Amount',value:'Wrong Amount'},{label:'Other',value:'Other'}], function(opt){ stopChequeReason(opt.value); }); }">
+          <span class="app-select__value" data-bind="text: stopChequeReason() || 'Select reason', css: {'app-select__placeholder': !stopChequeReason()}"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
@@ -194,8 +194,8 @@
       <div class="pay-form-group"><label class="pay-form-label">Email Address</label><input type="email" class="pay-form-input" value="mohammed@example.com"></div>
       <div class="pay-form-group">
         <label class="pay-form-label">Frequency</label>
-        <div class="aman-select" data-bind="click: function(){ window.amanApp.openPicker('Frequency', [{label:'Monthly',value:'Monthly'},{label:'Quarterly',value:'Quarterly'}], function(opt){ eStatFrequency(opt.value); }); }">
-          <span class="aman-select__value" data-bind="text: eStatFrequency()"></span>
+        <div class="app-select" data-bind="click: function(){ window.obdxApp.openPicker('Frequency', [{label:'Monthly',value:'Monthly'},{label:'Quarterly',value:'Quarterly'}], function(opt){ eStatFrequency(opt.value); }); }">
+          <span class="app-select__value" data-bind="text: eStatFrequency()"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>

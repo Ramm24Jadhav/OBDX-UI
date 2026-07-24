@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-det-schedule",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Detail Schedule",
+  "description": "Slide-up repayment schedule inside detail.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

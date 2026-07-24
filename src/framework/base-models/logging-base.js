@@ -1,5 +1,5 @@
-/**
- * Aman Bank — Logger Base (stub)
+﻿/**
+ * OBDX Mobile — Logger Base (stub)
  * Mirrors OBDX framework/js/base-models/logging-base.js.
  * Provides the 'baseLogger' alias so ported component code resolves cleanly.
  * Phase 1 will connect this to config.system.loggingLevel.
