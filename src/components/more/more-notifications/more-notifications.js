@@ -1,4 +1,4 @@
-define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
+define(['knockout', 'ojL10n!components/more/nls/strings'], function (ko, nls) {
   'use strict';
 
   var ALL_ITEMS = [

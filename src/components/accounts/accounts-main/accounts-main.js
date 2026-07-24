@@ -1,7 +1,7 @@
 ﻿define([
   'knockout',
   'services/AccountService',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/accounts/nls/strings',
   'ojs/ojknockout',
   'shared-components/picker-sheet/loader',
   'shared-components/account-dropdown/loader',

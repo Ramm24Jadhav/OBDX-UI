@@ -1,4 +1,4 @@
-define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
+define(['knockout'], function (ko) {
   'use strict';
   function PersonalViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;

@@ -3,7 +3,7 @@
   'shared-components/utils',
   'services/AccountService',
   'services/UserService',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/home/nls/strings',
   'ojs/ojknockout',
   'home-components/home-appbar/loader',
   'home-components/home-balance-summary/loader',

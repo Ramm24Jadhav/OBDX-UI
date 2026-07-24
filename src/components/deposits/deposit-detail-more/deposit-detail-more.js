@@ -1,4 +1,4 @@
-﻿define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
+﻿define(['shared-components/utils'], function (utils) {
   'use strict';
   function DepositDetailMoreViewModel(context) {
     var p = context.properties ? context.properties.params : context;

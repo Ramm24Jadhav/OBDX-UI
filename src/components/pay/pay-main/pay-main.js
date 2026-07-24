@@ -3,7 +3,7 @@
   'services/PaymentService',
   'services/AccountService',
   'shared-components/utils',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/pay/nls/strings',
   'ojs/ojknockout',
   'pay-components/pay-hub/loader',
   'pay-components/pay-step-recipient/loader',

@@ -1,7 +1,6 @@
 define([
   'knockout',
   'shared-components/utils',
-  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'origination-components/orig-header/loader',
   'origination-components/orig-step-indicator/loader',
@@ -12,7 +11,7 @@ define([
   'origination-components/orig-footer/loader',
   'origination-components/orig-success/loader',
   'origination-components/orig-step-personal/loader'
-], function (ko, utils, nls) {
+], function (ko, utils) {
   'use strict';
 
   var PRODUCTS = {

@@ -2,7 +2,7 @@
   'knockout',
   'services/CardService',
   'shared-components/utils',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/cards/nls/strings',
   'ojs/ojknockout',
   'card-components/card-auth-gate/loader',
   'card-components/card-flip-popout/loader',

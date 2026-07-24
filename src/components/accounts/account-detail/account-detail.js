@@ -1,4 +1,4 @@
-define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
+define(['knockout', 'ojL10n!components/accounts/nls/strings'], function (ko, nls) {
 
   function _loadCss(url) {
     if (!document.querySelector('link[data-cid="' + url + '"]')) {

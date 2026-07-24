@@ -1,4 +1,4 @@
-define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
+define(['shared-components/utils', 'ojL10n!components/cards/nls/strings'], function (utils, nls) {
   'use strict';
   function CardPinSheetViewModel(context) {
     var p = context.properties ? context.properties.params : context;

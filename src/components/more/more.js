@@ -1,7 +1,7 @@
 ﻿define([
   'knockout',
   'shared-components/utils',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/more/nls/strings',
   'ojs/ojknockout',
   'more-components/more-hero/loader',
   'more-components/more-profile/loader',

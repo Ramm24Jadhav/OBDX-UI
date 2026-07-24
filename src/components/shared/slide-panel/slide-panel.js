@@ -1,4 +1,4 @@
-define(['knockout', 'shared-components/utils', 'ojL10n!resources/nls/strings'], function (ko, utils, nls) {
+define(['knockout', 'shared-components/utils'], function (ko, utils) {
   'use strict';
 
   function SlidePanelViewModel(context) {

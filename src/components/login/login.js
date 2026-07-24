@@ -2,7 +2,7 @@
   'knockout',
   'platform',
   'shared-components/utils',
-  'ojL10n!resources/nls/strings',
+  'ojL10n!components/login/nls/strings',
   'ojs/ojknockout',
   'login-components/login-splash/loader',
   'login-components/login-hero/loader',

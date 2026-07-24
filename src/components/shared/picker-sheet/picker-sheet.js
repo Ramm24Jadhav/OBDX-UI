@@ -1,4 +1,4 @@
-define(['ojL10n!resources/nls/strings'], function (nls) {
+define([], function (nls) {
   'use strict';
   function PickerSheetViewModel(context) {
     var p = context.properties ? context.properties.params : context;
