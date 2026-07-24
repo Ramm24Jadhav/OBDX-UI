@@ -27,7 +27,7 @@
     {
       group: 'Credit Cards',
       items: [
-        { id: 'cc1', label: 'Aman Platinum Card', number: '•••• •••• •••• 4829', balance: 'LYD 8,200.00 outstanding', icon: '#DC2626', iconBg: '#FEE2E2' }
+        { id: 'cc1', label: 'Platinum Card', number: '•••• •••• •••• 4829', balance: 'LYD 8,200.00 outstanding', icon: '#DC2626', iconBg: '#FEE2E2' }
       ]
     }
   ];

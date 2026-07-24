@@ -33,7 +33,7 @@
 
     // ── Notification data ─────────────────────────────────────
     self.notifList = ko.observableArray([
-      { title: 'Salary Credited', sub: 'LYD 18,500 from Aman Corporation', time: 'Today, 08:00', read: false,
+      { title: 'Salary Credited', sub: 'LYD 18,500 from National Corp.', time: 'Today, 08:00', read: false,
         iconBg: '#DCFCE7', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polyline points="6 9 12 15 18 9"/></svg>' },
       { title: 'Transfer Successful', sub: 'LYD 500 sent to Mohammed Al-Qahtani', time: 'Today, 09:14', read: false,
         iconBg: '#FCE7EE', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>' },

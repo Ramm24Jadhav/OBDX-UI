@@ -22,9 +22,9 @@
     ];
 
     self.funds = ko.observableArray([
-      { name: 'Aman Growth Fund',        type: 'Equity · Diversified',   nav: 'LYD 24.85', navSub: 'NAV per unit', returnVal: '+22.4%', returnPos: true,  units: '1,240 units', value: 'LYD 30,814' },
-      { name: 'Aman Income Fund',        type: 'Fixed Income · Monthly', nav: 'LYD 18.40', navSub: 'NAV per unit', returnVal: '+8.7%',  returnPos: true,  units: '870 units',   value: 'LYD 16,008' },
-      { name: 'Aman Capital Preservation',type: 'Money Market · Daily',  nav: 'LYD 10.12', navSub: 'NAV per unit', returnVal: '+4.2%',  returnPos: true,  units: '3,100 units', value: 'LYD 31,372' }
+      { name: 'National Growth Fund',        type: 'Equity · Diversified',   nav: 'LYD 24.85', navSub: 'NAV per unit', returnVal: '+22.4%', returnPos: true,  units: '1,240 units', value: 'LYD 30,814' },
+      { name: 'National Income Fund',        type: 'Fixed Income · Monthly', nav: 'LYD 18.40', navSub: 'NAV per unit', returnVal: '+8.7%',  returnPos: true,  units: '870 units',   value: 'LYD 16,008' },
+      { name: 'National Capital Preservation',type: 'Money Market · Daily',  nav: 'LYD 10.12', navSub: 'NAV per unit', returnVal: '+4.2%',  returnPos: true,  units: '3,100 units', value: 'LYD 31,372' }
     ]);
 
     self.investMore = function () { window.obdxApp && window.obdxApp.showToast('Invest More — coming soon', 'info'); };

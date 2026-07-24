@@ -16,7 +16,7 @@ define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
       time: 'Yesterday, 6:00 PM', unread: ko.observable(true) },
     { id: 4, category: 'Transactions',  iconBg: '#DBEAFE', stroke: '#2563EB',
       icon: 'cart',    title: 'Purchase Confirmed',
-      sub: 'Noon.com — LYD 285.00 on Aman Platinum Card.',
+      sub: 'Noon.com — LYD 285.00 on Platinum Card.',
       time: 'Yesterday, 2:30 PM', unread: ko.observable(false) },
     { id: 5, category: 'Transactions',  iconBg: '#FCE7EE', stroke: '#7A1531',
       icon: 'send',    title: 'Transfer Successful',
