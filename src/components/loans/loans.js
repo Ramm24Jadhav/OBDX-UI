@@ -1,4 +1,4 @@
-﻿define(['knockout', 'shared-components/utils'], function (ko, utils) {
+﻿define(['knockout', 'shared-components/utils', 'ojL10n!resources/nls/strings'], function (ko, utils, nls) {
   'use strict';
 
   var LOANS = [
@@ -98,6 +98,7 @@
 
   function LoansViewModel(Context) {
     var self = this;
+    self.nls = nls;
     utils.loadCss('/components/shared/panel-system.css');
     utils.loadCss('/components/loans/loans.css');
 

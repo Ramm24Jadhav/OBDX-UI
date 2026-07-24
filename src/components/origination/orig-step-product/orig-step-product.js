@@ -1,6 +1,7 @@
-define([], function () {
+define(['ojL10n!resources/nls/strings'], function (nls) {
   function OrigStepProductViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     this.context              = p.context;
     this.products             = p.products;
     this.selectedProduct      = p.selectedProduct;

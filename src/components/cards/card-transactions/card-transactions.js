@@ -1,7 +1,8 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   'use strict';
   function CardTransactionsViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/cards/card-transactions/card-transactions.css');
     this.activeCard   = p.activeCard;
     this.formatAmount = p.formatAmount;

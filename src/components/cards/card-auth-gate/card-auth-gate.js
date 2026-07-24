@@ -1,7 +1,8 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   'use strict';
   function CardAuthGateViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/cards/card-auth-gate/card-auth-gate.css');
     this.open      = p.showAuthGate;
     this.authView  = p.authView;

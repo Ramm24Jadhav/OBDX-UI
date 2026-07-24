@@ -3,6 +3,7 @@
   'services/PaymentService',
   'services/AccountService',
   'shared-components/utils',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'pay-components/pay-hub/loader',
   'pay-components/pay-step-recipient/loader',
@@ -10,11 +11,12 @@
   'pay-components/pay-step-review/loader',
   'pay-components/pay-step-otp/loader',
   'pay-components/pay-step-success/loader'
-], function (ko, PaymentService, AccountService, utils) {
+], function (ko, PaymentService, AccountService, utils, nls) {
   'use strict';
 
   function PayViewModel() {
     var self = this;
+    self.nls = nls;
 
     utils.loadCss('/components/pay/pay-main/pay-main.css');
 

@@ -3,6 +3,7 @@
   'shared-components/utils',
   'services/AccountService',
   'services/UserService',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'home-components/home-appbar/loader',
   'home-components/home-balance-summary/loader',
@@ -11,10 +12,11 @@
   'home-components/home-recent-tx/loader',
   'home-components/home-notifications-panel/loader',
   'home-components/home-analytics-panel/loader'
-], function (ko, utils, AccountService, UserService) {
+], function (ko, utils, AccountService, UserService, nls) {
 
   function HomeViewModel() {
     var self = this;
+    self.nls = nls;
     utils.loadCss('/components/home/home.css');
 
     // ── State ─────────────────────────────────────────────────

@@ -1,6 +1,7 @@
 ﻿define([
   'knockout',
   'services/AccountService',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'shared-components/picker-sheet/loader',
   'shared-components/account-dropdown/loader',
@@ -10,7 +11,7 @@
   'acct-components/account-detail/loader',
   'acct-components/sheets/loader',
   'origination-components/loader'
-], function (ko, AccountService) {
+], function (ko, AccountService, nls) {
   'use strict';
 
   function _loadCss(url) {
@@ -24,6 +25,7 @@
 
   function AccountsViewModel() {
     var self = this;
+    self.nls = nls;
     _loadCss('/components/accounts/accounts-main/accounts-main.css');
 
     // ── Core state ────────────────────────────────────────────

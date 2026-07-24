@@ -1,6 +1,7 @@
-define([], function () {
+define(['ojL10n!resources/nls/strings'], function (nls) {
   function OrigStepMaturityViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     this.maturityInstruction    = p.maturityInstruction;
     this.maturityOptions        = p.maturityOptions;
     this.rolloverAmount         = p.rolloverAmount;

@@ -1,6 +1,7 @@
 define([
   'knockout',
   'shared-components/utils',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'origination-components/orig-header/loader',
   'origination-components/orig-step-indicator/loader',
@@ -11,7 +12,7 @@ define([
   'origination-components/orig-footer/loader',
   'origination-components/orig-success/loader',
   'origination-components/orig-step-personal/loader'
-], function (ko, utils) {
+], function (ko, utils, nls) {
   'use strict';
 
   var PRODUCTS = {
@@ -38,6 +39,7 @@ define([
   function OriginationViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
     utils.loadCss('/components/origination/origination.css');
 
     self.open    = params.open;

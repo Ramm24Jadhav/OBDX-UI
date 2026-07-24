@@ -1,4 +1,4 @@
-﻿define(['knockout'], function (ko) {
+﻿define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
   'use strict';
 
   var ACCOUNT_GROUPS = [
@@ -35,6 +35,7 @@
   function StatementsViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
 
     self.open    = params.open;
     self.onClose = params.onClose;

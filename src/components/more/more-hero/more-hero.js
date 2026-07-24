@@ -1,9 +1,10 @@
-﻿define(['knockout'], function (ko) {
+﻿define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
   'use strict';
 
   function HeroViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
 
     self.onProfileTap = params.onProfileTap || function () {};
     self.onRMCall     = params.onRMCall     || function () {

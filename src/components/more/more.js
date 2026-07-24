@@ -1,6 +1,7 @@
 ﻿define([
   'knockout',
   'shared-components/utils',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'more-components/more-hero/loader',
   'more-components/more-profile/loader',
@@ -13,11 +14,12 @@
   'more-components/more-statements/loader',
   'more-components/more-primary-account/loader',
   'origination-components/loader'
-], function (ko, utils) {
+], function (ko, utils, nls) {
   'use strict';
 
   function MoreViewModel() {
     var self = this;
+    self.nls = nls;
     utils.loadCss('/components/more/more.css');
 
     // ── Panel visibility ──────────────────────────────────────

@@ -1,7 +1,8 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   'use strict';
   function PayHubViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/pay/pay-hub/pay-hub.css');
     this.showHub            = p.showHub;
     this.beneficiaries      = p.beneficiaries;

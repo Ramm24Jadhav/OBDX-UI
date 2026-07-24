@@ -2,6 +2,7 @@
   'knockout',
   'services/CardService',
   'shared-components/utils',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'card-components/card-auth-gate/loader',
   'card-components/card-flip-popout/loader',
@@ -13,11 +14,12 @@
   'card-components/card-limits-sheet/loader',
   'card-components/card-pin-sheet/loader',
   'card-components/card-new-sheet/loader'
-], function (ko, CardService, utils) {
+], function (ko, CardService, utils, nls) {
   'use strict';
 
   function CardsViewModel() {
     var self = this;
+    self.nls = nls;
     utils.loadCss('/components/cards/cards-main/cards-main.css');
 
     // ── Tab state ─────────────────────────────────────────────

@@ -1,6 +1,7 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   function LoginBioViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/login/login-bio-view/login-bio-view.css');
     this.authMode    = p.authMode;
     this.userInitial = p.userInitial;

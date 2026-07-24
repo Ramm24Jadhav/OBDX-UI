@@ -1,6 +1,7 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   function HomeNotificationsPanelViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/home/home-notifications-panel/home-notifications-panel.css');
     this.showNotifications  = p.showNotifications;
     this.closeNotifications = p.closeNotifications;

@@ -2,6 +2,7 @@
   'knockout',
   'platform',
   'shared-components/utils',
+  'ojL10n!resources/nls/strings',
   'ojs/ojknockout',
   'login-components/login-splash/loader',
   'login-components/login-hero/loader',
@@ -10,10 +11,11 @@
   'login-components/login-password-view/loader',
   'login-components/login-quick-access/loader',
   'origination-components/loader'
-], function (ko, platform, utils) {
+], function (ko, platform, utils, nls) {
 
   function LoginViewModel() {
     var self = this;
+    self.nls = nls;
 
     utils.loadCss('/components/login/login.css');
 

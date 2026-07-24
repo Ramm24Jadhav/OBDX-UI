@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
 
   function _loadCss(url) {
     if (!document.querySelector('link[data-cid="' + url + '"]')) {
@@ -12,6 +12,7 @@ define(['knockout'], function (ko) {
   function SheetsViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
     _loadCss('/components/accounts/sheets/sheets.css');
     // Shared data
     self.selectedAccount    = params.selectedAccount;

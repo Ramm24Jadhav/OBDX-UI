@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
 
   function _loadCss(url) {
     if (!document.querySelector('link[data-cid="' + url + '"]')) {
@@ -12,6 +12,7 @@ define(['knockout'], function (ko) {
   function AccountDetailViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
     _loadCss('/components/accounts/account-detail/account-detail.css');
     self.detailPanelOpen      = params.detailPanelOpen;
     self.selectedAccount      = params.selectedAccount;

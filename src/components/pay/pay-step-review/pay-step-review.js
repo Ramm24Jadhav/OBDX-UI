@@ -1,7 +1,8 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   'use strict';
   function PayStepReviewViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/pay/pay-step-review/pay-step-review.css');
     this.showStep3       = p.showStep3;
     this.selectedBen     = p.selectedBen;

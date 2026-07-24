@@ -1,7 +1,8 @@
-define(['shared-components/utils'], function (utils) {
+define(['shared-components/utils', 'ojL10n!resources/nls/strings'], function (utils, nls) {
   'use strict';
   function CardBlockSheetViewModel(context) {
     var p = context.properties ? context.properties.params : context;
+    this.nls = nls;
     utils.loadCss('/components/cards/card-block-sheet/card-block-sheet.css');
     this.open         = p.showBlockSheet;
     this.blockReason  = p.blockReason;

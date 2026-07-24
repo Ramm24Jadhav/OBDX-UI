@@ -1,9 +1,10 @@
-﻿define(['knockout'], function (ko) {
+﻿define(['knockout', 'ojL10n!resources/nls/strings'], function (ko, nls) {
   'use strict';
 
   function ProfileViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
+    self.nls = nls;
 
     self.open    = params.open;
     self.onClose = params.onClose;
