@@ -27,70 +27,40 @@
      ** All paths are dynamicaly generated from the path_mappings.json file.
      ** Add any new library dependencies in path_mappings json file
      */
-    // injector:mainReleasePaths
-    {
-      'ojs': 'libs/oj/14.1.14/debug',
-      'ojL10n': 'libs/oj/14.1.14/ojL10n',
-      'ojtranslations': 'libs/oj/14.1.14/resources',
-      'knockout': 'libs/knockout/knockout-3.5.1.debug',
-      'jquery': 'libs/jquery/jquery-3.6.1',
-      'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.13.2',
-      'text': 'libs/require/text',
-      'hammerjs': 'libs/hammer/hammer-2.0.8',
-      'signals': 'libs/js-signals/signals',
-      'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.2',
-      'css': 'libs/require-css/css.min',
-      'css-builder': 'libs/require-css/css-builder',
-      'normalize': 'libs/require-css/normalize',
-      '@oracle/oraclejet-preact': 'libs/oraclejet-preact/amd',
-      'preact': 'libs/preact/dist/preact.umd',
-      'preact/hooks': 'libs/preact/hooks/dist/hooks.umd',
-      'preact/compat': 'libs/preact/compat/dist/compat.umd',
-      'preact/jsx-runtime': 'libs/preact/jsx-runtime/dist/jsxRuntime.umd',
-      'proj4': 'libs/proj4js/dist/proj4-src',
-      'touchr': 'libs/touchr/touchr',
-      'chai': 'libs/chai/chai-4.3.7',
+// injector:mainReleasePaths
 
-      // ── OBDX canonical framework aliases ─────────────────────────
-      // These mirror require-config.js aliases in the OBDX reference app
-      // so that component code ported from the reference needs no path changes.
+{
+  "knockout":"libs/knockout/knockout-3.5.1.debug",
+  "jquery":"libs/jquery/jquery-3.6.1",
+  "jqueryui-amd":"libs/jquery/jqueryui-amd-1.13.2",
+  "hammerjs":"libs/hammer/hammer-2.0.8",
+  "ojdnd":"libs/dnd-polyfill/dnd-polyfill-1.0.2",
+  "ojs":"libs/oj/14.1.14/debug",
+  "ojL10n":"libs/oj/14.1.14/ojL10n",
+  "ojtranslations":"libs/oj/14.1.14/resources",
+  "@oracle/oraclejet-preact":"libs/oraclejet-preact/amd",
+  "oj-c":"libs/packs/oj-c",
+  "persist":"libs/persist/debug",
+  "text":"libs/require/text",
+  "signals":"libs/js-signals/signals",
+  "touchr":"libs/touchr/touchr",
+  "preact":"libs/preact/dist/preact.umd",
+  "preact/hooks":"libs/preact/hooks/dist/hooks.umd",
+  "preact/compat":"libs/preact/compat/dist/compat.umd",
+  "preact/jsx-runtime":"libs/preact/jsx-runtime/dist/jsxRuntime.umd",
+  "preact/debug":"libs/preact/debug/dist/debug.umd",
+  "preact/devtools":"libs/preact/devtools/dist/devtools.umd",
+  "proj4":"libs/proj4js/dist/proj4-src",
+  "css":"libs/require-css/css",
+  "ojcss":"libs/oj/14.1.14/debug/ojcss",
+  "ojs/ojcss":"libs/oj/14.1.14/debug/ojcss",
+  "css-builder":"libs/require-css/css-builder",
+  "normalize":"libs/require-css/normalize",
+  "ojs/normalize":"libs/require-css/normalize",
+  "jet-composites":"jet-composites"
+}
 
-      // Core framework modules
-      'framework': '../framework',
-      'base-models': '../framework/base-models',
-      'app-data': '../framework/app-data',
-      'baseService': '../framework/services/BaseService',
-      'platform': '../framework/base-models/platform',
-      'baseLogger': '../framework/base-models/logging-base',
-      'api-catalogue': '../framework/configurations/api-catalogue',
-      'interrupt-handler': '../framework/interrupt-handler',
-      'formatter': '../framework/utils/formatter',
-      'flow': '../framework/flow',
-      'component-registry': '../framework/component-registry',
-      'session-manager': '../framework/session-manager',
-      'extension-registry': '../framework/extensions/extension-registry',
-      'analytics': '../framework/analytics',
-      'chatbot': '../framework/chatbot',
-
-      // Services and resources
-      'services': '../framework/services',
-      'resources': '../resources',
-      'nls': '../resources/nls',
-
-      // Component structure
-      'components': '../components',
-      'acct-components': '../components/accounts',
-      'loan-components': '../components/loans',
-      'deposit-components': '../components/deposits',
-      'origination-components': '../components/origination',
-      'shared-components': '../components/shared',
-      'card-components':  '../components/cards',
-      'pay-components':   '../components/pay',
-      'login-components': '../components/login',
-      'home-components':  '../components/home',
-      'more-components':  '../components/more'
-    }
-    // endinjector
+// endinjector
   });
 }());
 
