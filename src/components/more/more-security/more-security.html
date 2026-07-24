@@ -94,14 +94,14 @@
           <div style="font-size:13px;font-weight:700;color:var(--c-t1);display:flex;align-items:center;gap:6px;">
             <span data-bind="text: device"></span>
             <!-- ko if: current -->
-            <span style="font-size:9px;font-weight:700;background:var(--c-success-bg);color:var(--c-success);border-radius:20px;padding:2px 7px;" data-bind="text: nls.more_this_device"></span>
+            <span style="font-size:9px;font-weight:700;background:var(--c-success-bg);color:var(--c-success);border-radius:20px;padding:2px 7px;" data-bind="text: $parent.nls.more_this_device"></span>
             <!-- /ko -->
           </div>
           <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: location + ' · ' + time"></div>
         </div>
         <!-- ko ifnot: current -->
         <button data-bind="click: $parent.endSession.bind($parent, $data)"
-                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: nls.more_sec_end"></button>
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: $parent.nls.more_sec_end"></button>
         <!-- /ko -->
       </div>
       <!-- /ko -->
@@ -120,7 +120,7 @@
           <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: added"></div>
         </div>
         <button data-bind="click: $parent.removeTrusted.bind($parent, $data)"
-                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: nls.more_sec_remove"></button>
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: $parent.nls.more_sec_remove"></button>
       </div>
       <!-- /ko -->
       <!-- ko if: trustedDevices().length === 0 -->
