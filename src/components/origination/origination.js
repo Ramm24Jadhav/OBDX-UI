@@ -38,7 +38,6 @@ define([
   function OriginationViewModel(Context) {
     var params = Context.properties ? Context.properties.params : Context;
     var self = this;
-    self.nls = nls;
     utils.loadCss('/components/origination/origination.css');
 
     self.open    = params.open;

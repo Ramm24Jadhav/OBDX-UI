@@ -1,7 +1,6 @@
-define([], function (nls) {
+define([], function () {
   function OrigStepReviewViewModel(context) {
     var p = context.properties ? context.properties.params : context;
-    this.nls = nls;
     this.context                = p.context;
     this.selectedProduct        = p.selectedProduct;
     this.detailBranch           = p.detailBranch;

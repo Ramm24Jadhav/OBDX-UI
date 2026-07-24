@@ -4,7 +4,6 @@ define(['knockout', 'shared-components/utils'], function (ko, utils) {
   function BottomSheetViewModel(context) {
     var params = context.properties ? context.properties : context;
     var self = this;
-    self.nls = nls;
     utils.loadCss('/components/shared/panel-system.css');
 
     self.title   = ko.isObservable(params.title)   ? params.title   : ko.observable(params.title || '');

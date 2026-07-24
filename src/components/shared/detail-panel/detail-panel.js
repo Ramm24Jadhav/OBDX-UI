@@ -4,7 +4,6 @@ define(['knockout', 'shared-components/utils'], function (ko, utils) {
   function DetailPanelViewModel(context) {
     var params = context.properties ? context.properties : context;
     var self = this;
-    self.nls = nls;
     utils.loadCss('/components/shared/panel-system.css');
 
     self.open        = ko.isObservable(params.open)      ? params.open      : ko.observable(!!params.open);

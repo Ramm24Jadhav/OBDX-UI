@@ -2,7 +2,6 @@
   'use strict';
   function DepositDetailMoreViewModel(context) {
     var p = context.properties ? context.properties.params : context;
-    this.nls = nls;
     utils.loadCss('/components/shared/panel-system.css');
     this.open = p.showDetMore;
     this.dep  = p.dep;

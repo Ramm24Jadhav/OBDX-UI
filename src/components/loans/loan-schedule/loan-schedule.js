@@ -2,7 +2,6 @@ define(['shared-components/utils'], function (utils) {
   'use strict';
   function LoanScheduleViewModel(context) {
     var self = this;
-    self.nls = nls;
     var p = context.properties ? context.properties.params : context;
     utils.loadCss('/components/shared/panel-system.css');
     utils.loadCss('/components/loans/loans.css');

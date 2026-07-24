@@ -1,7 +1,6 @@
-define([], function (nls) {
+define([], function () {
   function OrigStepNomineeViewModel(context) {
     var p = context.properties ? context.properties.params : context;
-    this.nls = nls;
     this.addNominee               = p.addNominee;
     this.nominationType           = p.nominationType;
     this.nomineeName              = p.nomineeName;

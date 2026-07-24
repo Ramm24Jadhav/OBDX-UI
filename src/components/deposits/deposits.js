@@ -44,7 +44,6 @@
 
   function DepositsViewModel(context) {
     var self = this;
-    self.nls = nls;
     utils.loadCss('/components/shared/panel-system.css');
     utils.loadCss('/components/deposits/deposits.css');
 

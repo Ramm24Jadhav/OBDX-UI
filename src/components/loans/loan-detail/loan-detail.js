@@ -2,7 +2,6 @@ define(['knockout', 'shared-components/utils'], function (ko, utils) {
   'use strict';
   function LoanDetailViewModel(context) {
     var self = this;
-    self.nls = nls;
     var p = context.properties ? context.properties.params : context;
     utils.loadCss('/components/shared/panel-system.css');
     utils.loadCss('/components/loans/loans.css');
