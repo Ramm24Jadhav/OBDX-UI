@@ -64,7 +64,7 @@ define([
       _pendingPath = null;
       configObservable({ view: view, viewModel: ViewModel });
     }, function (err) {
-      console.error('[AmanBank] Component load failed: ' + path, err);
+      console.error('[OBDX] Component load failed: ' + path, err);
     });
   }
 
@@ -100,10 +100,10 @@ define([
     self.sessionExpired   = ko.observable(false);
     self.sessionSuspended = ko.observable(false);
 
-    document.addEventListener('aman:show:expired', function () {
+    document.addEventListener('obdx:show:expired', function () {
       self.sessionExpired(true);
     });
-    document.addEventListener('aman:show:suspended', function () {
+    document.addEventListener('obdx:show:suspended', function () {
       self.sessionSuspended(true);
     });
     self.currentUser = ko.observable({
@@ -284,16 +284,16 @@ define([
 
     // ── Global Loader ──────────────────────────────────────────
     self.showLoader = function (msg, submsg) {
-      var el      = document.getElementById('amanLoader');
-      var msg_el  = document.getElementById('amanLoaderMsg');
-      var sub_el  = document.getElementById('amanLoaderSubMsg');
+      var el      = document.getElementById('obdxLoader');
+      var msg_el  = document.getElementById('obdxLoaderMsg');
+      var sub_el  = document.getElementById('obdxLoaderSubMsg');
       if (el)     el.style.display = 'flex';
       if (msg_el) msg_el.textContent = msg || 'Processing';
       if (sub_el) sub_el.textContent = submsg || 'Please wait';
     };
 
     self.hideLoader = function () {
-      var el = document.getElementById('amanLoader');
+      var el = document.getElementById('obdxLoader');
       if (el) el.style.display = 'none';
     };
 
@@ -338,7 +338,7 @@ define([
     self.interruptKeyPress = function (key) { InterruptHandler.keyPress(key); };
 
     // Set global mock-mode flag so interrupt handler's _verifyOTP can skip the live call
-    window._AMAN_MOCK_MODE = config.development.mockMode;
+    window._OBDX_MOCK_MODE = config.development.mockMode;
 
     // ── Service Worker registration ───────────────────────────────
     if (config.serviceWorker.enabled && 'serviceWorker' in navigator) {

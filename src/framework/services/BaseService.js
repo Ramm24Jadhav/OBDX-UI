@@ -45,15 +45,15 @@
   // ── HTTP status handler ───────────────────────────────────────────
   function _handleStatus(r) {
     if (r.status === 401) {
-      document.dispatchEvent(new CustomEvent('aman:auth:expired'));
+      document.dispatchEvent(new CustomEvent('obdx:auth:expired'));
       throw { status: 401, message: 'Unauthorized — session may have expired' };
     }
     if (r.status === 419) {
-      document.dispatchEvent(new CustomEvent('aman:session:expired'));
+      document.dispatchEvent(new CustomEvent('obdx:session:expired'));
       throw { status: 419, message: 'Session expired' };
     }
     if (r.status === 420) {
-      document.dispatchEvent(new CustomEvent('aman:session:suspended'));
+      document.dispatchEvent(new CustomEvent('obdx:session:suspended'));
       throw { status: 420, message: 'Account suspended' };
     }
     if (r.status === 417) {
@@ -117,15 +117,15 @@
   }
 
   // ── Session event handlers ────────────────────────────────────────
-  document.addEventListener('aman:auth:expired', function () {
+  document.addEventListener('obdx:auth:expired', function () {
     platform.logout();
     if (window.obdxApp) window.obdxApp.navigate('login');
   });
-  document.addEventListener('aman:session:expired', function () {
+  document.addEventListener('obdx:session:expired', function () {
     platform.logout();
     if (window.obdxApp) window.obdxApp.navigate('login');
   });
-  document.addEventListener('aman:session:suspended', function () {
+  document.addEventListener('obdx:session:suspended', function () {
     platform.logout();
     if (window.obdxApp) {
       window.obdxApp.showToast('Your account has been suspended. Please contact support.', 'error');

@@ -32,7 +32,7 @@
           ko.applyBindings(app, document.getElementById('globalBody'));
           Context.getPageContext().getBusyContext().applicationBootstrapComplete();
         } catch (e) {
-          console.error('[AmanBank] applyBindings failed:', e);
+          console.error('[OBDX] applyBindings failed:', e);
         }
         _fadeOverlay();
       }

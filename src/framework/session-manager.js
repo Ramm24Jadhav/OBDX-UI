@@ -101,12 +101,12 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
     // ── HTTP 420 handler (account suspended) ──────────────────────
     _onSuspended: function () {
       SessionManager.stop();
-      document.dispatchEvent(new CustomEvent('aman:show:suspended'));
+      document.dispatchEvent(new CustomEvent('obdx:show:suspended'));
     },
 
     // ── Dispatch expiry event — appController shows the modal ─────
     _dispatchExpiry: function (reason) {
-      document.dispatchEvent(new CustomEvent('aman:show:expired', {
+      document.dispatchEvent(new CustomEvent('obdx:show:expired', {
         detail: { reason: reason }
       }));
     },
@@ -129,8 +129,8 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
   };
 
   // ── Wire BaseService session events ─────────────────────────────
-  document.addEventListener('aman:session:expired',   SessionManager._onServerExpiry.bind(SessionManager));
-  document.addEventListener('aman:session:suspended', SessionManager._onSuspended.bind(SessionManager));
+  document.addEventListener('obdx:session:expired',   SessionManager._onServerExpiry.bind(SessionManager));
+  document.addEventListener('obdx:session:suspended', SessionManager._onSuspended.bind(SessionManager));
 
   return SessionManager;
 });

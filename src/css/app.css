@@ -118,11 +118,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Sego
 .nav-btn.nav-center .nav-label{color:rgba(255,255,255,.6);margin-top:4px;font-size:9px}
 
 /* Legacy JET nav overrides */
-#amanNavList{height:100%}
-#amanNavList ul{display:flex;width:100%;list-style:none;padding:0;margin:0;height:100%}
-#amanNavList li{flex:1;display:flex}
-#amanNavList li a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:4px;color:rgba(255,255,255,.35);font-size:9.5px;font-weight:600;letter-spacing:.2px;text-decoration:none;transition:color .15s}
-#amanNavList li.oj-selected>a,#amanNavList li[aria-selected="true"]>a{color:#fff}
+#obdxNavList{height:100%}
+#obdxNavList ul{display:flex;width:100%;list-style:none;padding:0;margin:0;height:100%}
+#obdxNavList li{flex:1;display:flex}
+#obdxNavList li a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:4px;color:rgba(255,255,255,.35);font-size:9.5px;font-weight:600;letter-spacing:.2px;text-decoration:none;transition:color .15s}
+#obdxNavList li.oj-selected>a,#obdxNavList li[aria-selected="true"]>a{color:#fff}
 .app-nav-icon{width:20px;height:20px;display:block}
 .app-nav-label{font-size:9.5px}
 
@@ -262,7 +262,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Sego
 /* Privacy blur */
 body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-total-amount,body.sens-hidden .acc-total-sub,body.sens-hidden .acc-mini-amount,body.sens-hidden .tx-amount,body.sens-hidden .spending-amt-val,body.sens-hidden .qb-item-val,body.sens-hidden .card-bal-amount,body.sens-hidden .acct-bal-big,body.sens-hidden #trvAmount,body.sens-hidden .acc-footer-left span{filter:blur(7px);user-select:none;pointer-events:none;transition:filter .25s ease}
 
-/* ── Aman bottom sheet (overlay + slide-up panel) ── */
+/* ── bottom sheet (overlay + slide-up panel) ── */
 .app-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:600}
 .app-bottom-sheet{position:absolute;bottom:0;left:0;right:0;transform:translateY(100%);background:var(--c-surface);border-radius:28px 28px 0 0;padding:0 20px calc(32px + env(safe-area-inset-bottom,0px));z-index:601;transition:transform .32s cubic-bezier(.32,1,.23,1);max-height:85%;overflow-y:auto;scrollbar-width:none;will-change:transform}
 .app-bottom-sheet::-webkit-scrollbar{display:none}
@@ -272,7 +272,7 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 .app-sheet-sub{font-size:13px;color:var(--c-t3);text-align:center;margin-bottom:24px;line-height:1.5}
 .app-sheet-cancel-link{display:block;text-align:center;font-size:13px;font-weight:600;color:var(--c-t3);cursor:pointer;margin-top:12px;padding:8px;background:none;border:none;width:100%}
 
-/* ── Aman buttons ── */
+/* ── buttons ── */
 .app-btn{display:flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;border:none;transition:opacity .15s,transform .15s;gap:6px;font-family:inherit;text-align:center;line-height:1}
 .app-btn:active{opacity:.85;transform:scale(.98)}
 .app-btn--primary{background:var(--c-primary);color:#fff}

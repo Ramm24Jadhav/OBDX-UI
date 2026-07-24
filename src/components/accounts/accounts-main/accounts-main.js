@@ -413,9 +413,9 @@
     self.handleActivated = function () {
       clearTimeout(_loadTimer);
       _loadTimer = setTimeout(function () {
-        if (window._amanDeepLink) {
-          self.activeTab(window._amanDeepLink);
-          window._amanDeepLink = null;
+        if (window._obdxDeepLink) {
+          self.activeTab(window._obdxDeepLink);
+          window._obdxDeepLink = null;
         }
         self._load();
       }, 50);

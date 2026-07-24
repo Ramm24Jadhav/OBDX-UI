@@ -66,7 +66,7 @@
     self.closePrimaryAccount = function () { self.showPrimaryAccount(false); };
 
     self.openLoans = function () {
-      window._amanDeepLink = 'loans';
+      window._obdxDeepLink = 'loans';
       window.obdxApp && window.obdxApp.navigate('accounts');
     };
 

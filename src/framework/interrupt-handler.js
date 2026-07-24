@@ -59,7 +59,7 @@
       var refNo = data && data.referenceNo;
 
       // In mock mode, any 6-digit OTP succeeds
-      if (!refNo || window._AMAN_MOCK_MODE) {
+      if (!refNo || window._OBDX_MOCK_MODE) {
         clearInterval(_otpTimer);
         InterruptHandler.isVisible(false);
         if (_pending) {
@@ -96,7 +96,7 @@
       if (InterruptHandler.otpCountdown() > 0) return;
       var data  = InterruptHandler.interruptData();
       var refNo = data && data.referenceNo;
-      if (refNo && !window._AMAN_MOCK_MODE) {
+      if (refNo && !window._OBDX_MOCK_MODE) {
         require(['services/UserService'], function (UserService) {
           UserService.generateOTP(refNo).catch(function () {
             if (window.obdxApp) window.obdxApp.showToast('Could not resend OTP.', 'error');

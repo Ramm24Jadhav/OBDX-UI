@@ -64,8 +64,8 @@ define(['knockout', 'framework/configurations/config', 'app-data'], function (ko
           theme:            'default',
           colors: { branding: '#7A1531' }
         };
-        window._amanODA = new window.WebSDK(settings);
-        window._amanODA.connect().then(function () {
+        window._obdxODA = new window.WebSDK(settings);
+        window._obdxODA.connect().then(function () {
           console.log('[Chatbot] ODA connected');
         });
       }
@@ -98,15 +98,15 @@ define(['knockout', 'framework/configurations/config', 'app-data'], function (ko
 
     open: function () {
       Chatbot.isOpen(true);
-      if (Chatbot._liveMode && window._amanODA) {
-        window._amanODA.openChat();
+      if (Chatbot._liveMode && window._obdxODA) {
+        window._obdxODA.openChat();
       }
     },
 
     close: function () {
       Chatbot.isOpen(false);
-      if (Chatbot._liveMode && window._amanODA) {
-        window._amanODA.closeChat();
+      if (Chatbot._liveMode && window._obdxODA) {
+        window._obdxODA.closeChat();
       }
     },
 
@@ -120,8 +120,8 @@ define(['knockout', 'framework/configurations/config', 'app-data'], function (ko
       Chatbot.inputText('');
       Chatbot.messages.push({ role: 'user', text: text, time: _now() });
 
-      if (Chatbot._liveMode && window._amanODA) {
-        window._amanODA.sendMessage(text);
+      if (Chatbot._liveMode && window._obdxODA) {
+        window._obdxODA.sendMessage(text);
         return;
       }
 

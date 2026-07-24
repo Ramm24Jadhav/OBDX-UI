@@ -69,7 +69,7 @@
 
       <!-- ── Phone shell ── -->
       <div class="app-phone-shell">
-        <div class="app-phone" id="amanPhone">
+        <div class="app-phone" id="obdxPhone">
 
           <!-- Status bar (desktop only, hidden on mobile) -->
           <div class="app-status-bar" id="statusBar">
@@ -131,7 +131,7 @@
           </nav>
 
           <!-- ── Global Loader ── -->
-          <div id="amanLoader" class="app-loader-overlay" style="display:none">
+          <div id="obdxLoader" class="app-loader-overlay" style="display:none">
             <div class="ldr-glass">
               <div class="ldr-quantum">
                 <div class="ldr-guide"></div>
@@ -142,8 +142,8 @@
                 <div class="ldr-center"></div>
               </div>
               <div>
-                <div class="ldr-msg" id="amanLoaderMsg">Processing</div>
-                <div class="ldr-submsg" id="amanLoaderSubMsg">Please wait</div>
+                <div class="ldr-msg" id="obdxLoaderMsg">Processing</div>
+                <div class="ldr-submsg" id="obdxLoaderSubMsg">Please wait</div>
               </div>
             </div>
           </div>
@@ -196,7 +196,7 @@
           </div>
 
           <!-- ── OTP / Interrupt Overlay (z:950 — above everything) ── -->
-          <div id="amanInterruptOverlay" class="app-interrupt-overlay"
+          <div id="obdxInterruptOverlay" class="app-interrupt-overlay"
                data-bind="css:{'app-interrupt-overlay--open': interruptHandler.isVisible()}">
             <div class="app-interrupt-sheet" onclick="event.stopPropagation()">
               <!-- drag handle -->
@@ -259,7 +259,7 @@
 
           <!-- ── Chatbot FAB (z:940, hidden on login) ── -->
           <!-- ko if: isAuthenticated() -->
-          <button class="app-chat-fab" data-bind="click: chatbot.toggle, css:{'app-chat-fab--open': chatbot.isOpen()}" aria-label="Chat with Aman Assistant">
+          <button class="app-chat-fab" data-bind="click: chatbot.toggle, css:{'app-chat-fab--open': chatbot.isOpen()}" aria-label="Chat with OBDX Assistant">
             <!-- Chat icon -->
             <!-- ko ifnot: chatbot.isOpen() -->
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -277,7 +277,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
               </div>
               <div class="chat-header-text">
-                <div class="chat-name">Aman Assistant</div>
+                <div class="chat-name">OBDX Assistant</div>
                 <div class="chat-status">
                   <!-- ko if: chatbot.isTyping() --><span class="chat-typing">typing…</span><!-- /ko -->
                   <!-- ko ifnot: chatbot.isTyping() --><span>Online · Always here to help</span><!-- /ko -->
@@ -420,7 +420,7 @@
       }
 
       document.addEventListener('DOMContentLoaded', function () {
-        phone = document.getElementById('amanPhone');
+        phone = document.getElementById('obdxPhone');
         if (!phone) return;
         phone.addEventListener('pointerdown', onDown);
         phone.addEventListener('pointermove', onMove);

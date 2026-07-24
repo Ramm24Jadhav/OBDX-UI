@@ -1,5 +1,5 @@
 ﻿/**
- * Aman Toast / Snackbar — Global singleton ViewModel
+ * OBDX Toast / Snackbar — Global singleton ViewModel
  *
  * On init this VM registers itself as window.obdxToast so that any
  * component can fire a toast without importing this module directly:
