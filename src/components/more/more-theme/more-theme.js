@@ -34,7 +34,7 @@
 
     // ── Load persisted prefs ──────────────────────────────────
     var stored = {};
-    try { stored = JSON.parse(localStorage.getItem('amanThemePrefs') || '{}'); } catch (e) {}
+    try { stored = JSON.parse(localStorage.getItem('obdxThemePrefs') || '{}'); } catch (e) {}
 
     self.themeMode = ko.observable(stored.themeMode || 'system');
     self.accents   = ACCENTS;
@@ -76,7 +76,7 @@
       self.themeMode(mode);
       self.selectedAccent(accent.id);
       self.fontSize(fsz);
-      localStorage.setItem('amanThemePrefs', JSON.stringify({ themeMode: mode, accent: accent.id, fontSize: fsz }));
+      localStorage.setItem('obdxThemePrefs', JSON.stringify({ themeMode: mode, accent: accent.id, fontSize: fsz }));
 
       window.obdxApp && window.obdxApp.showToast('Appearance saved', 'success');
       self.onClose();

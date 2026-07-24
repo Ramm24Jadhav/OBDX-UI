@@ -5,12 +5,12 @@
     <button class="app-back-btn" data-bind="click: onClose">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <h2 class="app-sub-panel__title">Primary Account</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_primary_acct"></h2>
     <div style="width:36px;"></div>
   </div>
 
   <div class="app-panel-body" style="padding-top:20px;">
-    <p style="font-size:13px;color:var(--c-t3);margin-bottom:16px;">Your primary account is used for direct debits, salary credits, and default transfers.</p>
+    <p style="font-size:13px;color:var(--c-t3);margin-bottom:16px;" data-bind="text: nls.more_primary_desc"></p>
 
     <div style="display:flex;flex-direction:column;gap:12px;">
       <!-- ko foreach: accounts -->
@@ -54,8 +54,8 @@
 
   <div class="app-panel-footer">
     <button class="app-btn app-btn--primary app-btn--full"
-            data-bind="click: save, disable: !hasChange(), text: hasChange() ? 'Set as Primary' : 'Already Primary'"></button>
-    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: onClose">Cancel</button>
+            data-bind="click: save, disable: !hasChange(), text: hasChange() ? nls.more_set_primary : nls.more_already_primary"></button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: onClose, text: nls.btn_cancel"></button>
   </div>
 
 </div>

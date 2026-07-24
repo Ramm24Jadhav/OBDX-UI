@@ -4,8 +4,8 @@
     <button class="app-back-btn" data-bind="click: onClose">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <h2 class="app-sub-panel__title">Forex &amp; Rates</h2>
-    <div style="font-size:10px;color:var(--c-t3);font-weight:600;padding-right:4px;">Live rates</div>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_forex_title"></h2>
+    <div style="font-size:10px;color:var(--c-t3);font-weight:600;padding-right:4px;" data-bind="text: nls.more_forex_live"></div>
   </div>
 
   <div style="overflow-y:auto;flex:1;padding:0 20px 24px;">
@@ -44,9 +44,9 @@
     <div class="more-theme-label">Exchange Rates · Base: LYD</div>
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
       <div style="display:flex;padding:10px 16px;border-bottom:1px solid var(--c-border);font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;">
-        <div style="flex:1;">Currency</div>
-        <div style="width:72px;text-align:right;">Buy</div>
-        <div style="width:72px;text-align:right;">Sell</div>
+        <div style="flex:1;" data-bind="text: nls.more_forex_currency"></div>
+        <div style="width:72px;text-align:right;" data-bind="text: nls.more_forex_buy"></div>
+        <div style="width:72px;text-align:right;" data-bind="text: nls.more_forex_sell"></div>
       </div>
       <!-- ko foreach: rateList -->
       <div class="more-rate-row" data-bind="click: function(){ $parent.selectToCcy(ccy); }">

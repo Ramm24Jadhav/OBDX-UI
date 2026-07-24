@@ -6,33 +6,33 @@
       <polyline points="25,40 36,52 55,28" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <h2 class="pay-success-title">Transfer Successful!</h2>
-  <p style="font-size:13px;color:var(--c-t3);text-align:center;margin:4px 0 0;">Your money is on its way</p>
+  <h2 class="pay-success-title" data-bind="text: nls.pay_success_title"></h2>
+  <p style="font-size:13px;color:var(--c-t3);text-align:center;margin:4px 0 0;" data-bind="text: nls.pay_money_way"></p>
 
   <div style="margin:20px 20px 0;background:linear-gradient(135deg,#7A1531 0%,#C8A45D 100%);border-radius:18px;padding:20px;color:#fff;text-align:center;width:calc(100% - 40px);box-sizing:border-box;">
-    <div style="font-size:10px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Amount Sent</div>
+    <div style="font-size:10px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;" data-bind="text: nls.pay_amount_sent"></div>
     <div style="font-size:32px;font-weight:900;letter-spacing:-.5px;margin-bottom:4px;">LYD <span data-bind="text: formatAmount(parseFloat(amount()) || 0)"></span></div>
     <div style="opacity:.8;font-size:12px;" data-bind="text: selectedBen() ? 'To ' + selectedBen().name : ''"></div>
   </div>
 
   <div style="margin:12px 20px 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;overflow:hidden;width:calc(100% - 40px);box-sizing:border-box;">
     <div style="padding:13px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Reference No.</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_success_ref"></span>
       <span style="font-size:12px;font-weight:700;color:var(--c-t1);" data-bind="text: referenceNo"></span>
     </div>
     <div style="padding:13px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">To</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.lbl_to"></span>
       <span style="font-size:12px;font-weight:700;color:var(--c-t1);" data-bind="text: selectedBen() ? selectedBen().name : ''"></span>
     </div>
     <div style="padding:13px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Date &amp; Time</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_success_date"></span>
       <span style="font-size:12px;font-weight:700;color:var(--c-t1);" data-bind="text: successDateTime() || '24 Jul 2026, 10:42 AM'"></span>
     </div>
     <div style="padding:13px 16px;display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Status</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.lbl_status"></span>
       <span style="font-size:12px;font-weight:700;color:#16A34A;display:inline-flex;align-items:center;gap:4px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>
-        Completed
+        <span data-bind="text: nls.pay_completed"></span>
       </span>
     </div>
   </div>
@@ -40,14 +40,14 @@
   <div style="padding:16px 20px;display:flex;gap:10px;width:100%;box-sizing:border-box;">
     <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Receipt
+      <span data-bind="text: nls.pay_btn_receipt"></span>
     </button>
     <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;" data-bind="click: openTracker">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Track
+      <span data-bind="text: nls.pay_btn_track"></span>
     </button>
   </div>
   <div style="padding:0 20px 20px;width:100%;box-sizing:border-box;">
-    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: resetFlow">Back to Payments</button>
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: resetFlow, text: nls.pay_back_payments"></button>
   </div>
 </div>

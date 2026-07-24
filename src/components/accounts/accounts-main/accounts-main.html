@@ -18,14 +18,14 @@
       <div class="acc-hero-inner">
       <div class="acc-hero-header">
         <div>
-          <h2>My Accounts</h2>
-          <div style="font-size:12px;color:rgba(255,255,255,.55);font-weight:400;margin-top:2px;">Manage and view your accounts</div>
+          <h2 data-bind="text: nls.acc_title"></h2>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);font-weight:400;margin-top:2px;" data-bind="text: nls.acc_subtitle"></div>
         </div>
         <button class="acc-open-btn" data-bind="click: function(){ openOrigination(showCurrentSavings() ? 'account' : showDeposits() ? 'deposit' : 'loan'); }">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          <!-- ko if: showCurrentSavings() -->Open Account<!-- /ko -->
-          <!-- ko if: showDeposits() -->Open Deposit<!-- /ko -->
-          <!-- ko if: showLoans() -->Apply Loan<!-- /ko -->
+          <!-- ko if: showCurrentSavings() --><span data-bind="text: nls.acc_open_account"></span><!-- /ko -->
+          <!-- ko if: showDeposits() --><span data-bind="text: nls.acc_open_deposit"></span><!-- /ko -->
+          <!-- ko if: showLoans() --><span data-bind="text: nls.acc_apply_loan"></span><!-- /ko -->
         </button>
       </div>
 
@@ -34,13 +34,13 @@
       <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:14px 14px 14px 16px;margin:10px 0 12px;">
         <div style="flex:1;min-width:0;">
           <div style="display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">
-            TOTAL BALANCE
+            <span data-bind="text: nls.acc_total_balance"></span>
           </div>
           <div class="s-num" style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:10px;" data-bind="text: 'LYD ' + formatAmount(currentAccounts().reduce(function(s,a){return s+(a.availableBalance||0);},0))">LYD 133,649.25</div>
           <div style="display:flex;gap:12px;align-items:center;">
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">No. of Accounts</div><div style="font-size:13px;font-weight:700;color:#fff;" data-bind="text: currentAccounts().length">2</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_no_of_accounts"></div><div style="font-size:13px;font-weight:700;color:#fff;" data-bind="text: currentAccounts().length">2</div></div>
             <div style="width:1px;height:28px;background:rgba(255,255,255,.15);"></div>
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Today's Change</div><div class="s-num" style="font-size:13px;font-weight:700;color:#86EFAC;">&#8593; LYD 9,700 (7.82%)</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_today_change"></div><div class="s-num" style="font-size:13px;font-weight:700;color:#86EFAC;">&#8593; LYD 9,700 (7.82%)</div></div>
           </div>
         </div>
         <svg width="78" height="70" viewBox="0 0 80 72" fill="none" style="flex-shrink:0;">
@@ -56,12 +56,12 @@
       <!-- ko if: showDeposits() -->
       <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:14px 14px 14px 16px;margin:10px 0 12px;">
         <div style="flex:1;min-width:0;">
-          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">TOTAL DEPOSITED</div>
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;" data-bind="text: nls.acc_total_deposited"></div>
           <div class="s-num" style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:10px;">LYD 250,000</div>
           <div style="display:flex;gap:12px;align-items:center;">
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Active Deposits</div><div style="font-size:13px;font-weight:700;color:#fff;">3</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_active_deposits"></div><div style="font-size:13px;font-weight:700;color:#fff;">3</div></div>
             <div style="width:1px;height:28px;background:rgba(255,255,255,.15);"></div>
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Interest YTD</div><div class="s-num" style="font-size:13px;font-weight:700;color:#86EFAC;">LYD 8,125</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_interest_ytd"></div><div class="s-num" style="font-size:13px;font-weight:700;color:#86EFAC;">LYD 8,125</div></div>
           </div>
         </div>
         <svg width="72" height="70" viewBox="0 0 72 70" fill="none" style="flex-shrink:0;">
@@ -89,12 +89,12 @@
       <!-- ko if: showLoans() -->
       <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:14px 14px 14px 16px;margin:10px 0 12px;">
         <div style="flex:1;min-width:0;">
-          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">TOTAL OUTSTANDING</div>
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;" data-bind="text: nls.acc_total_outstanding"></div>
           <div class="s-num" style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:10px;">LYD 185,000</div>
           <div style="display:flex;gap:12px;align-items:center;">
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Active Loans</div><div style="font-size:13px;font-weight:700;color:#fff;">2</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_active_loans"></div><div style="font-size:13px;font-weight:700;color:#fff;">2</div></div>
             <div style="width:1px;height:28px;background:rgba(255,255,255,.15);"></div>
-            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Next EMI</div><div class="s-num" style="font-size:13px;font-weight:700;color:#FCA5A5;">LYD 3,240 · 25 Jul</div></div>
+            <div><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;" data-bind="text: nls.acc_next_emi"></div><div class="s-num" style="font-size:13px;font-weight:700;color:#FCA5A5;">LYD 3,240 · 25 Jul</div></div>
           </div>
         </div>
         <svg width="72" height="70" viewBox="0 0 72 70" fill="none" style="flex-shrink:0;">

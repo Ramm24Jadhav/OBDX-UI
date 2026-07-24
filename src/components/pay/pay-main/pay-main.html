@@ -7,7 +7,7 @@
       <button class="app-back-btn" data-bind="click: goBack" aria-label="Back">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <h1 class="app-page-header__title">Fund Transfer</h1>
+      <h1 class="app-page-header__title" data-bind="text: nls.pay_fund_transfer"></h1>
     </div>
     <div class="pay-progress" data-bind="foreach: [1,2,3,4]">
       <div class="pay-progress__item" data-bind="css: $parent.stepClass($data)">

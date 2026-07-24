@@ -4,9 +4,9 @@
     <div class="lb-user-avatar" data-bind="text: userInitial"></div>
     <div class="lb-user-info">
       <div class="lb-user-name" data-bind="text: userName"></div>
-      <div class="lb-user-sub">Last login: Today, 9:12 AM</div>
+      <div class="lb-user-sub"><span data-bind="text: nls.login_last_login"></span> Today, 9:12 AM</div>
     </div>
-    <button class="lb-user-switch" data-bind="click: function(){ setMode('password'); }">Switch</button>
+    <button class="lb-user-switch" data-bind="click: function(){ setMode('password'); }, text: nls.login_switch"></button>
   </div>
 
   <div class="lb-bio-view">
@@ -26,16 +26,16 @@
         </svg>
       </div>
     </div>
-    <div class="lb-bio-label" data-bind="text: authMode()==='faceid' ? 'Look to Authenticate' : 'Touch to Authenticate'"></div>
-    <div class="lb-bio-sub" data-bind="text: authMode()==='faceid' ? 'Use Face ID to sign in' : 'Use your registered fingerprint'"></div>
+    <div class="lb-bio-label" data-bind="text: authMode()==='faceid' ? nls.login_face_label : nls.login_biometric"></div>
+    <div class="lb-bio-sub" data-bind="text: authMode()==='faceid' ? nls.login_face_sub : nls.login_bio_sub"></div>
     <div class="lb-alt-methods">
-      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'faceid', click: function(){ setMode('faceid'); }">Face ID</button>
+      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'faceid', click: function(){ setMode('faceid'); }, text: nls.login_face_id"></button>
       <span data-bind="visible: authMode() !== 'faceid'">·</span>
-      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'bio', click: function(){ setMode('bio'); }">Fingerprint</button>
+      <button class="lb-alt-btn" data-bind="visible: authMode() !== 'bio', click: function(){ setMode('bio'); }, text: nls.login_fingerprint"></button>
       <span data-bind="visible: authMode() !== 'bio'">·</span>
-      <button class="lb-alt-btn" data-bind="click: function(){ setMode('mpin'); }">MPIN</button>
+      <button class="lb-alt-btn" data-bind="click: function(){ setMode('mpin'); }, text: nls.login_mpin"></button>
       <span>·</span>
-      <button class="lb-alt-btn" data-bind="click: function(){ setMode('password'); }">Password</button>
+      <button class="lb-alt-btn" data-bind="click: function(){ setMode('password'); }, text: nls.login_password"></button>
     </div>
   </div>
 </div>

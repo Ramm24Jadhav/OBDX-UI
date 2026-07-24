@@ -6,13 +6,13 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <!-- ko if: view() === 'main' -->
-    <h2 class="app-sub-panel__title">Security &amp; Privacy</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_security"></h2>
     <!-- /ko -->
     <!-- ko if: view() === 'mpin' -->
-    <h2 class="app-sub-panel__title">Change MPIN</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_sec_change_mpin"></h2>
     <!-- /ko -->
     <!-- ko if: view() === 'password' -->
-    <h2 class="app-sub-panel__title">Change Password</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_sec_change_pwd"></h2>
     <!-- /ko -->
     <div style="width:36px;"></div>
   </div>
@@ -23,14 +23,14 @@
   <div class="app-panel-body" style="padding-top:8px;">
 
     <!-- Access & Authentication -->
-    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding:12px 0 8px;">Access &amp; Authentication</div>
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding:12px 0 8px;" data-bind="text: nls.more_sec_auth"></div>
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
       <div class="more-security-row">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="more-row-icon" style="background:#DCFCE7;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Face ID / Biometrics</div><div style="font-size:11px;color:var(--c-t3);">Login with fingerprint or face</div></div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.more_sec_face_id"></div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: nls.more_sec_face_sub"></div></div>
         </div>
         <div class="more-toggle" data-bind="css: {'more-toggle--on': faceId()}, click: toggleFaceId"></div>
       </div>
@@ -39,7 +39,7 @@
           <div class="more-row-icon" style="background:#EDE9FE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">MPIN Lock</div><div style="font-size:11px;color:var(--c-t3);">6-digit PIN required on launch</div></div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.more_sec_mpin_lock"></div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: nls.more_sec_mpin_sub"></div></div>
         </div>
         <div class="more-toggle" data-bind="css: {'more-toggle--on': mpinLock()}, click: toggleMpin"></div>
       </div>
@@ -48,21 +48,21 @@
           <div class="more-row-icon" style="background:#DBEAFE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
           </div>
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">2-Factor Auth (OTP)</div><div style="font-size:11px;color:var(--c-t3);">SMS OTP for transactions</div></div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.more_sec_2fa"></div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: nls.more_sec_2fa_sub"></div></div>
         </div>
         <div class="more-toggle" data-bind="css: {'more-toggle--on': twoFactor()}, click: toggleTwoFactor"></div>
       </div>
     </div>
 
     <!-- Change credentials -->
-    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;">Credentials</div>
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;" data-bind="text: nls.more_sec_creds"></div>
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
       <div class="more-security-row" data-bind="click: goView.bind($data,'mpin')">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="more-row-icon" style="background:#EDE9FE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01M8 12h.01M16 12h.01"/></svg>
           </div>
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Change MPIN</div><div style="font-size:11px;color:var(--c-t3);">Update your 6-digit PIN</div></div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.more_sec_change_mpin"></div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: nls.more_sec_mpin_row_sub"></div></div>
         </div>
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
@@ -71,7 +71,7 @@
           <div class="more-row-icon" style="background:#FCE7EE;width:36px;height:36px;border-radius:10px;flex-shrink:0;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Change Password</div><div style="font-size:11px;color:var(--c-t3);">Update your login password</div></div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.more_sec_change_pwd"></div><div style="font-size:11px;color:var(--c-t3);" data-bind="text: nls.more_sec_pwd_row_sub"></div></div>
         </div>
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
@@ -79,9 +79,9 @@
 
     <!-- Active Sessions -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;">
-      <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;">Active Sessions</div>
+      <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;" data-bind="text: nls.more_sec_sessions"></div>
       <!-- ko if: sessions().filter(function(s){return !s.current;}).length > 0 -->
-      <button style="font-size:11px;font-weight:700;color:var(--c-error);background:none;border:none;cursor:pointer;" data-bind="click: endAllSessions">End all others</button>
+      <button style="font-size:11px;font-weight:700;color:var(--c-error);background:none;border:none;cursor:pointer;" data-bind="click: endAllSessions, text: nls.more_sec_end_all"></button>
       <!-- /ko -->
     </div>
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
@@ -94,21 +94,21 @@
           <div style="font-size:13px;font-weight:700;color:var(--c-t1);display:flex;align-items:center;gap:6px;">
             <span data-bind="text: device"></span>
             <!-- ko if: current -->
-            <span style="font-size:9px;font-weight:700;background:var(--c-success-bg);color:var(--c-success);border-radius:20px;padding:2px 7px;">THIS DEVICE</span>
+            <span style="font-size:9px;font-weight:700;background:var(--c-success-bg);color:var(--c-success);border-radius:20px;padding:2px 7px;" data-bind="text: nls.more_this_device"></span>
             <!-- /ko -->
           </div>
           <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: location + ' · ' + time"></div>
         </div>
         <!-- ko ifnot: current -->
         <button data-bind="click: $parent.endSession.bind($parent, $data)"
-                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;">End</button>
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: nls.more_sec_end"></button>
         <!-- /ko -->
       </div>
       <!-- /ko -->
     </div>
 
     <!-- Trusted Devices -->
-    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;">Trusted Devices</div>
+    <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;padding-bottom:8px;" data-bind="text: nls.more_sec_trusted"></div>
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:24px;">
       <!-- ko foreach: trustedDevices() -->
       <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;" data-bind="style:{borderBottom: $index() < $parent.trustedDevices().length - 1 ? '1px solid var(--c-border)' : 'none'}">
@@ -120,11 +120,11 @@
           <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: added"></div>
         </div>
         <button data-bind="click: $parent.removeTrusted.bind($parent, $data)"
-                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;">Remove</button>
+                style="font-size:11px;font-weight:700;color:var(--c-error);background:var(--c-error-bg);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;" data-bind="text: nls.more_sec_remove"></button>
       </div>
       <!-- /ko -->
       <!-- ko if: trustedDevices().length === 0 -->
-      <div style="padding:16px;font-size:13px;color:var(--c-t3);text-align:center;">No trusted devices</div>
+      <div style="padding:16px;font-size:13px;color:var(--c-t3);text-align:center;" data-bind="text: nls.more_sec_no_trusted"></div>
       <!-- /ko -->
     </div>
   </div>
@@ -137,24 +137,24 @@
       <div style="width:56px;height:56px;border-radius:16px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="26" height="26"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01M8 12h.01M16 12h.01"/></svg>
       </div>
-      <div style="font-size:15px;font-weight:800;color:var(--c-t1);">Update MPIN</div>
-      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Enter your 6-digit PIN</div>
+      <div style="font-size:15px;font-weight:800;color:var(--c-t1);" data-bind="text: nls.more_sec_update_mpin"></div>
+      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;" data-bind="text: nls.more_sec_mpin_hint"></div>
     </div>
 
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
       <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Current MPIN</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_cur_mpin"></div>
         <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinCurrent, valueUpdate: 'input'" placeholder="••••••">
       </div>
       <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">New MPIN</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_new_mpin"></div>
         <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinNew, valueUpdate: 'input'" placeholder="••••••">
         <!-- ko if: mpinNew().length > 0 && !mpinNewValid() -->
         <div style="font-size:11px;color:var(--c-error);margin-top:5px;">Must be exactly 6 digits</div>
         <!-- /ko -->
       </div>
       <div style="padding:14px 16px;">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Confirm New MPIN</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_confirm_mpin"></div>
         <input type="password" inputmode="numeric" maxlength="6" style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 12px;font-size:20px;letter-spacing:8px;color:var(--c-t1);font-family:inherit;" data-bind="value: mpinConfirm, valueUpdate: 'input'" placeholder="••••••">
         <!-- ko if: mpinConfirm().length > 0 && !mpinMatch() -->
         <div style="font-size:11px;color:var(--c-error);margin-top:5px;">PINs do not match</div>
@@ -166,8 +166,8 @@
     </div>
   </div>
   <div class="app-panel-footer">
-    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: saveMpin, disable: !mpinCanSave()">Update MPIN</button>
-    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main')">Cancel</button>
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: saveMpin, disable: !mpinCanSave(), text: nls.more_sec_update_mpin"></button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main'), text: nls.btn_cancel"></button>
   </div>
   <!-- /ko -->
 
@@ -178,13 +178,13 @@
       <div style="width:56px;height:56px;border-radius:16px;background:#FCE7EE;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" width="26" height="26"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
-      <div style="font-size:15px;font-weight:800;color:var(--c-t1);">Update Password</div>
-      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Min 8 chars · Uppercase · Number · Symbol</div>
+      <div style="font-size:15px;font-weight:800;color:var(--c-t1);" data-bind="text: nls.more_sec_update_pwd"></div>
+      <div style="font-size:12px;color:var(--c-t3);margin-top:4px;" data-bind="text: nls.more_sec_pwd_hint"></div>
     </div>
 
     <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:16px;">
       <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Current Password</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_cur_pwd"></div>
         <div style="position:relative;">
           <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdCurrent, valueUpdate: 'input', attr: {type: showPwdCurrent() ? 'text' : 'password'}" placeholder="Enter current password">
           <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdCurrent(!showPwdCurrent()); }">
@@ -193,7 +193,7 @@
         </div>
       </div>
       <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">New Password</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_new_pwd"></div>
         <div style="position:relative;">
           <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdNew, valueUpdate: 'input', attr: {type: showPwdNew() ? 'text' : 'password'}" placeholder="Create new password">
           <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdNew(!showPwdNew()); }">
@@ -212,7 +212,7 @@
         <!-- /ko -->
       </div>
       <div style="padding:14px 16px;">
-        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;">Confirm New Password</div>
+        <div style="font-size:11px;font-weight:600;color:var(--c-t3);margin-bottom:6px;" data-bind="text: nls.more_sec_confirm_pwd"></div>
         <div style="position:relative;">
           <input style="width:100%;background:var(--c-bg);border:1px solid var(--c-border);border-radius:10px;padding:10px 40px 10px 12px;font-size:14px;color:var(--c-t1);font-family:inherit;" data-bind="value: pwdConfirm, valueUpdate: 'input', attr: {type: showPwdConfirm() ? 'text' : 'password'}" placeholder="Repeat new password">
           <button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--c-t3);line-height:0;" data-bind="click: function(){ showPwdConfirm(!showPwdConfirm()); }">
@@ -229,8 +229,8 @@
     </div>
   </div>
   <div class="app-panel-footer">
-    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: savePassword, disable: !pwdCanSave()">Update Password</button>
-    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main')">Cancel</button>
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: savePassword, disable: !pwdCanSave(), text: nls.more_sec_update_pwd"></button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: goView.bind($data,'main'), text: nls.btn_cancel"></button>
   </div>
   <!-- /ko -->
   </div><!-- /.app-sub-body -->

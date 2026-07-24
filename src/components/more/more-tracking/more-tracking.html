@@ -4,7 +4,7 @@
     <button class="app-back-btn" data-bind="click: onClose">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <h2 class="app-sub-panel__title">Track Application</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_track_app"></h2>
     <div style="width:36px;"></div>
   </div>
 
@@ -37,6 +37,6 @@
     </div>
     <!-- /ko -->
 
-    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: contactOfficer">Contact Assigned Officer</button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: contactOfficer, text: nls.more_track_contact"></button>
   </div>
 </div>

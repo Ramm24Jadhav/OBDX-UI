@@ -2,8 +2,8 @@
   <div style="width:72px;height:72px;border-radius:24px;background:linear-gradient(135deg,#FCE7EE,#EDE9FE);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
     <svg viewBox="0 0 24 24" fill="none" stroke="#7A1531" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="32" height="32"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
   </div>
-  <h2 class="pay-otp-title">Verify Your Transfer</h2>
-  <p class="pay-otp-sub">A 6-digit OTP has been sent to</p>
+  <h2 class="pay-otp-title" data-bind="text: nls.pay_verify_title"></h2>
+  <p class="pay-otp-sub" data-bind="text: nls.pay_otp_sent"></p>
   <p style="font-size:14px;font-weight:800;color:var(--c-t1);margin:4px 0 20px;text-align:center;">+218 •••• ••47</p>
 
   <div class="pay-otp-boxes" data-bind="foreach: [0,1,2,3,4,5]">
@@ -38,7 +38,7 @@
   </div>
 
   <div style="padding:8px 20px;width:100%;box-sizing:border-box;">
-    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: _verifyOTP, enable: otpVal().length >= 6">Verify &amp; Confirm</button>
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: _verifyOTP, enable: otpVal().length >= 6, text: nls.pay_btn_verify"></button>
   </div>
-  <p class="pay-otp-resend">Resend OTP in <span data-bind="text: otpCountdownDisplay()"></span></p>
+  <p class="pay-otp-resend"><span data-bind="text: nls.pay_resend_in"></span> <span data-bind="text: otpCountdownDisplay()"></span></p>
 </div>

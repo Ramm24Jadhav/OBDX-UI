@@ -4,8 +4,8 @@
     <!-- Methods view -->
     <div data-bind="visible: authView() === 'methods'">
       <div class="cas-handle"></div>
-      <div class="cas-title">Verify Your Identity</div>
-      <div class="cas-sub">Choose how to authenticate to view card details</div>
+      <div class="cas-title" data-bind="text: nls.cards_auth_title"></div>
+      <div class="cas-sub" data-bind="text: nls.cards_auth_sub"></div>
       <div class="cas-methods">
 
         <div class="cas-method" data-bind="click: function(){ authPick('bio'); }">
@@ -13,8 +13,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
           <div class="cas-method-info">
-            <div class="cas-method-name">Biometric</div>
-            <div class="cas-method-desc">Use Face ID or Fingerprint</div>
+            <div class="cas-method-name" data-bind="text: nls.cards_auth_bio"></div>
+            <div class="cas-method-desc" data-bind="text: nls.cards_auth_bio_sub"></div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
@@ -24,8 +24,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
           </div>
           <div class="cas-method-info">
-            <div class="cas-method-name">MPIN</div>
-            <div class="cas-method-desc">Enter your 6-digit MPIN</div>
+            <div class="cas-method-name" data-bind="text: nls.login_mpin"></div>
+            <div class="cas-method-desc" data-bind="text: nls.cards_auth_mpin_sub"></div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
@@ -35,14 +35,14 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
           </div>
           <div class="cas-method-info">
-            <div class="cas-method-name">OTP via SMS</div>
+            <div class="cas-method-name" data-bind="text: nls.cards_auth_otp"></div>
             <div class="cas-method-desc">Send code to ••• ••• 4821</div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
 
       </div>
-      <button class="cas-cancel" data-bind="click: onClose">Cancel</button>
+      <button class="cas-cancel" data-bind="click: onClose, text: nls.btn_cancel"></button>
     </div>
 
     <!-- MPIN entry view -->
@@ -52,9 +52,9 @@
         <button data-bind="click: authBack" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--c-border);background:var(--c-bg);display:flex;align-items:center;justify-content:center;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <div class="cas-title" style="margin:0;">Enter MPIN</div>
+        <div class="cas-title" style="margin:0;" data-bind="text: nls.login_mpin_label"></div>
       </div>
-      <div class="cas-sub">Enter your 6-digit Mobile PIN</div>
+      <div class="cas-sub" data-bind="text: nls.cards_auth_mpin_hint"></div>
       <div class="mpin-dots-row">
         <!-- ko foreach: [0,1,2,3,4,5] -->
         <div class="mpin-dot" data-bind="css: {'mpin-dot--filled': $parent.mpinDots() > $data}"></div>

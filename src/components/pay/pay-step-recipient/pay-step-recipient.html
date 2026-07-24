@@ -1,6 +1,6 @@
 <div data-bind="visible: showStep1()" style="display:none;flex:1;overflow-y:auto;">
   <div class="pay-transfer-type" style="padding:16px 20px 0;">
-    <p class="pay-field-label">Transfer To</p>
+    <p class="pay-field-label" data-bind="text: nls.pay_transfer_to"></p>
     <div data-bind="foreach: transferTypes">
       <div class="pay-type-card" data-bind="click: $parent.selectTransferType, css: {'pay-type-card--active': $parent.transferType() === id}">
         <div class="pay-type-card__icon" style="width:36px;height:36px;border-radius:10px;background:var(--c-surface);border:1px solid var(--c-border);"></div>
@@ -14,9 +14,9 @@
   </div>
 
   <div style="padding:20px 20px 8px;">
-    <div style="font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Recent Beneficiaries</div>
+    <div style="font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;" data-bind="text: nls.pay_recent_ben"></div>
     <!-- ko if: beneficiaries().length === 0 -->
-    <div style="text-align:center;padding:24px;color:var(--c-t3);font-size:13px;">No beneficiaries yet</div>
+    <div style="text-align:center;padding:24px;color:var(--c-t3);font-size:13px;" data-bind="text: nls.pay_no_ben"></div>
     <!-- /ko -->
     <!-- ko foreach: beneficiaries -->
     <div class="pay-ben-row-item" style="padding:12px 0;" data-bind="click: function(){ $parent.selectBeneficiary($data); }">

@@ -1,8 +1,8 @@
 <!-- recent-transactions widget -->
 <div class="section" style="padding-bottom:8px;">
   <div class="section-header">
-    <span class="section-title">Recent Transactions</span>
-    <span class="section-link" data-bind="click: goToAccounts">See All</span>
+    <span class="section-title" data-bind="text: nls.home_recent_tx"></span>
+    <span class="section-link" data-bind="click: goToAccounts, text: nls.home_see_all"></span>
   </div>
   <div class="tx-list" data-bind="foreach: transactions">
     <div class="tx-item">
@@ -17,7 +17,5 @@
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:16px;color:var(--c-t3);font-size:13px;" data-bind="visible: transactions().length === 0">
-    No recent transactions
-  </div>
+  <div style="text-align:center;padding:16px;color:var(--c-t3);font-size:13px;" data-bind="visible: transactions().length === 0, text: nls.home_no_tx"></div>
 </div>

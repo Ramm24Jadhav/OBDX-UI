@@ -2,7 +2,7 @@
   <div class="home-rv-card__ring home-rv-card__ring--lg"></div>
   <div class="home-rv-card__ring home-rv-card__ring--sm"></div>
   <div style="margin-bottom:4px;">
-    <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.8px;text-transform:uppercase;">Relationship Value</span>
+    <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.8px;text-transform:uppercase;" data-bind="text: nls.home_rel_value"></span>
   </div>
   <div class="s-num" style="font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:4px;" data-bind="text: displayTRV()"></div>
   <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.25);border-radius:20px;padding:3px 9px;margin-bottom:14px;">
@@ -12,25 +12,25 @@
   <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:12px;"></div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
     <div>
-      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">NET WORTH</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.home_net_worth"></div>
       <div style="font-size:13px;font-weight:700;color:#fff;">LYD 2.45M</div>
     </div>
     <div>
-      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">AVAILABLE BAL</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.home_available_bal"></div>
       <div class="s-num" style="font-size:13px;font-weight:700;color:#fff;" data-bind="text: displayAvailBal()"></div>
     </div>
     <div>
-      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">CASH POSITION</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.home_cash_pos"></div>
       <div style="font-size:13px;font-weight:700;color:#fff;">LYD 125,430</div>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:center;">
     <div>
-      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">INVESTMENTS</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.home_investments"></div>
       <div style="font-size:13px;font-weight:700;color:#fff;">LYD 1.20M</div>
     </div>
     <div>
-      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;">LOAN EXPOSURE</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.home_loan_exposure"></div>
       <div style="font-size:13px;font-weight:700;color:#FCA5A5;">LYD 350,000</div>
     </div>
     <div style="display:flex;justify-content:flex-end;">

@@ -1,7 +1,7 @@
 ﻿<div data-bind="visible: showStep3()" style="display:none;flex:1;overflow-y:auto;">
   <!-- Amount hero -->
   <div style="margin:16px 20px 0;background:linear-gradient(135deg,#7A1531 0%,#C8A45D 100%);border-radius:20px;padding:24px 20px;color:#fff;">
-    <div style="font-size:11px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">You are sending</div>
+    <div style="font-size:11px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;" data-bind="text: nls.pay_you_sending"></div>
     <div style="font-size:36px;font-weight:900;letter-spacing:-.5px;margin-bottom:4px;">LYD <span data-bind="text: formatAmount(parseFloat(amount()) || 0)"></span></div>
     <div style="opacity:.8;font-size:13px;" data-bind="text: selectedBen() ? 'To ' + selectedBen().name : ''"></div>
   </div>
@@ -9,23 +9,23 @@
   <!-- Detail rows -->
   <div style="margin:12px 20px 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;overflow:hidden;">
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">To</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.lbl_to"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: selectedBen() ? selectedBen().name : ''"></span>
     </div>
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Account No.</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_account_no"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: selectedBen() ? selectedBen().accountNo : ''"></span>
     </div>
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">From</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.lbl_from"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: selectedAccount() ? selectedAccount().typeLabel : ''"></span>
     </div>
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Purpose</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_purpose"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: purpose() || 'General Transfer'"></span>
     </div>
     <div style="padding:14px 16px;display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Transfer Date</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_schedule_date"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: scheduleEnabled() && scheduledDate() ? scheduledDate() : 'Today'"></span>
     </div>
   </div>
@@ -33,15 +33,15 @@
   <!-- Charges card -->
   <div style="margin:12px 20px 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;overflow:hidden;">
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Transfer Amount</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_transfer_amount"></span>
       <span style="font-size:13px;font-weight:700;color:var(--c-t1);">LYD <span data-bind="text: formatAmount(parseFloat(amount()) || 0)"></span></span>
     </div>
     <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;">
-      <span style="font-size:12px;color:var(--c-t3);">Service Charges</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.pay_service_charges"></span>
       <span style="font-size:13px;font-weight:700;color:#16A34A;">LYD 0.00 <span style="font-size:11px;font-weight:600;">(Free)</span></span>
     </div>
     <div style="padding:14px 16px;display:flex;justify-content:space-between;background:rgba(122,21,49,.03);">
-      <span style="font-size:13px;font-weight:800;color:var(--c-t1);">Total Debit</span>
+      <span style="font-size:13px;font-weight:800;color:var(--c-t1);" data-bind="text: nls.pay_total_debit"></span>
       <span style="font-size:14px;font-weight:900;color:var(--c-primary);">LYD <span data-bind="text: formatAmount(parseFloat(amount()) || 0)"></span></span>
     </div>
   </div>
@@ -54,8 +54,8 @@
 
   <div style="padding:20px;">
     <button class="app-btn app-btn--primary app-btn--full" data-bind="click: confirmTransfer, disable: isLoading">
-      <span data-bind="visible: !isLoading()">Confirm &amp; Send OTP →</span>
-      <span data-bind="visible: isLoading()">Sending…</span>
+      <span data-bind="visible: !isLoading(), text: nls.pay_btn_confirm"></span>
+      <span data-bind="visible: isLoading(), text: nls.pay_sending"></span>
     </button>
   </div>
 </div>

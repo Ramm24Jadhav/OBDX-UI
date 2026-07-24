@@ -3,9 +3,9 @@
 <!-- /ko -->
 <div class="cbs-sheet" data-bind="css: {'cbs-sheet--open': open()}">
   <div class="cbs-handle"></div>
-  <div class="cbs-title">Block Card</div>
+  <div class="cbs-title" data-bind="text: nls.cards_confirm_block"></div>
   <div class="cbs-body">
-    <div style="font-size:13px;color:var(--c-t3);margin-bottom:16px;">Select a reason for blocking this card. This action can be reversed.</div>
+    <div style="font-size:13px;color:var(--c-t3);margin-bottom:16px;" data-bind="text: nls.cards_block_reason"></div>
     <div class="cbs-reasons">
       <!-- ko foreach: blockReasons -->
       <label class="cbs-reason-row">
@@ -15,8 +15,8 @@
       <!-- /ko -->
     </div>
     <div class="cbs-actions">
-      <button class="cbs-btn cbs-btn--ghost" data-bind="click: onClose">Cancel</button>
-      <button class="cbs-btn cbs-btn--danger" data-bind="click: confirmBlock">Block Card</button>
+      <button class="cbs-btn cbs-btn--ghost" data-bind="click: onClose, text: nls.btn_cancel"></button>
+      <button class="cbs-btn cbs-btn--danger" data-bind="click: confirmBlock, text: nls.cards_confirm_block"></button>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
 <!-- /ko -->
 <div class="cps-sheet" data-bind="css: {'cps-sheet--open': open()}">
   <div class="cps-handle"></div>
-  <div class="cps-title">Change PIN</div>
+  <div class="cps-title" data-bind="text: nls.cards_change_pin"></div>
   <div class="cps-body">
     <div class="cps-dots-row">
       <!-- ko foreach: pinDots() -->
@@ -20,7 +20,7 @@
       <!-- /ko -->
     </div>
     <div class="cps-actions">
-      <button class="cps-btn cps-btn--ghost" data-bind="click: onClose">Cancel</button>
+      <button class="cps-btn cps-btn--ghost" data-bind="click: onClose, text: nls.btn_cancel"></button>
     </div>
   </div>
 </div>

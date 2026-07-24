@@ -4,7 +4,7 @@
     <button class="app-back-btn" data-bind="click: onClose">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <h2 class="app-sub-panel__title">Investments</h2>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_investments"></h2>
     <div style="width:36px;"></div>
   </div>
 
@@ -12,18 +12,18 @@
 
     <!-- Portfolio Summary -->
     <div class="more-inv-summary">
-      <div class="more-inv-label">Total Portfolio Value</div>
+      <div class="more-inv-label" data-bind="text: nls.more_inv_total"></div>
       <div class="more-inv-total" data-bind="text: totalValue"></div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
         <span class="more-inv-gain more-inv-gain--pos" data-bind="text: todayGain + ' (' + todayGainPct + ') today'"></span>
       </div>
       <div class="more-inv-stats">
         <div class="more-inv-stat">
-          <div style="font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">1Y Return</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.more_inv_return"></div>
           <div style="font-size:16px;font-weight:800;color:#4ADE80;" data-bind="text: totalReturn"></div>
         </div>
         <div class="more-inv-stat">
-          <div style="font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">Active Funds</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.more_inv_active_funds"></div>
           <div style="font-size:16px;font-weight:800;color:#fff;" data-bind="text: funds().length"></div>
         </div>
       </div>
@@ -31,7 +31,7 @@
 
     <!-- Asset Allocation -->
     <div style="margin-bottom:16px;">
-      <div class="more-theme-label">Asset Allocation</div>
+      <div class="more-theme-label" data-bind="text: nls.more_inv_alloc"></div>
       <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);padding:16px;">
         <!-- ko foreach: allocation -->
         <div class="more-inv-alloc-row">
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Fund List -->
-    <div class="more-theme-label">My Funds</div>
+    <div class="more-theme-label" data-bind="text: nls.more_inv_funds"></div>
     <!-- ko foreach: funds -->
     <div class="more-fund-card">
       <div class="more-fund-row">
@@ -74,8 +74,8 @@
 
     <!-- CTAs -->
     <div style="display:flex;gap:10px;margin-top:8px;">
-      <button class="app-btn app-btn--primary" style="flex:2;" data-bind="click: investMore">Invest More</button>
-      <button class="app-btn app-btn--ghost" style="flex:1;" data-bind="click: withdraw">Withdraw</button>
+      <button class="app-btn app-btn--primary" style="flex:2;" data-bind="click: investMore, text: nls.more_inv_more"></button>
+      <button class="app-btn app-btn--ghost" style="flex:1;" data-bind="click: withdraw, text: nls.more_inv_withdraw"></button>
     </div>
 
   </div>

@@ -1,11 +1,11 @@
 <div class="clb-wrap">
   <div class="clb-hdr">
-    <span class="clb-title">Spending Limits</span>
-    <button class="clb-edit-btn" data-bind="click: openLimitSheet">Edit</button>
+    <span class="clb-title" data-bind="text: nls.cards_spending_limits"></span>
+    <button class="clb-edit-btn" data-bind="click: openLimitSheet, text: nls.cards_set_limit"></button>
   </div>
   <div class="clb-row">
     <div class="clb-labels">
-      <span style="font-size:12px;color:var(--c-t3);">Daily</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.cards_daily"></span>
       <span style="font-size:12px;color:var(--c-t3);" data-bind="text: formatAmount(dailyLimit())"></span>
     </div>
     <div class="clb-bar-bg">
@@ -14,7 +14,7 @@
   </div>
   <div class="clb-row">
     <div class="clb-labels">
-      <span style="font-size:12px;color:var(--c-t3);">Monthly</span>
+      <span style="font-size:12px;color:var(--c-t3);" data-bind="text: nls.cards_monthly"></span>
       <span style="font-size:12px;color:var(--c-t3);" data-bind="text: formatAmount(monthlyLimit())"></span>
     </div>
     <div class="clb-bar-bg">

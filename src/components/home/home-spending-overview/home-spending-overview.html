@@ -1,21 +1,21 @@
 <!-- spending-overview widget -->
 <div class="spending-card">
   <div class="spending-header">
-    <h4>Spending Overview</h4>
-    <span style="font-size:11px;color:var(--c-t3);font-weight:600;cursor:pointer;" data-bind="click: openAnalytics">Analytics ›</span>
+    <h4 data-bind="text: nls.home_spending_overview"></h4>
+    <span style="font-size:11px;color:var(--c-t3);font-weight:600;cursor:pointer;" data-bind="click: openAnalytics, text: nls.home_analytics_link"></span>
   </div>
   <div class="spending-amounts">
     <div class="spending-amt-item">
       <div class="spending-dot" style="background:var(--c-primary);"></div>
       <div>
-        <div class="spending-amt-label">Income</div>
+        <div class="spending-amt-label" data-bind="text: nls.home_income"></div>
         <div class="spending-amt-val s-num">LYD 27,640</div>
       </div>
     </div>
     <div class="spending-amt-item">
       <div class="spending-dot" style="background:#C8A45D;"></div>
       <div>
-        <div class="spending-amt-label">Expenses</div>
+        <div class="spending-amt-label" data-bind="text: nls.home_expenses"></div>
         <div class="spending-amt-val s-num">LYD 12,420</div>
       </div>
     </div>

@@ -5,8 +5,8 @@
     <button class="app-back-btn" data-bind="click: closeNotifications">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <h2 class="app-sub-panel__title">Notifications</h2>
-    <button style="font-size:11px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;" data-bind="click: markAllRead">Mark all read</button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_notifications"></h2>
+    <button style="font-size:11px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;" data-bind="click: markAllRead, text: nls.notif_mark_all_read"></button>
   </div>
   <div style="overflow-y:auto;flex:1;">
     <!-- ko foreach: notifList -->

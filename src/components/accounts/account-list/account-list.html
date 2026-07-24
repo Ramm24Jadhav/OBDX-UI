@@ -4,7 +4,7 @@
   <!-- View toggle -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;">
     <span data-bind="click: openAccountAnalytics" style="font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;display:flex;align-items:center;gap:4px;">
-      Know your spending
+      <span data-bind="text: nls.acc_know_spending"></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg>
     </span>
     <div style="display:flex;gap:4px;background:var(--c-surface2);border-radius:10px;padding:3px;">
@@ -71,17 +71,17 @@
             <div style="background:rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#fff;letter-spacing:.4px;text-transform:uppercase;">Current</div>
           </div>
           <div class="c-mid" style="margin-top:14px;">
-            <div class="c-acc-type">Available Balance</div>
+            <div class="c-acc-type" data-bind="text: nls.acc_available"></div>
             <div class="c-amount s-num">LYD 24,750.00</div>
             <div class="c-sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="9" height="9"><polyline points="18 15 12 9 6 15"/></svg>+LYD 8,500 credited today</div>
           </div>
           <div class="c-bottom" style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;">
             <div>
-              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">Account Number</div>
+              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.acc_account_number"></div>
               <div style="font-family:monospace;font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1px;">LY44 2000 •••• 2341</div>
             </div>
             <button class="view-details-btn" data-bind="click: function(d,e){ e.stopPropagation(); openAccountDetail(currentAccounts()[0]); }">
-              View Details<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+              <span data-bind="text: nls.acc_view_details"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           </div>
         </div>
@@ -97,17 +97,17 @@
             <div style="background:rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#fff;letter-spacing:.4px;text-transform:uppercase;">Savings</div>
           </div>
           <div class="c-mid" style="margin-top:14px;">
-            <div class="c-acc-type">Available Balance</div>
+            <div class="c-acc-type" data-bind="text: nls.acc_available"></div>
             <div class="c-amount s-num">LYD 91,849.25</div>
             <div class="c-sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="9" height="9"><polyline points="18 15 12 9 6 15"/></svg>+LYD 1,200 interest last month</div>
           </div>
           <div class="c-bottom" style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;">
             <div>
-              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">Account Number</div>
+              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.acc_account_number"></div>
               <div style="font-family:monospace;font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1px;">LY44 2000 •••• 7312</div>
             </div>
             <button class="view-details-btn" data-bind="click: function(d,e){ e.stopPropagation(); openAccountDetail(currentAccounts()[1]); }">
-              View Details<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+              <span data-bind="text: nls.acc_view_details"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           </div>
         </div>
@@ -123,8 +123,8 @@
 
     <!-- Offers (snap carousel with dots) -->
     <div class="w-section-head">
-      <span class="w-section-title">Offers for You</span>
-      <span class="w-section-link">See All</span>
+      <span class="w-section-title" data-bind="text: nls.acc_offers_for_you"></span>
+      <span class="w-section-link" data-bind="text: nls.home_see_all"></span>
     </div>
     <div class="offers-carousel-wrap">
       <div class="offers-track" id="offersTrack">

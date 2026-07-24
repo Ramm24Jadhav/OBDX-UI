@@ -1,7 +1,7 @@
 <div class="ctx-wrap">
   <div class="ctx-hdr">
-    <span class="ctx-title">Recent Transactions</span>
-    <button class="ctx-see-all">See All</button>
+    <span class="ctx-title" data-bind="text: nls.home_recent_tx"></span>
+    <button class="ctx-see-all" data-bind="text: nls.home_see_all"></button>
   </div>
   <div data-bind="with: activeCard()">
     <!-- ko if: $data && $data.transactions && $data.transactions.length -->
@@ -21,7 +21,7 @@
     <!-- ko ifnot: $data && $data.transactions && $data.transactions.length -->
     <div class="ctx-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32" style="opacity:.3;margin-bottom:8px;"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/></svg>
-      <div style="font-size:13px;color:var(--c-t3);">No transactions yet</div>
+      <div style="font-size:13px;color:var(--c-t3);" data-bind="text: nls.cards_no_tx"></div>
     </div>
     <!-- /ko -->
   </div>
