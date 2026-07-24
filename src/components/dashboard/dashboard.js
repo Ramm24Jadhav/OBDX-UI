@@ -37,9 +37,20 @@ define([
     self.currentTab      = window.obdxApp.currentTab;
     self.isAuthenticated = window.obdxApp.isAuthenticated;
 
+    // JET oj-module normally calls connected() after the view is in the DOM.
+    // We bypass oj-module, so fire it manually after a tick so KO finishes
+    // applying bindings before the VM makes any API calls.
+    function _fireConnected(vm) {
+      var fn = vm.connected || vm.handleActivated;
+      if (typeof fn === 'function') {
+        setTimeout(fn.bind(vm), 0);
+      }
+    }
+
     // Login — always ready; parse once and keep
     var loginNodes = parseNodes(loginCfg.view);
     var loginVm    = new loginCfg.viewModel();
+    _fireConnected(loginVm);
 
     // Per-tab observables: null until the tab is activated post-auth
     self.tabViews = {
@@ -68,9 +79,11 @@ define([
       require(AUTH_LOADER_IDS, function () {
         var loaders = Array.prototype.slice.call(arguments);
         AUTH_TAB_KEYS.forEach(function (key, i) {
-          var cfg   = loaders[i];
+          var cfg = loaders[i];
+          var vm  = new cfg.viewModel();
           self.tabViews[key](parseNodes(cfg.view));
-          self.tabVms[key](new cfg.viewModel());
+          self.tabVms[key](vm);
+          _fireConnected(vm);
         });
       });
     }
