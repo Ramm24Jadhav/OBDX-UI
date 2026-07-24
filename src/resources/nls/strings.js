@@ -1,6 +1,6 @@
 define({
   root: {
-    appName: 'Aman Bank',
+    appName: 'OBDX Bank',
 
     // ── Navigation ────────────────────────────────────────────────
     nav_home:     'Home',
@@ -228,7 +228,7 @@ define({
     pay_enter_amount:      'Enter Amount',
     pay_review_transfer:   'Review Transfer',
     pay_transfer_type:     'Transfer Type',
-    pay_within_aman:       'Within Aman',
+
     pay_other_banks:       'Other Banks',
     pay_swift:             'International',
     pay_purpose:           'Purpose',
@@ -283,6 +283,12 @@ define({
     pay_back_payments:    'Back to Payments',
     pay_schedule_later:   'Schedule for later',
     pay_account_no:       'Account No.',
+    pay_within_bank:      'Within Bank',
+    pay_within_bank_sub:  'Same bank transfers',
+    pay_other_banks:      'Other Banks',
+    pay_other_banks_sub:  'Domestic local transfer',
+    pay_intl:             'International',
+    pay_intl_sub:         'SWIFT / IBAN',
 
     // ── Cards ─────────────────────────────────────────────────────
     cards_title:         'My Cards',

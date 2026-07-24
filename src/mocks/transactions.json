@@ -2,7 +2,7 @@
   "status": "SUCCESS",
   "transactions": [
     { "id": "TX001", "date": "2026-07-22", "description": "Noon.com", "category": "shop", "amount": -285.00, "currency": "AED", "type": "DEBIT", "balance": 42350.75 },
-    { "id": "TX002", "date": "2026-07-22", "description": "Salary — Aman Corp", "category": "salary", "amount": 18500.00, "currency": "AED", "type": "CREDIT", "balance": 42635.75 },
+    { "id": "TX002", "date": "2026-07-22", "description": "Salary — National Corp.", "category": "salary", "amount": 18500.00, "currency": "AED", "type": "CREDIT", "balance": 42635.75 },
     { "id": "TX003", "date": "2026-07-21", "description": "Carrefour", "category": "shop", "amount": -185.50, "currency": "AED", "type": "DEBIT", "balance": 24135.75 },
     { "id": "TX004", "date": "2026-07-21", "description": "DEWA Bill", "category": "bill", "amount": -420.00, "currency": "AED", "type": "DEBIT", "balance": 24321.25 },
     { "id": "TX005", "date": "2026-07-20", "description": "Transfer from Sara", "category": "transfer", "amount": 2000.00, "currency": "AED", "type": "CREDIT", "balance": 24741.25 },

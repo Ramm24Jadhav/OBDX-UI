@@ -13,7 +13,7 @@ define(['knockout', 'framework/configurations/config', 'app-data'], function (ko
 
   // ── Canned responses for mock mode ───────────────────────────
   var MOCK_RESPONSES = [
-    'Hello! I\'m Aman, your digital banking assistant. How can I help you today?',
+    'Hello! I\'m your digital banking assistant. How can I help you today?',
     'I can help you check your balance, make transfers, or answer questions about your account.',
     'For a transfer, please tap the Pay tab and follow the steps.',
     'Your last transaction was processed successfully. Is there anything else?',
@@ -91,7 +91,7 @@ define(['knockout', 'framework/configurations/config', 'app-data'], function (ko
         role: 'bot',
         text: 'Hello ' + (AppData.userData && AppData.userData.customer
                           ? AppData.userData.customer.displayName.split(' ')[0]
-                          : '') + '! I\'m Aman, your digital banking assistant. How can I help?',
+                          : '') + '! I\'m your digital banking assistant. How can I help?',
         time: _now()
       });
     },

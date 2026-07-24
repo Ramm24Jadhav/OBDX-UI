@@ -1,5 +1,5 @@
 define({
-  appName: 'بنك أمان',
+  appName: 'OBDX Bank',
 
   // ── Navigation ────────────────────────────────────────────────
   nav_home:     'الرئيسية',
@@ -227,7 +227,7 @@ define({
   pay_enter_amount:      'أدخل المبلغ',
   pay_review_transfer:   'مراجعة التحويل',
   pay_transfer_type:     'نوع التحويل',
-  pay_within_aman:       'داخل بنك أمان',
+
   pay_other_banks:       'بنوك أخرى',
   pay_swift:             'دولي',
   pay_purpose:           'الغرض',
@@ -282,6 +282,12 @@ define({
   pay_back_payments:    'العودة إلى المدفوعات',
   pay_schedule_later:   'جدولة لاحقاً',
   pay_account_no:       'رقم الحساب.',
+  pay_within_bank:      'داخل البنك',
+  pay_within_bank_sub:  'تحويلات داخل البنك',
+  pay_other_banks:      'بنوك أخرى',
+  pay_other_banks_sub:  'تحويل محلي',
+  pay_intl:             'دولي',
+  pay_intl_sub:         'سويفت / آيبان',
 
   // ── Cards ─────────────────────────────────────────────────────
   cards_title:        'بطاقاتي',

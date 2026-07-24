@@ -48,9 +48,9 @@
     self.quickAmounts  = [500, 1000, 2000, 5000];
 
     self.transferTypes = [
-      { id: 'WITHIN_AMAN', label: 'Within Aman',   sub: 'Same bank transfers',  color: 'primary' },
-      { id: 'OTHER_BANK',  label: 'Other Banks',    sub: 'Domestic local transfer', color: 'info' },
-      { id: 'SWIFT',       label: 'International',  sub: 'SWIFT / IBAN',         color: 'purple' }
+      { id: 'WITHIN_AMAN', label: nls.pay_within_bank,    sub: nls.pay_within_bank_sub, color: 'primary' },
+      { id: 'OTHER_BANK',  label: nls.pay_other_banks,    sub: nls.pay_other_banks_sub, color: 'info' },
+      { id: 'SWIFT',       label: nls.pay_intl,           sub: nls.pay_intl_sub,        color: 'purple' }
     ];
 
     // Hub sub-panel state
