@@ -1,0 +1,11 @@
+{
+  "name": "session-countdown",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Session Countdown",
+  "description": "Flip-clock inactivity warning popup. Listens for obdx:session:countdown and obdx:session:reset custom events.",
+  "properties": {},
+  "methods": {},
+  "events": {},
+  "slots": {}
+}

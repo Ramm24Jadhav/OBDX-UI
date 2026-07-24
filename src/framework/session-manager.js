@@ -14,11 +14,12 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
   var WARN_BEFORE_MS  =  2 * 60 * 1000;  // warn 2 min before expiry
   var HEARTBEAT_MS    =  4 * 60 * 1000;  // extend session every 4 min of activity
 
-  var _inactivityTimer = null;
-  var _warnTimer       = null;
-  var _heartbeatTimer  = null;
-  var _active          = false;
-  var _dirty           = false;   // activity since last heartbeat?
+  var _inactivityTimer    = null;
+  var _warnTimer          = null;
+  var _heartbeatTimer     = null;
+  var _active             = false;
+  var _dirty              = false;   // activity since last heartbeat?
+  var _countdownVisible   = false;   // is the countdown popup open?
 
   // ── Activity events to track ────────────────────────────────────
   var ACTIVITY_EVENTS = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'scroll'];
@@ -60,8 +61,14 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
       clearTimeout(_inactivityTimer);
       clearTimeout(_warnTimer);
 
+      /* If the countdown popup is open, dismiss it */
+      if (_countdownVisible) {
+        _countdownVisible = false;
+        document.dispatchEvent(new CustomEvent('obdx:session:reset'));
+      }
+
       _warnTimer = setTimeout(function () {
-        SessionManager._showWarning();
+        SessionManager._showCountdown();
       }, INACTIVITY_MS - WARN_BEFORE_MS);
 
       _inactivityTimer = setTimeout(function () {
@@ -69,15 +76,18 @@ define(['platform', 'framework/configurations/config'], function (platform, conf
       }, INACTIVITY_MS);
     },
 
-    // ── Show warning banner 2 min before expiry ───────────────────
-    _showWarning: function () {
-      if (window.obdxApp && window.obdxApp.showToast) {
-        window.obdxApp.showToast('Your session will expire in 2 minutes due to inactivity.', 'warning');
-      }
+    // ── Show flip-clock countdown popup 2 min before expiry ──────
+    _showCountdown: function () {
+      _countdownVisible = true;
+      document.dispatchEvent(new CustomEvent('obdx:session:countdown', {
+        detail: { secondsLeft: WARN_BEFORE_MS / 1000 }
+      }));
     },
 
     // ── Inactivity hard-logout ────────────────────────────────────
     _onInactivityExpiry: function () {
+      _countdownVisible = false;
+      document.dispatchEvent(new CustomEvent('obdx:session:reset')); /* close popup */
       SessionManager.stop();
       SessionManager._dispatchExpiry('INACTIVITY');
     },

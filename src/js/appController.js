@@ -21,7 +21,8 @@ define([
   'framework/analytics',
   'framework/chatbot',
   'ojs/ojknockout',
-  'components/shared/obdx-toast/loader'
+  'components/shared/obdx-toast/loader',
+  'components/shared/session-countdown/loader'
 ], function (
   ko, Context,
   CoreRouter, KnockoutRouterAdapter,
