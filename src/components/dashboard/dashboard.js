@@ -1,10 +1,13 @@
 /**
  * Dashboard — keep-alive container ViewModel.
  *
- * Loads the login screen eagerly (always needed).
- * Pre-fetches the 5 authenticated tab modules immediately to warm the AMD
- * cache, but defers ViewModel instantiation until after the user logs in
- * so API calls never fire without a valid token.
+ * Uses KO template binding (nodes + data) instead of nested oj-module elements
+ * to avoid JET custom-element upgrade issues inside a parent oj-module view.
+ *
+ * Login template is parsed and its VM instantiated immediately.
+ * The 5 authenticated tabs are pre-fetched (AMD cache warm) right away but
+ * VMs are only instantiated after isAuthenticated fires, so API calls never
+ * run without a valid token.
  */
 define([
   'knockout',
@@ -12,8 +15,6 @@ define([
   'ojs/ojknockout'
 ], function (ko, loginCfg) {
   'use strict';
-
-  var EMPTY = { view: [], viewModel: null };
 
   var AUTH_LOADER_IDS = [
     'components/home/loader',
@@ -24,41 +25,57 @@ define([
   ];
   var AUTH_TAB_KEYS = ['home', 'accounts', 'pay', 'cards', 'more'];
 
+  function parseNodes(htmlStr) {
+    var div = document.createElement('div');
+    div.innerHTML = htmlStr;
+    return Array.from(div.childNodes);
+  }
+
   function DashboardViewModel() {
     var self = this;
 
-    // Shared observables from appController — set before dashboard loads.
     self.currentTab      = window.obdxApp.currentTab;
     self.isAuthenticated = window.obdxApp.isAuthenticated;
 
-    // Login is always ready; authenticated tabs start empty and are
-    // populated once auth completes.
-    self.tabs = {
-      login:    ko.observable(loginCfg),
-      home:     ko.observable(EMPTY),
-      accounts: ko.observable(EMPTY),
-      pay:      ko.observable(EMPTY),
-      cards:    ko.observable(EMPTY),
-      more:     ko.observable(EMPTY)
+    // Login — always ready; parse once and keep
+    var loginNodes = parseNodes(loginCfg.view);
+    var loginVm    = new loginCfg.viewModel();
+
+    // Per-tab observables: null until the tab is activated post-auth
+    self.tabViews = {
+      login:    ko.observable(loginNodes),
+      home:     ko.observable(null),
+      accounts: ko.observable(null),
+      pay:      ko.observable(null),
+      cards:    ko.observable(null),
+      more:     ko.observable(null)
+    };
+    self.tabVms = {
+      login:    ko.observable(loginVm),
+      home:     ko.observable(null),
+      accounts: ko.observable(null),
+      pay:      ko.observable(null),
+      cards:    ko.observable(null),
+      more:     ko.observable(null)
     };
 
-    // Immediately kick off AMD fetch for all authenticated tabs so the
-    // module code is cached and ready before the user finishes logging in.
-    require(AUTH_LOADER_IDS, function () {}); // fire-and-forget prefetch
+    // Fire AMD pre-fetch immediately to warm the module cache while the
+    // user is on the login screen. No ViewModel construction yet.
+    require(AUTH_LOADER_IDS, function () {});
 
     function _activateTabs() {
-      // By this point the modules are almost certainly already cached.
-      // require() resolves synchronously from cache when available.
+      // Modules are almost certainly cached by now; resolves synchronously.
       require(AUTH_LOADER_IDS, function () {
         var loaders = Array.prototype.slice.call(arguments);
         AUTH_TAB_KEYS.forEach(function (key, i) {
-          self.tabs[key](loaders[i]);
+          var cfg   = loaders[i];
+          self.tabViews[key](parseNodes(cfg.view));
+          self.tabVms[key](new cfg.viewModel());
         });
       });
     }
 
     if (self.isAuthenticated()) {
-      // Session already active (e.g. deep-link or dev reload).
       _activateTabs();
     } else {
       var _authSub = self.isAuthenticated.subscribe(function (auth) {

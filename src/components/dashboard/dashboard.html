@@ -1,36 +1,48 @@
 <!-- Dashboard container — keep-alive wrapper for all tab screens.
-     All 6 slots are permanently in the DOM; visibility is toggled
-     via CSS display only, so ViewModels are never destroyed on tab switch. -->
+     All 6 slots are permanently in the DOM; only visibility toggles on tab switch.
+     Uses KO template {nodes, data} binding to avoid nested oj-module upgrade issues. -->
 <div class="dash-container">
 
   <!-- Login screen -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'login'">
-    <oj-module config="[[tabs.login]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.login() -->
+    <!-- ko template: { nodes: tabViews.login(), data: tabVms.login() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
   <!-- Home tab -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'home'">
-    <oj-module config="[[tabs.home]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.home() -->
+    <!-- ko template: { nodes: tabViews.home(), data: tabVms.home() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
   <!-- Accounts tab -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'accounts'">
-    <oj-module config="[[tabs.accounts]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.accounts() -->
+    <!-- ko template: { nodes: tabViews.accounts(), data: tabVms.accounts() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
   <!-- Pay tab -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'pay'">
-    <oj-module config="[[tabs.pay]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.pay() -->
+    <!-- ko template: { nodes: tabViews.pay(), data: tabVms.pay() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
   <!-- Cards tab -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'cards'">
-    <oj-module config="[[tabs.cards]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.cards() -->
+    <!-- ko template: { nodes: tabViews.cards(), data: tabVms.cards() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
   <!-- More tab -->
   <div class="dash-slot" data-bind="visible: currentTab() === 'more'">
-    <oj-module config="[[tabs.more]]" style="display:block;height:100%;"></oj-module>
+    <!-- ko if: tabVms.more() -->
+    <!-- ko template: { nodes: tabViews.more(), data: tabVms.more() } --><!-- /ko -->
+    <!-- /ko -->
   </div>
 
 </div>
