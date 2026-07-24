@@ -10,3 +10,4 @@
 .sub-header h2{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;flex:1}
 .sub-header:not(.dark) h2{color:var(--c-t1)}
 @media(max-width:360px){.sub-header{padding:10px 14px 6px}}
+.rtl .sub-header{flex-direction:row-reverse}

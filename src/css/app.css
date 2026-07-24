@@ -183,8 +183,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Sego
 /* Rounded white body below dark header (Phase 3) */
 .app-sub-body{flex:1;overflow-y:auto;background:var(--c-bg);border-radius:28px 28px 0 0;margin-top:-24px;position:relative;z-index:1}
 
-/* Sub-screen slide-in — rules live in css/sub-screen.css */
-
 /* Shared page header */
 .app-page-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 8px}
 .app-page-header__title{font-size:22px;font-weight:800;color:var(--c-t1)}
@@ -297,4 +295,3 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 /* RTL support */
 .rtl{direction:rtl}
 .rtl .app-nav{flex-direction:row-reverse}
-.rtl .sub-header{flex-direction:row-reverse}

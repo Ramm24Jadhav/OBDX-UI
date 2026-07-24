@@ -45,12 +45,12 @@
 
 /* Notice banners */
 .dep-notice{padding:10px 13px;border-radius:10px;font-size:12px;font-weight:500;line-height:1.45;margin-bottom:14px;}
-.dep-notice--warn{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;}
+.dep-notice--warn{background:var(--c-warning-bg);color:var(--c-warning);border:1px solid var(--c-warning-bg);}
 .dep-notice--info{background:rgba(var(--c-primary-rgb,30,78,96),.07);color:var(--c-primary);border:1px solid rgba(var(--c-primary-rgb,30,78,96),.15);}
 
 /* Success state */
 .dep-success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;}
-.dep-success-icon{width:72px;height:72px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.dep-success-icon{width:72px;height:72px;border-radius:50%;background:var(--c-success-bg);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
 .dep-success-title{font-size:20px;font-weight:800;color:var(--c-t1);margin-bottom:8px;}
 .dep-success-sub{font-size:14px;color:var(--c-t3);line-height:1.5;max-width:280px;}
 
