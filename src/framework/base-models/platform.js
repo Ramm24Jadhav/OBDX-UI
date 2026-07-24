@@ -4,9 +4,9 @@ define([
 ], function (config, logger) {
   'use strict';
 
-  var _TOKEN_KEY        = 'aman_auth_token';
-  var _REFRESH_KEY      = 'aman_refresh_token';
-  var _TOKEN_EXPIRY_KEY = 'aman_token_expiry';
+  var _TOKEN_KEY        = 'obdx_auth_token';
+  var _REFRESH_KEY      = 'obdx_refresh_token';
+  var _TOKEN_EXPIRY_KEY = 'obdx_token_expiry';
   var _authType         = config.authentication.type;
 
   // ── Auth URL helper (bypasses api-catalogue to avoid circular dep) ──

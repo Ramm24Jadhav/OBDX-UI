@@ -31,7 +31,7 @@
     self.amount          = ko.observable('');
     self.purpose         = ko.observable('Family Support');
     self.note            = ko.observable('');
-    self.transferType    = ko.observable('WITHIN_AMAN');
+    self.transferType    = ko.observable('WITHIN_OBDX');
     self.referenceNo     = ko.observable('');
 
     self.scheduleEnabled = ko.observable(false);
@@ -48,7 +48,7 @@
     self.quickAmounts  = [500, 1000, 2000, 5000];
 
     self.transferTypes = [
-      { id: 'WITHIN_AMAN', label: nls.pay_within_bank,    sub: nls.pay_within_bank_sub, color: 'primary' },
+      { id: 'WITHIN_OBDX', label: nls.pay_within_bank,    sub: nls.pay_within_bank_sub, color: 'primary' },
       { id: 'OTHER_BANK',  label: nls.pay_other_banks,    sub: nls.pay_other_banks_sub, color: 'info' },
       { id: 'SWIFT',       label: nls.pay_intl,           sub: nls.pay_intl_sub,        color: 'purple' }
     ];
@@ -72,8 +72,8 @@
     self.closeTracker       = function () { self.showTracker(false); };
 
     self.startPayFlow = function (type) {
-      var typeMap = { own:'WITHIN_AMAN', within:'WITHIN_AMAN', domestic:'OTHER_BANK', international:'SWIFT', gcc:'SWIFT', afaq:'OTHER_BANK', adhoc:'WITHIN_AMAN' };
-      self.transferType(typeMap[type] || 'WITHIN_AMAN');
+      var typeMap = { own:'WITHIN_OBDX', within:'WITHIN_OBDX', domestic:'OTHER_BANK', international:'SWIFT', gcc:'SWIFT', afaq:'OTHER_BANK', adhoc:'WITHIN_OBDX' };
+      self.transferType(typeMap[type] || 'WITHIN_OBDX');
       self.step(1);
     };
 

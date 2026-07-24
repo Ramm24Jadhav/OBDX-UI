@@ -33,7 +33,7 @@ define([], function () {
     system: {
       componentAccessControlEnabled: false,  // Phase 3: enable after /me/components wired
       requestThrottleSeconds:        5,       // GET dedup window in BaseService
-      defaultEntity:                 'AMAN_BU',
+      defaultEntity:                 'OBDX_BU',
       sslEnabled:                    false,
       loggingLevel:                  'LEVEL_ERROR'
     },

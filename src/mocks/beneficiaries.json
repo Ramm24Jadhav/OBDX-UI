@@ -1,8 +1,8 @@
 {
   "status": "SUCCESS",
   "beneficiaries": [
-    { "id": "BEN-001", "name": "Khalid Saeed Al Mansoori", "initials": "KS", "bank": "Aman Bank", "accountNo": "AMANAE33 0012 3456 789", "type": "WITHIN_AMAN", "avatarColor": "#7C3AED", "nickname": "Khalid (Family)" },
-    { "id": "BEN-002", "name": "Sara Ahmed Al Nuaimi",     "initials": "SA", "bank": "Aman Bank", "accountNo": "•••• 7312", "type": "WITHIN_AMAN", "avatarColor": "#2563EB", "nickname": "Sara" },
+    { "id": "BEN-001", "name": "Khalid Saeed Al Mansoori", "initials": "KS", "bank": "OBDX Bank", "accountNo": "OBDXAE33 0012 3456 789", "type": "WITHIN_OBDX", "avatarColor": "#7C3AED", "nickname": "Khalid (Family)" },
+    { "id": "BEN-002", "name": "Sara Ahmed Al Nuaimi",     "initials": "SA", "bank": "OBDX Bank", "accountNo": "•••• 7312", "type": "WITHIN_OBDX", "avatarColor": "#2563EB", "nickname": "Sara" },
     { "id": "BEN-003", "name": "Rahul Kumar",              "initials": "RK", "bank": "Citibank UAE", "accountNo": "CITIAEAX 1234 5678", "type": "OTHER_BANK", "avatarColor": "#16A34A", "nickname": "Rahul" },
     { "id": "BEN-004", "name": "Fatima Al Rashid",         "initials": "FR", "bank": "Emirates NBD", "accountNo": "ENBD4532 9876 5432", "type": "OTHER_BANK", "avatarColor": "#D97706", "nickname": "Fatima" }
   ]
