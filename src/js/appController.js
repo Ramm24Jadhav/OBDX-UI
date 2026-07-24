@@ -32,39 +32,23 @@ define([
   Analytics, Chatbot
 ) {
 
-  // ── OBDX component loader ────────────────────────────────────────────────
-  // Maps route paths to their entry-point component folder.
-  // Module directories (e.g. accounts/) contain only sub-component folders;
-  // the actual entry component lives one level deeper.
-  var _componentMap = {
-    'accounts': 'accounts/accounts-main',
-    'cards':    'cards/cards-main',
-    'pay':      'pay/pay-main'
-  };
+  // ── Dashboard keep-alive loader ──────────────────────────────────────────
+  // The dashboard component is loaded exactly once and stays mounted for the
+  // entire session. All 6 tab screens live inside it as persistent oj-module
+  // slots; switching tabs is a pure CSS visibility toggle — no destroy/recreate.
+  var _dashboardLoaded = false;
 
-  // Tracks the most recently requested path — used to discard stale AMD callbacks
-  // when multiple _loadComponent calls race (e.g. initial load + subscribe fire).
-  var _pendingPath = null;
-
-  function _loadComponent(path, configObservable) {
-    // ExtensionRegistry overrides take priority over the static component map
-    var overridePath = ExtensionRegistry.getComponentPath(path);
-    var compPath = overridePath || _componentMap[path] || path;
-    var name   = compPath.split('/').pop();
-    var viewId = 'text!../components/' + compPath + '/' + name + '.html';
-    var vmId   = '../components/' + compPath + '/' + name;
-
-    _pendingPath = path;
-    // Reset to empty so oj-module unmounts the old view before mounting the new one.
-    configObservable({ view: [], viewModel: null });
-
-    require([viewId, vmId, 'ojs/ojknockout'], function (view, ViewModel) {
-      // Discard if a newer navigation superseded this one.
-      if (_pendingPath !== path) return;
-      _pendingPath = null;
-      configObservable({ view: view, viewModel: ViewModel });
+  function _loadDashboard(configObservable) {
+    if (_dashboardLoaded) return;
+    _dashboardLoaded = true;
+    require([
+      'text!../components/dashboard/dashboard.html',
+      '../components/dashboard/dashboard',
+      'ojs/ojknockout'
+    ], function (view, DashboardVM) {
+      configObservable({ view: view, viewModel: new DashboardVM() });
     }, function (err) {
-      console.error('[OBDX] Component load failed: ' + path, err);
+      console.error('[OBDX] Dashboard load failed:', err);
     });
   }
 
@@ -94,6 +78,9 @@ define([
 
     // ── Auth state ─────────────────────────────────────────────
     self.isAuthenticated = ko.observable(false);
+    // Which tab slot the dashboard should display — set before dashboard loads
+    // so it is immediately correct when the dashboard ViewModel reads it.
+    self.currentTab = ko.observable('login');
     self.anyPanelOpen   = ko.observable(false);  // hides nav when sheet/sub-panel is open
 
     // ── Session modal state ────────────────────────────────────
@@ -161,11 +148,13 @@ define([
     function _guardedLoad(path) {
       if (!path) return;
       if (_protectedRoutes.indexOf(path) !== -1 && !platform.getToken()) {
-        // No valid session — bounce to login regardless of the URL.
         router.go({ path: 'login' });
         return;
       }
-      _loadComponent(path, _moduleConfig);
+      // Tell the dashboard which slot to show — pure observable update, no reload.
+      self.currentTab(path || 'login');
+      // Load the dashboard shell once; subsequent calls are no-ops.
+      _loadDashboard(_moduleConfig);
     }
 
     // Use selection.path (KnockoutRouterAdapter's KO observable) — guaranteed API in JET 14.
@@ -377,6 +366,9 @@ define([
       login:           self.login.bind(self),
       logout:          self.logout.bind(self),
       onLoginSuccess:  self.login.bind(self),
+      // KO observables shared with the dashboard ViewModel
+      currentTab:      self.currentTab,
+      isAuthenticated: self.isAuthenticated,
       toggleLang:      self.toggleLanguage.bind(self),
       showLoader:      self.showLoader.bind(self),
       hideLoader:      self.hideLoader.bind(self),

@@ -87,6 +87,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Sego
 
 /* ── Router outlet ── */
 .app-router-outlet{flex:1;overflow:hidden;position:relative}
+/* ── Dashboard keep-alive slots ── */
+.dash-container{position:relative;height:100%;overflow:hidden}
+.dash-slot{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
 .app-screen{position:absolute;inset:0;background:var(--c-bg);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-top:var(--status-h);padding-bottom:120px;scrollbar-width:none;display:flex;flex-direction:column}
 .app-screen::-webkit-scrollbar{display:none}
 .app-screen--login{padding-top:0;padding-bottom:0}
