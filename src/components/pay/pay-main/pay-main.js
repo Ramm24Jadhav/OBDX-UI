@@ -71,10 +71,23 @@
     self.openTracker        = function () { self.showTracker(true); };
     self.closeTracker       = function () { self.showTracker(false); };
 
+    self.flowType = ko.observable('transfer'); // 'own' | 'transfer'
+
+    self.adhocMode         = ko.observable(false);
+    self.selectedToAccount = ko.observable(null);
+    self.adhocName         = ko.observable('');
+    self.adhocBank         = ko.observable('');
+    self.adhocAccountNo    = ko.observable('');
+
     self.startPayFlow = function (type) {
       var typeMap = { own:'WITHIN_OBDX', within:'WITHIN_OBDX', domestic:'OTHER_BANK', international:'SWIFT', gcc:'SWIFT', afaq:'OTHER_BANK', adhoc:'WITHIN_OBDX' };
       self.transferType(typeMap[type] || 'WITHIN_OBDX');
+      self.flowType(type === 'own' ? 'own' : 'transfer');
+      self.adhocMode(false);
+      self.adhocName(''); self.adhocBank(''); self.adhocAccountNo('');
+      self.selectedToAccount(null);
       self.step(1);
+      window.obdxApp && window.obdxApp.setPanelOpen(true);
     };
 
     // ── Step helpers ──────────────────────────────────────────
@@ -94,10 +107,60 @@
       return 'pay-step--pending';
     };
 
-    self.backToHub = function () { self.step(0); };
+    self.backToHub = function () { self.step(0); window.obdxApp && window.obdxApp.setPanelOpen(false); };
     self.goBack    = function () { if (self.step() === 1) { self.backToHub(); } else { self.step(self.step() - 1); } };
 
-    self.selectBeneficiary = function (ben) { self.selectedBen(ben); self.step(2); };
+    self.selectBeneficiary = function (ben) { self.selectedBen(ben); self.adhocMode(false); };
+
+    self.selectOwnAccount = function (acc) {
+      self.selectedBen({
+        id: acc.id,
+        name: acc.typeLabel || acc.type,
+        initials: (acc.typeLabel || acc.type).substring(0, 2).toUpperCase(),
+        bank: 'Own Account',
+        accountNo: acc.number,
+        avatarColor: '#7A1531'
+      });
+    };
+
+    self.toggleAdhoc = function () {
+      self.adhocMode(!self.adhocMode());
+      if (self.adhocMode()) self.selectedBen(null);
+    };
+
+    self.proceedAdhoc = function () {
+      var name  = self.adhocName().trim();
+      var accNo = self.adhocAccountNo().trim();
+      if (!name || !accNo) {
+        window.obdxApp && window.obdxApp.showToast('Please fill in payee name and account number', 'error');
+        return;
+      }
+      self.selectedBen({
+        id: 'ADHOC-' + Date.now(),
+        name: name,
+        initials: name.substring(0, 2).toUpperCase(),
+        bank: self.adhocBank().trim() || 'New Payee',
+        accountNo: accNo,
+        avatarColor: '#DC2626'
+      });
+      self.step(2);
+    };
+
+    self.goToAmount = function () {
+      if (self.flowType() === 'own') {
+        var acc = self.selectedToAccount();
+        if (!acc) return;
+        self.selectedBen({
+          id: acc.id,
+          name: acc.typeLabel || acc.type,
+          initials: (acc.typeLabel || acc.type).substring(0, 2).toUpperCase(),
+          bank: 'Own Account',
+          accountNo: acc.number,
+          avatarColor: '#7A1531'
+        });
+      }
+      if (self.selectedBen()) self.step(2);
+    };
     self.setQuickAmount    = function (amt) { self.amount(String(amt)); };
     self.selectTransferType = function (t) { self.transferType(t.id); };
 
@@ -181,9 +244,10 @@
     };
 
     self.resetFlow = function () {
-      self.step(0); self.selectedBen(null); self.amount('');
+      self.step(0); self.selectedBen(null); self.selectedToAccount(null); self.amount('');
       self.purpose('Family Support'); self.note(''); self.otpVal('');
       clearInterval(self._otpTimer);
+      window.obdxApp && window.obdxApp.setPanelOpen(false);
     };
 
     self.formatAmount = function (n) {
@@ -191,12 +255,19 @@
     };
 
     // ── Lifecycle ─────────────────────────────────────────────
+    var _fallbackBens = [
+      { id:'BEN-001', name:'Khalid Saeed Al Mansoori', initials:'KS', bank:'OBDX Bank',     accountNo:'OBDXAE33 0012 3456 789', type:'WITHIN_OBDX', avatarColor:'#7C3AED' },
+      { id:'BEN-002', name:'Sara Ahmed Al Nuaimi',     initials:'SA', bank:'OBDX Bank',     accountNo:'•••• 7312',             type:'WITHIN_OBDX', avatarColor:'#2563EB' },
+      { id:'BEN-003', name:'Rahul Kumar',              initials:'RK', bank:'Citibank UAE',  accountNo:'CITIAEAX 1234 5678',    type:'OTHER_BANK',  avatarColor:'#16A34A' },
+      { id:'BEN-004', name:'Fatima Al Rashid',         initials:'FR', bank:'Emirates NBD',  accountNo:'ENBD4532 9876 5432',    type:'OTHER_BANK',  avatarColor:'#D97706' }
+    ];
+
     self._load = function () {
       Promise.all([
-        PaymentService.getBeneficiaries(),
-        AccountService.getAccounts()
+        PaymentService.getBeneficiaries().catch(function () { return { beneficiaries: _fallbackBens }; }),
+        AccountService.getAccounts().catch(function () { return { accounts: [] }; })
       ]).then(function (res) {
-        self.beneficiaries(res[0].beneficiaries || []);
+        self.beneficiaries((res[0].beneficiaries && res[0].beneficiaries.length) ? res[0].beneficiaries : _fallbackBens);
         self.accounts(res[1].accounts || []);
         if (res[1].accounts && res[1].accounts.length > 0) {
           self.selectedAccount(res[1].accounts.find(function (a) { return a.type === 'CURRENT'; }) || res[1].accounts[0]);

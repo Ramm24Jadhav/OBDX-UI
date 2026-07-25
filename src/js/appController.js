@@ -46,7 +46,8 @@ define([
       '../components/dashboard/dashboard',
       'ojs/ojknockout'
     ], function (view, DashboardVM) {
-      configObservable({ view: view, viewModel: new DashboardVM() });
+      // Pass the constructor, not an instance — oj-module instantiates it internally.
+      configObservable({ view: view, viewModel: DashboardVM });
     }, function (err) {
       console.error('[OBDX] Dashboard load failed:', err);
     });

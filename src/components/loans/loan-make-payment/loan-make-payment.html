@@ -34,7 +34,7 @@
     <!-- /ko -->
     <div class="dep-form-group">
       <label class="dep-form-label">Deduct from</label>
-      <acct-account-dd params="[[$parent]]"></acct-account-dd>
+      <acct-account-dd params="accounts: $parent.accounts, selectedAccount: $parent.selectedAccount"></acct-account-dd>
     </div>
     <div class="dep-notice dep-notice--info">Leave amount blank to pay the monthly EMI amount.</div>
   </div>

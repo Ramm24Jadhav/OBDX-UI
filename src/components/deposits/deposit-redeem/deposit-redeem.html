@@ -23,7 +23,7 @@
     </div>
     <div class="dep-form-group">
       <label class="dep-form-label">Credit to Account</label>
-      <acct-account-dd params="[[$parent]]"></acct-account-dd>
+      <acct-account-dd params="accounts: $parent.accounts, selectedAccount: $parent.selectedAccount"></acct-account-dd>
     </div>
   </div>
   <!-- /ko -->

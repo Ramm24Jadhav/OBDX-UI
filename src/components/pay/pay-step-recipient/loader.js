@@ -1,4 +1,9 @@
-define(['ojs/ojcomposite','text!./pay-step-recipient.html','./pay-step-recipient'], function (Composite, view, viewModel) {
+define([
+  'ojs/ojcomposite',
+  'text!./pay-step-recipient.html',
+  './pay-step-recipient',
+  'shared-components/account-dropdown/loader'
+], function (Composite, view, viewModel) {
   'use strict';
   Composite.register('pay-step-recipient', {
     view: view, viewModel: viewModel,

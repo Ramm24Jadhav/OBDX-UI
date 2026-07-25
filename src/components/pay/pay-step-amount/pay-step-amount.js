@@ -6,6 +6,7 @@ define(['shared-components/utils', 'ojL10n!components/pay/nls/strings'], functio
     utils.loadCss('/components/pay/pay-step-amount/pay-step-amount.css');
     this.showStep2       = p.showStep2;
     this.selectedBen     = p.selectedBen;
+    this.accounts        = p.accounts;
     this.selectedAccount = p.selectedAccount;
     this.amount          = p.amount;
     this.purpose         = p.purpose;

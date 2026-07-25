@@ -1,4 +1,35 @@
-﻿.app-screen--pay { display:flex;flex-direction:column;height:100%;overflow:hidden;position:relative; }
+﻿/* Pay screen — natural scroll like cards; nav bar floats over content */
+.app-screen--pay { padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px); }
+/* Transfer flow — fixed full-screen overlay matching app-sub-panel pattern */
+.pay-flow-overlay { position:fixed;inset:0;z-index:500;background:var(--c-bg);display:flex;flex-direction:column;overflow:hidden;transform:translateX(100%);transition:transform .35s cubic-bezier(.32,1,.23,1); }
+.pay-flow-overlay--open { transform:translateX(0); }
+.pay-flow-header { flex-shrink:0; }
+/* Dark gradient header — standalone, no dependency on app-sub-panel__header */
+.pay-flow-dark-header {
+  background: linear-gradient(160deg, var(--c-primary) 0%, var(--c-primary-dd) 100%);
+  padding: max(env(safe-area-inset-top, 0px), 20px) 12px 60px;
+  border-bottom: none;
+}
+.pay-flow-title {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+.pay-flow-back-btn {
+  background: rgba(255,255,255,.15);
+  border-color: transparent;
+  color: #fff;
+}
+/* White rounded progress panel overlaps dark header */
+.pay-progress-panel { background:var(--c-bg);border-radius:24px 24px 0 0;margin-top:-32px;position:relative;z-index:1;padding:4px 0 0; }
+/* Step scroll area — no excess padding; footer sits below as flex sibling */
+.pay-steps-scroll { flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch;scrollbar-width:none; }
+/* Fixed CTA footer inside overlay flex column */
+.pay-flow-footer { flex-shrink:0;padding:12px 20px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));border-top:1px solid var(--c-border);background:var(--c-bg); }
+.pay-steps-scroll::-webkit-scrollbar { display:none; }
 
 /* Step progress bar */
 .pay-progress { display:flex;align-items:center;padding:12px 20px 16px;gap:0; }
@@ -11,6 +42,11 @@
 .pay-step--active .pay-progress__label { color:var(--c-primary); }
 .pay-step--done .pay-progress__dot { border-color:var(--c-primary);background:var(--c-primary);color:#fff; }
 .pay-step--done .pay-progress__label { color:var(--c-primary); }
+
+/* Adhoc / new payee toggle button */
+.pay-adhoc-toggle { display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:12px;border:1.5px dashed var(--c-border);background:transparent;color:var(--c-t2);font-size:13px;font-weight:600;cursor:pointer;width:100%;transition:all .2s; }
+.pay-adhoc-toggle--active { border-color:var(--c-primary);color:var(--c-primary);background:rgba(var(--c-primary-rgb),.04); }
+.pay-adhoc-form { background:var(--c-surface);border-radius:16px;border:1.5px solid var(--c-border);padding:16px; }
 
 /* Common form elements shared by step components */
 .pay-form-group { margin-bottom:14px; }
@@ -36,6 +72,7 @@
 /* Beneficiary list items */
 .pay-ben-row-item { display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border);cursor:pointer;-webkit-tap-highlight-color:transparent; }
 .pay-ben-row-item:active { background:var(--c-surface); }
+.pay-ben-row-item--selected { background:rgba(var(--c-primary-rgb),.04);border-radius:12px; }
 .pay-ben-row-item__avatar { width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0; }
 .pay-ben-row-item__info { flex:1;min-width:0; }
 .pay-ben-row-item__name { display:block;font-size:14px;font-weight:700;color:var(--c-t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
@@ -78,7 +115,7 @@
 .track-step__label span { font-size:11px;color:var(--c-t3);font-weight:400; }
 
 /* OTP screen */
-.pay-otp-screen { flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;align-items:center; }
+.pay-otp-screen { padding:24px 20px;display:flex;flex-direction:column;align-items:center; }
 .pay-otp-title { font-size:22px;font-weight:800;color:var(--c-t1);text-align:center;margin:0 0 6px; }
 .pay-otp-sub { font-size:13px;color:var(--c-t3);text-align:center;margin:0; }
 .pay-otp-boxes { display:flex;gap:10px;margin:20px 0 8px; }
@@ -92,5 +129,5 @@
 .login-keypad__btn--empty { background:transparent;border-color:transparent;cursor:default; }
 
 /* Success screen */
-.pay-success-screen { flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:24px 0 16px; }
+.pay-success-screen { display:flex;flex-direction:column;align-items:center;padding:24px 0 16px; }
 .pay-success-title { font-size:22px;font-weight:900;color:var(--c-t1);text-align:center;margin:0 0 4px; }

@@ -6,7 +6,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
       </div>
       <div style="flex:1;min-width:0;text-align:left;">
-        <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: type + ' ' + number + (nickname ? ' · ' + nickname : '')"></div>
+        <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: (typeLabel || type) + ' · ' + number"></div>
         <div class="s-num" style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.fmt(balance)"></div>
       </div>
     </div>
@@ -18,13 +18,13 @@
   </button>
   <!-- ko if: open() -->
   <div class="acct-dd-menu">
-    <!-- ko foreach: accounts() -->
+    <!-- ko foreach: accounts -->
     <div class="acct-dd-item" data-bind="click: $parent.select.bind($parent, $data), css: {'acct-dd-item--sel': $parent.selected() === $data}">
       <div class="acct-dd-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
       </div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: type + ' ' + number + (nickname ? ' · ' + nickname : '')"></div>
+        <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: (typeLabel || type) + ' · ' + number"></div>
         <div class="s-num" style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.fmt(balance)"></div>
       </div>
       <!-- ko if: $parent.selected() === $data -->

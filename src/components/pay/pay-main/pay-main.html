@@ -1,29 +1,106 @@
-﻿<div class="app-screen app-screen--pay">
-  <pay-hub          params="[[$data]]"></pay-hub>
+<div class="app-screen app-screen--pay">
 
-  <!-- Step header + progress bar (steps 1-4) -->
-  <div data-bind="visible: !showHub() && step() <= 4" style="display:none;flex-shrink:0;">
-    <div class="app-page-header">
-      <button class="app-back-btn" data-bind="click: goBack" aria-label="Back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <h1 class="app-page-header__title" data-bind="text: nls.pay_fund_transfer"></h1>
-    </div>
-    <div class="pay-progress" data-bind="foreach: [1,2,3,4]">
-      <div class="pay-progress__item" data-bind="css: $parent.stepClass($data)">
-        <div class="pay-progress__dot">
-          <span data-bind="visible: $parent.step() > $data">✓</span>
-          <span data-bind="visible: $parent.step() <= $data, text: $data"></span>
+  <!-- Hub — flows naturally inside the standard screen scroll, nav floats on top -->
+  <pay-hub params="[[$data]]"></pay-hub>
+
+  <!-- Transfer flow — fixed full-screen overlay, slides in from right -->
+  <div class="pay-flow-overlay" data-bind="css: {'pay-flow-overlay--open': !showHub()}">
+    <div class="pay-flow-header">
+      <div class="pay-flow-dark-header">
+        <div class="oj-flex oj-sm-align-items-center" style="gap:0;padding:0;">
+          <!-- ko ifnot: step() >= 4 -->
+          <div class="oj-flex-item" style="flex:0 0 36px;">
+            <button class="app-back-btn pay-flow-back-btn" data-bind="click: goBack" aria-label="Back">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+          </div>
+          <!-- /ko -->
+          <!-- ko if: step() >= 4 -->
+          <div class="oj-flex-item" style="flex:0 0 36px;"></div>
+          <!-- /ko -->
+          <h2 class="oj-flex-item pay-flow-title" data-bind="text: nls.pay_fund_transfer"></h2>
+          <div class="oj-flex-item" style="flex:0 0 36px;"></div>
         </div>
-        <span class="pay-progress__label" data-bind="text: $parent.stepLabel($data)"></span>
       </div>
-      <div class="pay-progress__line" data-bind="visible: $data < 4, css: {'pay-progress__line--done': $parent.step() > $data}"></div>
+      <div class="pay-progress-panel">
+        <div class="pay-progress" data-bind="foreach: [1,2,3,4]">
+          <div class="pay-progress__item" data-bind="css: $parent.stepClass($data)">
+            <div class="pay-progress__dot">
+              <span data-bind="visible: $parent.step() > $data">✓</span>
+              <span data-bind="visible: $parent.step() <= $data, text: $data"></span>
+            </div>
+            <span class="pay-progress__label" data-bind="text: $parent.stepLabel($data)"></span>
+          </div>
+          <div class="pay-progress__line" data-bind="visible: $data < 4, css: {'pay-progress__line--done': $parent.step() > $data}"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-steps-scroll">
+      <pay-step-recipient params="[[$data]]"></pay-step-recipient>
+
+      <!-- Own-account: reuse shared acct-account-dd component (KO component, not JET composite) -->
+      <!-- ko if: showStep1() && flowType() === 'own' -->
+      <div style="padding:0 20px 20px;">
+        <p class="pay-field-label" style="margin-bottom:12px;">Select Account to Transfer To</p>
+        <acct-account-dd params="accounts: accounts, selectedAccount: selectedToAccount"></acct-account-dd>
+      </div>
+      <!-- /ko -->
+      <pay-step-amount    params="[[$data]]"></pay-step-amount>
+      <pay-step-review    params="[[$data]]"></pay-step-review>
+      <pay-step-otp       params="[[$data]]"></pay-step-otp>
+      <pay-step-success   params="[[$data]]"></pay-step-success>
+    </div>
+
+    <!-- Fixed CTA footer — button changes per step -->
+    <div class="pay-flow-footer">
+
+      <!-- Step 1: Continue (hidden in adhoc mode — adhoc has its own Proceed button inline) -->
+      <!-- ko if: showStep1() && !adhocMode() -->
+      <button class="app-btn app-btn--primary app-btn--full"
+        data-bind="click: goToAmount,
+                   enable: flowType() === 'own' ? !!selectedToAccount() : !!selectedBen(),
+                   css: {'app-btn--disabled': !(flowType() === 'own' ? !!selectedToAccount() : !!selectedBen())}">
+        Continue →
+      </button>
+      <!-- /ko -->
+
+      <!-- Step 2: Review Transfer -->
+      <!-- ko if: showStep2() -->
+      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: goToReview, text: nls.pay_btn_review"></button>
+      <!-- /ko -->
+
+      <!-- Step 3: Confirm & Send -->
+      <!-- ko if: showStep3() -->
+      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: confirmTransfer, disable: isLoading">
+        <span data-bind="visible: !isLoading(), text: nls.pay_btn_confirm"></span>
+        <span data-bind="visible: isLoading(), text: nls.pay_sending"></span>
+      </button>
+      <!-- /ko -->
+
+      <!-- Step 4: Verify & Transfer -->
+      <!-- ko if: showStep4() -->
+      <button class="app-btn app-btn--primary app-btn--full"
+        data-bind="click: _verifyOTP, enable: otpVal().length >= 6, text: nls.pay_btn_verify,
+                   css: {'app-btn--disabled': otpVal().length < 6}"></button>
+      <!-- /ko -->
+
+      <!-- Step 5: Receipt + Track + Back to Payments -->
+      <!-- ko if: showStep5() -->
+      <div style="display:flex;gap:10px;margin-bottom:10px;">
+        <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span data-bind="text: nls.pay_btn_receipt"></span>
+        </button>
+        <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;" data-bind="click: openTracker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-bind="text: nls.pay_btn_track"></span>
+        </button>
+      </div>
+      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: resetFlow, text: nls.pay_back_payments"></button>
+      <!-- /ko -->
+
     </div>
   </div>
 
-  <pay-step-recipient params="[[$data]]"></pay-step-recipient>
-  <pay-step-amount    params="[[$data]]"></pay-step-amount>
-  <pay-step-review    params="[[$data]]"></pay-step-review>
-  <pay-step-otp       params="[[$data]]"></pay-step-otp>
-  <pay-step-success   params="[[$data]]"></pay-step-success>
 </div>

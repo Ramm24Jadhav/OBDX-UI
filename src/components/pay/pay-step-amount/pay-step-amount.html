@@ -1,4 +1,4 @@
-﻿<div data-bind="visible: showStep2()" style="display:none;flex:1;overflow-y:auto;padding:0 20px;">
+﻿<div data-bind="visible: showStep2()" style="display:none;padding:0 20px;">
 
   <!-- Recipient chip -->
   <div data-bind="visible: selectedBen() !== null" style="display:none;margin:16px 0 0;background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:14px;padding:12px 14px;">
@@ -16,10 +16,7 @@
   <div style="margin-top:16px;">
     <div class="pay-form-group">
       <label class="pay-form-label" data-bind="text: nls.pay_from_account"></label>
-      <div class="pay-select-field">
-        <span data-bind="text: selectedAccount() ? selectedAccount().typeLabel + ' · LYD ' + formatAmount(selectedAccount().balance || 0) : 'Select account'"></span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
+      <acct-account-dd params="accounts: accounts, selectedAccount: selectedAccount"></acct-account-dd>
     </div>
 
     <div class="pay-form-group">
@@ -63,9 +60,6 @@
       </div>
     </div>
 
-    <div class="pay-cta">
-      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: goToReview, text: nls.pay_btn_review"></button>
-    </div>
   </div>
-  <div style="height:80px;"></div>
+  <div style="height:16px;"></div>
 </div>

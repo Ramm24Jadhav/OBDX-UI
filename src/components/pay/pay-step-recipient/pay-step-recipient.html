@@ -1,4 +1,8 @@
-<div data-bind="visible: showStep1()" style="display:none;flex:1;overflow-y:auto;">
+<div data-bind="visible: showStep1()" style="display:none;">
+
+  <!-- ── TRANSFER / BENEFICIARY FLOW ───────────────────────────────── -->
+  <!-- ko ifnot: flowType() === 'own' -->
+
   <div class="pay-transfer-type" style="padding:16px 20px 0;">
     <p class="pay-field-label" data-bind="text: nls.pay_transfer_to"></p>
     <div data-bind="foreach: transferTypes">
@@ -19,15 +23,52 @@
     <div style="text-align:center;padding:24px;color:var(--c-t3);font-size:13px;" data-bind="text: nls.pay_no_ben"></div>
     <!-- /ko -->
     <!-- ko foreach: beneficiaries -->
-    <div class="pay-ben-row-item" style="padding:12px 0;" data-bind="click: function(){ $parent.selectBeneficiary($data); }">
+    <div class="pay-ben-row-item" data-bind="click: function(){ $parent.selectedBen($data); $parent.adhocMode(false); }, css: {'pay-ben-row-item--selected': $parent.selectedBen() === $data}">
       <div class="pay-ben-row-item__avatar" data-bind="text: initials, style:{background: avatarColor}"></div>
       <div class="pay-ben-row-item__info">
         <span class="pay-ben-row-item__name" data-bind="text: name"></span>
         <span class="pay-ben-row-item__bank" data-bind="text: accountNo || bank"></span>
       </div>
+      <!-- ko if: $parent.selectedBen() === $data -->
+      <div style="width:20px;height:20px;border-radius:50%;background:var(--c-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;flex-shrink:0;">✓</div>
+      <!-- /ko -->
+      <!-- ko ifnot: $parent.selectedBen() === $data -->
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <!-- /ko -->
     </div>
     <!-- /ko -->
   </div>
-  <div style="height:80px;"></div>
+
+  <!-- Adhoc / New Payee toggle -->
+  <div style="padding:0 20px 8px;">
+    <button class="pay-adhoc-toggle" data-bind="click: toggleAdhoc, css: {'pay-adhoc-toggle--active': adhocMode()}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Pay to New Account
+    </button>
+  </div>
+
+  <!-- Adhoc form (has its own action button — Proceed — so no Continue in footer when adhocMode) -->
+  <!-- ko if: adhocMode() -->
+  <div class="pay-adhoc-form" style="margin:0 20px 20px;">
+    <div class="pay-form-group">
+      <label class="pay-form-label">Payee Name</label>
+      <input class="pay-form-input" type="text" placeholder="Full name" data-bind="value: adhocName, valueUpdate: 'input'"/>
+    </div>
+    <div class="pay-form-group">
+      <label class="pay-form-label">Account / IBAN Number</label>
+      <input class="pay-form-input" type="text" placeholder="e.g. LY89 0000 0000 0001 2345 6789" data-bind="value: adhocAccountNo, valueUpdate: 'input'"/>
+    </div>
+    <div class="pay-form-group">
+      <label class="pay-form-label">Bank (optional)</label>
+      <input class="pay-form-input" type="text" placeholder="Bank name" data-bind="value: adhocBank, valueUpdate: 'input'"/>
+    </div>
+    <button class="app-btn app-btn--primary" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:14px;margin-top:4px;"
+      data-bind="click: proceedAdhoc">
+      Proceed with New Payee →
+    </button>
+  </div>
+  <!-- /ko -->
+
+  <!-- /ko -->
+
 </div>
