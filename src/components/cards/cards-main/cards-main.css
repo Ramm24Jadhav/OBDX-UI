@@ -6,13 +6,13 @@
 .cards-body-wrap { background:var(--c-bg);border-radius:28px 28px 0 0;margin-top:-28px;position:relative;z-index:1;flex-shrink:0; }
 
 /* Header — white text on dark hero */
-.cards-hdr { display:flex;align-items:center;justify-content:space-between;padding:16px 20px 8px;flex-shrink:0; }
+.cards-hdr { display:flex;align-items:center;justify-content:space-between;padding:12px 20px 6px;flex-shrink:0; }
 .cards-hdr-title { font-size:20px;font-weight:800;color:#fff; }
 .cards-hdr-sub { font-size:12px;color:rgba(255,255,255,.55);margin-top:2px; }
 .cards-new-btn { display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:22px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:700;cursor:pointer; }
 
 /* Type pills on dark background */
-.card-type-pills { display:flex;gap:8px;padding:4px 20px 12px;overflow-x:auto;scrollbar-width:none;flex-shrink:0; }
+.card-type-pills { display:flex;gap:8px;padding:4px 20px 8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0; }
 .card-type-pills::-webkit-scrollbar { display:none; }
 .card-type-pill { padding:7px 16px;border-radius:22px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);font-size:12px;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;white-space:nowrap;transition:.15s; }
 .card-type-pill.active { background:#fff;border-color:#fff;color:var(--c-primary);box-shadow:0 4px 12px rgba(0,0,0,.2); }
