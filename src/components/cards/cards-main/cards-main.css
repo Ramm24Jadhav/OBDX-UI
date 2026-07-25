@@ -1,5 +1,5 @@
 ﻿/* Cards screen wrapper */
-.app-screen--cards { padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px); flex-direction:column; }
+.app-screen--cards { padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px); flex-direction:column; flex-wrap:nowrap; }
 
 /* Dual-tone layout */
 .cards-hero-wrap { background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);flex-shrink:0;padding-bottom:clamp(20px,4svh,40px); }
