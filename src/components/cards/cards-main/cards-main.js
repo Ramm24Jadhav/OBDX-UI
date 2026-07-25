@@ -201,7 +201,7 @@
         +   '</div>'
         +   '<div>'
         +     '<div style="font-size:8px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;">' + (card.balanceLabel || 'Available Balance') + '</div>'
-        +     '<div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-.5px;">' + card.balance + '</div>'
+        +     '<div style="font-size:clamp(1rem,4.5vw,1.25rem);font-weight:800;color:#fff;letter-spacing:-.5px;">' + card.balance + '</div>'
         +     tier
         +   '</div>'
         +   '<div>'

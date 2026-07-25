@@ -2,7 +2,7 @@
 .cag-grid { gap:10px; }
 .cag-btn { background:var(--c-surface);border:none;border-radius:14px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s,transform .12s;-webkit-tap-highlight-color:transparent;box-sizing:border-box; }
 .cag-btn:active { background:var(--c-border);transform:scale(.95); }
-.cag-btn span { font-size:11px;color:var(--c-t2);font-weight:500;text-align:center;line-height:1.3; }
+.cag-btn span { font-size:0.6875rem;color:var(--c-t2);font-weight:500;text-align:center;line-height:1.3; }
 .cag-icon { width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center; }
 .cag-icon--red    { background:rgba(239,68,68,.12);color:#ef4444; }
 .cag-icon--blue   { background:rgba(59,130,246,.12);color:#3b82f6; }

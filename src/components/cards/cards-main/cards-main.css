@@ -1,4 +1,4 @@
-﻿/* Cards screen wrapper */
+/* Cards screen wrapper */
 .app-screen--cards { padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px); flex-direction:column; flex-wrap:nowrap; }
 
 /* Dual-tone layout */
@@ -7,14 +7,14 @@
 
 /* Header — white text on dark hero */
 .cards-hdr { display:flex;align-items:center;justify-content:space-between;padding:12px 20px 6px;flex-shrink:0; }
-.cards-hdr-title { font-size:20px;font-weight:800;color:#fff; }
-.cards-hdr-sub { font-size:12px;color:rgba(255,255,255,.55);margin-top:2px; }
-.cards-new-btn { display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:22px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:700;cursor:pointer; }
+.cards-hdr-title { font-size:1.25rem;font-weight:800;color:#fff; }
+.cards-hdr-sub { font-size:0.75rem;color:rgba(255,255,255,.55);margin-top:2px; }
+.cards-new-btn { display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:22px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:0.75rem;font-weight:700;cursor:pointer; }
 
 /* Type pills on dark background */
 .card-type-pills { display:flex;gap:8px;padding:4px 20px 8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0; }
 .card-type-pills::-webkit-scrollbar { display:none; }
-.card-type-pill { padding:7px 16px;border-radius:22px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);font-size:12px;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;white-space:nowrap;transition:.15s; }
+.card-type-pill { padding:7px 16px;border-radius:22px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);font-size:0.75rem;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;white-space:nowrap;transition:.15s; }
 .card-type-pill.active { background:#fff;border-color:#fff;color:var(--c-primary);box-shadow:0 4px 12px rgba(0,0,0,.2); }
 
 /* Shimmer animation (used by renderCardInner and carousel) */
@@ -28,12 +28,12 @@
 .mpin-dot--sm { width:14px;height:14px; }
 .mpin-dot--filled { background:var(--c-primary);border-color:var(--c-primary); }
 .mpin-keypad-grid { gap:10px;max-width:300px;margin:0 auto 16px; }
-.mpin-key { height:56px;border-radius:14px;border:none;background:var(--c-surface);font-size:20px;font-weight:700;color:var(--c-t1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.1s;box-shadow:0 2px 6px rgba(0,0,0,.06);flex-direction:column;gap:2px;box-sizing:border-box; }
+.mpin-key { height:56px;border-radius:14px;border:none;background:var(--c-surface);font-size:1.25rem;font-weight:700;color:var(--c-t1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.1s;box-shadow:0 2px 6px rgba(0,0,0,.06);flex-direction:column;gap:2px;box-sizing:border-box; }
 .mpin-key:active { transform:scale(.92);background:var(--c-surface2); }
-.mpin-key--del { font-size:14px;color:var(--c-t2); }
-.mpin-key--cancel { font-size:12px;color:var(--c-t3); }
+.mpin-key--del { font-size:0.875rem;color:var(--c-t2); }
+.mpin-key--cancel { font-size:0.75rem;color:var(--c-t3); }
 .mpin-key--empty { background:transparent;box-shadow:none;cursor:default;border-color:transparent; }
-.app-sheet-cancel-link { display:block;width:100%;padding:12px;border:none;background:none;font-size:13px;font-weight:600;color:var(--c-t3);cursor:pointer;text-align:center; }
+.app-sheet-cancel-link { display:block;width:100%;padding:12px;border:none;background:none;font-size:0.8125rem;font-weight:600;color:var(--c-t3);cursor:pointer;text-align:center; }
 
 /* Bottom spacer */
 .bottom-spacer { height:24px;flex-shrink:0; }

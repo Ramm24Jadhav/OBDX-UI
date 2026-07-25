@@ -1,7 +1,7 @@
 .clb-wrap { padding:16px 20px 12px;border-top:1px solid var(--c-border); }
 .clb-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px; }
-.clb-title { font-size:14px;font-weight:700;color:var(--c-t1); }
-.clb-edit-btn { font-size:12px;color:var(--c-primary);background:none;border:none;cursor:pointer;padding:0;font-weight:600; }
+.clb-title { font-size:0.875rem;font-weight:700;color:var(--c-t1); }
+.clb-edit-btn { font-size:0.75rem;color:var(--c-primary);background:none;border:none;cursor:pointer;padding:0;font-weight:600; }
 .clb-row { margin-bottom:10px; }
 .clb-labels { display:flex;justify-content:space-between;margin-bottom:6px; }
 .clb-bar-bg { height:6px;background:var(--c-border);border-radius:3px;overflow:hidden; }
