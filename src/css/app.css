@@ -250,7 +250,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Sego
 /* Bottom sheet overlay + sheet */
 .sheet-overlay{position:absolute;inset:0;background:rgba(15,22,35,.5);z-index:200;display:none;align-items:flex-end;backdrop-filter:blur(2px)}
 .sheet-overlay.open{display:flex}
-.sheet{width:100%;background:var(--c-bg);border-radius:28px 28px 0 0;max-height:78%;overflow:hidden;display:flex;flex-direction:column;animation:sheetUp .32s cubic-bezier(.32,1,.23,1)}
+.sheet{width:100%;max-width:480px;margin:0 auto;background:var(--c-bg);border-radius:28px 28px 0 0;max-height:78%;overflow:hidden;display:flex;flex-direction:column;animation:sheetUp .32s cubic-bezier(.32,1,.23,1)}
 @keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .sheet-handle{width:36px;height:4px;background:var(--c-border2);border-radius:2px;margin:12px auto 0;flex-shrink:0}
@@ -351,7 +351,7 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 
 /* ── bottom sheet (overlay + slide-up panel) ── */
 .app-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:600}
-.app-bottom-sheet{position:absolute;bottom:0;left:0;right:0;transform:translateY(100%);background:var(--c-surface);border-radius:28px 28px 0 0;padding:0 20px calc(32px + env(safe-area-inset-bottom,0px));z-index:601;transition:transform .32s cubic-bezier(.32,1,.23,1);max-height:85%;overflow-y:auto;scrollbar-width:none;will-change:transform}
+.app-bottom-sheet{position:absolute;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;transform:translateY(100%);background:var(--c-surface);border-radius:28px 28px 0 0;padding:0 20px calc(32px + env(safe-area-inset-bottom,0px));z-index:601;transition:transform .32s cubic-bezier(.32,1,.23,1);max-height:85%;overflow-y:auto;scrollbar-width:none;will-change:transform}
 .app-bottom-sheet::-webkit-scrollbar{display:none}
 .app-bottom-sheet--open{transform:translateY(0)}
 .app-sheet-handle{width:40px;height:5px;border-radius:3px;background:var(--c-border2);margin:14px auto 20px;display:block}

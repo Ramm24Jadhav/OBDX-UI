@@ -60,11 +60,9 @@
         <div class="mpin-dot" data-bind="css: {'mpin-dot--filled': $parent.mpinDots() > $data}"></div>
         <!-- /ko -->
       </div>
-      <div class="mpin-keypad-grid">
-        <!-- ko foreach: [['1','2','3'],['4','5','6'],['7','8','9'],['cancel','0','⌫']] -->
-        <!-- ko foreach: $data -->
-        <button class="mpin-key" data-bind="text: $data === 'cancel' ? 'Cancel' : $data, click: function(){ if($data==='cancel'){ $parents[1].authBack(); } else { $parents[1].mpinKey($data); } }, css: {'mpin-key--del': $data==='⌫', 'mpin-key--cancel': $data==='cancel'}"></button>
-        <!-- /ko -->
+      <div class="mpin-keypad-grid oj-flex">
+        <!-- ko foreach: ['1','2','3','4','5','6','7','8','9','cancel','0','⌫'] -->
+        <button class="mpin-key oj-sm-4" data-bind="text: $data === 'cancel' ? 'Cancel' : $data, click: function(){ if($data==='cancel'){ $parents[1].authBack(); } else { $parents[1].mpinKey($data); } }, css: {'mpin-key--del': $data==='⌫', 'mpin-key--cancel': $data==='cancel'}"></button>
         <!-- /ko -->
       </div>
     </div>

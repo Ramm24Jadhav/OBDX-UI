@@ -1,5 +1,5 @@
 .cps-backdrop { position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:310;backdrop-filter:blur(2px); }
-.cps-sheet { position:fixed;bottom:0;left:0;right:0;background:var(--c-bg);border-radius:20px 20px 0 0;padding:0 0 32px;z-index:311;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1); }
+.cps-sheet { position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:var(--c-bg);border-radius:20px 20px 0 0;padding:0 0 32px;z-index:311;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1); }
 .cps-sheet--open { transform:translateY(0); }
 .cps-handle { width:36px;height:4px;background:var(--c-border);border-radius:2px;margin:12px auto 0; }
 .cps-title { font-size:16px;font-weight:800;color:var(--c-t1);padding:16px 20px 12px;border-bottom:1px solid var(--c-border); }
@@ -7,8 +7,8 @@
 .cps-dots-row { display:flex;justify-content:center;gap:16px;margin-bottom:28px; }
 .cps-dot { width:14px;height:14px;border-radius:7px;border:2px solid var(--c-border);transition:all .2s; }
 .cps-dot--filled { background:var(--c-primary);border-color:var(--c-primary); }
-.cpin-keypad { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px; }
-.cpin-key { background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;height:56px;font-size:20px;font-weight:700;color:var(--c-t1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s,transform .1s;-webkit-tap-highlight-color:transparent; }
+.cpin-keypad { gap:10px;margin-bottom:20px; }
+.cpin-key { background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;height:56px;font-size:20px;font-weight:700;color:var(--c-t1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s,transform .1s;-webkit-tap-highlight-color:transparent;box-sizing:border-box; }
 .cpin-key:active { background:var(--c-border);transform:scale(.94); }
 .cps-actions { display:flex;justify-content:center; }
 .cps-btn { padding:12px 32px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:opacity .15s; }
