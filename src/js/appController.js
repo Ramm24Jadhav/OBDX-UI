@@ -58,9 +58,8 @@ define([
     try {
       var prefs = JSON.parse(localStorage.getItem('obdxThemePrefs') || '{}');
       var mode = prefs.themeMode;
-      if (mode === 'dark')  document.documentElement.setAttribute('data-theme', 'dark');
-      else if (mode === 'light') document.documentElement.setAttribute('data-theme', 'light');
-      else document.documentElement.removeAttribute('data-theme');
+      if (mode === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      else document.documentElement.setAttribute('data-theme', 'light'); // light is explicit default; never fall through to OS preference
       if (prefs.fontSize === 'large') document.documentElement.style.setProperty('font-size', '17px');
     } catch (e) {}
   }());

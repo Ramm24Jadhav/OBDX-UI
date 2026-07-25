@@ -1,5 +1,6 @@
 .splash{position:absolute;inset:0;z-index:1000;background:linear-gradient(160deg,var(--c-primary-dd) 0%,var(--c-primary-d) 40%,var(--c-primary-dd) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:0;transition:opacity .5s ease,transform .5s ease}
 .splash.hidden{opacity:0;transform:scale(1.04);pointer-events:none}
+.splash.splash-no-enter{transition:none}
 .splash-logo-wrap{display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:12px}
 .splash-emblem{width:88px;height:88px;position:relative}
 .splash-emblem svg{width:88px;height:88px}

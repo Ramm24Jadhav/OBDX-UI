@@ -11,16 +11,13 @@
  * by some modules), we are listing it explicitly to get the reference to the 'ko'
  * object in the callback
  */
- function _fadeOverlay() {
-   var overlay = document.getElementById('loading-overlay');
-   if (overlay && overlay.style.display !== 'none') {
-     overlay.style.opacity = '0';
-     setTimeout(function () { overlay.style.display = 'none'; }, 500);
-   }
+ function _dismissSplashCover() {
+   var cover = document.getElementById('splashCover');
+   if (cover) cover.style.display = 'none';
  }
 
- // Safety fallback: always fade the overlay within 5s even if JET fails
- setTimeout(_fadeOverlay, 5000);
+ // Safety fallback: always dismiss within 5s even if BusyContext never resolves
+ setTimeout(_dismissSplashCover, 5000);
 
  require(['ojs/ojbootstrap', 'knockout', './appController', 'ojs/ojcontext', 'ojs/ojlogger',
  'ojs/ojknockout', 'ojs/ojmodule-element', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar'],
@@ -31,10 +28,12 @@
         try {
           ko.applyBindings(app, document.getElementById('globalBody'));
           Context.getPageContext().getBusyContext().applicationBootstrapComplete();
+          // Dismiss splashCover only after ALL JET components (including login-splash) are painted
+          Context.getPageContext().getBusyContext().whenReady().then(_dismissSplashCover);
         } catch (e) {
           console.error('[OBDX] applyBindings failed:', e);
+          _dismissSplashCover();
         }
-        _fadeOverlay();
       }
       if (document.body.classList.contains('oj-hybrid')) {
         document.addEventListener("deviceready", init);
