@@ -32,16 +32,6 @@
     <div class="ccrsl-dots" data-bind="foreach: debitCards">
       <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
     </div>
-    <div class="csel-strip" data-bind="with: activeCard()">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
-        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
-        <span style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.nls.lbl_active"></span>
-      </div>
-    </div>
   </div>
 
   <!-- Credit carousel -->
@@ -54,16 +44,6 @@
     <div class="ccrsl-dots" data-bind="foreach: creditCards">
       <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
     </div>
-    <div class="csel-strip" data-bind="with: activeCard()">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
-        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
-        <span style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.nls.lbl_active"></span>
-      </div>
-    </div>
   </div>
 
   <!-- Virtual carousel -->
@@ -75,15 +55,5 @@
     </div>
     <div class="ccrsl-dots" data-bind="foreach: virtualCards">
       <div class="ccrsl-dot" data-bind="css: {'active': $parent.activeIndex() === $index()}, click: function(){ $parent.activeIndex($index()); }"></div>
-    </div>
-    <div class="csel-strip" data-bind="with: activeCard()">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
-        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: typeLabel"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
-        <span style="font-size:11px;color:var(--c-t3);" data-bind="text: $parent.nls.lbl_active"></span>
-      </div>
     </div>
   </div>
