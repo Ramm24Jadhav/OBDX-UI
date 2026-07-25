@@ -1,0 +1,18 @@
+<div class="conf-receipt-card">
+  <div class="conf-receipt-row">
+    <span class="conf-receipt-row__lbl" data-bind="text: nls.conf_ref_no"></span>
+    <span class="conf-receipt-row__val" data-bind="text: referenceNo() || '—'"></span>
+  </div>
+  <div class="conf-receipt-row">
+    <span class="conf-receipt-row__lbl">Amount</span>
+    <span class="conf-receipt-row__val">LYD <span data-bind="text: formattedAmount()"></span></span>
+  </div>
+  <div class="conf-receipt-row">
+    <span class="conf-receipt-row__lbl">To</span>
+    <span class="conf-receipt-row__val" data-bind="text: recipientName() || '—'"></span>
+  </div>
+  <div class="conf-receipt-row conf-receipt-row--last">
+    <span class="conf-receipt-row__lbl" data-bind="text: nls.conf_date_time"></span>
+    <span class="conf-receipt-row__val" data-bind="text: successDateTime() || '—'"></span>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="conf-screen">
+
+  <!-- Status bar -->
+  <div class="conf-status-bar" data-bind="css: statusConfig().barClass">
+    <div class="conf-icon-wrap">
+      <!-- ko if: status() === 'success' -->
+      <svg class="conf-icon conf-icon--anim" viewBox="0 0 80 80" width="72" height="72">
+        <circle cx="40" cy="40" r="34" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+        <circle cx="40" cy="40" r="34" fill="none" stroke="#fff" stroke-width="4"
+          stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round"
+          style="animation:conf-circle-draw .6s ease forwards .1s"/>
+        <polyline points="24,40 35,52 56,28" fill="none" stroke="#fff" stroke-width="4.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          style="stroke-dasharray:42;stroke-dashoffset:42;animation:conf-check-draw .35s ease forwards .65s"/>
+      </svg>
+      <!-- /ko -->
+      <!-- ko if: status() === 'failure' -->
+      <svg class="conf-icon" viewBox="0 0 80 80" width="72" height="72">
+        <circle cx="40" cy="40" r="34" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+        <line x1="27" y1="27" x2="53" y2="53" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="53" y1="27" x2="27" y2="53" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
+      </svg>
+      <!-- /ko -->
+      <!-- ko if: status() === 'pending' -->
+      <svg class="conf-icon conf-icon--spin" viewBox="0 0 80 80" width="72" height="72">
+        <circle cx="40" cy="40" r="34" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+        <circle cx="40" cy="40" r="26" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3.5"/>
+        <circle cx="40" cy="40" r="26" fill="none" stroke="#fff" stroke-width="3.5"
+          stroke-dasharray="50 114" stroke-linecap="round"/>
+        <polyline points="40,20 40,40 52,48" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <!-- /ko -->
+      <!-- ko if: status() === 'rejected' -->
+      <svg class="conf-icon" viewBox="0 0 80 80" width="72" height="72">
+        <circle cx="40" cy="40" r="34" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+        <circle cx="40" cy="40" r="18" fill="none" stroke="#fff" stroke-width="4"/>
+        <line x1="28" y1="28" x2="52" y2="52" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <!-- /ko -->
+    </div>
+    <h2 class="conf-status-title" data-bind="text: statusConfig().title"></h2>
+    <p class="conf-status-sub" data-bind="text: statusConfig().subtitle"></p>
+  </div>
+
+  <!-- Amount summary card -->
+  <div class="conf-amount-card">
+    <div class="conf-amount-lbl" data-bind="text: nls.conf_amount_sent"></div>
+    <div class="conf-amount-val">LYD <span data-bind="text: formattedAmount()"></span></div>
+    <!-- ko if: recipientName() -->
+    <div class="conf-amount-to" data-bind="text: 'To ' + recipientName()"></div>
+    <!-- /ko -->
+  </div>
+
+  <!-- Detail rows -->
+  <div class="conf-detail-card">
+    <div class="conf-detail-row">
+      <span class="conf-detail-lbl" data-bind="text: nls.conf_ref_no"></span>
+      <span class="conf-detail-val" data-bind="text: referenceNo() || '—'"></span>
+    </div>
+    <div class="conf-detail-row">
+      <span class="conf-detail-lbl" data-bind="text: nls.conf_date_time"></span>
+      <span class="conf-detail-val" data-bind="text: successDateTime() || '—'"></span>
+    </div>
+    <div class="conf-detail-row conf-detail-row--last">
+      <span class="conf-detail-lbl" data-bind="text: nls.conf_status"></span>
+      <span class="conf-detail-val conf-detail-status" data-bind="css: statusConfig().statusClass, text: statusConfig().statusLabel"></span>
+    </div>
+  </div>
+
+  <!-- Receipt section — success only -->
+  <!-- ko if: isSuccess() -->
+  <div class="conf-receipt-section">
+    <div class="conf-receipt-header" data-bind="text: nls.conf_receipt_title"></div>
+    <!-- ko if: receiptTemplateName() -->
+    <!-- ko template: { name: receiptTemplateName(), data: $data } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: receiptTemplateName() -->
+    <div class="conf-receipt-loading">
+      <div class="conf-skeleton conf-skeleton--row"></div>
+      <div class="conf-skeleton conf-skeleton--row" style="width:70%"></div>
+      <div class="conf-skeleton conf-skeleton--row" style="width:85%"></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+
+  <!-- Actions -->
+  <div class="conf-actions">
+    <!-- ko if: isSuccess() -->
+    <button class="app-btn app-btn--ghost conf-actions__secondary"
+      data-bind="click: downloadPdf, disable: isDownloading(),
+                 css: {'app-btn--disabled': isDownloading()}">
+      <!-- ko ifnot: isDownloading() -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15" style="margin-right:6px;flex-shrink:0;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span data-bind="text: nls.conf_download_receipt"></span>
+      <!-- /ko -->
+      <!-- ko if: isDownloading() -->
+      <span data-bind="text: nls.conf_generating"></span>
+      <!-- /ko -->
+    </button>
+    <!-- /ko -->
+    <button class="app-btn app-btn--primary app-btn--full"
+      data-bind="click: onBackToPayments, text: nls.conf_back_payments"></button>
+  </div>
+
+  <div style="height:16px;"></div>
+</div>
+
+<style>
+@keyframes conf-circle-draw { to { stroke-dashoffset: 0; } }
+@keyframes conf-check-draw  { to { stroke-dashoffset: 0; } }
+@keyframes conf-icon-spin   { to { transform: rotate(360deg); } }
+</style>

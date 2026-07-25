@@ -26,11 +26,22 @@
       <pay-step-amount    params="[[$data]]"></pay-step-amount>
       <pay-step-review    params="[[$data]]"></pay-step-review>
       <pay-step-otp       params="[[$data]]"></pay-step-otp>
-      <pay-step-success   params="[[$data]]"></pay-step-success>
+      <!-- ko if: showStep5() -->
+      <pay-confirmation params="
+        status:          transferStatus,
+        paymentType:     flowType,
+        referenceNo:     referenceNo,
+        amount:          amount,
+        selectedBen:     selectedBen,
+        successDateTime: successDateTime,
+        formatAmount:    formatAmount,
+        onBackToPayments: resetFlow
+      "></pay-confirmation>
+      <!-- /ko -->
     </div>
 
-    <!-- Fixed CTA footer — button changes per step -->
-    <div class="pay-flow-footer">
+    <!-- Fixed CTA footer — hidden on step 5 (confirmation manages its own actions) -->
+    <div class="pay-flow-footer" data-bind="visible: !showStep5()" style="display:none;">
 
       <!-- Step 1: Continue (hidden in adhoc mode — adhoc has its own Proceed button inline) -->
       <!-- ko if: showStep1() && !adhocMode() -->

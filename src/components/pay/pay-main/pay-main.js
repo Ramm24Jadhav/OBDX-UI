@@ -10,8 +10,8 @@
   'pay-components/pay-step-amount/loader',
   'pay-components/pay-step-review/loader',
   'pay-components/pay-step-otp/loader',
-  'pay-components/pay-step-success/loader',
-  'shared-components/pay_flow_header/loader'
+  'shared-components/pay_flow_header/loader',
+  'shared-components/pay_confirmation/loader'
 ], function (ko, PaymentService, AccountService, utils, nls) {
   'use strict';
 
@@ -72,7 +72,8 @@
     self.openTracker        = function () { self.showTracker(true); };
     self.closeTracker       = function () { self.showTracker(false); };
 
-    self.flowType = ko.observable('transfer'); // 'own' | 'transfer'
+    self.flowType       = ko.observable('within'); // 'own'|'within'|'domestic'|'international'|'gcc'|'afaq'|'adhoc'
+    self.transferStatus = ko.observable('success');  // 'success'|'failure'|'pending'|'rejected'
 
     self.adhocMode         = ko.observable(false);
     self.selectedToAccount = ko.observable(null);
@@ -83,7 +84,7 @@
     self.startPayFlow = function (type) {
       var typeMap = { own:'WITHIN_OBDX', within:'WITHIN_OBDX', domestic:'OTHER_BANK', international:'SWIFT', gcc:'SWIFT', afaq:'OTHER_BANK', adhoc:'WITHIN_OBDX' };
       self.transferType(typeMap[type] || 'WITHIN_OBDX');
-      self.flowType(type === 'own' ? 'own' : 'transfer');
+      self.flowType(type || 'within');
       self.adhocMode(false);
       self.adhocName(''); self.adhocBank(''); self.adhocAccountNo('');
       self.selectedToAccount(null);
@@ -230,6 +231,7 @@
           if (data.status === 'SUCCESS') {
             var now = new Date();
             self.successDateTime(now.toLocaleDateString('en-LY', {day:'2-digit',month:'short',year:'numeric'}) + ', ' + now.toLocaleTimeString('en-LY', {hour:'2-digit',minute:'2-digit'}));
+            self.transferStatus('success');
             self.step(5);
             clearInterval(self._otpTimer);
           } else {
