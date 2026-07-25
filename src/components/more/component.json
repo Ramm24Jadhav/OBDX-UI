@@ -1,0 +1,8 @@
+﻿{
+  "name": "more",
+  "description": "More menu — profile, settings, notifications and support",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "type": "composite",
+  "dependencies": {}
+}

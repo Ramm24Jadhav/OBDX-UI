@@ -1,0 +1,81 @@
+<div>
+  <div class="orig-section-title">Maturity Instructions</div>
+  <div class="orig-section-sub">Choose what happens when your deposit matures</div>
+
+  <div class="orig-option-list">
+    <!-- ko foreach: maturityOptions -->
+    <div data-bind="css: {'orig-option':true,'orig-option--sel': $parent.maturityInstruction()===$data}, click: function(){ $parent.maturityInstruction($data); }">
+      <div class="orig-option-radio"><div class="orig-option-radio-dot"></div></div>
+      <span data-bind="text: $data"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+
+  <!-- Rollover Amount -->
+  <!-- ko if: showRollover() -->
+  <div class="orig-form-group" style="margin-top:16px;">
+    <label class="orig-form-label">Rollover Amount (LYD)</label>
+    <input type="number" class="orig-form-input" placeholder="e.g. 50,000" data-bind="value: rolloverAmount">
+  </div>
+  <!-- /ko -->
+
+  <!-- Pay To -->
+  <!-- ko if: showPayTo() -->
+  <div class="orig-form-group" style="margin-top:16px;">
+    <label class="orig-form-label">Pay To</label>
+    <div class="orig-pill-list">
+      <!-- ko foreach: payToOptions -->
+      <div data-bind="css: {'orig-pill':true,'orig-pill--sel': $parent.payToMode()===$data}, click: function(){ $parent.payToMode($data); }">
+        <span data-bind="text: $data"></span>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+
+  <!-- Own Accounts picker -->
+  <!-- ko if: payToMode() === 'Own Accounts' -->
+  <div class="orig-form-group">
+    <label class="orig-form-label">Payout Account</label>
+    <div class="orig-dropdown">
+      <button class="orig-dropdown-trigger" data-bind="click: togglePayToOwnDropdown">
+        <div style="display:flex;align-items:center;gap:8px;flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span style="font-size:13px;font-weight:700;" data-bind="text: payToOwnAccount() || 'Select payout account', css: {'orig-dd-placeholder': !payToOwnAccount()}"></span>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;transition:transform .2s;" data-bind="style:{transform: payToOwnDropdownOpen() ? 'rotate(180deg)' : 'rotate(0deg)'}"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <!-- ko if: payToOwnDropdownOpen() -->
+      <div class="orig-dropdown-menu">
+        <!-- ko foreach: payToOwnAccounts -->
+        <div class="orig-dropdown-item" data-bind="click: $parent.selectPayToOwnAcc.bind($parent, $data), css: {'orig-dropdown-item--sel': $parent.payToOwnAccount()===$data}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" width="15" height="15" style="flex-shrink:0;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <div class="orig-dd-body"><div class="orig-dd-label" data-bind="text: $data"></div></div>
+          <!-- ko if: $parent.payToOwnAccount()===$data -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+
+  <!-- Internal Bank Account fields -->
+  <!-- ko if: payToMode() === 'Internal Bank Account' -->
+  <div class="orig-form-group">
+    <label class="orig-form-label">Account Number</label>
+    <input type="text" class="orig-form-input" placeholder="Enter account number" data-bind="value: payToInternalAccNo">
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Account Holder Name</label>
+    <input type="text" class="orig-form-input" placeholder="Full name on account" data-bind="value: payToInternalAccHolder">
+  </div>
+  <div class="orig-form-group">
+    <label class="orig-form-label">Bank Name</label>
+    <input type="text" class="orig-form-input" placeholder="e.g. National Commercial Bank" data-bind="value: payToInternalBankName">
+  </div>
+  <!-- /ko -->
+
+  <!-- /ko --><!-- end showPayTo -->
+</div>

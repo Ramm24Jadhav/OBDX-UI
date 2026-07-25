@@ -1,0 +1,17 @@
+{
+  "status": "SUCCESS",
+  "roles": [
+    { "roleName": "retailUser", "moduleId": "RETAIL" }
+  ],
+  "corpAdmin": false,
+  "customer": {
+    "id": "CUST-0047829",
+    "displayName": "Mohammed Al Jasem",
+    "fullName": "Mohammed Ahmed Al Jasem",
+    "email": "mohammed.aljasem@email.com",
+    "mobile": "+971 50 *** 0845",
+    "tier": "Gold Member",
+    "preferredLanguage": "en",
+    "lastLogin": "2026-07-22T09:14:00Z"
+  }
+}

@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-statement",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Statement Panel",
+  "description": "Slide-up panel for requesting a loan statement.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

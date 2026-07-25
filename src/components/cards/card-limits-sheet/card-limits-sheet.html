@@ -1,0 +1,27 @@
+<!-- ko if: open() -->
+<div class="cls-backdrop" data-bind="click: onClose"></div>
+<!-- /ko -->
+<div class="cls-sheet" data-bind="css: {'cls-sheet--open': open()}">
+  <div class="cls-handle"></div>
+  <div class="cls-title" data-bind="text: nls.cards_spending_limits"></div>
+  <div class="cls-body">
+    <div class="cls-field">
+      <label class="cls-label" data-bind="text: nls.cards_daily_limit"></label>
+      <div class="cls-input-wrap">
+        <span class="cls-currency">LYD</span>
+        <input type="number" class="cls-input" data-bind="value: dailyLimit, valueUpdate: 'input'" placeholder="0.00">
+      </div>
+    </div>
+    <div class="cls-field">
+      <label class="cls-label" data-bind="text: nls.cards_monthly_limit"></label>
+      <div class="cls-input-wrap">
+        <span class="cls-currency">LYD</span>
+        <input type="number" class="cls-input" data-bind="value: monthlyLimit, valueUpdate: 'input'" placeholder="0.00">
+      </div>
+    </div>
+    <div class="cls-actions">
+      <button class="cls-btn cls-btn--ghost" data-bind="click: onClose, text: nls.btn_cancel"></button>
+      <button class="cls-btn cls-btn--primary" data-bind="click: saveLimits, text: nls.cards_save_limits"></button>
+    </div>
+  </div>
+</div>

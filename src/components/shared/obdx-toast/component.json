@@ -1,0 +1,14 @@
+﻿{
+  "name": "obdx-toast",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "OBDX Toast / Snackbar",
+  "description": "Global toast stack. Registers itself as window.obdxToast so any component can call window.obdxApp.showToast(opts) or window.obdxToast.show(opts).",
+  "properties": {},
+  "methods": {
+    "show":        { "description": "Show a toast. Accepts (message, type) or an options object." },
+    "clearToasts": { "description": "Dismiss all visible toasts with a staggered animation." }
+  },
+  "events": {},
+  "slots": {}
+}

@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-make-payment",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Make Payment Panel",
+  "description": "Slide-up panel for making a loan payment.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

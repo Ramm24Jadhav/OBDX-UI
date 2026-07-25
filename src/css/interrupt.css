@@ -1,0 +1,24 @@
+﻿/* ==========================================================
+   Interrupt / OTP Overlay  (z-index 950)
+   ========================================================== */
+.app-interrupt-overlay{position:absolute;inset:0;z-index:950;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.app-interrupt-overlay--open{opacity:1;pointer-events:auto}
+.app-interrupt-sheet{width:100%;background:var(--c-surface);border-radius:28px 28px 0 0;padding-bottom:env(safe-area-inset-bottom,16px);transform:translateY(100%);transition:transform .4s cubic-bezier(.32,1,.23,1)}
+.app-interrupt-overlay--open .app-interrupt-sheet{transform:translateY(0)}
+.interrupt-body{padding:20px 24px 8px;text-align:center}
+.interrupt-icon{width:56px;height:56px;border-radius:50%;background:var(--c-primary-light);display:flex;align-items:center;justify-content:center;margin:12px auto 16px}
+.interrupt-title{font-size:18px;font-weight:800;color:var(--c-t1);margin-bottom:6px}
+.interrupt-sub{font-size:13px;color:var(--c-t3);line-height:1.5;max-width:280px;margin:0 auto 20px}
+.interrupt-otp-dots{display:flex;justify-content:center;gap:12px;margin-bottom:8px}
+.otp-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--c-border);background:var(--c-bg);transition:background .15s,border-color .15s}
+.otp-dot--filled{background:var(--c-primary);border-color:var(--c-primary)}
+.interrupt-countdown{font-size:12px;color:var(--c-t3);font-weight:600;margin-bottom:16px;font-variant-numeric:tabular-nums}
+.interrupt-keypad{display:grid;grid-template-rows:repeat(4,1fr);gap:0;margin:0 -8px}
+.keypad-row{display:grid;grid-template-columns:repeat(3,1fr)}
+.keypad-key{border:none;background:none;padding:14px 0;font-size:22px;font-weight:600;color:var(--c-t1);cursor:pointer;border-radius:12px;transition:background .12s;line-height:1}
+.keypad-key:active{background:var(--c-bg)}
+.keypad-key--ghost{pointer-events:none;color:transparent}
+.interrupt-resend-btn{display:block;width:100%;padding:10px;background:none;border:none;font-size:13px;font-weight:700;color:var(--c-primary);cursor:pointer;margin-top:4px}
+.interrupt-resend-btn:disabled{color:var(--c-t3);cursor:default}
+.interrupt-primary-btn{display:block;width:calc(100% - 48px);margin:8px 24px 0;padding:14px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-size:15px;font-weight:700;cursor:pointer}
+.interrupt-cancel-btn{display:block;width:calc(100% - 48px);margin:10px 24px 16px;padding:14px;background:var(--c-bg);color:var(--c-t2);border:1px solid var(--c-border);border-radius:var(--r-lg);font-size:15px;font-weight:600;cursor:pointer}

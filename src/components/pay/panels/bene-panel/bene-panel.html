@@ -1,0 +1,17 @@
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': isOpen()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.pay_beneficiaries"></h2>
+    <button style="font-size:12px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;" data-bind="text: nls.pay_add_ben"></button>
+  </div>
+  <div style="overflow-y:auto;flex:1;" data-bind="foreach: beneficiaries">
+    <div class="pay-ben-row-item" data-bind="click: function(){ $parent.pickBeneficiary($data); }">
+      <div class="pay-ben-chip__avatar" style="width:44px;height:44px;border-radius:50%;font-size:16px;" data-bind="text: initials, style:{background: avatarColor}"></div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:12px;color:var(--c-t3);" data-bind="text: bank + ' · ' + accountNo"></div>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t4)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
+</div>

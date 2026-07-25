@@ -1,0 +1,15 @@
+<div class="dep-sheet-backdrop" data-bind="visible: picker.open(), click: onClose" style="display:none;z-index:595;"></div>
+<div class="dep-sheet" style="z-index:600;" data-bind="css: {'dep-sheet--open': picker.open()}">
+  <div class="dep-sheet-handle"></div>
+  <div class="dep-sheet-title" data-bind="text: picker.title"></div>
+  <div class="dep-sheet-actions">
+    <!-- ko foreach: picker.options() -->
+    <button class="dep-sheet-row" data-bind="click: function(){ $parent.pickOption($data); }, css: {'dep-sheet-row--active': $data === $parent.picker.current()}">
+      <div style="flex:1;font-size:14px;font-weight:600;color:var(--c-t1);" data-bind="text: $data"></div>
+      <!-- ko if: $data === $parent.picker.current() -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+      <!-- /ko -->
+    </button>
+    <!-- /ko -->
+  </div>
+</div>

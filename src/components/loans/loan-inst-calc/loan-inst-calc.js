@@ -1,0 +1,17 @@
+define(['shared-components/utils'], function (utils) {
+  'use strict';
+  function LoanInstCalcViewModel(context) {
+    var self = this;
+    var p = context.properties ? context.properties.params : context;
+    utils.loadCss('/components/shared/panel-system.css');
+    utils.loadCss('/components/loans/loans.css');
+    self.open        = p.showInstCalc;
+    self.amount      = p.instCalcAmount;
+    self.tenure      = p.instCalcTenure;
+    self.rate        = p.instCalcRate;
+    self.result      = p.instCalcResult;
+    self.onCalculate = p.calcInstallment;
+    self.onClose = function () { p.showInstCalc(false); p.instCalcResult(null); };
+  }
+  return LoanInstCalcViewModel;
+});

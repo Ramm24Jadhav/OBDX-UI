@@ -1,0 +1,13 @@
+define(['shared-components/utils'], function (utils) {
+  'use strict';
+  function LoanDisbInquiryViewModel(context) {
+    var self = this;
+    var p = context.properties ? context.properties.params : context;
+    utils.loadCss('/components/shared/panel-system.css');
+    self.open    = p.showDisbInquiry;
+    self.loan    = p.loan;
+    self.fmt     = p.fmt;
+    self.onClose = function () { p.showDisbInquiry(false); };
+  }
+  return LoanDisbInquiryViewModel;
+});

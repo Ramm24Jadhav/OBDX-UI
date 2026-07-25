@@ -1,0 +1,53 @@
+<!-- more-hero CCA — Profile card + RM row -->
+<div class="more-hero-card">
+  <div class="more-hero-mesh1"></div>
+  <div class="more-hero-mesh2"></div>
+
+  <div class="more-hero-profile" data-bind="click: onProfileTap">
+    <div class="more-hero-avatar" data-bind="text: userInitial"></div>
+    <div class="more-hero-info">
+      <div class="more-hero-name" data-bind="text: currentUser().name"></div>
+      <div class="more-hero-cid" data-bind="text: 'Customer ID: ' + currentUser().customerId"></div>
+      <div class="more-hero-tier">
+        <svg viewBox="0 0 24 24" fill="#C8A45D" stroke="none" width="10" height="10"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span data-bind="text: currentUser().tier || 'Platinum Member'"></span>
+      </div>
+    </div>
+    <div class="more-hero-edit-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+  </div>
+
+  <div class="more-hero-stats">
+    <div class="more-hero-stat">
+      <div class="more-hero-stat__val">3</div>
+      <div class="more-hero-stat__label" data-bind="text: nls.more_stat_accounts"></div>
+    </div>
+    <div class="more-hero-stat">
+      <div class="more-hero-stat__val" style="color:var(--c-gold);">2</div>
+      <div class="more-hero-stat__label" data-bind="text: nls.more_stat_cards"></div>
+    </div>
+    <div class="more-hero-stat">
+      <div class="more-hero-stat__val" style="color:#4ADE80;">KYC ✓</div>
+      <div class="more-hero-stat__label" data-bind="text: nls.more_stat_verified"></div>
+    </div>
+  </div>
+
+  <div class="more-hero-divider"></div>
+
+  <div class="more-hero-rm">
+    <div class="more-hero-rm-avatar">S</div>
+    <div class="more-hero-rm-info">
+      <div class="more-hero-rm-label" data-bind="text: nls.more_rm_label"></div>
+      <div class="more-hero-rm-name">Samir Al-Rashidi · Premium Desk</div>
+    </div>
+    <div style="display:flex;gap:6px;">
+      <div class="more-hero-rm-btn" data-bind="click: onRMCall" title="Call RM">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="more-hero-rm-btn" data-bind="click: onRMChat" title="Chat with RM">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+    </div>
+  </div>
+</div>

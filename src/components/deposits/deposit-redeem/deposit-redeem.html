@@ -1,0 +1,40 @@
+﻿<div class="dep-panel" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Redeem Deposit</div>
+    <div style="width:36px;"></div>
+  </div>
+  <!-- ko if: !submitted() -->
+  <!-- ko with: dep() -->
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-summary-card">
+      <div class="dep-summary-row"><span>Deposit</span><strong data-bind="text: name"></strong></div>
+      <div class="dep-summary-row"><span>Principal</span><strong class="s-num" data-bind="text: $parent.fmt(principal)"></strong></div>
+      <div class="dep-summary-row"><span>Accrued Profit</span><strong class="s-num" style="color:var(--c-success);" data-bind="text: $parent.fmt(profit)"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Amount to Credit</span><strong class="s-num" style="color:var(--c-primary);font-size:16px;" data-bind="text: $parent.fmt(principal + profit)"></strong></div>
+    </div>
+    <div class="dep-notice dep-notice--warn">Early redemption may result in reduced profit rate as per terms.</div>
+    <div class="dep-form-group">
+      <label class="dep-form-label">Reason for Redemption</label>
+      <button class="app-picker-btn" data-bind="click: function(){ $parent.openPicker('Reason for Redemption', ['Liquidity needs','Better investment opportunity','Emergency','Other'], $parent.redeemReason); }">
+        <span data-bind="text: $parent.redeemReason()"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <div class="dep-form-group">
+      <label class="dep-form-label">Credit to Account</label>
+      <acct-account-dd params="accounts: $parent.accounts, selectedAccount: $parent.selectedAccount"></acct-account-dd>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="dep-panel-footer"><button class="dep-btn-primary" data-bind="click: onConfirm">Confirm Redemption</button></div>
+  <!-- /ko -->
+  <!-- ko if: submitted() -->
+  <div class="dep-success">
+    <div class="dep-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="36" height="36"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="dep-success-title">Redemption Requested</div>
+    <div class="dep-success-sub" data-bind="text: submittedMsg"></div>
+    <button class="dep-btn-primary" style="width:100%;margin-top:24px;" data-bind="click: onClose">Done</button>
+  </div>
+  <!-- /ko -->
+</div>

@@ -1,0 +1,51 @@
+<div style="padding:16px;display:flex;flex-direction:column;gap:14px;">
+
+  <!-- ko foreach: loans() -->
+  <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+
+    <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;"
+         data-bind="click: function(){ $parent.onOpenDetail($data); }">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:11px;color:var(--c-t3);margin-top:2px;" data-bind="text: ref + ' · Since ' + disbursed"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="pill pill-success" style="font-size:10px;padding:3px 9px;" data-bind="text: status"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t3)" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
+    <div style="padding:14px 16px;display:flex;border-bottom:1px solid var(--c-border);">
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Outstanding</div><div class="s-num" style="font-size:15px;font-weight:800;color:#EF4444;margin-top:3px;" data-bind="text: $parent.fmt(outstanding)"></div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Rate p.a.</div><div style="font-size:15px;font-weight:800;color:var(--c-t1);margin-top:3px;" data-bind="text: rate.toFixed(2) + '%'"></div></div>
+      <div style="flex:1;"><div style="font-size:10px;color:var(--c-t3);">Monthly EMI</div><div class="s-num" style="font-size:15px;font-weight:800;color:var(--c-primary);margin-top:3px;" data-bind="text: $parent.fmt(emi)"></div></div>
+    </div>
+
+    <div style="padding:12px 16px;border-bottom:1px solid var(--c-border);">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:11px;color:var(--c-t3);" data-bind="text: repaidLabel"></span>
+        <span style="font-size:11px;font-weight:700;color:var(--c-t1);" data-bind="text: repaidPct + '% repaid'"></span>
+      </div>
+      <div style="height:6px;background:var(--c-border);border-radius:3px;">
+        <div style="height:6px;background:linear-gradient(90deg,var(--c-primary),#86EFAC);border-radius:3px;transition:width .4s;" data-bind="style:{width: repaidPct + '%'}"></div>
+      </div>
+      <div style="font-size:11px;color:var(--c-t3);margin-top:6px;">Next due: <strong style="color:var(--c-t1);" data-bind="text: nextDue"></strong></div>
+    </div>
+
+    <div style="padding:10px 16px;display:flex;gap:8px;align-items:center;">
+      <button class="dep-btn dep-btn--primary" data-bind="click: function(d,e){ e.stopPropagation(); $parent.onOpen($data,'showPayment'); }">Make Payment</button>
+      <button class="dep-btn dep-btn--ghost"   data-bind="click: function(d,e){ e.stopPropagation(); $parent.onOpen($data,'showSchedule'); }">Schedule</button>
+      <button class="dep-btn dep-btn--ghost"   data-bind="click: function(d,e){ e.stopPropagation(); $parent.onOpen($data,'showStatement'); }">Statement</button>
+      <button class="dep-btn dep-btn--ghost dep-btn--icon" data-bind="click: function(d,e){ e.stopPropagation(); $parent.onOpen($data,'showDetails'); }" title="More">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- /ko -->
+
+  <button class="dep-new-btn" data-bind="click: onOrigination">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Apply for New Finance
+  </button>
+  <div class="bottom-spacer"></div>
+</div>

@@ -1,0 +1,101 @@
+﻿<!-- more-theme CCA — Theme & Appearance slide panel -->
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': open()}">
+
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.more_theme"></h2>
+    <div style="width:36px;"></div>
+  </div>
+
+  <div class="app-panel-body" style="padding-top:16px;">
+
+    <!-- Live Preview Card -->
+    <div class="more-theme-section">
+      <div class="more-theme-label" data-bind="text: nls.more_theme_preview"></div>
+      <div style="border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+        <!-- Preview header in selected accent -->
+        <div style="padding:16px 18px 18px;" data-bind="style:{background: previewAccentObj().color}">
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:6px;">OBDX Mobile</div>
+          <div style="font-size:22px;font-weight:800;color:#fff;">LYD 45,678.00</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:3px;">Available Balance · Current ••2341</div>
+        </div>
+        <!-- Preview body -->
+        <div style="padding:14px 18px;background:var(--c-surface);display:flex;gap:10px;">
+          <div style="flex:1;background:var(--c-bg);border-radius:12px;padding:12px;text-align:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="20" height="20" style="margin-bottom:4px;" data-bind="attr:{stroke: previewAccentObj().color}"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+            <div style="font-size:11px;font-weight:600;color:var(--c-t2);">Transfer</div>
+          </div>
+          <div style="flex:1;background:var(--c-bg);border-radius:12px;padding:12px;text-align:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="20" height="20" style="margin-bottom:4px;" data-bind="attr:{stroke: previewAccentObj().color}"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <div style="font-size:11px;font-weight:600;color:var(--c-t2);">Pay Bills</div>
+          </div>
+          <div style="flex:1;background:var(--c-bg);border-radius:12px;padding:12px;text-align:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" width="20" height="20" style="margin-bottom:4px;" data-bind="attr:{stroke: previewAccentObj().color}"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            <div style="font-size:11px;font-weight:600;color:var(--c-t2);">More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appearance Mode -->
+    <div class="more-theme-section">
+      <div class="more-theme-label" data-bind="text: nls.more_theme_appearance"></div>
+      <div class="more-theme-opts">
+        <div class="more-theme-opt" data-bind="css: {'more-theme-opt--sel': previewMode() === 'light'}, click: function(){ setThemePreview('light'); }">
+          <div class="more-theme-opt__icon">☀️</div>
+          <div class="more-theme-opt__label" data-bind="text: nls.more_theme_light"></div>
+        </div>
+        <div class="more-theme-opt" data-bind="css: {'more-theme-opt--sel': previewMode() === 'dark'}, click: function(){ setThemePreview('dark'); }">
+          <div class="more-theme-opt__icon">🌙</div>
+          <div class="more-theme-opt__label" data-bind="text: nls.more_theme_dark"></div>
+        </div>
+        <div class="more-theme-opt" data-bind="css: {'more-theme-opt--sel': previewMode() === 'system'}, click: function(){ setThemePreview('system'); }">
+          <div class="more-theme-opt__icon">⚙️</div>
+          <div class="more-theme-opt__label" data-bind="text: nls.more_theme_system"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent Color -->
+    <div class="more-theme-section">
+      <div class="more-theme-label" data-bind="text: nls.more_theme_accent"></div>
+      <div class="more-accent-grid">
+        <!-- ko foreach: accents -->
+        <div data-bind="attr:{class: $parent.accentClass($data), title: label}, style: { background: color }, click: function(){ $parent.setAccentPreview($data); }" style="position:relative;border-radius:50%;width:40px;height:40px;cursor:pointer;">
+          <!-- ko if: $parent.previewAccent() === id -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" width="14" height="14" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
+      </div>
+      <div style="font-size:11px;color:var(--c-t3);margin-top:6px;">
+        <span data-bind="text: nls.more_theme_selected"></span> <span style="font-weight:700;" data-bind="text: previewAccentObj().label, style:{color: previewAccentObj().color}"></span>
+      </div>
+    </div>
+
+    <!-- Font Size -->
+    <div class="more-theme-section" style="margin-bottom:8px;">
+      <div class="more-theme-label" data-bind="text: nls.more_theme_text_size"></div>
+      <div class="more-theme-opts">
+        <div class="more-theme-opt" data-bind="css: {'more-theme-opt--sel': previewFont() === 'normal'}, click: function(){ setFontPreview('normal'); }">
+          <div class="more-theme-opt__icon" style="font-size:16px;font-weight:700;">A</div>
+          <div class="more-theme-opt__label" data-bind="text: nls.more_theme_normal"></div>
+        </div>
+        <div class="more-theme-opt" data-bind="css: {'more-theme-opt--sel': previewFont() === 'large'}, click: function(){ setFontPreview('large'); }">
+          <div class="more-theme-opt__icon" style="font-size:22px;font-weight:700;">A</div>
+          <div class="more-theme-opt__label" data-bind="text: nls.more_theme_large"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sticky footer -->
+  <div class="app-panel-footer">
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: applyAll, text: nls.more_theme_apply"></button>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="click: onClose, text: nls.btn_cancel"></button>
+  </div>
+
+</div>

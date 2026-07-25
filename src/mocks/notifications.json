@@ -1,0 +1,10 @@
+{
+  "status": "SUCCESS",
+  "notifications": [
+    { "id": "N001", "type": "CREDIT",   "title": "Transfer Received", "body": "AED 2,000 received from Sara Ahmed", "time": "2 min ago", "read": false, "iconType": "success" },
+    { "id": "N002", "type": "SECURITY", "title": "Security Alert",    "body": "New device login detected",          "time": "1 hr ago",  "read": false, "iconType": "error"   },
+    { "id": "N003", "type": "DEBIT",    "title": "Card Transaction",  "body": "AED 185.00 at Carrefour",           "time": "3 hr ago",  "read": true,  "iconType": "info"    },
+    { "id": "N004", "type": "STATEMENT","title": "Monthly Statement", "body": "July 2026 statement ready",         "time": "Yesterday", "read": true,  "iconType": "info"    }
+  ],
+  "unreadCount": 2
+}

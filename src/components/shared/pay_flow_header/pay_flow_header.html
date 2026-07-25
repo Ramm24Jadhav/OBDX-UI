@@ -1,0 +1,36 @@
+<div class="pay-flow-header">
+  <div class="pay-flow-dark-header">
+    <div class="oj-flex oj-sm-align-items-center" style="gap:0;padding:0;">
+      <!-- ko if: showBack() -->
+      <div class="oj-flex-item" style="flex:0 0 36px;">
+        <button class="app-back-btn pay-flow-back-btn" data-bind="click: onBack" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+      <!-- /ko -->
+      <!-- ko ifnot: showBack() -->
+      <div class="oj-flex-item" style="flex:0 0 36px;"></div>
+      <!-- /ko -->
+      <h2 class="oj-flex-item pay-flow-title" data-bind="text: title"></h2>
+      <div class="oj-flex-item" style="flex:0 0 36px;"></div>
+    </div>
+  </div>
+  <div class="pay-progress-panel">
+    <div class="pay-progress" data-bind="foreach: stepItems">
+      <div class="pay-progress__item" data-bind="css: $parent.dotClass($index() + 1)">
+        <div class="pay-progress__dot">
+          <!-- ko if: $parent.currentStep() > $index() + 1 -->
+          <span>&#10003;</span>
+          <!-- /ko -->
+          <!-- ko ifnot: $parent.currentStep() > $index() + 1 -->
+          <span data-bind="text: $index() + 1"></span>
+          <!-- /ko -->
+        </div>
+        <span class="pay-progress__label" data-bind="text: $data"></span>
+      </div>
+      <!-- ko if: $index() < $parent.stepItems().length - 1 -->
+      <div class="pay-progress__line" data-bind="css: {'pay-progress__line--done': $parent.currentStep() > $index() + 1}"></div>
+      <!-- /ko -->
+    </div>
+  </div>
+</div>

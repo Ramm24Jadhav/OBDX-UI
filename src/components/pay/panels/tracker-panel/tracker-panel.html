@@ -1,0 +1,43 @@
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': isOpen()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.pay_tracker"></h2>
+    <div style="width:36px;"></div>
+  </div>
+  <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--c-t1);">International Wire</div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;">Ref: TXN-2026-00891</div>
+        </div>
+        <span class="pill pill-warning">Processing</span>
+      </div>
+      <div style="padding:14px 16px;">
+        <div class="track-steps">
+          <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Initiated<span>24 Jul 2026</span></div></div>
+          <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Authorised<span>24 Jul 2026</span></div></div>
+          <div class="track-step track-step--active"><div class="track-step__dot"></div><div class="track-step__label">Processing<span>In Progress</span></div></div>
+          <div class="track-step" style="padding-bottom:0;"><div class="track-step__dot"></div><div class="track-step__label">Completed<span>Pending</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--c-t1);">Within Bank Transfer</div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;">Ref: TXN-2026-00874</div>
+        </div>
+        <span class="pill pill-success">Completed</span>
+      </div>
+      <div style="padding:14px 16px;">
+        <div class="track-steps">
+          <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Initiated<span>22 Jul 2026</span></div></div>
+          <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Authorised<span>22 Jul 2026</span></div></div>
+          <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Processing<span>22 Jul 2026</span></div></div>
+          <div class="track-step track-step--done" style="padding-bottom:0;"><div class="track-step__dot">✓</div><div class="track-step__label">Completed<span>22 Jul 2026</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="dep-sheet-backdrop" data-bind="visible: open(), click: onClose" style="display:none;"></div>
+<div class="dep-sheet" data-bind="css: {'dep-sheet--open': open()}">
+  <div class="dep-sheet-handle"></div>
+  <!-- ko with: loan() --><div class="dep-sheet-title" data-bind="text: name"></div><!-- /ko -->
+  <div class="dep-sheet-actions">
+    <button class="dep-sheet-row" data-bind="click: onOpenDetail">
+      <div class="dep-sheet-row-icon" style="background:#EFF6FF;"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+      <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Loan Details</div><div style="font-size:12px;color:var(--c-t3);">Full account information</div></div>
+    </button>
+    <button class="dep-sheet-row" data-bind="click: onDisbInquiry">
+      <div class="dep-sheet-row-icon" style="background:#DCFCE7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Disbursement Inquiry</div><div style="font-size:12px;color:var(--c-t3);">View disbursement history</div></div>
+    </button>
+  </div>
+</div>

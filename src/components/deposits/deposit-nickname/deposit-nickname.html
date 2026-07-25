@@ -1,0 +1,27 @@
+<div class="dep-panel" style="z-index:515;" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Add Nickname</div>
+    <div style="width:36px;"></div>
+  </div>
+  <!-- ko if: !submitted() -->
+  <!-- ko with: dep() -->
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-summary-card">
+      <div class="dep-summary-row" style="border:none;"><span>Deposit</span><strong data-bind="text: name"></strong></div>
+    </div>
+    <div class="dep-form-group"><label class="dep-form-label">Nickname</label><input type="text" class="dep-form-input" placeholder="e.g. Emergency Fund, House Savings" data-bind="value: $parent.nickname"></div>
+    <div class="dep-notice dep-notice--info">Nickname is visible only to you within the app.</div>
+  </div>
+  <!-- /ko -->
+  <div class="dep-panel-footer"><button class="dep-btn-primary" data-bind="click: onConfirm">Save Nickname</button></div>
+  <!-- /ko -->
+  <!-- ko if: submitted() -->
+  <div class="dep-success">
+    <div class="dep-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" width="36" height="36"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="dep-success-title">Nickname Saved</div>
+    <div class="dep-success-sub" data-bind="text: submittedMsg"></div>
+    <button class="dep-btn-primary" style="width:100%;margin-top:24px;" data-bind="click: onClose">Done</button>
+  </div>
+  <!-- /ko -->
+</div>

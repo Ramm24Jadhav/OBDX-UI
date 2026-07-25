@@ -1,0 +1,39 @@
+<!-- spending-overview widget -->
+<div class="spending-card">
+  <div class="spending-header">
+    <h4 data-bind="text: nls.home_spending_overview"></h4>
+    <span style="font-size:11px;color:var(--c-t3);font-weight:600;cursor:pointer;" data-bind="click: openAnalytics, text: nls.home_analytics_link"></span>
+  </div>
+  <div class="spending-amounts">
+    <div class="spending-amt-item">
+      <div class="spending-dot" style="background:var(--c-primary);"></div>
+      <div>
+        <div class="spending-amt-label" data-bind="text: nls.home_income"></div>
+        <div class="spending-amt-val s-num">LYD 27,640</div>
+      </div>
+    </div>
+    <div class="spending-amt-item">
+      <div class="spending-dot" style="background:#C8A45D;"></div>
+      <div>
+        <div class="spending-amt-label" data-bind="text: nls.home_expenses"></div>
+        <div class="spending-amt-val s-num">LYD 12,420</div>
+      </div>
+    </div>
+  </div>
+  <svg viewBox="0 0 313 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:60px;">
+    <defs>
+      <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7A1531" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#7A1531" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="expGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C8A45D" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#C8A45D" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 45 C30 42 55 20 80 25 C105 30 130 12 160 15 C190 18 220 8 260 10 C285 11 300 14 313 12 L313 60 L0 60 Z" fill="url(#incomeGrad)"/>
+    <path d="M0 45 C30 42 55 20 80 25 C105 30 130 12 160 15 C190 18 220 8 260 10 C285 11 300 14 313 12" stroke="#7A1531" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M0 52 C30 50 55 42 80 44 C105 46 130 36 160 38 C190 40 220 32 260 35 C285 36 300 38 313 36 L313 60 L0 60 Z" fill="url(#expGrad)"/>
+    <path d="M0 52 C30 50 55 42 80 44 C105 46 130 36 160 38 C190 40 220 32 260 35 C285 36 300 38 313 36" stroke="#C8A45D" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </svg>
+</div>

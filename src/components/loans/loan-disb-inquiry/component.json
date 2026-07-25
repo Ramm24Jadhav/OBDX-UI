@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-disb-inquiry",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Disbursement Inquiry",
+  "description": "Slide-up disbursement inquiry panel.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

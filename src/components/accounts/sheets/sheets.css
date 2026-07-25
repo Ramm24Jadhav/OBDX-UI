@@ -1,0 +1,13 @@
+/* Account bottom sheets */
+.acc-bottom-sheet{position:absolute;inset:0;z-index:800;background:rgba(0,0,0,0);display:none;flex-direction:column;justify-content:flex-end;transition:background .25s}
+.acc-bottom-sheet.bs-open{background:rgba(0,0,0,.45)}
+.acc-sheet-card{background:var(--c-surface);border-radius:28px 28px 0 0;padding:16px 20px 32px;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,1,.23,1)}
+.acc-bottom-sheet.bs-open .acc-sheet-card{transform:translateY(0)}
+.acc-sheet-handle{width:40px;height:5px;border-radius:3px;background:var(--c-border);margin:14px auto 12px;cursor:grab;touch-action:none;flex-shrink:0}
+.acc-sheet-handle:active{cursor:grabbing;background:var(--c-t4)}
+.acc-sheet-title{font-size:17px;font-weight:800;color:var(--c-t1);text-align:center;margin-bottom:4px}
+.acc-sheet-opt{background:var(--c-bg);border:1px solid var(--c-border);border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s}
+.acc-sheet-opt:active{background:var(--c-border)}
+.acc-sheet-opt-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.acc-sheet-opt-label{font-size:12px;font-weight:700;color:var(--c-t1);text-align:center}
+.acc-sheet-opt-sub{font-size:10px;color:var(--c-t3);text-align:center}

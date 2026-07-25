@@ -1,0 +1,23 @@
+﻿<!-- Login Screen — OBDX Mobile (MVVM view) -->
+<div class="login-screen-wrap">
+
+  <login-splash params="[[$data]]"></login-splash>
+
+  <div class="login-screen" data-bind="css: {'hidden': showSplash()}">
+    <login-hero params="[[$data]]"></login-hero>
+
+    <div class="login-body">
+      <div class="lb-auth-area">
+        <login-bio-view      params="[[$data]]"></login-bio-view>
+        <login-mpin-view     params="[[$data]]"></login-mpin-view>
+        <login-password-view params="[[$data]]"></login-password-view>
+      </div>
+      <login-quick-access params="[[$data]]"></login-quick-access>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:1000;">
+    <acct-origination params="[[originationParams]]"></acct-origination>
+  </div>
+
+</div>

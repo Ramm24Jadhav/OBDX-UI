@@ -1,0 +1,6 @@
+/* Deposits — screen-specific styles only.
+   All dep-* panel/sheet/card rules live in shared/panel-system.css */
+
+/* Deposit progress bar (unique to deposits) */
+.dep-progress-track{height:6px;border-radius:3px;background:var(--c-border);overflow:hidden;margin:8px 0 4px;}
+.dep-progress-fill{height:100%;border-radius:3px;background:var(--c-primary);transition:width .4s ease;}

@@ -1,0 +1,63 @@
+﻿/* Loans — screen-specific styles only.
+   All dep-* panel/sheet/card rules live in shared/panel-system.css */
+
+/* Eligibility result colours */
+.loan-eligible-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;}
+.loan-eligible-badge--yes{background:#DCFCE7;color:#166534;}
+.loan-eligible-badge--no{background:#FEE2E2;color:#991B1B;}
+
+/* ── Repayment schedule card rows ───────────────────── */
+.sched-row-card{
+  display:grid;grid-template-columns:80px 1fr 1fr 1fr 14px;
+  align-items:center;gap:4px;
+  background:var(--c-surface);border:1px solid var(--c-border);
+  border-radius:14px;padding:14px;margin-bottom:8px;
+}
+.sched-row-card:active{background:var(--c-bg);}
+.sched-row-month{display:flex;flex-direction:column;}
+.sched-month-name{font-size:17px;font-weight:800;color:var(--c-t1);line-height:1.15;}
+.sched-month-year{font-size:11px;color:var(--c-t3);font-weight:500;margin-top:1px;}
+.sched-row-cell{display:flex;flex-direction:column;}
+.sched-cell-cur{font-size:9px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px;}
+.sched-cell-val{font-size:13px;font-weight:700;color:var(--c-t1);font-variant-numeric:tabular-nums;}
+
+/* ── Custom picker button ───────────────────────────── */
+.app-picker-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:13px 14px;
+  border-radius:12px;border:1.5px solid var(--c-border);
+  background:var(--c-surface);color:var(--c-t1);
+  font-size:14px;font-weight:600;cursor:pointer;text-align:left;
+  transition:border-color .15s;
+}
+.app-picker-btn:active{border-color:var(--c-primary);background:var(--c-surface);}
+.app-picker-btn svg{color:var(--c-t3);flex-shrink:0;margin-left:8px;}
+
+/* ── Picker bottom sheet ────────────────────────────── */
+.app-picker-sheet{
+  position:fixed;left:0;right:0;bottom:0;
+  background:var(--c-surface);border-radius:22px 22px 0 0;
+  z-index:595;
+  transform:translateY(100%);
+  transition:transform .32s cubic-bezier(.32,1,.23,1);
+  box-shadow:0 -4px 32px rgba(0,0,0,.14);
+}
+.app-picker-sheet--open{transform:translateY(0);}
+
+.app-picker-sheet-title{
+  font-size:13px;font-weight:700;color:var(--c-t3);
+  text-transform:uppercase;letter-spacing:.6px;
+  padding:6px 20px 14px;border-bottom:1px solid var(--c-border);
+}
+
+.app-picker-row{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:16px 20px;
+  background:none;border:none;border-bottom:1px solid var(--c-border);
+  cursor:pointer;font-size:15px;font-weight:600;color:var(--c-t1);text-align:left;
+  transition:background .1s;
+}
+.app-picker-row:last-of-type{border-bottom:none;}
+.app-picker-row:active{background:var(--c-bg);}
+.app-picker-row--active{color:var(--c-primary);}
+.app-picker-row--active svg{stroke:var(--c-primary);}

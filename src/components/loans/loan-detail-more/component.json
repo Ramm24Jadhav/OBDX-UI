@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-detail-more",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan Detail More Sheet",
+  "description": "Bottom sheet with loan detail actions.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

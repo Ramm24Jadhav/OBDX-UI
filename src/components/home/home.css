@@ -1,0 +1,28 @@
+/* ==========================================================
+   Home Screen — root layout + skeleton only
+   ========================================================== */
+
+#home-root{display:flex;flex-direction:column;height:100%;overflow:hidden}
+
+/* ── Hero sheet (appbar + RV widget) ── */
+.home-hero-sheet{background:var(--c-primary-dd);flex-shrink:0;overflow:hidden;border-radius:0 0 28px 28px;transition:height .38s cubic-bezier(.4,0,.2,1),border-radius .38s cubic-bezier(.4,0,.2,1)}
+.home-hero-sheet--collapsed{border-radius:0}
+.home-hero-body{transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .28s ease}
+.home-hero-sheet--collapsed .home-hero-body{transform:translateY(-100%);opacity:0;pointer-events:none}
+
+.home-hero-handle{display:flex;justify-content:center;align-items:center;padding:6px 0 14px;cursor:grab;touch-action:none;-webkit-tap-highlight-color:transparent}
+.home-hero-handle:active{cursor:grabbing}
+.home-hero-handle-pill{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.35);transition:width .2s,background .2s}
+.home-hero-handle:active .home-hero-handle-pill{width:48px;background:rgba(255,255,255,.6)}
+.home-hero-sheet--collapsed .home-hero-handle{display:none}
+
+/* ── Scrollable content ── */
+.home-content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:100px}
+.home-sheet{background:var(--c-surface);border-radius:28px 28px 0 0;margin-top:12px;padding:4px 0 0;position:relative;z-index:1}
+.home-content::-webkit-scrollbar{display:none}
+
+.home-skeleton{padding:20px;display:flex;flex-direction:column;gap:12px}
+.skeleton-card{height:180px;border-radius:20px;background:linear-gradient(90deg,var(--c-border) 25%,var(--c-surface2) 50%,var(--c-border) 75%);background-size:200% 100%;animation:skeletonShimmer 1.4s ease-in-out infinite}
+.skeleton-row{height:18px;border-radius:var(--r-full);background:linear-gradient(90deg,var(--c-border) 25%,var(--c-surface2) 50%,var(--c-border) 75%);background-size:200% 100%;animation:skeletonShimmer 1.4s ease-in-out infinite}
+.skeleton-row--short{width:60%}
+@keyframes skeletonShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}

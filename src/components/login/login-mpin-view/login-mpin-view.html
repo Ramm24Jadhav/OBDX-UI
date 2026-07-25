@@ -1,0 +1,41 @@
+<div style="width:100%;" data-bind="visible: authMode() === 'mpin'" style="display:none;">
+  <!-- User chip -->
+  <div class="lb-user-chip">
+    <div class="lb-user-avatar" data-bind="text: userInitial"></div>
+    <div class="lb-user-info">
+      <div class="lb-user-name" data-bind="text: userName"></div>
+      <div class="lb-user-sub"><span data-bind="text: nls.login_last_login"></span> Today, 9:12 AM</div>
+    </div>
+    <button class="lb-user-switch" data-bind="click: function(){ setMode('password'); }, text: nls.login_switch"></button>
+  </div>
+
+  <div style="text-align:center;margin-bottom:4px;">
+    <div class="lb-mode-label" data-bind="text: nls.login_mpin_label"></div>
+    <div style="font-size:12px;color:var(--c-t3);margin-top:4px;" data-bind="text: nls.login_mpin_hint"></div>
+  </div>
+  <div class="mpin-display">
+    <!-- ko foreach: [0,1,2,3,4,5] -->
+    <div class="mpin-dot" data-bind="css: {'filled': $parent.mpinVal().length > $data}"></div>
+    <!-- /ko -->
+  </div>
+  <div class="lb-error" data-bind="text: errorMsg, visible: errorMsg().length > 0"></div>
+  <div class="mpin-pad">
+    <!-- ko foreach: mpinKeys -->
+    <button class="mpin-key"
+            data-bind="click: function(){ $parent.mpinKeyPress($data.k); },
+                       css: {'empty': $data.k === '', 'del': $data.k === '⌫'}">
+      <span data-bind="text: $data.k"></span>
+      <!-- ko if: $data.sub -->
+      <small data-bind="text: $data.sub"></small>
+      <!-- /ko -->
+    </button>
+    <!-- /ko -->
+  </div>
+  <div class="lb-alt-methods" style="margin-top:12px;">
+    <button class="lb-alt-btn" data-bind="click: function(){ setMode('bio'); }, text: nls.login_fingerprint"></button>
+    <span>·</span>
+    <button class="lb-alt-btn" data-bind="click: function(){ setMode('faceid'); }, text: nls.login_face_id"></button>
+    <span>·</span>
+    <button class="lb-alt-btn" data-bind="click: function(){ setMode('password'); }, text: nls.login_password"></button>
+  </div>
+</div>

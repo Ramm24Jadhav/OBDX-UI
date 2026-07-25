@@ -1,0 +1,52 @@
+<div class="orig-footer">
+  <!-- Account: Step 1 (Personal Details) → Step 2 -->
+  <!-- ko if: step() === 1 && context() === 'account' -->
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 2)">Continue</button>
+  <!-- /ko -->
+
+  <!-- Account: Step 2 (Product) → Step 3 (Review) -->
+  <!-- ko if: step() === 2 && context() === 'account' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 1)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 3)">Review Application</button>
+  <!-- /ko -->
+
+  <!-- Account: Step 3 (Review) → Submit -->
+  <!-- ko if: step() === 3 && context() === 'account' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 2)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: submit">Submit Application</button>
+  <!-- /ko -->
+
+  <!-- Loan: Step 1 → Review -->
+  <!-- ko if: step() === 1 && context() === 'loan' -->
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 2)">Continue</button>
+  <!-- /ko -->
+
+  <!-- Loan: Step 2 (Review) → Submit -->
+  <!-- ko if: step() === 2 && context() === 'loan' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 1)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: submit">Submit Application</button>
+  <!-- /ko -->
+
+  <!-- Deposit: Step 1 (Product+Amount) → Maturity -->
+  <!-- ko if: step() === 1 && context() === 'deposit' -->
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 2)">Continue</button>
+  <!-- /ko -->
+
+  <!-- Deposit: Step 2 (Maturity) → Nominee -->
+  <!-- ko if: step() === 2 && context() === 'deposit' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 1)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 3)">Continue</button>
+  <!-- /ko -->
+
+  <!-- Deposit: Step 3 (Nominee) → Review -->
+  <!-- ko if: step() === 3 && context() === 'deposit' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 2)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: goStep.bind($data, 4)">Review</button>
+  <!-- /ko -->
+
+  <!-- Deposit: Step 4 (Review) → Submit -->
+  <!-- ko if: step() === 4 && context() === 'deposit' -->
+  <button class="orig-btn-secondary" data-bind="click: goStep.bind($data, 3)">Back</button>
+  <button class="orig-btn-primary" data-bind="click: submit">Submit Application</button>
+  <!-- /ko -->
+</div>

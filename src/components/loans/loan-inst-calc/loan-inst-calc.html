@@ -1,0 +1,23 @@
+<div class="dep-panel" style="z-index:515;" data-bind="css: {'dep-panel--open': open()}">
+  <div class="dep-panel-header">
+    <button class="dep-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="dep-panel-title">Installment Calculator</div>
+    <div style="width:36px;"></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;">
+    <div class="dep-form-group"><label class="dep-form-label">Finance Amount (LYD)</label><input type="number" class="dep-form-input" placeholder="e.g. 100,000" data-bind="value: amount"></div>
+    <div class="dep-form-group"><label class="dep-form-label">Tenure (months)</label><input type="number" class="dep-form-input" placeholder="e.g. 36" data-bind="value: tenure"></div>
+    <div class="dep-form-group"><label class="dep-form-label">Profit Rate (% p.a.)</label><input type="number" class="dep-form-input" placeholder="e.g. 3.99" data-bind="value: rate"></div>
+    <button class="dep-btn-primary" style="margin-bottom:16px;" data-bind="click: onCalculate">Calculate EMI</button>
+    <!-- ko if: result() -->
+    <div class="dep-info-card">
+      <div style="text-align:center;margin-bottom:12px;">
+        <div style="font-size:12px;color:var(--c-t3);margin-bottom:4px;">Monthly EMI</div>
+        <div class="s-num" style="font-size:28px;font-weight:800;color:var(--c-primary);" data-bind="text: result().emi"></div>
+      </div>
+      <div class="dep-summary-row"><span>Total Repayment</span><strong class="s-num" data-bind="text: result().total"></strong></div>
+      <div class="dep-summary-row" style="border:none;"><span>Total Profit Cost</span><strong class="s-num" style="color:#F59E0B;" data-bind="text: result().profit"></strong></div>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>

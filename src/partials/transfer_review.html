@@ -1,0 +1,35 @@
+<!-- Amount hero -->
+<div class="rev-hero">
+  <div class="rev-hero__label" data-bind="text: nls.pay_you_sending"></div>
+  <div class="rev-hero__amount">LYD <span data-bind="text: reviewHero().amount"></span></div>
+  <div class="rev-hero__recipient" data-bind="text: reviewHero().recipientName ? 'To ' + reviewHero().recipientName : ''"></div>
+</div>
+
+<!-- Detail rows -->
+<div class="rev-card">
+  <!-- ko foreach: reviewRows() -->
+  <div class="rev-row" data-bind="css: { 'rev-row--last': $index() === $parent.reviewRows().length - 1 }">
+    <span class="rev-row__label" data-bind="text: label"></span>
+    <span class="rev-row__value" data-bind="text: value"></span>
+  </div>
+  <!-- /ko -->
+</div>
+
+<!-- Charges card -->
+<div class="rev-card" style="margin-top:12px;">
+  <!-- ko foreach: reviewCharges() -->
+  <div class="rev-row" data-bind="css: { 'rev-row--last': $index() === $parent.reviewCharges().length - 1, 'rev-row--total': isTotal, 'rev-row--free': isFree }">
+    <span class="rev-row__label" data-bind="text: label, css: { 'rev-row__label--bold': isTotal }"></span>
+    <span class="rev-row__value" data-bind="text: value, css: { 'rev-row__value--primary': isTotal, 'rev-row__value--green': isFree }">
+    </span>
+  </div>
+  <!-- /ko -->
+</div>
+
+<!-- Disclaimer -->
+<div class="rev-disclaimer">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" width="16" height="16" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <div class="rev-disclaimer__text">Once submitted, this transfer cannot be cancelled. Please verify all details before confirming.</div>
+</div>
+
+<div style="height:16px;"></div>

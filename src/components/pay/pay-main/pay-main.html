@@ -1,0 +1,35 @@
+<div class="app-screen app-screen--pay">
+
+  <!-- Hub — visible when no flow is active -->
+  <pay-hub params="[[$data]]"></pay-hub>
+
+  <!-- Flow router — mounts the active flow component as a full-screen overlay -->
+  <!-- ko if: flowType() === 'within' -->
+  <within-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></within-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'own' -->
+  <own-flow params="accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></own-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'domestic' -->
+  <domestic-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></domestic-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'international' -->
+  <intl-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></intl-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'gcc' -->
+  <gcc-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></gcc-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'afaq' -->
+  <afaq-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></afaq-flow>
+  <!-- /ko -->
+
+  <!-- ko if: flowType() === 'adhoc' -->
+  <adhoc-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></adhoc-flow>
+  <!-- /ko -->
+
+</div>

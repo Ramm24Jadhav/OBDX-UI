@@ -1,0 +1,65 @@
+﻿<div data-bind="visible: showStep2()" style="display:none;padding:0 20px;">
+
+  <!-- Recipient chip -->
+  <div data-bind="visible: selectedBen() !== null" style="display:none;margin:16px 0 0;background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:14px;padding:12px 14px;">
+    <div data-bind="with: selectedBen()" style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;" data-bind="text: initials, style:{background: avatarColor}"></div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:10px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Sending To</div>
+        <div style="font-size:14px;font-weight:800;color:var(--c-t1);" data-bind="text: name"></div>
+        <div style="font-size:11px;color:var(--c-t3);margin-top:1px;" data-bind="text: accountNo || bank"></div>
+      </div>
+      <button data-bind="click: function(){ $parent.step(1); }" style="font-size:11px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;flex-shrink:0;">Edit</button>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="pay-form-group">
+      <label class="pay-form-label" data-bind="text: nls.pay_from_account"></label>
+      <acct-account-dd params="accounts: accounts, selectedAccount: selectedAccount"></acct-account-dd>
+    </div>
+
+    <div class="pay-form-group">
+      <label class="pay-form-label">Amount <span style="color:var(--c-primary);">LYD</span></label>
+      <div style="position:relative;">
+        <div style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:800;color:var(--c-t3);">LYD</div>
+        <input type="number" placeholder="0.00" class="pay-form-input pay-amount-input" data-bind="value: amount, valueUpdate: 'input'" min="0" />
+      </div>
+      <div class="pay-quick-amounts" data-bind="foreach: quickAmounts">
+        <button class="pay-quick-amt" data-bind="text: 'LYD ' + $data, click: function(){ $parent.setQuickAmount($data); }"></button>
+      </div>
+    </div>
+
+    <div class="pay-form-group">
+      <label class="pay-form-label" data-bind="text: nls.pay_purpose"></label>
+      <input class="pay-form-input" type="text" data-bind="value: purpose" />
+    </div>
+
+    <div class="pay-form-group">
+      <label class="pay-form-label" data-bind="text: nls.pay_note"></label>
+      <input class="pay-form-input" type="text" placeholder="Add a note…" data-bind="value: note" />
+    </div>
+
+    <!-- Schedule toggle -->
+    <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t2)" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.pay_schedule_later"></div>
+            <div style="font-size:11px;color:var(--c-t3);" data-bind="text: scheduleEnabled() ? scheduledDate() || 'Pick a date' : 'Transfer now by default'"></div>
+          </div>
+        </div>
+        <div data-bind="click: toggleSchedule" style="width:44px;height:24px;border-radius:12px;position:relative;cursor:pointer;transition:background .2s;" data-bind2="style:{background: scheduleEnabled() ? 'var(--c-primary)' : 'var(--c-border)'}">
+          <div style="width:20px;height:20px;border-radius:10px;background:#fff;position:absolute;top:2px;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s;" data-bind="style:{left: scheduleEnabled() ? '22px' : '2px'}"></div>
+        </div>
+      </div>
+      <div data-bind="visible: scheduleEnabled()" style="margin-top:14px;border-top:1px solid var(--c-border);padding-top:14px;display:none;">
+        <label class="pay-form-label" data-bind="text: nls.pay_schedule_date"></label>
+        <input type="date" class="pay-form-input" data-bind="value: scheduledDate" />
+      </div>
+    </div>
+
+  </div>
+  <div style="height:16px;"></div>
+</div>

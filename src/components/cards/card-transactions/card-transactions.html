@@ -1,0 +1,29 @@
+<div class="ctx-wrap">
+  <div class="ctx-hdr">
+    <span class="ctx-title" data-bind="text: nls.home_recent_tx"></span>
+    <button class="ctx-see-all" data-bind="text: nls.home_see_all"></button>
+  </div>
+  <div data-bind="with: activeCard()">
+    <!-- ko if: $data && $data.transactions && $data.transactions.length -->
+    <!-- ko foreach: $data.transactions.slice(0, 5) -->
+    <div class="ctx-row">
+      <div class="ctx-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      </div>
+      <div class="ctx-info">
+        <div class="ctx-merchant" data-bind="text: merchant || description"></div>
+        <div class="ctx-date" data-bind="text: date"></div>
+      </div>
+      <div class="ctx-amount" data-bind="css: {'ctx-amount--cr': type === 'CR'}, text: (type === 'CR' ? '+' : '-') + $parents[1].formatAmount(amount)"></div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: $data && $data.transactions && $data.transactions.length -->
+    <div class="ctx-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32" style="opacity:.3;margin-bottom:8px;"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/></svg>
+      <div style="font-size:13px;color:var(--c-t3);" data-bind="text: $parent.nls.cards_no_tx"></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div class="ctx-bottom-spacer"></div>
+</div>

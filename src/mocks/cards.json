@@ -1,0 +1,51 @@
+{
+  "status": "SUCCESS",
+  "cards": [
+    {
+      "id": "CRD-001",
+      "type": "DEBIT",
+      "typeLabel": "Debit Card",
+      "network": "VISA",
+      "maskedNumber": "•••• •••• •••• 7412",
+      "cardholderName": "MOHAMMED AL JASEM",
+      "expiryMonth": "08",
+      "expiryYear": "29",
+      "status": "ACTIVE",
+      "linkedAccountId": "ACC-4829",
+      "limits": { "daily": 3000, "monthly": 15000 },
+      "spentToday": 470.50,
+      "spentThisMonth": 9600.00,
+      "theme": "debit"
+    },
+    {
+      "id": "CRD-002",
+      "type": "CREDIT",
+      "typeLabel": "Credit Card",
+      "network": "VISA",
+      "maskedNumber": "•••• •••• •••• 4892",
+      "cardholderName": "MOHAMMED AL JASEM",
+      "expiryMonth": "11",
+      "expiryYear": "27",
+      "status": "ACTIVE",
+      "creditLimit": 25000,
+      "availableCredit": 15800,
+      "outstandingBalance": 9200,
+      "dueDate": "2026-08-05",
+      "theme": "credit"
+    },
+    {
+      "id": "CRD-003",
+      "type": "VIRTUAL",
+      "typeLabel": "Virtual Card",
+      "network": "VISA",
+      "maskedNumber": "•••• •••• •••• 1198",
+      "cardholderName": "MOHAMMED AL JASEM",
+      "expiryMonth": "12",
+      "expiryYear": "26",
+      "status": "ACTIVE",
+      "linkedAccountId": "ACC-4829",
+      "limits": { "daily": 1000, "monthly": 5000 },
+      "theme": "virtual"
+    }
+  ]
+}

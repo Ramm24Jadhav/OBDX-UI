@@ -1,0 +1,39 @@
+<div id="home-root" data-bind="css: {'rtl': currentLang() === 'ar'}">
+
+  <div class="home-hero-sheet" data-bind="css: {'home-hero-sheet--collapsed': heroCollapsed()}">
+    <home-appbar params="[[$data]]"></home-appbar>
+    <!-- ko ifnot: isLoading() -->
+    <div class="home-hero-body">
+      <home-balance-summary params="[[$data]]"></home-balance-summary>
+    </div>
+    <!-- /ko -->
+    <div class="home-hero-handle" id="homeHeroDragHandle">
+      <div class="home-hero-handle-pill"></div>
+    </div>
+  </div>
+
+  <div class="home-content" data-bind="css: {'home-content--loading': isLoading()}">
+
+    <!-- ko if: isLoading() -->
+    <div class="home-skeleton">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row skeleton-row--short"></div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko ifnot: isLoading() -->
+    <div class="home-sheet">
+      <home-spending-overview params="[[$data]]"></home-spending-overview>
+      <home-quick-actions     params="[[$data]]"></home-quick-actions>
+      <home-recent-tx         params="[[$data]]"></home-recent-tx>
+    </div>
+    <!-- /ko -->
+
+    <div class="bottom-spacer"></div>
+  </div>
+
+  <home-notifications-panel params="[[$data]]"></home-notifications-panel>
+  <home-analytics-panel     params="[[$data]]"></home-analytics-panel>
+
+</div>

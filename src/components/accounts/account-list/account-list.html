@@ -1,0 +1,180 @@
+﻿<!-- account-list sub-component -->
+<div data-bind="css: {'acl-card-mode': cardView(), 'acl-list-mode': !cardView()}">
+
+  <!-- View toggle -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;">
+    <span data-bind="click: openAccountAnalytics" style="font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;display:flex;align-items:center;gap:4px;">
+      <span data-bind="text: nls.acc_know_spending"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+    <div style="display:flex;gap:4px;background:var(--c-surface2);border-radius:10px;padding:3px;">
+      <button data-bind="click: setListView, css: {'acc-view-btn--active': !cardView()}" class="acc-view-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
+      <button data-bind="click: setCardView, css: {'acc-view-btn--active': cardView()}" class="acc-view-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="3" width="9" height="9" rx="2"/><rect x="13" y="3" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ── LIST VIEW ── -->
+  <div class="acl-list-section">
+    <div class="acc-cards-list">
+      <!-- ko with: currentAccounts()[0] -->
+      <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : 'var(--c-primary-light)'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : 'var(--c-primary)'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="acc-card-body">
+          <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>
+          <div class="acc-card-num" data-bind="text: '•••• ' + $data.numberFull.slice(-4)"></div>
+        </div>
+        <div class="acc-card-right">
+          <div class="acc-card-balance s-num" data-bind="text: $parents[0].formatAmount($data.availableBalance)"></div>
+          <span class="acc-card-status" data-bind="text: $data.status === 'ACTIVE' ? 'Active' : $data.status"></span>
+        </div>
+        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <!-- /ko -->
+      <!-- ko with: currentAccounts()[1] -->
+      <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : 'var(--c-primary-light)'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : 'var(--c-primary)'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="acc-card-body">
+          <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>
+          <div class="acc-card-num" data-bind="text: '•••• ' + $data.numberFull.slice(-4)"></div>
+        </div>
+        <div class="acc-card-right">
+          <div class="acc-card-balance s-num" data-bind="text: $parents[0].formatAmount($data.availableBalance)"></div>
+          <span class="acc-card-status" data-bind="text: $data.status === 'ACTIVE' ? 'Active' : $data.status"></span>
+        </div>
+        <svg class="acc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <!-- /ko -->
+    </div>
+  </div>
+
+  <!-- ── CARD CAROUSEL VIEW ── -->
+  <div class="acl-card-section">
+    <div class="acc-carousel-wrap" id="accCarouselWrap" style="padding-top:12px;">
+      <div class="acc-carousel-track" id="accCarouselTrack">
+        <!-- Card 1: Current -->
+        <div class="hero-card">
+          <div class="c-mesh1"></div><div class="c-mesh2"></div><div class="c-holo"></div>
+          <div class="c-top">
+            <div class="c-logo">
+              <div class="c-logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <span class="c-bank-name">OBDX Mobile</span>
+            </div>
+            <div style="background:rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#fff;letter-spacing:.4px;text-transform:uppercase;">Current</div>
+          </div>
+          <div class="c-mid" style="margin-top:14px;">
+            <div class="c-acc-type" data-bind="text: nls.acc_available"></div>
+            <div class="c-amount s-num">LYD 24,750.00</div>
+            <div class="c-sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="9" height="9"><polyline points="18 15 12 9 6 15"/></svg>+LYD 8,500 credited today</div>
+          </div>
+          <div class="c-bottom" style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;">
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.acc_account_number"></div>
+              <div style="font-family:monospace;font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1px;">LY44 2000 •••• 2341</div>
+            </div>
+            <button class="view-details-btn" data-bind="click: function(d,e){ e.stopPropagation(); openAccountDetail(currentAccounts()[0]); }">
+              <span data-bind="text: nls.acc_view_details"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <!-- Card 2: Savings -->
+        <div class="hero-card" style="background:linear-gradient(135deg,#0F2D5A 0%,#081A38 50%,#040E20 100%);">
+          <div class="c-mesh1" style="background:radial-gradient(circle,rgba(100,160,255,.08) 0%,transparent 70%);"></div>
+          <div class="c-mesh2"></div><div class="c-holo"></div>
+          <div class="c-top">
+            <div class="c-logo">
+              <div class="c-logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <span class="c-bank-name">OBDX Mobile</span>
+            </div>
+            <div style="background:rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#fff;letter-spacing:.4px;text-transform:uppercase;">Savings</div>
+          </div>
+          <div class="c-mid" style="margin-top:14px;">
+            <div class="c-acc-type" data-bind="text: nls.acc_available"></div>
+            <div class="c-amount s-num">LYD 91,849.25</div>
+            <div class="c-sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="9" height="9"><polyline points="18 15 12 9 6 15"/></svg>+LYD 1,200 interest last month</div>
+          </div>
+          <div class="c-bottom" style="margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;">
+            <div>
+              <div style="font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;" data-bind="text: nls.acc_account_number"></div>
+              <div style="font-family:monospace;font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1px;">LY44 2000 •••• 7312</div>
+            </div>
+            <button class="view-details-btn" data-bind="click: function(d,e){ e.stopPropagation(); openAccountDetail(currentAccounts()[1]); }">
+              <span data-bind="text: nls.acc_view_details"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ SHARED WIDGETS ══ -->
+  <div class="acct-widgets">
+
+
+
+    <!-- Offers (snap carousel with dots) -->
+    <div class="w-section-head">
+      <span class="w-section-title" data-bind="text: nls.acc_offers_for_you"></span>
+      <span class="w-section-link" data-bind="text: nls.home_see_all"></span>
+    </div>
+    <div class="offers-carousel-wrap">
+      <div class="offers-track" id="offersTrack">
+        <div class="offer-card offer-card--savings">
+          <div class="offer-accent"></div>
+          <div class="offer-body">
+            <div class="offer-eyebrow">Savings</div>
+            <div class="offer-title">Earn up to 4.5% p.a.</div>
+            <div class="offer-sub">Premium Savings Account — limited time</div>
+            <div class="offer-cta">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+        <div class="offer-card offer-card--transfers">
+          <div class="offer-accent"></div>
+          <div class="offer-body">
+            <div class="offer-eyebrow">Transfers</div>
+            <div class="offer-title">Zero fees for 3 months</div>
+            <div class="offer-sub">Existing customers · Ends Aug 2026</div>
+            <div class="offer-cta">Activate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+        <div class="offer-card offer-card--cashback">
+          <div class="offer-accent"></div>
+          <div class="offer-body">
+            <div class="offer-eyebrow">Cashback</div>
+            <div class="offer-title">5% back on groceries</div>
+            <div class="offer-sub">Use your debit card · Jul–Aug</div>
+            <div class="offer-cta">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+      <div class="offers-dots" id="offersDots">
+        <div class="offer-dot active"></div>
+        <div class="offer-dot"></div>
+        <div class="offer-dot"></div>
+      </div>
+    </div>
+
+  </div><!-- /acct-widgets -->
+
+  <div class="bottom-spacer"></div>
+</div>
+<script>
+(function(){
+  var track = document.getElementById('offersTrack');
+  var dots  = document.querySelectorAll('#offersDots .offer-dot');
+  if (!track || !dots.length) return;
+  track.addEventListener('scroll', function(){
+    var idx = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+  }, { passive: true });
+})();
+</script>

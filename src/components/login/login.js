@@ -1,0 +1,154 @@
+﻿define([
+  'knockout',
+  'platform',
+  'shared-components/utils',
+  'ojL10n!components/login/nls/strings',
+  'ojs/ojknockout',
+  'login-components/login-splash/loader',
+  'login-components/login-hero/loader',
+  'login-components/login-bio-view/loader',
+  'login-components/login-mpin-view/loader',
+  'login-components/login-password-view/loader',
+  'login-components/login-quick-access/loader',
+  'origination-components/loader'
+], function (ko, platform, utils, nls) {
+
+  function LoginViewModel() {
+    var self = this;
+    self.nls = nls;
+
+    utils.loadCss('/components/login/login.css');
+
+    // ── Splash ────────────────────────────────────────────────
+    self.showSplash = ko.observable(true);
+    var _splashTimer = null;
+
+    _splashTimer = setTimeout(function () {
+      self.showSplash(false);
+    }, 2200);
+
+    // ── Auth mode: 'bio' | 'faceid' | 'mpin' | 'password' ───
+    self.authMode  = ko.observable('bio');
+    self.isLoading = ko.observable(false);
+    self.errorMsg  = ko.observable('');
+
+    // ── MPIN ──────────────────────────────────────────────────
+    self.mpinVal = ko.observable('');
+    self.mpinKeys = [
+      {k:'1',sub:null},{k:'2',sub:'ABC'},{k:'3',sub:'DEF'},
+      {k:'4',sub:'GHI'},{k:'5',sub:'JKL'},{k:'6',sub:'MNO'},
+      {k:'7',sub:'PQRS'},{k:'8',sub:'TUV'},{k:'9',sub:'WXYZ'},
+      {k:'',sub:null},{k:'0',sub:null},{k:'⌫',sub:null}
+    ];
+
+    self.mpinKeyPress = function (key) {
+      if (key === '⌫') {
+        self.mpinVal(self.mpinVal().slice(0, -1));
+      } else if (key === '') {
+        return;
+      } else {
+        if (self.mpinVal().length >= 6) return;
+        self.mpinVal(self.mpinVal() + key);
+        if (self.mpinVal().length === 6) {
+          setTimeout(function () { self.doLogin(); }, 150);
+        }
+      }
+    };
+
+    // ── Password ──────────────────────────────────────────────
+    self.username     = ko.observable('');
+    self.password     = ko.observable('');
+    self.showPassword = ko.observable(false);
+
+    // ── User info ─────────────────────────────────────────────
+    self.userName = ko.computed(function () {
+      return window.obdxApp ? window.obdxApp.currentUser().name : 'Mohammed Al Jasem';
+    });
+    self.userInitial = ko.computed(function () {
+      return self.userName().charAt(0);
+    });
+
+    // ── Language ──────────────────────────────────────────────
+    self.currentLang = ko.computed(function () {
+      return window.obdxApp ? window.obdxApp.currentLang() : 'en';
+    });
+    self.toggleLang = function () {
+      window.obdxApp && window.obdxApp.toggleLang();
+    };
+
+    // ── Origination (pre-login) ───────────────────────────────
+    self.showOrigination     = ko.observable(false);
+    self.originationContext  = ko.observable('account');
+    self.openOrigination     = function (ctx) {
+      self.originationContext(ctx || 'account');
+      self.showOrigination(true);
+    };
+    self.closeOrigination    = function () { self.showOrigination(false); };
+    self.originationParams   = {
+      open:    self.showOrigination,
+      close:   self.closeOrigination,
+      context: self.originationContext
+    };
+
+    // ── Actions ───────────────────────────────────────────────
+    self.setMode = function (mode) {
+      self.authMode(mode);
+      self.errorMsg('');
+      self.mpinVal('');
+    };
+
+    self.openTrackApp = function () {
+      window.obdxApp && window.obdxApp.showToast('Track Application — no login needed', 'info');
+    };
+
+    self.doLogin = function () {
+      self.isLoading(true);
+      self.errorMsg('');
+      window.obdxApp && window.obdxApp.showLoader('Authenticating', 'Verifying your credentials');
+
+      var credentials = {
+        type:     self.authMode() === 'mpin'     ? 'MPIN'
+                : self.authMode() === 'password' ? 'PASSWORD'
+                : 'BIOMETRIC',
+        userId:   self.username() || 'CUST-0047829',
+        mpin:     self.mpinVal(),
+        password: self.password()
+      };
+
+      platform.login(credentials).then(function () {
+        self.isLoading(false);
+        window.obdxApp && window.obdxApp.hideLoader();
+        window.obdxApp && window.obdxApp.login();
+      }).catch(function (err) {
+        self.isLoading(false);
+        window.obdxApp && window.obdxApp.hideLoader();
+        var msg = (err && (err.message || err.errorCode)) || 'Authentication failed. Please try again.';
+        self.errorMsg(msg);
+      });
+    };
+
+    // ── Lifecycle ─────────────────────────────────────────────
+    self.handleActivated = function () {
+      self.showSplash(true);
+      self.authMode('bio');
+      self.mpinVal('');
+      self.errorMsg('');
+      self.username('');
+      self.password('');
+      self.showOrigination(false);
+    };
+
+    self.handleBindingsApplied = function () {
+      clearTimeout(_splashTimer);
+      _splashTimer = setTimeout(function () {
+        self.showSplash(false);
+      }, 2200);
+    };
+
+    self.handleDeactivated = function () {
+      clearTimeout(_splashTimer);
+    };
+  }
+
+  return LoginViewModel;
+});

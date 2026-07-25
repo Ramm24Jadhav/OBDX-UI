@@ -1,0 +1,19 @@
+{
+  "name": "acct-slide-panel",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Slide-up action panel",
+  "description": "Full-screen panel that slides up from the bottom. Body content is provided as inner HTML (slot).",
+  "properties": {
+    "title":          { "type": "string"   },
+    "open":           { "type": "boolean", "writeback": true },
+    "primaryLabel":   { "type": "string"   },
+    "secondaryLabel": { "type": "string"   },
+    "onPrimary":      { "type": "function" },
+    "onSecondary":    { "type": "function" },
+    "onBack":         { "type": "function" }
+  },
+  "methods": {},
+  "events": {},
+  "slots": { "": {} }
+}

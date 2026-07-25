@@ -1,0 +1,11 @@
+﻿{
+  "name": "acct-loan-more-sheet",
+  "version": "1.0.0",
+  "jetVersion": "^14.0.0",
+  "displayName": "Loan More Actions Sheet",
+  "description": "Bottom sheet with loan quick-actions.",
+  "properties": {
+    "params": { "type": "object" }
+  },
+  "methods": {}, "events": {}, "slots": {}
+}

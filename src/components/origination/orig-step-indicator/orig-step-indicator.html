@@ -1,0 +1,30 @@
+<!-- account: 3 steps — Personal Details → Product → Review -->
+<!-- ko if: context() === 'account' -->
+<div class="orig-steps">
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===1, 'done': step()>1}">1</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>1}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===2, 'done': step()>2}">2</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>2}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===3}">3</div>
+</div>
+<!-- /ko -->
+<!-- loan: 2 steps -->
+<!-- ko if: context() === 'loan' -->
+<div class="orig-steps">
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===1, 'done': step()>1}">1</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>1}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===2}">2</div>
+</div>
+<!-- /ko -->
+<!-- deposit: 4 steps -->
+<!-- ko if: context() === 'deposit' -->
+<div class="orig-steps">
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===1, 'done': step()>1}">1</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>1}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===2, 'done': step()>2}">2</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>2}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===3, 'done': step()>3}">3</div>
+  <div data-bind="css: {'orig-step-line':true, 'done': step()>3}"></div>
+  <div data-bind="css: {'orig-step-dot':true, 'cur': step()===4}">4</div>
+</div>
+<!-- /ko -->
