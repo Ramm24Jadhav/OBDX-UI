@@ -1,0 +1,62 @@
+<div class="pay-flow-overlay pay-flow-overlay--open">
+  <pay-flow-header params="
+    title:       nls.pay_fund_transfer,
+    steps:       [nls.pay_step_recipient, nls.pay_step_amount, nls.pay_step_review, nls.pay_step_verify],
+    currentStep: step,
+    onBack:      goBack,
+    hideBackOn:  [5]
+  "></pay-flow-header>
+
+  <div class="pay-steps-scroll">
+    <pay-step-recipient params="[[$data]]"></pay-step-recipient>
+    <pay-step-amount    params="[[$data]]"></pay-step-amount>
+    <pay-step-review    params="[[$data]]"></pay-step-review>
+    <pay-step-otp       params="[[$data]]"></pay-step-otp>
+    <!-- ko if: showStep5() -->
+    <pay-confirmation params="
+      status:           transferStatus,
+      paymentType:      flowType,
+      referenceNo:      referenceNo,
+      amount:           amount,
+      selectedBen:      selectedBen,
+      successDateTime:  successDateTime,
+      formatAmount:     formatAmount,
+      onBackToPayments: resetFlow
+    "></pay-confirmation>
+    <!-- /ko -->
+  </div>
+
+  <div class="pay-flow-footer" data-bind="visible: !showStep5()" style="display:none;">
+
+    <!-- Step 1: Continue -->
+    <!-- ko if: showStep1() && !adhocMode() -->
+    <button class="app-btn app-btn--primary app-btn--full"
+      data-bind="click: goToAmount,
+                 enable: !!selectedBen(),
+                 css: {'app-btn--disabled': !selectedBen()}">
+      Continue →
+    </button>
+    <!-- /ko -->
+
+    <!-- Step 2: Review Transfer -->
+    <!-- ko if: showStep2() -->
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: goToReview, text: nls.pay_btn_review"></button>
+    <!-- /ko -->
+
+    <!-- Step 3: Confirm & Send OTP -->
+    <!-- ko if: showStep3() -->
+    <button class="app-btn app-btn--primary app-btn--full" data-bind="click: confirmTransfer, disable: isLoading">
+      <span data-bind="visible: !isLoading(), text: nls.pay_btn_confirm"></span>
+      <span data-bind="visible: isLoading(), text: nls.pay_sending"></span>
+    </button>
+    <!-- /ko -->
+
+    <!-- Step 4: Verify & Transfer -->
+    <!-- ko if: showStep4() -->
+    <button class="app-btn app-btn--primary app-btn--full"
+      data-bind="click: _verifyOTP, enable: otpVal().length >= 6, text: nls.pay_btn_verify,
+                 css: {'app-btn--disabled': otpVal().length < 6}"></button>
+    <!-- /ko -->
+
+  </div>
+</div>

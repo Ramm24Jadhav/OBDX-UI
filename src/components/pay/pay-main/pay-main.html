@@ -1,94 +1,35 @@
 <div class="app-screen app-screen--pay">
 
-  <!-- Hub — flows naturally inside the standard screen scroll, nav floats on top -->
+  <!-- Hub — visible when no flow is active -->
   <pay-hub params="[[$data]]"></pay-hub>
 
-  <!-- Transfer flow — fixed full-screen overlay, slides in from right -->
-  <div class="pay-flow-overlay" data-bind="css: {'pay-flow-overlay--open': !showHub()}">
-    <pay-flow-header params="
-      title:       nls.pay_fund_transfer,
-      steps:       [nls.pay_step_recipient, nls.pay_step_amount, nls.pay_step_review, nls.pay_step_verify],
-      currentStep: step,
-      onBack:      goBack,
-      hideBackOn:  [4, 5]
-    "></pay-flow-header>
+  <!-- Flow router — mounts the active flow component as a full-screen overlay -->
+  <!-- ko if: flowType() === 'within' -->
+  <within-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></within-flow>
+  <!-- /ko -->
 
-    <div class="pay-steps-scroll">
-      <pay-step-recipient params="[[$data]]"></pay-step-recipient>
+  <!-- ko if: flowType() === 'own' -->
+  <own-flow params="accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></own-flow>
+  <!-- /ko -->
 
-      <!-- Own-account: reuse shared acct-account-dd component (KO component, not JET composite) -->
-      <!-- ko if: showStep1() && flowType() === 'own' -->
-      <div style="padding:0 20px 20px;">
-        <p class="pay-field-label" style="margin-bottom:12px;">Select Account to Transfer To</p>
-        <acct-account-dd params="accounts: accounts, selectedAccount: selectedToAccount"></acct-account-dd>
-      </div>
-      <!-- /ko -->
-      <pay-step-amount    params="[[$data]]"></pay-step-amount>
-      <pay-step-review    params="[[$data]]"></pay-step-review>
-      <pay-step-otp       params="[[$data]]"></pay-step-otp>
-      <!-- ko if: showStep5() -->
-      <pay-confirmation params="
-        status:          transferStatus,
-        paymentType:     flowType,
-        referenceNo:     referenceNo,
-        amount:          amount,
-        selectedBen:     selectedBen,
-        successDateTime: successDateTime,
-        formatAmount:    formatAmount,
-        onBackToPayments: resetFlow
-      "></pay-confirmation>
-      <!-- /ko -->
-    </div>
+  <!-- ko if: flowType() === 'domestic' -->
+  <domestic-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></domestic-flow>
+  <!-- /ko -->
 
-    <!-- Fixed CTA footer — hidden on step 5 (confirmation manages its own actions) -->
-    <div class="pay-flow-footer" data-bind="visible: !showStep5()" style="display:none;">
+  <!-- ko if: flowType() === 'international' -->
+  <intl-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></intl-flow>
+  <!-- /ko -->
 
-      <!-- Step 1: Continue (hidden in adhoc mode — adhoc has its own Proceed button inline) -->
-      <!-- ko if: showStep1() && !adhocMode() -->
-      <button class="app-btn app-btn--primary app-btn--full"
-        data-bind="click: goToAmount,
-                   enable: flowType() === 'own' ? !!selectedToAccount() : !!selectedBen(),
-                   css: {'app-btn--disabled': !(flowType() === 'own' ? !!selectedToAccount() : !!selectedBen())}">
-        Continue →
-      </button>
-      <!-- /ko -->
+  <!-- ko if: flowType() === 'gcc' -->
+  <gcc-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></gcc-flow>
+  <!-- /ko -->
 
-      <!-- Step 2: Review Transfer -->
-      <!-- ko if: showStep2() -->
-      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: goToReview, text: nls.pay_btn_review"></button>
-      <!-- /ko -->
+  <!-- ko if: flowType() === 'afaq' -->
+  <afaq-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></afaq-flow>
+  <!-- /ko -->
 
-      <!-- Step 3: Confirm & Send -->
-      <!-- ko if: showStep3() -->
-      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: confirmTransfer, disable: isLoading">
-        <span data-bind="visible: !isLoading(), text: nls.pay_btn_confirm"></span>
-        <span data-bind="visible: isLoading(), text: nls.pay_sending"></span>
-      </button>
-      <!-- /ko -->
-
-      <!-- Step 4: Verify & Transfer -->
-      <!-- ko if: showStep4() -->
-      <button class="app-btn app-btn--primary app-btn--full"
-        data-bind="click: _verifyOTP, enable: otpVal().length >= 6, text: nls.pay_btn_verify,
-                   css: {'app-btn--disabled': otpVal().length < 6}"></button>
-      <!-- /ko -->
-
-      <!-- Step 5: Receipt + Track + Back to Payments -->
-      <!-- ko if: showStep5() -->
-      <div style="display:flex;gap:10px;margin-bottom:10px;">
-        <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span data-bind="text: nls.pay_btn_receipt"></span>
-        </button>
-        <button class="app-btn app-btn--ghost" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;" data-bind="click: openTracker">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span data-bind="text: nls.pay_btn_track"></span>
-        </button>
-      </div>
-      <button class="app-btn app-btn--primary app-btn--full" data-bind="click: resetFlow, text: nls.pay_back_payments"></button>
-      <!-- /ko -->
-
-    </div>
-  </div>
+  <!-- ko if: flowType() === 'adhoc' -->
+  <adhoc-flow params="beneficiaries: beneficiaries, accounts: accounts, selectedAccount: selectedAccount, onBackToHub: backToHub, formatAmount: formatAmount"></adhoc-flow>
+  <!-- /ko -->
 
 </div>
