@@ -1,6 +1,7 @@
 .cag-wrap { padding:16px 20px 8px; }
-.cag-grid { gap:10px; }
-.cag-btn { background:var(--c-surface);border:none;border-radius:14px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s,transform .12s;-webkit-tap-highlight-color:transparent;box-sizing:border-box; }
+.cag-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:10px; }
+@media (min-width:640px) { .cag-grid { grid-template-columns:repeat(4,1fr); } }
+.cag-btn { background:var(--c-surface);border:none;border-radius:14px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s,transform .12s;-webkit-tap-highlight-color:transparent; }
 .cag-btn:active { background:var(--c-border);transform:scale(.95); }
 .cag-btn span { font-size:0.6875rem;color:var(--c-t2);font-weight:500;text-align:center;line-height:1.3; }
 .cag-icon { width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center; }
