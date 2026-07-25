@@ -53,6 +53,18 @@ define([
     });
   }
 
+  // ── Restore persisted theme on every boot ─────────────────────────────────
+  (function () {
+    try {
+      var prefs = JSON.parse(localStorage.getItem('obdxThemePrefs') || '{}');
+      var mode = prefs.themeMode;
+      if (mode === 'dark')  document.documentElement.setAttribute('data-theme', 'dark');
+      else if (mode === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      else document.documentElement.removeAttribute('data-theme');
+      if (prefs.fontSize === 'large') document.documentElement.style.setProperty('font-size', '17px');
+    } catch (e) {}
+  }());
+
   function ControllerViewModel() {
     var self = this;
 

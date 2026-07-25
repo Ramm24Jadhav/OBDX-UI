@@ -23,8 +23,8 @@
     <div class="acc-cards-list">
       <!-- ko with: currentAccounts()[0] -->
       <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
-        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : 'var(--c-primary-light)'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : 'var(--c-primary)'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
         <div class="acc-card-body">
           <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>
@@ -39,8 +39,8 @@
       <!-- /ko -->
       <!-- ko with: currentAccounts()[1] -->
       <div class="acc-card" data-bind="click: function(){ $parents[0].openAccountDetail($data); }">
-        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : '#FCE7EE'}">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : '#7A1531'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <div class="acc-card-icon-wrap" data-bind="style:{background: type==='SAVINGS' ? '#DCFCE7' : 'var(--c-primary-light)'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" data-bind="attr:{stroke: type==='SAVINGS' ? '#16A34A' : 'var(--c-primary)'}"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
         <div class="acc-card-body">
           <div class="acc-card-name" data-bind="text: $data.typeLabel"></div>

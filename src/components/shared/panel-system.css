@@ -77,8 +77,8 @@
 .acct-dd-item{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid var(--c-border);transition:background .15s;}
 .acct-dd-item:last-child{border-bottom:none;}
 .acct-dd-item:active,.acct-dd-item:hover{background:var(--c-surface);}
-.acct-dd-item--sel{background:rgba(122,21,49,.04);}
-.acct-dd-icon{width:32px;height:32px;border-radius:9px;background:rgba(122,21,49,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.acct-dd-item--sel{background:rgba(var(--c-primary-rgb),.04);}
+.acct-dd-icon{width:32px;height:32px;border-radius:9px;background:rgba(var(--c-primary-rgb),.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .dep-form-group:has(.acct-dd-menu){z-index:50;position:relative;}
 
 /* Custom picker trigger button */

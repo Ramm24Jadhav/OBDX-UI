@@ -2,22 +2,23 @@
   'use strict';
 
   var ACCENTS = [
-    { id: 'maroon', label: 'Maroon',   color: '#7A1531', hover: '#A01A3B', dark: '#5A0F23', dd: '#3A0716', rgb: '122,21,49',  light: '#FCE7EE' },
-    { id: 'navy',   label: 'Navy',     color: '#1E3A5F', hover: '#264D80', dark: '#152840', dd: '#0D1E30', rgb: '30,58,95',   light: '#DBEAFE' },
-    { id: 'forest', label: 'Forest',   color: '#166534', hover: '#1A7C40', dark: '#0D4A24', dd: '#073317', rgb: '22,101,52',  light: '#DCFCE7' },
-    { id: 'slate',  label: 'Slate',    color: '#334155', hover: '#475569', dark: '#1E293B', dd: '#0F172A', rgb: '51,65,85',   light: '#E2E8F0' },
-    { id: 'gold',   label: 'Gold',     color: '#B45309', hover: '#D97706', dark: '#8A3E07', dd: '#5A2A04', rgb: '180,83,9',   light: '#FEF3C7' },
-    { id: 'rose',   label: 'Rose',     color: '#9F1239', hover: '#BE185D', dark: '#771030', dd: '#4C0720', rgb: '159,18,57',  light: '#FCE7EE' }
+    { id: 'maroon', label: 'Maroon',   color: '#7A1531', hover: '#A01A3B', dark: '#5A0F23', dd: '#3A0716', rgb: '122,21,49',  light: '#FCE7EE', bright: '#E0607A' },
+    { id: 'navy',   label: 'Navy',     color: '#1E3A5F', hover: '#264D80', dark: '#152840', dd: '#0D1E30', rgb: '30,58,95',   light: '#DBEAFE', bright: '#60A5FA' },
+    { id: 'forest', label: 'Forest',   color: '#166534', hover: '#1A7C40', dark: '#0D4A24', dd: '#073317', rgb: '22,101,52',  light: '#DCFCE7', bright: '#4ADE80' },
+    { id: 'slate',  label: 'Slate',    color: '#334155', hover: '#475569', dark: '#1E293B', dd: '#0F172A', rgb: '51,65,85',   light: '#E2E8F0', bright: '#94A3B8' },
+    { id: 'gold',   label: 'Gold',     color: '#B45309', hover: '#D97706', dark: '#8A3E07', dd: '#5A2A04', rgb: '180,83,9',   light: '#FEF3C7', bright: '#FCD34D' },
+    { id: 'rose',   label: 'Rose',     color: '#9F1239', hover: '#BE185D', dark: '#771030', dd: '#4C0720', rgb: '159,18,57',  light: '#FCE7EE', bright: '#FB7185' }
   ];
 
   function applyAccent(accent) {
     var r = document.documentElement;
-    r.style.setProperty('--c-primary',       accent.color);
-    r.style.setProperty('--c-primary-h',     accent.hover);
-    r.style.setProperty('--c-primary-d',     accent.dark);
-    r.style.setProperty('--c-primary-dd',    accent.dd);
-    r.style.setProperty('--c-primary-rgb',   accent.rgb);
-    r.style.setProperty('--c-primary-light', accent.light);
+    r.style.setProperty('--c-primary',        accent.color);
+    r.style.setProperty('--c-primary-h',      accent.hover);
+    r.style.setProperty('--c-primary-d',      accent.dark);
+    r.style.setProperty('--c-primary-dd',     accent.dd);
+    r.style.setProperty('--c-primary-rgb',    accent.rgb);
+    r.style.setProperty('--c-primary-light',  accent.light);
+    r.style.setProperty('--c-primary-bright', accent.bright);
   }
 
   function applyFontSize(size) {

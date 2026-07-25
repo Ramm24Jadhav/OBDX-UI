@@ -50,7 +50,7 @@
 .sc-warn-icon {
   width: 40px; height: 40px;
   border-radius: 11px;
-  background: rgba(122,21,49,.1);
+  background: rgba(var(--c-primary-rgb),.1);
   display: flex; align-items: center; justify-content: center;
   margin: 16px 0 10px;
   flex-shrink: 0;
@@ -100,7 +100,7 @@
   --sc-half: 26px;
   --sc-w:    54px;
   --sc-r:    9px;
-  --sc-stile: 0 12px 32px rgba(122,21,49,.45), 0 3px 10px rgba(0,0,0,.25);
+  --sc-stile: 0 12px 32px rgba(var(--c-primary-rgb),.45), 0 3px 10px rgba(0,0,0,.25);
 }
 
 .sc-card {
@@ -231,7 +231,7 @@
   cursor: pointer; border: none;
   font-family: inherit;
   background: var(--c-primary); color: #fff;
-  box-shadow: 0 6px 20px rgba(122,21,49,.3);
+  box-shadow: 0 6px 20px rgba(var(--c-primary-rgb),.3);
   transition: opacity .15s, transform .15s;
   -webkit-font-smoothing: antialiased;
 }

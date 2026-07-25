@@ -62,7 +62,7 @@ html,body{height:100%}
     --c-t3:           #7E85A0;
     --c-t4:           #4E5470;
     --c-error:        #F87171;
-    --c-link:         #E0607A;
+    --c-link:         var(--c-primary-bright);
     --c-primary-light:#2A0F1A;
     --c-gold-light:   #2A1E08;
     --c-success-bg:   #0A2318;
@@ -87,7 +87,7 @@ html,body{height:100%}
   --c-t3:           #7E85A0;
   --c-t4:           #4E5470;
   --c-error:        #F87171;
-  --c-link:         #E0607A;
+  --c-link:         var(--c-primary-bright);
   --c-primary-light:#2A0F1A;
   --c-gold-light:   #2A1E08;
   --c-success-bg:   #0A2318;
