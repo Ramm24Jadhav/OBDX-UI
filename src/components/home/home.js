@@ -30,6 +30,7 @@
     self.currentLang       = ko.observable('en');
     self.showNotifications = ko.observable(false);
     self.showAnalytics     = ko.observable(false);
+    self.heroCollapsed     = ko.observable(false);
 
     // ── Notification data ─────────────────────────────────────
     self.notifList = ko.observableArray([
@@ -131,12 +132,143 @@
     self.txIconSvg = function (category) { return (_txIcons[category] || _txIcons['shop']).svg; };
 
     // ── Lifecycle ─────────────────────────────────────────────
-    var _loadTimer = null;
+    var _loadTimer  = null;
+    var _scrollEl   = null;
+    var _heroEl     = null;
+    var _heroBodyEl = null;
+    var _handleEl   = null;
+    var _onScroll   = null;
+    var _openH      = 0;
+    var CLOSED_H    = 56;
+
     self.handleActivated = function () {
       clearTimeout(_loadTimer);
       _loadTimer = setTimeout(function () { self._load(); }, 50);
     };
-    self.connected = self.handleActivated;
+
+    self.connected = function () {
+      self.handleActivated();
+      setTimeout(function () {
+        _scrollEl   = document.querySelector('.home-content');
+        _heroEl     = document.querySelector('.home-hero-sheet');
+        _heroBodyEl = document.querySelector('.home-hero-body');
+        _handleEl   = document.getElementById('homeHeroDragHandle');
+        if (!_scrollEl || !_heroEl) return;
+
+        // Re-measure open height after data loads (balance summary renders behind isLoading guard)
+        var _loadingSub = self.isLoading.subscribe(function (loading) {
+          if (!loading) {
+            setTimeout(function () {
+              _heroEl.style.height = 'auto';
+              _openH = _heroEl.scrollHeight;
+              _heroEl.style.height = _openH + 'px';
+            }, 60);
+          }
+        });
+
+        // Scroll-driven collapse (uses same _snapTo path)
+        _onScroll = function () {
+          if (_dragging) return;
+          var shouldCollapse = _scrollEl.scrollTop > 30;
+          if (shouldCollapse !== self.heroCollapsed()) {
+            _snapTo(!shouldCollapse);
+          }
+        };
+        _scrollEl.addEventListener('scroll', _onScroll, { passive: true });
+
+        // Drag-to-collapse/expand on handle
+        var _dragging  = false;
+        var _startY    = 0;
+        var _startH    = 0;
+
+        function _measureOpenH() {
+          // Measure at full open: temporarily clear height constraint
+          _heroEl.style.transition = 'none';
+          _heroEl.style.height = 'auto';
+          _openH = _heroEl.scrollHeight;
+          // Restore current rendered height immediately so there's no jump
+          _heroEl.style.height = _heroEl.offsetHeight + 'px';
+        }
+
+        function _setLive(h) {
+          var bodyH = _openH - CLOSED_H;
+          var pct   = bodyH > 0 ? Math.max(0, Math.min(1, (h - CLOSED_H) / bodyH)) : 1;
+          _heroEl.style.transition    = 'none';
+          _heroEl.style.height        = h + 'px';
+          if (_heroBodyEl) {
+            _heroBodyEl.style.transition = 'none';
+            _heroBodyEl.style.opacity    = pct;
+            // slide body up as sheet shrinks: 0% when open, -100% when closed
+            _heroBodyEl.style.transform  = 'translateY(' + (-(1 - pct) * 100) + '%)';
+          }
+        }
+
+        function _snapTo(open) {
+          // Force a reflow so the transition picks up from current rendered position
+          void _heroEl.offsetHeight;
+          _heroEl.style.transition = '';
+          _heroEl.style.height     = (open ? _openH : CLOSED_H) + 'px';
+          if (_heroBodyEl) {
+            _heroBodyEl.style.transition = '';
+            _heroBodyEl.style.opacity    = open ? '' : '0';
+            _heroBodyEl.style.transform  = open ? '' : 'translateY(-100%)';
+          }
+          self.heroCollapsed(!open);
+          // Keep inline height managing the sheet — never clear it
+        }
+
+        function _onTouchStart(e) {
+          _measureOpenH();
+          _dragging = true;
+          _startY   = e.touches[0].clientY;
+          _startH   = _heroEl.offsetHeight;
+        }
+
+        function _onTouchMove(e) {
+          if (!_dragging) return;
+          var dy  = e.touches[0].clientY - _startY;
+          var newH = Math.max(CLOSED_H, Math.min(_openH, _startH + dy));
+          _setLive(newH);
+        }
+
+        function _onTouchEnd(e) {
+          if (!_dragging) return;
+          _dragging = false;
+          var currentH = _heroEl.offsetHeight;
+          var vel      = e.changedTouches[0].clientY - _startY;
+          // Snap open if dragged down fast (vel > 40) or past midpoint; snap closed otherwise
+          var mid  = (_openH + CLOSED_H) / 2;
+          var open = vel > 40 || currentH > mid;
+          _snapTo(open);
+        }
+
+        if (_handleEl) {
+          _handleEl.addEventListener('touchstart', _onTouchStart, { passive: true });
+          _handleEl.addEventListener('touchmove',  _onTouchMove,  { passive: true });
+          _handleEl.addEventListener('touchend',   _onTouchEnd,   { passive: true });
+        }
+
+        // Also allow dragging from collapsed appbar area to re-expand
+        var _appbarEl = document.querySelector('.home-hero-sheet .app-bar');
+        if (_appbarEl) {
+          _appbarEl.addEventListener('touchstart', function(e) {
+            if (!self.heroCollapsed()) return;
+            _measureOpenH();
+            _dragging = true;
+            _startY   = e.touches[0].clientY;
+            _startH   = _heroEl.offsetHeight;
+          }, { passive: true });
+          _appbarEl.addEventListener('touchmove',  _onTouchMove,  { passive: true });
+          _appbarEl.addEventListener('touchend',   _onTouchEnd,   { passive: true });
+        }
+      }, 100);
+    };
+
+    self.disconnected = function () {
+      if (_scrollEl && _onScroll) {
+        _scrollEl.removeEventListener('scroll', _onScroll);
+      }
+    };
 
     self._load = function () {
       self.isLoading(true);

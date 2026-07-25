@@ -5,7 +5,7 @@
 
 /* ── Reset & Base ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
+html,body{height:100%;margin:0;padding:0}
 
 /* ── Design Tokens ── */
 :root {
@@ -44,7 +44,7 @@ html,body{height:100%}
   --shadow-lg:  0 12px 32px rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.06);
   --shadow-card:0 20px 60px rgba(var(--c-primary-rgb),.35),0 8px 20px rgba(0,0,0,.15);
   --nav-h: 72px;
-  --status-h: 44px;
+  --status-h: 0px;
   --safe-bottom: env(safe-area-inset-bottom,0px);
 }
 
@@ -145,7 +145,7 @@ input{font-family:inherit;outline:none}
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Segoe UI',sans-serif;background:var(--c-bg);min-height:100vh;min-height:100dvh}
 .app-app-body{display:block;min-height:100vh;min-height:100dvh}
 .app-phone-shell{width:100vw;height:100vh;height:100dvh;position:relative}
-.app-phone{width:100vw;height:100vh;height:100dvh;background:var(--c-bg);overflow:hidden;display:flex;flex-direction:column;position:relative;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.app-phone{width:100vw;height:100vh;height:100dvh;background:var(--c-bg);overflow:hidden;display:flex;flex-direction:column;position:relative}
 
 /* ── Tablet portrait blocker ── */
 #obdxRotateOverlay{display:none;position:fixed;inset:0;z-index:99999;background:#7A1531;flex-direction:column;align-items:center;justify-content:center;gap:24px;pointer-events:all}

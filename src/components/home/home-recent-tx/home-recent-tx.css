@@ -1,3 +1,7 @@
+.section-wrap{padding:16px 16px 8px}
+.section-wrap .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.section-wrap .section-title{font-size:15px;font-weight:800;color:var(--c-t1);letter-spacing:-.3px}
+.section-wrap .section-link{font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;background:none;border:none}
 .tx-list{display:flex;flex-direction:column}
 .tx-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--c-border)}
 .tx-item:last-child{border-bottom:none}

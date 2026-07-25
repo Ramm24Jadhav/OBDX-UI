@@ -1,4 +1,4 @@
-.section{padding:18px 16px 0}
+.section{padding:16px 16px 8px}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .section-title{font-size:15px;font-weight:800;color:var(--c-t1);letter-spacing:-.3px}
 .section-link{font-size:12px;font-weight:600;color:var(--c-primary);cursor:pointer;background:none;border:none}
