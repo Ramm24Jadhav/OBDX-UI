@@ -10,7 +10,8 @@
   'pay-components/pay-step-amount/loader',
   'pay-components/pay-step-review/loader',
   'pay-components/pay-step-otp/loader',
-  'pay-components/pay-step-success/loader'
+  'pay-components/pay-step-success/loader',
+  'shared-components/pay_flow_header/loader'
 ], function (ko, PaymentService, AccountService, utils, nls) {
   'use strict';
 

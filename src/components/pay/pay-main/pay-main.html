@@ -5,36 +5,13 @@
 
   <!-- Transfer flow — fixed full-screen overlay, slides in from right -->
   <div class="pay-flow-overlay" data-bind="css: {'pay-flow-overlay--open': !showHub()}">
-    <div class="pay-flow-header">
-      <div class="pay-flow-dark-header">
-        <div class="oj-flex oj-sm-align-items-center" style="gap:0;padding:0;">
-          <!-- ko ifnot: step() >= 4 -->
-          <div class="oj-flex-item" style="flex:0 0 36px;">
-            <button class="app-back-btn pay-flow-back-btn" data-bind="click: goBack" aria-label="Back">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-          </div>
-          <!-- /ko -->
-          <!-- ko if: step() >= 4 -->
-          <div class="oj-flex-item" style="flex:0 0 36px;"></div>
-          <!-- /ko -->
-          <h2 class="oj-flex-item pay-flow-title" data-bind="text: nls.pay_fund_transfer"></h2>
-          <div class="oj-flex-item" style="flex:0 0 36px;"></div>
-        </div>
-      </div>
-      <div class="pay-progress-panel">
-        <div class="pay-progress" data-bind="foreach: [1,2,3,4]">
-          <div class="pay-progress__item" data-bind="css: $parent.stepClass($data)">
-            <div class="pay-progress__dot">
-              <span data-bind="visible: $parent.step() > $data">✓</span>
-              <span data-bind="visible: $parent.step() <= $data, text: $data"></span>
-            </div>
-            <span class="pay-progress__label" data-bind="text: $parent.stepLabel($data)"></span>
-          </div>
-          <div class="pay-progress__line" data-bind="visible: $data < 4, css: {'pay-progress__line--done': $parent.step() > $data}"></div>
-        </div>
-      </div>
-    </div>
+    <pay-flow-header params="
+      title:       nls.pay_fund_transfer,
+      steps:       [nls.pay_step_recipient, nls.pay_step_amount, nls.pay_step_review, nls.pay_step_verify],
+      currentStep: step,
+      onBack:      goBack,
+      hideBackOn:  [4, 5]
+    "></pay-flow-header>
 
     <div class="pay-steps-scroll">
       <pay-step-recipient params="[[$data]]"></pay-step-recipient>

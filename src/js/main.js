@@ -93,6 +93,9 @@ requirejs.config({
     'shared-components':      '../components/shared',
     'card-components':        '../components/cards',
     'pay-components':         '../components/pay',
+    'pay-flows':              '../components/pay/flows',
+    'pay-panels':             '../components/pay/panels',
+    'partials':               '../partials',
     'login-components':       '../components/login',
     'home-components':        '../components/home',
     'more-components':        '../components/more'
