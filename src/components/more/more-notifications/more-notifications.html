@@ -13,7 +13,7 @@
       <!-- /ko -->
     </h2>
     <!-- ko if: unreadCount() > 0 -->
-    <button style="font-size:12px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;padding:6px 0;white-space:nowrap;" data-bind="click: markAllRead, text: nls.notif_mark_all_read"></button>
+    <button style="font-size:12px;font-weight:700;color:var(--c-link);background:none;border:none;cursor:pointer;padding:6px 0;white-space:nowrap;" data-bind="click: markAllRead, text: nls.notif_mark_all_read"></button>
     <!-- /ko -->
     <!-- ko if: unreadCount() === 0 -->
     <div style="width:60px;"></div>
@@ -24,9 +24,9 @@
   <!-- Filter tabs -->
   <div style="display:flex;border-bottom:2px solid var(--c-border);padding:0 20px;background:var(--c-bg);flex-shrink:0;">
     <div style="padding:10px 16px 10px 0;font-size:13px;font-weight:700;cursor:pointer;margin-right:4px;"
-         data-bind="click: function(){ setFilter('all'); }, style: { color: filter()==='all' ? 'var(--c-primary)' : 'var(--c-t3)', borderBottom: filter()==='all' ? '2px solid var(--c-primary)' : '2px solid transparent', marginBottom: '-2px' }"><span data-bind="text: nls.acc_filter_all"></span></div>
+         data-bind="click: function(){ setFilter('all'); }, style: { color: filter()==='all' ? 'var(--c-link)' : 'var(--c-t3)', borderBottom: filter()==='all' ? '2px solid var(--c-link)' : '2px solid transparent', marginBottom: '-2px' }"><span data-bind="text: nls.acc_filter_all"></span></div>
     <div style="padding:10px 16px 10px 0;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;"
-         data-bind="click: function(){ setFilter('unread'); }, style: { color: filter()==='unread' ? 'var(--c-primary)' : 'var(--c-t3)', borderBottom: filter()==='unread' ? '2px solid var(--c-primary)' : '2px solid transparent', marginBottom: '-2px' }">
+         data-bind="click: function(){ setFilter('unread'); }, style: { color: filter()==='unread' ? 'var(--c-link)' : 'var(--c-t3)', borderBottom: filter()==='unread' ? '2px solid var(--c-link)' : '2px solid transparent', marginBottom: '-2px' }">
       <span data-bind="text: nls.more_notif_unread"></span>
       <!-- ko if: unreadCount() > 0 -->
       <span style="font-size:10px;font-weight:800;background:var(--c-primary);color:#fff;border-radius:9px;padding:1px 6px;" data-bind="text: unreadCount"></span>

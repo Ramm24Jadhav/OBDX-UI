@@ -15,6 +15,7 @@ html,body{height:100%}
   --c-primary-dd:  #3A0716;
   --c-primary-rgb: 122,21,49;
   --c-primary-light: #FCE7EE;
+  --c-link:        var(--c-primary);
   --c-gold:        #C8A45D;
   --c-gold-light:  #F5E6C8;
   --c-deposit:     #0D5C63;
@@ -55,11 +56,13 @@ html,body{height:100%}
     --c-surface:      #1A1D27;
     --c-surface2:     #21252F;
     --c-border:       #2A2D3A;
-    --c-border2:      #3A3E4F;
+    --c-border2:      #4A5066;
     --c-t1:           #F0F2F8;
     --c-t2:           #9DA3B4;
-    --c-t3:           #5C6278;
-    --c-t4:           #3A3E4F;
+    --c-t3:           #7E85A0;
+    --c-t4:           #4E5470;
+    --c-error:        #F87171;
+    --c-link:         #E0607A;
     --c-primary-light:#2A0F1A;
     --c-gold-light:   #2A1E08;
     --c-success-bg:   #0A2318;
@@ -78,11 +81,13 @@ html,body{height:100%}
   --c-surface:      #1A1D27;
   --c-surface2:     #21252F;
   --c-border:       #2A2D3A;
-  --c-border2:      #3A3E4F;
+  --c-border2:      #4A5066;
   --c-t1:           #F0F2F8;
   --c-t2:           #9DA3B4;
-  --c-t3:           #5C6278;
-  --c-t4:           #3A3E4F;
+  --c-t3:           #7E85A0;
+  --c-t4:           #4E5470;
+  --c-error:        #F87171;
+  --c-link:         #E0607A;
   --c-primary-light:#2A0F1A;
   --c-gold-light:   #2A1E08;
   --c-success-bg:   #0A2318;
@@ -95,6 +100,39 @@ html,body{height:100%}
   --shadow-lg:  0 12px 32px rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.3);
   --shadow-card:0 20px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
 }
+
+/* ── Dark mode component overrides ── */
+/* 1. Home header background */
+:root[data-theme="dark"] .app-bar{background:rgba(15,17,23,.95)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .app-bar{background:rgba(15,17,23,.95)}}
+
+/* 2. Link text — "See All", "View All", section links */
+:root[data-theme="dark"] .section-link,
+:root[data-theme="dark"] .w-card-link,
+:root[data-theme="dark"] .w-section-link,
+:root[data-theme="dark"] .tx-section-link,
+:root[data-theme="dark"] .offer-cta,
+:root[data-theme="dark"] .open-acc-title,
+:root[data-theme="dark"] .open-acc-link{color:var(--c-link)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .section-link,
+:root:not([data-theme="light"]) .w-card-link,
+:root:not([data-theme="light"]) .w-section-link,
+:root:not([data-theme="light"]) .tx-section-link,
+:root:not([data-theme="light"]) .offer-cta,
+:root:not([data-theme="light"]) .open-acc-title,
+:root:not([data-theme="light"]) .open-acc-link{color:var(--c-link)}}
+
+/* 4. Pay progress train — inactive dots more visible */
+:root[data-theme="dark"] .pay-progress__dot{border-color:var(--c-border2)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .pay-progress__dot{border-color:var(--c-border2)}}
+
+/* 5. Analytics period pill active state in dark */
+:root[data-theme="dark"] .an-period-btn--active{background:var(--c-surface2);color:var(--c-t1)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .an-period-btn--active{background:var(--c-surface2);color:var(--c-t1)}}
+
+/* Notification close icon visibility */
+:root[data-theme="dark"] .chat-close-btn svg,:root[data-theme="dark"] .notif-close-btn svg{color:var(--c-t2)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .chat-close-btn svg,:root:not([data-theme="light"]) .notif-close-btn svg{color:var(--c-t2)}}
 
 /* ── Dynamic SVG theming ── */
 [stroke="#7A1531"],[stroke="#7a1531"]{stroke:var(--c-primary)}

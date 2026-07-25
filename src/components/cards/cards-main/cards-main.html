@@ -2,10 +2,16 @@
 <div class="app-screen app-screen--cards">
   <card-auth-gate    params="[[$data]]"></card-auth-gate>
   <card-flip-popout  params="[[$data]]"></card-flip-popout>
-  <card-list         params="[[$data]]"></card-list>
-  <card-actions-grid params="[[$data]]"></card-actions-grid>
-  <card-limit-bar    params="[[$data]]"></card-limit-bar>
-  <card-transactions params="[[$data]]"></card-transactions>
+  <!-- Dark hero section -->
+  <div class="cards-hero-wrap">
+    <card-list params="[[$data]]"></card-list>
+  </div>
+  <!-- Rounded white body panel -->
+  <div class="cards-body-wrap">
+    <card-actions-grid params="[[$data]]"></card-actions-grid>
+    <card-limit-bar    params="[[$data]]"></card-limit-bar>
+    <card-transactions params="[[$data]]"></card-transactions>
+  </div>
   <card-block-sheet  params="[[$data]]"></card-block-sheet>
   <card-limits-sheet params="[[$data]]"></card-limits-sheet>
   <card-pin-sheet    params="[[$data]]"></card-pin-sheet>
