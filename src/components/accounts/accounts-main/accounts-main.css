@@ -1,6 +1,6 @@
 /* Accounts orchestrator — hero header + tab switcher */
 .acc-hero{background:var(--c-primary);padding:0;position:relative;overflow:hidden;transition:background .55s cubic-bezier(.4,0,.2,1);}
-.acc-hero--deposits{background:#0D5C63;}
+.acc-hero--deposits{background:var(--c-deposit);}
 .acc-hero--loans{background:#1A3353;}
 .acc-hero-inner{position:relative;z-index:1;padding:4px 16px 16px;}
 
