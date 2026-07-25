@@ -1,0 +1,41 @@
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': isOpen()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.pay_bulk"></h2>
+    <div style="width:36px;"></div>
+  </div>
+  <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+    <!-- Upload card -->
+    <div style="background:var(--c-surface);border-radius:16px;border:2px dashed var(--c-border);padding:32px 20px;text-align:center;margin-bottom:16px;cursor:pointer;">
+      <div style="width:56px;height:56px;border-radius:16px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="26" height="26"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <div style="font-size:15px;font-weight:800;color:var(--c-t1);margin-bottom:4px;">Upload Payment File</div>
+      <div style="font-size:12px;color:var(--c-t3);">CSV or Excel · Max 500 records</div>
+      <button class="app-btn app-btn--primary" style="margin-top:16px;padding:10px 24px;">Choose File</button>
+    </div>
+    <!-- Download template -->
+    <button class="app-btn app-btn--ghost app-btn--full" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Template
+    </button>
+    <!-- Recent batches -->
+    <div style="font-size:11px;font-weight:700;color:var(--c-t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Recent Batches</div>
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;">
+      <div style="padding:13px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Payroll Jul 2026</div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;">48 transactions · LYD 312,000</div>
+        </div>
+        <span class="pill pill-success">Processed</span>
+      </div>
+      <div style="padding:13px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Vendor Payments</div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;">12 transactions · LYD 84,500</div>
+        </div>
+        <span class="pill pill-warning">Pending</span>
+      </div>
+    </div>
+  </div>
+</div>

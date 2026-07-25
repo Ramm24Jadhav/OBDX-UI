@@ -61,7 +61,7 @@
       <span class="pay-menu-text" data-bind="text: nls.pay_scheduled"></span>
       <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
-    <div class="pay-menu-row">
+    <div class="pay-menu-row" data-bind="click: openStanding">
       <div class="pay-menu-icon" style="background:#FEF3C7;"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
       <span class="pay-menu-text" data-bind="text: nls.pay_standing"></span>
       <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -76,7 +76,7 @@
       <span class="pay-menu-text" data-bind="text: nls.pay_bills"></span>
       <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
-    <div class="pay-menu-row">
+    <div class="pay-menu-row" data-bind="click: openBulk">
       <div class="pay-menu-icon" style="background:#EDE9FE;"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" width="17" height="17"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
       <span class="pay-menu-text" data-bind="text: nls.pay_bulk"></span>
       <div class="pay-menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -85,137 +85,11 @@
 
   <div style="height:80px;"></div>
 
-  <!-- SUB-PANEL: QR PAY -->
-  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showQR()}">
-    <div class="app-sub-panel__header">
-      <button class="app-back-btn" data-bind="click: closeQR"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h2 class="app-sub-panel__title" data-bind="text: nls.pay_qr"></h2>
-      <div style="width:36px;"></div>
-    </div>
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:20px;">
-      <div style="width:220px;height:220px;border-radius:20px;border:2px solid var(--c-border);background:var(--c-surface);display:flex;align-items:center;justify-content:center;">
-        <svg viewBox="0 0 100 100" width="180" height="180" fill="none" stroke="var(--c-t2)" stroke-width="3">
-          <rect x="10" y="10" width="30" height="30" rx="3"/><rect x="15" y="15" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
-          <rect x="60" y="10" width="30" height="30" rx="3"/><rect x="65" y="15" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
-          <rect x="10" y="60" width="30" height="30" rx="3"/><rect x="15" y="65" width="20" height="20" rx="2" fill="var(--c-primary)" stroke="none"/>
-          <rect x="60" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="72" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
-          <rect x="84" y="60" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="60" y="72" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
-          <rect x="84" y="72" width="8" height="8" fill="var(--c-t2)" stroke="none"/><rect x="60" y="84" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
-          <rect x="72" y="84" width="8" height="8" fill="var(--c-t2)" stroke="none"/>
-        </svg>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:16px;font-weight:800;color:var(--c-t1);">Mohammed Al-Qahtani</div>
-        <div style="font-size:12px;color:var(--c-t3);margin-top:4px;">Scan to pay · LY44 2000 •••• 2341</div>
-      </div>
-      <div style="display:flex;gap:10px;width:100%;">
-        <button class="app-btn app-btn--ghost" style="flex:1;" data-bind="text: nls.pay_share_qr"></button>
-        <button class="app-btn app-btn--primary" style="flex:1;" data-bind="text: nls.pay_scan_pay"></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: BENEFICIARIES -->
-  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showBeneficiaries()}">
-    <div class="app-sub-panel__header">
-      <button class="app-back-btn" data-bind="click: closeBeneficiaries"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h2 class="app-sub-panel__title" data-bind="text: nls.pay_beneficiaries"></h2>
-      <button style="font-size:12px;font-weight:700;color:var(--c-primary);background:none;border:none;cursor:pointer;" data-bind="text: nls.pay_add_ben"></button>
-    </div>
-    <div style="overflow-y:auto;flex:1;" data-bind="foreach: beneficiaries">
-      <div class="pay-ben-row-item" data-bind="click: function(){ $parent.selectBeneficiary($data); $parent.closeBeneficiaries(); }">
-        <div class="pay-ben-chip__avatar" style="width:44px;height:44px;border-radius:50%;font-size:16px;" data-bind="text: initials, style:{background: avatarColor}"></div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:14px;font-weight:700;color:var(--c-t1);" data-bind="text: name"></div>
-          <div style="font-size:12px;color:var(--c-t3);" data-bind="text: bank + ' · ' + accountNo"></div>
-        </div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-t4)" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: SCHEDULED PAYMENTS -->
-  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showScheduled()}">
-    <div class="app-sub-panel__header">
-      <button class="app-back-btn" data-bind="click: closeScheduled"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h2 class="app-sub-panel__title" data-bind="text: nls.pay_scheduled"></h2>
-      <div style="width:36px;"></div>
-    </div>
-    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
-      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Rent Payment</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">To: Ahmed Al-Mansoori</div></div>
-          <span class="pill pill-success">Active</span>
-        </div>
-        <div style="padding:12px 16px;display:flex;gap:16px;border-bottom:1px solid var(--c-border);">
-          <div><div style="font-size:10px;color:var(--c-t3);">Amount</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">LYD 3,500</div></div>
-          <div><div style="font-size:10px;color:var(--c-t3);">Next Date</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">01 Aug</div></div>
-          <div><div style="font-size:10px;color:var(--c-t3);">Frequency</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">Monthly</div></div>
-        </div>
-        <div style="padding:10px 16px;display:flex;gap:8px;">
-          <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Edit</button>
-          <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-error);font-size:11px;font-weight:700;cursor:pointer;">Cancel</button>
-        </div>
-      </div>
-      <button class="app-btn app-btn--ghost app-btn--full" data-bind="text: nls.pay_new_scheduled"></button>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: BILL PAYMENTS -->
-  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showBills()}">
-    <div class="app-sub-panel__header">
-      <button class="app-back-btn" data-bind="click: closeBills"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h2 class="app-sub-panel__title" data-bind="text: nls.pay_bills"></h2>
-      <div style="width:36px;"></div>
-    </div>
-    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-        <div style="background:var(--c-surface);border-radius:14px;border:1px solid var(--c-border);padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;align-items:flex-start;">
-          <div style="width:38px;height:38px;border-radius:11px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Electricity</div>
-          <div style="font-size:10px;color:var(--c-t3);">GECOL</div>
-        </div>
-        <div style="background:var(--c-surface);border-radius:14px;border:1px solid var(--c-border);padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;align-items:flex-start;">
-          <div style="width:38px;height:38px;border-radius:11px;background:#DBEAFE;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-          <div style="font-size:13px;font-weight:700;color:var(--c-t1);">Mobile</div>
-          <div style="font-size:10px;color:var(--c-t3);">Libyana / Madar</div>
-        </div>
-      </div>
-      <div style="background:var(--c-surface);border-radius:16px;border:1.5px solid var(--c-warning, #F59E0B);overflow:hidden;">
-        <div style="padding:12px 16px;background:rgba(245,158,11,.08);border-bottom:1px solid rgba(245,158,11,.2);display:flex;align-items:center;gap:8px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span style="font-size:12px;font-weight:700;color:#D97706;">Due in 3 days</span>
-        </div>
-        <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">Electricity Bill</div><div style="font-size:11px;color:var(--c-t3);">Account: 1234567890</div></div>
-          <div style="text-align:right;"><div style="font-size:16px;font-weight:800;color:var(--c-t1);">LYD 420</div><button style="margin-top:4px;padding:6px 12px;border-radius:8px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Pay Now</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: PAYMENT TRACKER -->
-  <div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': showTracker()}">
-    <div class="app-sub-panel__header">
-      <button class="app-back-btn" data-bind="click: closeTracker"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h2 class="app-sub-panel__title" data-bind="text: nls.pay_tracker"></h2>
-      <div style="width:36px;"></div>
-    </div>
-    <div style="overflow-y:auto;flex:1;padding:16px 20px;">
-      <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:700;color:var(--c-t1);">International Wire</div><div style="font-size:11px;color:var(--c-t3);margin-top:2px;">Ref: TXN-2026-00891</div></div>
-          <span class="pill pill-warning">Processing</span>
-        </div>
-        <div style="padding:14px 16px;">
-          <div class="track-steps">
-            <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Initiated<span>24 Jul 2026</span></div></div>
-            <div class="track-step track-step--done"><div class="track-step__dot">✓</div><div class="track-step__label">Authorised<span>24 Jul 2026</span></div></div>
-            <div class="track-step track-step--active"><div class="track-step__dot"></div><div class="track-step__label">Processing<span>In Progress</span></div></div>
-            <div class="track-step" style="padding-bottom:0;"><div class="track-step__dot"></div><div class="track-step__label">Completed<span>Pending</span></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <qr-pay-panel params="isOpen: showQR, onClose: closeQR"></qr-pay-panel>
+  <bene-panel params="isOpen: showBeneficiaries, onClose: closeBeneficiaries, beneficiaries: beneficiaries, onSelectBen: selectBeneficiary"></bene-panel>
+  <scheduled-panel params="isOpen: showScheduled, onClose: closeScheduled"></scheduled-panel>
+  <standing-panel params="isOpen: showStanding, onClose: closeStanding"></standing-panel>
+  <bills-panel params="isOpen: showBills, onClose: closeBills"></bills-panel>
+  <tracker-panel params="isOpen: showTracker, onClose: closeTracker"></tracker-panel>
+  <bulk-panel params="isOpen: showBulk, onClose: closeBulk"></bulk-panel>
 </div>

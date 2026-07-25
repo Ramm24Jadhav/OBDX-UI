@@ -23,6 +23,12 @@ define(['shared-components/utils', 'ojL10n!components/pay/nls/strings'], functio
     this.showTracker        = p.showTracker;
     this.openTracker        = p.openTracker;
     this.closeTracker       = p.closeTracker;
+    this.showStanding       = p.showStanding;
+    this.openStanding       = p.openStanding;
+    this.closeStanding      = p.closeStanding;
+    this.showBulk           = p.showBulk;
+    this.openBulk           = p.openBulk;
+    this.closeBulk          = p.closeBulk;
   }
   return PayHubViewModel;
 });

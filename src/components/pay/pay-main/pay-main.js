@@ -11,7 +11,14 @@
   'pay-components/pay-step-review/loader',
   'pay-components/pay-step-otp/loader',
   'shared-components/pay_flow_header/loader',
-  'shared-components/pay_confirmation/loader'
+  'shared-components/pay_confirmation/loader',
+  'pay-panels/qr-pay/loader',
+  'pay-panels/bene-panel/loader',
+  'pay-panels/scheduled-panel/loader',
+  'pay-panels/standing-panel/loader',
+  'pay-panels/bills-panel/loader',
+  'pay-panels/tracker-panel/loader',
+  'pay-panels/bulk-panel/loader'
 ], function (ko, PaymentService, AccountService, utils, nls) {
   'use strict';
 
@@ -71,6 +78,12 @@
     self.closeBills         = function () { self.showBills(false); };
     self.openTracker        = function () { self.showTracker(true); };
     self.closeTracker       = function () { self.showTracker(false); };
+    self.showStanding       = ko.observable(false);
+    self.showBulk           = ko.observable(false);
+    self.openStanding       = function () { self.showStanding(true); };
+    self.closeStanding      = function () { self.showStanding(false); };
+    self.openBulk           = function () { self.showBulk(true); };
+    self.closeBulk          = function () { self.showBulk(false); };
 
     self.flowType       = ko.observable('within'); // 'own'|'within'|'domestic'|'international'|'gcc'|'afaq'|'adhoc'
     self.transferStatus = ko.observable('success');  // 'success'|'failure'|'pending'|'rejected'

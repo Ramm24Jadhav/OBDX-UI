@@ -1,0 +1,28 @@
+<div class="app-sub-panel" data-bind="css: {'app-sub-panel--open': isOpen()}">
+  <div class="app-sub-panel__header">
+    <button class="app-back-btn" data-bind="click: onClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="app-sub-panel__title" data-bind="text: nls.pay_scheduled"></h2>
+    <div style="width:36px;"></div>
+  </div>
+  <div style="overflow-y:auto;flex:1;padding:16px 20px;">
+    <div style="background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);overflow:hidden;margin-bottom:14px;">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--c-t1);">Rent Payment</div>
+          <div style="font-size:11px;color:var(--c-t3);margin-top:2px;">To: Ahmed Al-Mansoori</div>
+        </div>
+        <span class="pill pill-success">Active</span>
+      </div>
+      <div style="padding:12px 16px;display:flex;gap:16px;border-bottom:1px solid var(--c-border);">
+        <div><div style="font-size:10px;color:var(--c-t3);">Amount</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">LYD 3,500</div></div>
+        <div><div style="font-size:10px;color:var(--c-t3);">Next Date</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">01 Aug</div></div>
+        <div><div style="font-size:10px;color:var(--c-t3);">Frequency</div><div style="font-size:14px;font-weight:800;color:var(--c-t1);">Monthly</div></div>
+      </div>
+      <div style="padding:10px 16px;display:flex;gap:8px;">
+        <button style="flex:1;padding:8px;border-radius:10px;border:none;background:var(--c-primary);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Edit</button>
+        <button style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-error);font-size:11px;font-weight:700;cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+    <button class="app-btn app-btn--ghost app-btn--full" data-bind="text: nls.pay_new_scheduled"></button>
+  </div>
+</div>
