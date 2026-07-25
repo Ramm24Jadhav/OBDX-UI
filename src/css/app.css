@@ -47,6 +47,55 @@ html,body{height:100%}
   --safe-bottom: env(safe-area-inset-bottom,0px);
 }
 
+/* ── Dark mode tokens ── */
+/* Applied when user explicitly picks Dark, or when OS prefers dark (System mode) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-bg:           #0F1117;
+    --c-surface:      #1A1D27;
+    --c-surface2:     #21252F;
+    --c-border:       #2A2D3A;
+    --c-border2:      #3A3E4F;
+    --c-t1:           #F0F2F8;
+    --c-t2:           #9DA3B4;
+    --c-t3:           #5C6278;
+    --c-t4:           #3A3E4F;
+    --c-primary-light:#2A0F1A;
+    --c-gold-light:   #2A1E08;
+    --c-success-bg:   #0A2318;
+    --c-warning-bg:   #231A06;
+    --c-error-bg:     #230A0A;
+    --c-info-bg:      #091630;
+    --c-purple-bg:    #160E30;
+    --shadow-sm:  0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+    --shadow-md:  0 4px 12px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.25);
+    --shadow-lg:  0 12px 32px rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.3);
+    --shadow-card:0 20px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+  --c-bg:           #0F1117;
+  --c-surface:      #1A1D27;
+  --c-surface2:     #21252F;
+  --c-border:       #2A2D3A;
+  --c-border2:      #3A3E4F;
+  --c-t1:           #F0F2F8;
+  --c-t2:           #9DA3B4;
+  --c-t3:           #5C6278;
+  --c-t4:           #3A3E4F;
+  --c-primary-light:#2A0F1A;
+  --c-gold-light:   #2A1E08;
+  --c-success-bg:   #0A2318;
+  --c-warning-bg:   #231A06;
+  --c-error-bg:     #230A0A;
+  --c-info-bg:      #091630;
+  --c-purple-bg:    #160E30;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+  --shadow-md:  0 4px 12px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.25);
+  --shadow-lg:  0 12px 32px rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.3);
+  --shadow-card:0 20px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
+}
+
 /* ── Dynamic SVG theming ── */
 [stroke="#7A1531"],[stroke="#7a1531"]{stroke:var(--c-primary)}
 [fill="#7A1531"],[fill="#7a1531"]{fill:var(--c-primary)}
