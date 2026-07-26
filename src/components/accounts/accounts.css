@@ -39,7 +39,7 @@
 /* ── IBAN sheet ── */
 .iban-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s}
 .iban-sheet-backdrop.open{opacity:1;pointer-events:auto}
-.iban-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:801;padding:0 20px 32px;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:85vh;overflow-y:auto;scrollbar-width:none;will-change:transform}
+.iban-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--c-surface);border-radius:28px 28px 0 0;z-index:801;padding:0 20px 32px;transition:transform .35s cubic-bezier(.32,1,.23,1);max-height:85vh;overflow-y:auto;scrollbar-width:none;will-change:transform;pointer-events:auto}
 .iban-sheet.open{transform:translateX(-50%) translateY(0)}
 
 /* ── Global picker sheet ── */

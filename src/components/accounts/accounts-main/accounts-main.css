@@ -1,8 +1,8 @@
 /* Accounts orchestrator — hero header + tab switcher */
-.acc-hero{background:var(--c-primary);padding:0;position:relative;overflow:hidden;transition:background .55s cubic-bezier(.4,0,.2,1);}
+.acc-hero{height:var(--hero-h);background:var(--c-primary);padding:0;position:relative;overflow:hidden;transition:background .55s cubic-bezier(.4,0,.2,1);}
 .acc-hero--deposits{background:var(--c-deposit);}
 .acc-hero--loans{background:#1A3353;}
-.acc-hero-inner{position:relative;z-index:1;padding:calc(var(--status-h) + 24px) 16px 16px;}
+.acc-hero-inner{position:relative;z-index:1;padding:calc(var(--status-h) + 24px) 16px 8px;}
 
 /* Swoosh blobs */
 .acc-hero-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.12);pointer-events:none;will-change:transform,opacity;}
@@ -44,7 +44,7 @@
 .acc-hero-header h2{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.4px}
 .acc-hero-header .icon-btn{background:rgba(255,255,255,.12);box-shadow:none}
 .acc-hero-header .icon-btn svg{color:rgba(255,255,255,.9)}
-.acc-tabs{display:flex;background:rgba(255,255,255,.1);border-radius:var(--r-full);padding:3px;gap:0;margin-bottom:20px}
+.acc-tabs{display:flex;background:rgba(255,255,255,.1);border-radius:var(--r-full);padding:3px;gap:0;margin-bottom:10px}
 .acc-tab{flex:1;padding:7px 4px;border-radius:var(--r-full);text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;}
 .acc-tab.active,.acc-tab--active{background:rgba(255,255,255,.15);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.2);}
 .acc-tab-count{font-size:10px;font-weight:800;background:rgba(255,255,255,.2);border-radius:20px;padding:1px 6px;line-height:1.4;}

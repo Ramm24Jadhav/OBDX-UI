@@ -55,6 +55,7 @@ html,body{height:100%;margin:0;padding:0}
   --nav-h: 72px;
   --status-h: 0px;
   --safe-bottom: env(safe-area-inset-bottom,0px);
+  --hero-h: 40vh;
   --c-bg-glass: rgba(245,246,250,.92);
 }
 
