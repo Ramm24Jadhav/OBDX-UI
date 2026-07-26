@@ -34,7 +34,7 @@
 .more-hero-stat__val{font-size:14px;font-weight:800;color:#fff}
 .more-hero-stat__label{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
 .more-hero-divider{height:1px;background:rgba(255,255,255,.1);margin:0 20px}
-.more-hero-rm{padding:12px 20px;display:flex;align-items:center;gap:12px}
+.more-hero-rm{padding:12px 20px 36px;display:flex;align-items:center;gap:12px}
 .more-hero-rm-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--c-gold),#B8903C);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
 .more-hero-rm-info{flex:1;min-width:0}
 .more-hero-rm-label{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px;font-weight:600}

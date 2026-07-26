@@ -13,7 +13,7 @@
 .home-hero-sheet .notif-badge{border-color:var(--c-primary-dd)}
 
 /* ── Hero sheet (appbar + RV widget) ── */
-.home-hero-sheet{height:var(--hero-h);flex-shrink:0;overflow:hidden;border-radius:0 0 28px 28px;transition:height .38s cubic-bezier(.4,0,.2,1),border-radius .38s cubic-bezier(.4,0,.2,1)}
+.home-hero-sheet{height:auto;flex-shrink:0;overflow:hidden;border-radius:0 0 28px 28px;transition:height .38s cubic-bezier(.4,0,.2,1),border-radius .38s cubic-bezier(.4,0,.2,1)}
 .home-hero-sheet--collapsed{border-radius:0}
 .home-hero-body{transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .28s ease}
 .home-hero-sheet--collapsed .home-hero-body{transform:translateY(-100%);opacity:0;pointer-events:none}
