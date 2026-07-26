@@ -9,7 +9,7 @@
   </div>
 
   <!-- Content -->
-  <div data-bind="visible: !isLoading()" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+  <div data-bind="visible: !isLoading()" style="display:flex;flex-direction:column;">
 
     <!-- Hero: gradient header + balance + tabs -->
     <div data-bind="css: heroTabClass()">
@@ -125,7 +125,7 @@
     </div><!-- /acc-hero -->
 
     <!-- Scrollable body — rounded top corners overlap hero -->
-    <div class="acc-body-sheet" style="overflow-y:auto;flex:1;border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
+    <div class="acc-body-sheet" style="border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
 
       <!-- Current & Savings tab -->
       <acct-list params="[[accountListParams]]" data-bind="visible: showCurrentSavings()"></acct-list>
