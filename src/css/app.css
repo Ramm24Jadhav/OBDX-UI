@@ -337,7 +337,7 @@ input[type="text"],input[type="tel"],input[type="email"],input[type="number"],in
 .step-line.done{background:var(--c-success)}
 
 /* Bottom spacer + global anims */
-.bottom-spacer{height:100px}
+#home-root .bottom-spacer{height:100px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes scan-line{0%,100%{top:10px}50%{top:calc(100% - 12px)}}
 @keyframes skeletonShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}

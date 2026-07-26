@@ -137,7 +137,7 @@
 
           <!-- ── Floating Pill Nav Bar (hidden on login screen) ── -->
           <nav class="app-nav" role="navigation" aria-label="Main navigation"
-               data-bind="visible: isAuthenticated() && !anyPanelOpen()">
+               data-bind="visible: isAuthenticated() && isHomeVisible() && !anyPanelOpen()">
             <button class="nav-btn" data-bind="click: function(){navigate('home')}, css:{'active': currentRoute()==='home'}" aria-label="Home">
               <div class="nav-icon-wrap">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>

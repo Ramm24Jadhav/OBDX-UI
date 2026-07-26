@@ -107,6 +107,9 @@ define([
 
     // ── Auth state ─────────────────────────────────────────────
     self.isAuthenticated = ko.observable(false);
+    // True only after navigate('home') fires — keeps navbar hidden during the
+    // auth-loader → home-animation gap even though isAuthenticated is already true.
+    self.isHomeVisible  = ko.observable(false);
     // Which tab slot the dashboard should display — set before dashboard loads
     // so it is immediately correct when the dashboard ViewModel reads it.
     self.currentTab = ko.observable('login');
@@ -270,18 +273,25 @@ define([
         // Wait for home data to be bound before showing the home screen.
         // The auth loader stays visible until this callback fires.
         _whenHomeReady(function () {
-          self.hideLoader();
-          self.navigate('home');
-          // Force-reset animation so it replays on every login
+          // Pre-apply animation from-states while loader still covers screen.
+          // The loader is semi-transparent glass (z-2000) — applying classes here
+          // ensures the navbar/hero are already at their from-states (opacity:0,
+          // off-screen) before the overlay dismisses, preventing a visible flash.
+          document.body.classList.remove('home-ready');
+          void document.body.offsetWidth; // commit removal so animation replays
+          document.body.classList.add('home-ready'); // navbar → translateY(100%) opacity:0
+
           var root = document.getElementById('home-root');
           if (root) {
             root.classList.remove('home-ready');
-            void root.offsetWidth; // reflow to reset CSS animation
-            root.classList.add('home-ready');
+            void root.offsetWidth;
+            root.classList.add('home-ready'); // hero → -100vh, content → translateY(100vh)
           }
-          document.body.classList.remove('home-ready');
-          void document.body.offsetWidth;
-          document.body.classList.add('home-ready');
+
+          // Dismiss loader and navigate — from-states are already applied
+          self.hideLoader();
+          self.navigate('home');
+          self.isHomeVisible(true);
         });
       });
     };
@@ -308,6 +318,7 @@ define([
       self.sessionExpired(false);
       self.sessionSuspended(false);
       self.isAuthenticated(false);
+      self.isHomeVisible(false);
       self.navigate('login');
     };
 
