@@ -7,15 +7,8 @@
 .splash-name{font-size:26px;font-weight:900;color:#fff;letter-spacing:3px;text-transform:uppercase}
 .splash-tagline{font-size:13px;color:rgba(200,164,93,.7);font-weight:500;letter-spacing:.5px;margin-top:4px;text-align:center}
 .splash-divider{width:48px;height:2px;background:linear-gradient(90deg,transparent,var(--c-gold),transparent);margin:28px auto}
-.splash-powered{text-align:center}
-.splash-powered span{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.5px;display:block;margin-bottom:6px;font-weight:500}
-.splash-powered strong{font-size:13px;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:1px}
 .splash-loader{position:absolute;bottom:60px;display:flex;gap:6px}
 .splash-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,164,93,.4);animation:splashPulse 1.4s ease-in-out infinite}
 .splash-dot:nth-child(2){animation-delay:.2s}
 .splash-dot:nth-child(3){animation-delay:.4s}
 @keyframes splashPulse{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1.1);background:var(--c-gold)}}
-@keyframes waveSlide{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
-.splash-wave-bar{width:180px;height:3px;background:rgba(200,164,93,.18);border-radius:2px;overflow:hidden;position:relative;margin:0 auto}
-.splash-wave-bar::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--c-gold),transparent);animation:waveSlide 1.6s ease-in-out infinite}
-.splash-secure{font-size:11px;color:rgba(200,164,93,.55);font-weight:500;letter-spacing:.3px;text-align:center;margin-top:10px}

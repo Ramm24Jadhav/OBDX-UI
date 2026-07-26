@@ -4,42 +4,42 @@
 <div class="dash-container">
 
   <!-- Login screen -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'login'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'login' }">
     <!-- ko if: tabVms.login() -->
     <!-- ko template: { nodes: tabViews.login(), data: tabVms.login() } --><!-- /ko -->
     <!-- /ko -->
   </div>
 
   <!-- Home tab -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'home'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'home' }">
     <!-- ko if: tabVms.home() -->
     <!-- ko template: { nodes: tabViews.home(), data: tabVms.home() } --><!-- /ko -->
     <!-- /ko -->
   </div>
 
   <!-- Accounts tab -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'accounts'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'accounts' }">
     <!-- ko if: tabVms.accounts() -->
     <!-- ko template: { nodes: tabViews.accounts(), data: tabVms.accounts() } --><!-- /ko -->
     <!-- /ko -->
   </div>
 
   <!-- Pay tab -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'pay'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'pay' }">
     <!-- ko if: tabVms.pay() -->
     <!-- ko template: { nodes: tabViews.pay(), data: tabVms.pay() } --><!-- /ko -->
     <!-- /ko -->
   </div>
 
   <!-- Cards tab -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'cards'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'cards' }">
     <!-- ko if: tabVms.cards() -->
     <!-- ko template: { nodes: tabViews.cards(), data: tabVms.cards() } --><!-- /ko -->
     <!-- /ko -->
   </div>
 
   <!-- More tab -->
-  <div class="dash-slot" data-bind="visible: currentTab() === 'more'">
+  <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'more' }">
     <!-- ko if: tabVms.more() -->
     <!-- ko template: { nodes: tabViews.more(), data: tabVms.more() } --><!-- /ko -->
     <!-- /ko -->

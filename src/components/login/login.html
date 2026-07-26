@@ -1,13 +1,24 @@
-﻿<!-- Login Screen — OBDX Mobile (MVVM view) -->
+<!-- Login Screen — OBDX Mobile (MVVM view) -->
 <div class="login-screen-wrap">
 
   <login-splash params="[[$data]]"></login-splash>
 
   <div class="login-screen" data-bind="css: {'hidden': showSplash()}">
+
+    <!-- Language pill: sliding segmented toggle (swipe or tap) -->
+    <div class="login-lang-pill">
+      <button data-bind="click: toggleLang, attr: {'data-lang': currentLang()}" class="login-lang-btn">
+        <span class="login-lang-track">
+          <span class="login-lang-seg">EN</span>
+          <span class="login-lang-seg">عر</span>
+        </span>
+      </button>
+    </div>
+
     <login-hero params="[[$data]]"></login-hero>
 
-    <div class="login-body">
-      <div class="lb-auth-area">
+    <div class="login-body oj-flex oj-sm-flex-direction-column">
+      <div class="lb-auth-area oj-flex-item oj-flex oj-sm-flex-direction-column">
         <login-bio-view      params="[[$data]]"></login-bio-view>
         <login-mpin-view     params="[[$data]]"></login-mpin-view>
         <login-password-view params="[[$data]]"></login-password-view>

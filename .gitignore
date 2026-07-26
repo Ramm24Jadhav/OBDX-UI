@@ -18,3 +18,13 @@ hybrid/plugins/*
 
 .DS_Store
 Thumbs.db
+
+# Local env / secrets
+.env
+
+# Claude Code project files
+.claude/
+
+# Dev screenshots and logs
+*.png
+gradle-rebuild.log

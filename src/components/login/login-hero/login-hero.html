@@ -1,24 +1,16 @@
-﻿<div class="login-hero">
-  <!-- Language toggle -->
-  <div style="position:absolute;top:14px;right:16px;z-index:10;">
-    <button data-bind="click: toggleLang" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);cursor:pointer;font-size:12px;font-weight:700;color:#fff;letter-spacing:.3px;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <span style="padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.85);color:#1a0a00;">EN</span>
-      <span style="opacity:.5;font-weight:400;">|</span>
-      <span style="padding:2px 6px;border-radius:10px;">عر</span>
-    </button>
+<div class="login-hero">
+  <div class="login-hero-brand">
+    <div class="login-hero-logo">
+      <svg viewBox="0 0 32 32" fill="none">
+        <line x1="16" y1="28" x2="16" y2="10" stroke="#C8A45D" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 22 Q10 19 8 14" stroke="#C8A45D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M16 16 Q11 13 9 8" stroke="#C8A45D" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M16 22 Q22 19 24 14" stroke="#C8A45D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M16 16 Q21 13 23 8" stroke="#C8A45D" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <ellipse cx="16" cy="7" rx="2.5" ry="4" fill="#C8A45D" opacity=".9"/>
+      </svg>
+      <span>OBDX Mobile</span>
+    </div>
+    <p class="login-hero-tagline" data-bind="text: nls.splash_tagline"></p>
   </div>
-  <div class="login-hero-logo">
-    <svg viewBox="0 0 32 32" fill="none">
-      <line x1="16" y1="28" x2="16" y2="10" stroke="#C8A45D" stroke-width="2" stroke-linecap="round"/>
-      <path d="M16 22 Q10 19 8 14" stroke="#C8A45D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-      <path d="M16 16 Q11 13 9 8" stroke="#C8A45D" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <path d="M16 22 Q22 19 24 14" stroke="#C8A45D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-      <path d="M16 16 Q21 13 23 8" stroke="#C8A45D" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <ellipse cx="16" cy="7" rx="2.5" ry="4" fill="#C8A45D" opacity=".9"/>
-    </svg>
-    <span>OBDX Mobile</span>
-  </div>
-  <h2 data-bind="text: nls.login_title"></h2>
-  <p data-bind="text: nls.login_subtitle"></p>
 </div>

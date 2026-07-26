@@ -1,15 +1,15 @@
-<div data-bind="visible: authMode() === 'bio' || authMode() === 'faceid'" style="display:none;width:100%;">
+<div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-center" style="width:100%;" data-bind="visible: authMode() === 'bio' || authMode() === 'faceid'" style="display:none;">
   <!-- User chip -->
-  <div class="lb-user-chip">
-    <div class="lb-user-avatar" data-bind="text: userInitial"></div>
-    <div class="lb-user-info">
+  <div class="lb-user-chip oj-flex oj-sm-align-items-center oj-sm-12">
+    <div class="lb-user-avatar oj-flex-item-0" data-bind="text: userInitial"></div>
+    <div class="lb-user-info oj-flex-item">
       <div class="lb-user-name" data-bind="text: userName"></div>
       <div class="lb-user-sub"><span data-bind="text: nls.login_last_login"></span> Today, 9:12 AM</div>
     </div>
     <button class="lb-user-switch" data-bind="click: function(){ setMode('password'); }, text: nls.login_switch"></button>
   </div>
 
-  <div class="lb-bio-view">
+  <div class="lb-bio-view oj-flex oj-sm-flex-direction-column oj-sm-align-items-center">
     <div class="lb-bio-wrap">
       <div class="lb-bio-ring lb-bio-ring3"></div>
       <div class="lb-bio-ring lb-bio-ring2"></div>
@@ -28,7 +28,7 @@
     </div>
     <div class="lb-bio-label" data-bind="text: authMode()==='faceid' ? nls.login_face_label : nls.login_biometric"></div>
     <div class="lb-bio-sub" data-bind="text: authMode()==='faceid' ? nls.login_face_sub : nls.login_bio_sub"></div>
-    <div class="lb-alt-methods">
+    <div class="lb-alt-methods oj-flex oj-sm-align-items-center" style="flex-wrap:wrap;justify-content:center;">
       <button class="lb-alt-btn" data-bind="visible: authMode() !== 'faceid', click: function(){ setMode('faceid'); }, text: nls.login_face_id"></button>
       <span data-bind="visible: authMode() !== 'faceid'">·</span>
       <button class="lb-alt-btn" data-bind="visible: authMode() !== 'bio', click: function(){ setMode('bio'); }, text: nls.login_fingerprint"></button>

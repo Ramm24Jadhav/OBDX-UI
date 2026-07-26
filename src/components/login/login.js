@@ -25,7 +25,7 @@
 
     _splashTimer = setTimeout(function () {
       self.showSplash(false);
-    }, 2200);
+    }, 1800);
 
     // ── Auth mode: 'bio' | 'faceid' | 'mpin' | 'password' ───
     self.authMode  = ko.observable('bio');
@@ -142,7 +142,23 @@
       clearTimeout(_splashTimer);
       _splashTimer = setTimeout(function () {
         self.showSplash(false);
-      }, 2200);
+      }, 1800);
+
+      // Swipe gesture on language pill (left or right swipe toggles language)
+      var pill = document.querySelector('.login-lang-btn');
+      if (pill) {
+        var _swipeStartX = 0;
+        pill.addEventListener('touchstart', function (e) {
+          _swipeStartX = e.touches[0].clientX;
+        }, { passive: true });
+        pill.addEventListener('touchend', function (e) {
+          var dx = e.changedTouches[0].clientX - _swipeStartX;
+          if (Math.abs(dx) > 15) {
+            e.preventDefault();
+            self.toggleLang();
+          }
+        }, { passive: false });
+      }
     };
 
     self.handleDeactivated = function () {

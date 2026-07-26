@@ -6,7 +6,7 @@
 .app-screen--more{padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px)}
 
 /* ── Scrollable body panel — rounded white cap over dark hero card ── */
-.more-body{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--c-bg);border-radius:28px 28px 0 0;margin-top:-24px;position:relative;z-index:2;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.more-body{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--c-bg);border-radius:28px 28px 0 0;margin-top:-24px;position:relative;z-index:2;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior:contain}
 .more-body::-webkit-scrollbar{display:none}
 
 /* ── Header ── */
