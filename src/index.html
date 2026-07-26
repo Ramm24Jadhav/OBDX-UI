@@ -10,15 +10,14 @@
     <title>OBDX Mobile — Digital Banking</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="theme-color" content="#3A0716">
+    <meta name="theme-color" id="metaThemeColor" content="#3A0716">
     <meta name="apple-mobile-web-app-title" content="OBDX Mobile">
     <link rel="icon" href="css/images/favicon.ico" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="css/images/icon-192.png">
 
-
-    <!-- Splash background — set before any CSS loads so there's zero white/black flash -->
-    <style>html,body{background:#3A0716}#obdxPhone{background:#3A0716!important}</style>
+    <!-- Splash background — CSS vars with maroon fallback so there's zero white/black flash -->
+    <style>html,body{background:var(--c-primary-dd,#3A0716)}#obdxPhone{background:var(--c-primary-dd,#3A0716)!important}</style>
 
     <!-- Pre-load login-splash CSS so it renders styled the instant JET mounts it -->
     <link rel="stylesheet" href="components/login/login-splash/login-splash.css" type="text/css"/>
@@ -38,6 +37,37 @@
     <!-- pay and cards CSS now loaded dynamically per sub-component via utils.loadCss -->
     <link rel="stylesheet" href="components/more/more.css" type="text/css"/>
     <link rel="stylesheet" href="components/accounts/accounts.css" type="text/css"/>
+
+    <!-- Restore saved accent before first paint — runs after all stylesheets so inline style overrides :root defaults -->
+    <script>
+    (function(){
+      var A={
+        maroon:{color:'#7A1531',hover:'#A01A3B',dark:'#5A0F23',dd:'#3A0716',rgb:'122,21,49',  light:'#FCE7EE',bright:'#E0607A'},
+        navy:  {color:'#1E3A5F',hover:'#264D80',dark:'#152840',dd:'#0D1E30',rgb:'30,58,95',   light:'#DBEAFE',bright:'#60A5FA'},
+        forest:{color:'#166534',hover:'#1A7C40',dark:'#0D4A24',dd:'#073317',rgb:'22,101,52',  light:'#DCFCE7',bright:'#4ADE80'},
+        slate: {color:'#334155',hover:'#475569',dark:'#1E293B',dd:'#0F172A',rgb:'51,65,85',   light:'#E2E8F0',bright:'#94A3B8'},
+        gold:  {color:'#B45309',hover:'#D97706',dark:'#8A3E07',dd:'#5A2A04',rgb:'180,83,9',   light:'#FEF3C7',bright:'#FCD34D'},
+        rose:  {color:'#9F1239',hover:'#BE185D',dark:'#771030',dd:'#4C0720',rgb:'159,18,57',  light:'#FCE7EE',bright:'#FB7185'}
+      };
+      try{
+        var p=JSON.parse(localStorage.getItem('obdxThemePrefs')||'{}');
+        var a=A[p.accent]||A.maroon;
+        var r=document.documentElement;
+        r.style.setProperty('--c-primary',       a.color);
+        r.style.setProperty('--c-primary-h',     a.hover);
+        r.style.setProperty('--c-primary-d',     a.dark);
+        r.style.setProperty('--c-primary-dd',    a.dd);
+        r.style.setProperty('--c-primary-rgb',   a.rgb);
+        r.style.setProperty('--c-primary-light', a.light);
+        r.style.setProperty('--c-primary-bright',a.bright);
+        if(p.themeMode==='dark')  r.setAttribute('data-theme','dark');
+        else if(p.themeMode==='light') r.setAttribute('data-theme','light');
+        if(p.fontSize==='large') r.style.setProperty('font-size','17px');
+        var m=document.getElementById('metaThemeColor');
+        if(m) m.setAttribute('content',a.dd);
+      }catch(e){}
+    }());
+    </script>
   </head>
 
   <body class="app-app-body">
@@ -65,7 +95,7 @@
         <div class="app-phone" id="obdxPhone">
 
           <!-- Static splash cover — same maroon gradient as login-splash; hides raw phone during JET boot -->
-          <div id="splashCover" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#3A0716 0%,#5A0F23 40%,#3A0716 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;pointer-events:none;">
+          <div id="splashCover" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,var(--c-primary-dd) 0%,var(--c-primary-d) 40%,var(--c-primary-dd) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;pointer-events:none;">
             <div style="display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:12px;">
               <div style="width:88px;height:88px;">
                 <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" width="88" height="88">

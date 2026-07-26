@@ -2,10 +2,18 @@
    Home Screen — root layout + skeleton only
    ========================================================== */
 
-#home-root{display:flex;flex-direction:column;height:100%;overflow:hidden}
+#home-root{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--c-primary)}
+
+/* App bar sits inside the dark hero — transparent so hero bg shows through */
+.home-hero-sheet .app-bar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.home-hero-sheet .app-bar__greeting{color:rgba(255,255,255,.6)}
+.home-hero-sheet .app-bar__name{color:#fff}
+.home-hero-sheet .app-bar__icon-btn{background:rgba(255,255,255,.12);box-shadow:none;border:1px solid rgba(255,255,255,.1)}
+.home-hero-sheet .app-bar__icon-btn svg{color:rgba(255,255,255,.85)}
+.home-hero-sheet .notif-badge{border-color:var(--c-primary-dd)}
 
 /* ── Hero sheet (appbar + RV widget) ── */
-.home-hero-sheet{background:var(--c-primary-dd);flex-shrink:0;overflow:hidden;border-radius:0 0 28px 28px;transition:height .38s cubic-bezier(.4,0,.2,1),border-radius .38s cubic-bezier(.4,0,.2,1)}
+.home-hero-sheet{flex-shrink:0;overflow:hidden;border-radius:0 0 28px 28px;transition:height .38s cubic-bezier(.4,0,.2,1),border-radius .38s cubic-bezier(.4,0,.2,1)}
 .home-hero-sheet--collapsed{border-radius:0}
 .home-hero-body{transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .28s ease}
 .home-hero-sheet--collapsed .home-hero-body{transform:translateY(-100%);opacity:0;pointer-events:none}

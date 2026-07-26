@@ -143,7 +143,7 @@
 
     self.handleActivated = function () {
       clearTimeout(_loadTimer);
-      _loadTimer = setTimeout(function () { self._load(); }, 50);
+      self._load();
     };
 
     self.connected = function () {
@@ -271,7 +271,6 @@
     };
 
     self._load = function () {
-      self.isLoading(true);
       Promise.all([
         AccountService.getAccounts(),
         AccountService.getTransactions('ACC-4829')

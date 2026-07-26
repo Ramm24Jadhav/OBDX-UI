@@ -78,13 +78,24 @@ define([
       // Modules are almost certainly cached by now; resolves synchronously.
       require(AUTH_LOADER_IDS, function () {
         var loaders = Array.prototype.slice.call(arguments);
-        AUTH_TAB_KEYS.forEach(function (key, i) {
-          var cfg = loaders[i];
-          var vm  = new cfg.viewModel();
-          self.tabViews[key](parseNodes(cfg.view));
-          self.tabVms[key](vm);
-          _fireConnected(vm);
-        });
+
+        // Home — priority: construct synchronously so KO renders it first
+        var homeCfg = loaders[0];
+        var homeVm  = new homeCfg.viewModel();
+        self.tabViews.home(parseNodes(homeCfg.view));
+        self.tabVms.home(homeVm);
+        _fireConnected(homeVm);
+
+        // Other 4 — all construct in parallel one tick later (after Home renders)
+        setTimeout(function () {
+          ['accounts', 'pay', 'cards', 'more'].forEach(function (key, i) {
+            var cfg = loaders[i + 1];
+            var vm  = new cfg.viewModel();
+            self.tabViews[key](parseNodes(cfg.view));
+            self.tabVms[key](vm);
+            _fireConnected(vm);
+          });
+        }, 50);
       });
     }
 

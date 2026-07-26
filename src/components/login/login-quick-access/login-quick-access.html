@@ -4,27 +4,31 @@
     <span style="font-size:10px;font-weight:700;color:var(--c-t4);letter-spacing:.6px;text-transform:uppercase;" data-bind="text: nls.login_quick_access"></span>
     <div style="flex:1;height:1px;background:var(--c-border);"></div>
   </div>
-  <div class="login-action-row oj-flex oj-sm-align-items-center" style="gap:8px;">
-    <div class="login-act-btn oj-flex-item oj-flex oj-sm-flex-direction-column oj-sm-align-items-center" data-bind="click: function(){ openOrigination('account'); }">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+  <div class="login-action-row">
+    <div class="login-act-btn" data-bind="click: function(){ openOrigination('account'); }">
+      <div class="login-act-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
       <span data-bind="text: nls.login_open_acct"></span>
     </div>
-    <div class="login-act-btn oj-flex-item oj-flex oj-sm-flex-direction-column oj-sm-align-items-center">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <div class="login-act-btn">
+      <div class="login-act-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
       <span data-bind="text: nls.login_atm_branch"></span>
     </div>
-    <div class="login-act-btn oj-flex-item oj-flex oj-sm-flex-direction-column oj-sm-align-items-center">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+    <div class="login-act-btn">
+      <div class="login-act-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
       <span data-bind="text: nls.login_support"></span>
     </div>
   </div>
-  <div class="oj-flex oj-sm-align-items-center oj-sm-12" style="margin-top:8px;gap:8px;padding:10px 16px;border-radius:14px;border:1.5px solid var(--c-border);background:var(--c-surface);cursor:pointer;" data-bind="click: openTrackApp">
-    <svg viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    <span class="oj-flex-item" style="font-size:13px;font-weight:700;color:var(--c-t1);" data-bind="text: nls.login_track_app"></span>
-    <span style="font-size:10px;font-weight:700;background:#FEF3C7;color:#D97706;padding:2px 7px;border-radius:20px;" data-bind="text: nls.login_no_login"></span>
-  </div>
-  <div class="login-secure oj-flex oj-sm-align-items-center" style="padding:12px 0 0;justify-content:center;gap:6px;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <span data-bind="text: nls.login_secure"></span>
+  <div class="login-track-row" data-bind="click: openTrackApp">
+    <div class="login-track-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <span class="login-track-label" data-bind="text: nls.login_track_app"></span>
+    <span class="login-track-badge" data-bind="text: nls.login_no_login"></span>
   </div>
 </div>

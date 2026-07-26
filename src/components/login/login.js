@@ -101,20 +101,10 @@
       window.obdxApp && window.obdxApp.showToast('Track Application — no login needed', 'info');
     };
 
-    self.doLogin = function () {
+    function _performLogin(credentials) {
       self.isLoading(true);
       self.errorMsg('');
       window.obdxApp && window.obdxApp.showLoader('Authenticating', 'Verifying your credentials');
-
-      var credentials = {
-        type:     self.authMode() === 'mpin'     ? 'MPIN'
-                : self.authMode() === 'password' ? 'PASSWORD'
-                : 'BIOMETRIC',
-        userId:   self.username() || 'CUST-0047829',
-        mpin:     self.mpinVal(),
-        password: self.password()
-      };
-
       platform.login(credentials).then(function () {
         self.isLoading(false);
         window.obdxApp && window.obdxApp.hideLoader();
@@ -122,10 +112,55 @@
       }).catch(function (err) {
         self.isLoading(false);
         window.obdxApp && window.obdxApp.hideLoader();
-        var msg = (err && (err.message || err.errorCode)) || 'Authentication failed. Please try again.';
-        self.errorMsg(msg);
+        self.errorMsg((err && (err.message || err.errorCode)) || 'Authentication failed. Please try again.');
+      });
+    }
+
+    self.doLogin = function () {
+      var mode = self.authMode();
+
+      // Native biometric via cordova-plugin-fingerprint-aio
+      if ((mode === 'bio' || mode === 'faceid') && window.Fingerprint) {
+        window.Fingerprint.show({
+          clientId:              'OBDX Mobile Banking',
+          clientSecret:          'obdx_bio_key',
+          disableBackup:         false,
+          localizedFallbackTitle: 'Use PIN',
+          localizedReason:       'Authenticate to access your account'
+        }, function () {
+          _performLogin({ type: 'BIOMETRIC', userId: self.username() || 'CUST-0047829' });
+        }, function (err) {
+          self.errorMsg((err && err.message) || 'Biometric authentication failed');
+        });
+        return;
+      }
+
+      // Web / mock fallback — simulate native biometric delay for testing
+      if (mode === 'bio' || mode === 'faceid') {
+        self.errorMsg('');
+        window.obdxApp && window.obdxApp.showLoader('Authenticating', 'Verifying your credentials');
+        setTimeout(function () {
+          _performLogin({ type: 'BIOMETRIC', userId: self.username() || 'CUST-0047829' });
+        }, 2500);
+        return;
+      }
+
+      _performLogin({
+        type:     mode === 'mpin'     ? 'MPIN'
+                : mode === 'password' ? 'PASSWORD'
+                : 'BIOMETRIC',
+        userId:   self.username() || 'CUST-0047829',
+        mpin:     self.mpinVal(),
+        password: self.password()
       });
     };
+
+    // Auto-trigger native biometric when switching to bio/faceid mode
+    self.authMode.subscribe(function (mode) {
+      if ((mode === 'bio' || mode === 'faceid') && window.Fingerprint) {
+        setTimeout(function () { self.doLogin(); }, 400);
+      }
+    });
 
     // ── Lifecycle ─────────────────────────────────────────────
     self.handleActivated = function () {

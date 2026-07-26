@@ -55,6 +55,7 @@ html,body{height:100%;margin:0;padding:0}
   --nav-h: 72px;
   --status-h: 0px;
   --safe-bottom: env(safe-area-inset-bottom,0px);
+  --c-bg-glass: rgba(245,246,250,.92);
 }
 
 /* ── Dark mode tokens ── */
@@ -83,6 +84,7 @@ html,body{height:100%;margin:0;padding:0}
     --shadow-md:  0 4px 12px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.25);
     --shadow-lg:  0 12px 32px rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.3);
     --shadow-card:0 20px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
+    --c-bg-glass: rgba(15,17,23,.95);
   }
 }
 :root[data-theme="dark"] {
@@ -108,12 +110,13 @@ html,body{height:100%;margin:0;padding:0}
   --shadow-md:  0 4px 12px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.25);
   --shadow-lg:  0 12px 32px rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.3);
   --shadow-card:0 20px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
+  --c-bg-glass: rgba(15,17,23,.95);
 }
 
 /* ── Dark mode component overrides ── */
-/* 1. Home header background */
-:root[data-theme="dark"] .app-bar{background:rgba(15,17,23,.95)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .app-bar{background:rgba(15,17,23,.95)}}
+/* 1. Home header background — now handled by --c-bg-glass token; kept for specificity on other screens */
+:root[data-theme="dark"] .app-bar{background:var(--c-bg-glass)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .app-bar{background:var(--c-bg-glass)}}
 
 /* 2. Link text — "See All", "View All", section links */
 :root[data-theme="dark"] .section-link,
@@ -384,3 +387,17 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 /* RTL support */
 .rtl{direction:rtl}
 .rtl .app-nav{flex-direction:row-reverse}
+
+/* ── Progressive tab load skeleton ── */
+.dash-tab-skeleton{display:flex;flex-direction:column;height:100%;background:var(--c-bg);overflow:hidden}
+.dash-skel-hero{height:190px;background:var(--c-primary-dd);flex-shrink:0}
+.dash-skel-body{padding:20px 16px;display:flex;flex-direction:column;gap:16px;flex:1}
+.dash-skel-row{height:16px;border-radius:8px;background:var(--c-border2)}
+.dash-skel-row--short{width:55%}
+.dash-skel-card{height:110px;border-radius:18px;background:var(--c-border2)}
+@keyframes dashSkelPulse{0%,100%{opacity:1}50%{opacity:.35}}
+.dash-skel-hero,.dash-skel-row,.dash-skel-card{animation:dashSkelPulse 1.3s ease-in-out infinite}
+
+/* ── Post-login entrance animations ── */
+@keyframes navbarEnter{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.app-authenticated .app-nav{animation:navbarEnter .65s cubic-bezier(.32,1,.23,1) .15s both}

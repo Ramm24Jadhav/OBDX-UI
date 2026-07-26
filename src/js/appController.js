@@ -229,6 +229,7 @@ define([
           'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
         );
         document.body.classList.add('segment-' + AppData.jsonContext);
+        document.body.classList.add('app-authenticated');
 
         // Update the global current-user observable from real profile data
         if (profile && profile.customer) {
@@ -245,6 +246,7 @@ define([
         AppData.userSegment = 'RETAIL';
         AppData.jsonContext  = 'retail';
         document.body.classList.add('segment-retail');
+        document.body.classList.add('app-authenticated');
       }).then(function () {
         SessionManager.start();
         Analytics.track('session_start', { segment: AppData.userSegment });
@@ -268,7 +270,8 @@ define([
       AppData.allowedComponents = {};
       AppData.isUserDataSet(false);
       document.body.classList.remove(
-        'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
+        'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon',
+        'app-authenticated'
       );
       self.sessionExpired(false);
       self.sessionSuspended(false);

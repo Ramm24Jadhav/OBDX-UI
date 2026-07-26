@@ -22,12 +22,34 @@
     <!-- ko if: tabVms.accounts() -->
     <!-- ko template: { nodes: tabViews.accounts(), data: tabVms.accounts() } --><!-- /ko -->
     <!-- /ko -->
+    <!-- ko ifnot: tabVms.accounts() -->
+    <div class="dash-tab-skeleton">
+      <div class="dash-skel-hero"></div>
+      <div class="dash-skel-body">
+        <div class="dash-skel-row"></div>
+        <div class="dash-skel-row dash-skel-row--short"></div>
+        <div class="dash-skel-card"></div>
+        <div class="dash-skel-row"></div>
+      </div>
+    </div>
+    <!-- /ko -->
   </div>
 
   <!-- Pay tab -->
   <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'pay' }">
     <!-- ko if: tabVms.pay() -->
     <!-- ko template: { nodes: tabViews.pay(), data: tabVms.pay() } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: tabVms.pay() -->
+    <div class="dash-tab-skeleton">
+      <div class="dash-skel-hero"></div>
+      <div class="dash-skel-body">
+        <div class="dash-skel-row"></div>
+        <div class="dash-skel-row dash-skel-row--short"></div>
+        <div class="dash-skel-card"></div>
+        <div class="dash-skel-row"></div>
+      </div>
+    </div>
     <!-- /ko -->
   </div>
 
@@ -36,12 +58,34 @@
     <!-- ko if: tabVms.cards() -->
     <!-- ko template: { nodes: tabViews.cards(), data: tabVms.cards() } --><!-- /ko -->
     <!-- /ko -->
+    <!-- ko ifnot: tabVms.cards() -->
+    <div class="dash-tab-skeleton">
+      <div class="dash-skel-hero"></div>
+      <div class="dash-skel-body">
+        <div class="dash-skel-row"></div>
+        <div class="dash-skel-row dash-skel-row--short"></div>
+        <div class="dash-skel-card"></div>
+        <div class="dash-skel-row"></div>
+      </div>
+    </div>
+    <!-- /ko -->
   </div>
 
   <!-- More tab -->
   <div class="dash-slot" data-bind="css: { 'dash-slot--active': currentTab() === 'more' }">
     <!-- ko if: tabVms.more() -->
     <!-- ko template: { nodes: tabViews.more(), data: tabVms.more() } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: tabVms.more() -->
+    <div class="dash-tab-skeleton">
+      <div class="dash-skel-hero"></div>
+      <div class="dash-skel-body">
+        <div class="dash-skel-row"></div>
+        <div class="dash-skel-row dash-skel-row--short"></div>
+        <div class="dash-skel-card"></div>
+        <div class="dash-skel-row"></div>
+      </div>
+    </div>
     <!-- /ko -->
   </div>
 
