@@ -13,9 +13,17 @@
 
     <!-- ko ifnot: isLoading() -->
     <div class="home-sheet">
+
+      <!-- ko ifnot: showAnalytics() -->
       <home-spending-overview params="[[$data]]"></home-spending-overview>
       <home-quick-actions     params="[[$data]]"></home-quick-actions>
       <home-recent-tx         params="[[$data]]"></home-recent-tx>
+      <!-- /ko -->
+
+      <!-- ko if: showAnalytics() -->
+      <home-analytics-panel params="[[$data]]"></home-analytics-panel>
+      <!-- /ko -->
+
     </div>
     <!-- /ko -->
 
@@ -23,6 +31,5 @@
   </div>
 
   <home-notifications-panel params="[[$data]]"></home-notifications-panel>
-  <home-analytics-panel     params="[[$data]]"></home-analytics-panel>
 
 </div>

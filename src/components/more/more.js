@@ -142,6 +142,10 @@
       context: self.originationContext
     };
 
+    // Expose so other tabs can open/close Profile directly without re-init
+    window._obdxOpenMoreProfile  = function () { self.showProfile(true); };
+    window._obdxCloseMoreProfile = function () { self.showProfile(false); };
+
     self.handleActivated = function () {};
     self.connected = self.handleActivated;
   }

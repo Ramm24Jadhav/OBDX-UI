@@ -9,6 +9,7 @@ define(['shared-components/utils', 'ojL10n!components/home/nls/strings'], functi
     this.toggleBalance = p.toggleBalance;
     this.toggleLang   = p.toggleLang;
     this.goToNotifs   = p.goToNotifs;
+    this.goToProfile  = p.goToProfile;
   }
   return HomeAppbarViewModel;
 });

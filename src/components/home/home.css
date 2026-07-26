@@ -21,13 +21,14 @@
 
 /* ── Scrollable content ── */
 .home-content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:0;overscroll-behavior:contain;will-change:transform}
-.home-sheet{background:var(--c-surface);border-radius:28px 28px 0 0;margin-top:12px;padding:4px 0 0;position:relative;z-index:1}
+.home-sheet{background:var(--c-surface);border-radius:28px 28px 0 0;margin:12px 10px 0;padding:4px 0 0;position:relative;z-index:1}
 /* Drag-handle notch at top of the bottom sheet */
 .home-sheet::before{content:'';display:block;width:40px;height:4px;border-radius:2px;background:var(--c-border2);margin:10px auto 8px}
 /* Surface-colored spacer so the nav-bar clearance area matches the sheet, not the
    primary background that would otherwise leak through behind the navbar */
-#home-root .bottom-spacer{height:100px;background:var(--c-surface)}
+#home-root .bottom-spacer{height:100px;background:var(--c-surface);margin:0 10px}
 .home-content::-webkit-scrollbar{display:none}
+
 
 .home-skeleton{padding:20px;display:flex;flex-direction:column;gap:12px}
 .skeleton-card{height:180px;border-radius:20px;background:linear-gradient(90deg,var(--c-border) 25%,var(--c-surface2) 50%,var(--c-border) 75%);background-size:200% 100%;animation:skeletonShimmer 1.4s ease-in-out infinite}

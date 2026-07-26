@@ -113,8 +113,26 @@
       self.unreadCount(0);
     };
 
-    self.openAnalytics  = function () { self.showAnalytics(true); };
-    self.closeAnalytics = function () { self.showAnalytics(false); };
+    self.openAnalytics = function () {
+      var el = _scrollEl || document.querySelector('.home-content');
+      if (el) el.scrollTo({ top: 0, behavior: 'instant' });
+      if (_snapToRef) _snapToRef(false);
+      setTimeout(function () { self.showAnalytics(true); }, 400);
+    };
+    self.closeAnalytics = function () {
+      self.showAnalytics(false);
+      _analyticsClosing = true;
+      setTimeout(function () {
+        if (_snapToRef) _snapToRef(true);
+        _analyticsClosing = false;
+      }, 450);
+    };
+
+    self.goToProfile = function () {
+      if (_analyticsClosing) return;
+      window.obdxApp && window.obdxApp.navigate('more');
+      if (window._obdxOpenMoreProfile) window._obdxOpenMoreProfile();
+    };
 
     self.formatAmount = function (amount) { return _fmt(Math.abs(amount)); };
 
@@ -132,12 +150,14 @@
     self.txIconSvg = function (category) { return (_txIcons[category] || _txIcons['shop']).svg; };
 
     // ── Lifecycle ─────────────────────────────────────────────
-    var _loadTimer  = null;
-    var _scrollEl   = null;
-    var _heroEl     = null;
-    var _heroBodyEl = null;
-    var _onScroll   = null;
-    var _openH      = 0;
+    var _loadTimer       = null;
+    var _scrollEl        = null;
+    var _heroEl          = null;
+    var _heroBodyEl      = null;
+    var _onScroll        = null;
+    var _snapToRef       = null;
+    var _openH           = 0;
+    var _analyticsClosing = false;
     // Collapsed height in vh (≈7vh = appbar height only)
     var CLOSED_H    = Math.round(window.innerHeight * 0.07);
 
@@ -165,7 +185,7 @@
           }
         });
 
-        function _snapTo(open) {
+        _snapToRef = function (open) {
           void _heroEl.offsetHeight;
           _heroEl.style.transition = '';
           _heroEl.style.height     = (open ? _openH : CLOSED_H) + 'px';
@@ -175,13 +195,14 @@
             _heroBodyEl.style.transform  = open ? '' : 'translateY(-100%)';
           }
           self.heroCollapsed(!open);
-        }
+        };
 
-        // Scroll-driven collapse only (handle removed)
+        // Scroll-driven collapse — blocked while analytics is open
         _onScroll = function () {
+          if (self.showAnalytics()) return;
           var shouldCollapse = _scrollEl.scrollTop > 30;
           if (shouldCollapse !== self.heroCollapsed()) {
-            _snapTo(!shouldCollapse);
+            _snapToRef(!shouldCollapse);
           }
         };
         _scrollEl.addEventListener('scroll', _onScroll, { passive: true });
