@@ -64,6 +64,23 @@ define([
     } catch (e) {}
   }());
 
+  // Calls cb() exactly once when home data is bound to KO observables.
+  // If already ready (flag set), fires synchronously. 5s timeout is a safety net.
+  function _whenHomeReady(cb) {
+    var called = false;
+    function _once() {
+      if (called) return;
+      called = true;
+      cb();
+    }
+    if (window._obdxHomeDataReady) {
+      _once();
+    } else {
+      document.addEventListener('obdx:home:data-ready', _once, { once: true });
+      setTimeout(_once, 5000);
+    }
+  }
+
   function ControllerViewModel() {
     var self = this;
 
@@ -229,7 +246,6 @@ define([
           'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon'
         );
         document.body.classList.add('segment-' + AppData.jsonContext);
-        document.body.classList.add('app-authenticated');
 
         // Update the global current-user observable from real profile data
         if (profile && profile.customer) {
@@ -246,12 +262,27 @@ define([
         AppData.userSegment = 'RETAIL';
         AppData.jsonContext  = 'retail';
         document.body.classList.add('segment-retail');
-        document.body.classList.add('app-authenticated');
       }).then(function () {
         SessionManager.start();
         Analytics.track('session_start', { segment: AppData.userSegment });
         Chatbot.init();
-        self.navigate('home');
+        document.body.classList.add('app-authenticated');
+        // Wait for home data to be bound before showing the home screen.
+        // The auth loader stays visible until this callback fires.
+        _whenHomeReady(function () {
+          self.hideLoader();
+          self.navigate('home');
+          // Force-reset animation so it replays on every login
+          var root = document.getElementById('home-root');
+          if (root) {
+            root.classList.remove('home-ready');
+            void root.offsetWidth; // reflow to reset CSS animation
+            root.classList.add('home-ready');
+          }
+          document.body.classList.remove('home-ready');
+          void document.body.offsetWidth;
+          document.body.classList.add('home-ready');
+        });
       });
     };
 
@@ -269,9 +300,10 @@ define([
       AppData.currentEntity     = null;
       AppData.allowedComponents = {};
       AppData.isUserDataSet(false);
+      window._obdxHomeDataReady = false;
       document.body.classList.remove(
         'segment-retail', 'segment-corporate', 'segment-admin', 'segment-anon',
-        'app-authenticated'
+        'app-authenticated', 'home-ready'
       );
       self.sessionExpired(false);
       self.sessionSuspended(false);

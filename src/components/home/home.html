@@ -14,14 +14,6 @@
 
   <div class="home-content" data-bind="css: {'home-content--loading': isLoading()}">
 
-    <!-- ko if: isLoading() -->
-    <div class="home-skeleton">
-      <div class="skeleton-card"></div>
-      <div class="skeleton-row"></div>
-      <div class="skeleton-row skeleton-row--short"></div>
-    </div>
-    <!-- /ko -->
-
     <!-- ko ifnot: isLoading() -->
     <div class="home-sheet">
       <home-spending-overview params="[[$data]]"></home-spending-overview>

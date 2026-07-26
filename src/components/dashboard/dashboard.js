@@ -99,15 +99,28 @@ define([
       });
     }
 
+    // Tear down authenticated tab VMs on logout so they are rebuilt fresh on next login.
+    function _clearTabs() {
+      AUTH_TAB_KEYS.forEach(function (key) {
+        var vm = self.tabVms[key]();
+        if (vm && typeof vm.disconnected === 'function') vm.disconnected();
+        self.tabVms[key](null);
+        self.tabViews[key](null);
+      });
+    }
+
+    // Persistent subscription: activate on every login, clear on every logout.
+    self.isAuthenticated.subscribe(function (auth) {
+      if (auth) {
+        _activateTabs();
+      } else {
+        _clearTabs();
+      }
+    });
+
+    // Handle the case where the dashboard mounts while already authenticated.
     if (self.isAuthenticated()) {
       _activateTabs();
-    } else {
-      var _authSub = self.isAuthenticated.subscribe(function (auth) {
-        if (auth) {
-          _activateTabs();
-          _authSub.dispose();
-        }
-      });
     }
   }
 

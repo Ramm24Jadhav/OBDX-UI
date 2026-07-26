@@ -282,6 +282,10 @@
         console.error('Home load error', err);
       }).finally(function () {
         self.isLoading(false);
+        // Signal appController that home data is bound to KO observables.
+        // appController.login() will then hideLoader() + navigate() + add home-ready.
+        window._obdxHomeDataReady = true;
+        document.dispatchEvent(new CustomEvent('obdx:home:data-ready'));
       });
       // Load notifications in background — don't block initial render
       UserService.getNotifications().then(function (r) {

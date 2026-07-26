@@ -107,7 +107,7 @@
       window.obdxApp && window.obdxApp.showLoader('Authenticating', 'Verifying your credentials');
       platform.login(credentials).then(function () {
         self.isLoading(false);
-        window.obdxApp && window.obdxApp.hideLoader();
+        // Loader stays visible — appController.login() hides it after home data is ready
         window.obdxApp && window.obdxApp.login();
       }).catch(function (err) {
         self.isLoading(false);

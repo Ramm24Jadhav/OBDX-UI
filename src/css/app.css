@@ -399,5 +399,15 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 .dash-skel-hero,.dash-skel-row,.dash-skel-card{animation:dashSkelPulse 1.3s ease-in-out infinite}
 
 /* ── Post-login entrance animations ── */
-@keyframes navbarEnter{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-.app-authenticated .app-nav{animation:navbarEnter .65s cubic-bezier(.32,1,.23,1) .15s both}
+/* Hero panel rolls down from the top of the screen */
+@keyframes homeHeroRollDown{from{transform:translateY(-100vh)}to{transform:translateY(0)}}
+/* Content sheet rolls up from the bottom — parallel with hero */
+@keyframes homeContentRollUp{from{transform:translateY(100vh);opacity:0}to{transform:translateY(0);opacity:1}}
+/* Navbar bounces up after panels settle */
+@keyframes navbarBounceUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* Animations fire when home-ready class is added (after data is bound to KO elements) */
+#home-root.home-ready .home-hero-sheet{animation:homeHeroRollDown .65s cubic-bezier(.22,1,.36,1) both}
+#home-root.home-ready .home-content{animation:homeContentRollUp .65s cubic-bezier(.22,1,.36,1) both}
+/* Navbar bounces up with a spring overshoot after panels settle */
+body.home-ready .app-nav{animation:navbarBounceUp .5s cubic-bezier(.34,1.56,.64,1) .42s both}
