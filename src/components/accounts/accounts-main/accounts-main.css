@@ -2,7 +2,7 @@
 .acc-hero{background:var(--c-primary);padding:0;position:relative;overflow:hidden;transition:background .55s cubic-bezier(.4,0,.2,1);}
 .acc-hero--deposits{background:var(--c-deposit);}
 .acc-hero--loans{background:#1A3353;}
-.acc-hero-inner{position:relative;z-index:1;padding:4px 16px 16px;}
+.acc-hero-inner{position:relative;z-index:1;padding:calc(var(--status-h) + 24px) 16px 16px;}
 
 /* Swoosh blobs */
 .acc-hero-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.12);pointer-events:none;will-change:transform,opacity;}

@@ -125,7 +125,7 @@
     </div><!-- /acc-hero -->
 
     <!-- Scrollable body — rounded top corners overlap hero -->
-    <div style="overflow-y:auto;flex:1;border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
+    <div class="acc-body-sheet" style="overflow-y:auto;flex:1;border-radius:20px 20px 0 0;margin-top:-20px;background:var(--c-bg);position:relative;z-index:2;">
 
       <!-- Current & Savings tab -->
       <acct-list params="[[accountListParams]]" data-bind="visible: showCurrentSavings()"></acct-list>
@@ -146,7 +146,7 @@
   <acct-sheets params="[[sheetsParams]]"></acct-sheets>
 
   <!-- Origination flow -->
-  <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:200;">
+  <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:200;transform:translate(0,0);">
     <acct-origination params="[[originationParams]]"></acct-origination>
   </div>
 

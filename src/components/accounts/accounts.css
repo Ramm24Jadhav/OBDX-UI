@@ -120,6 +120,7 @@
 
 /* ── accounts-main sub-component ── */
 .acc-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:16px 20px 24px}
+.acc-body-sheet::before{content:'';display:block;width:40px;height:4px;border-radius:2px;background:var(--c-border2);margin:10px auto 8px}
 .acc-hero-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .acc-hero-header h2{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.4px}
 .acc-hero-header .icon-btn{background:rgba(255,255,255,.12);box-shadow:none}
