@@ -49,8 +49,8 @@ obdx-toast {
   pointer-events: auto;
 }
 .obdx-toast-clear-all button {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
   color: #fff;
   background: rgba(255, 255, 255, .22);
   border: 1.5px solid rgba(255, 255, 255, .5);
@@ -105,11 +105,11 @@ obdx-toast {
 /* Message text */
 .obdx-toast__msg {
   flex: 1;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-regular);
   color: var(--c-t1);
   padding: 14px 10px 14px 14px;
-  line-height: 1.4;
+  line-height: var(--lh-normal);
 }
 
 /* Optional action button */
@@ -118,8 +118,8 @@ obdx-toast {
   background: none;
   border: 1.5px solid var(--c-border);
   border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
   color: var(--c-primary);
   padding: 5px 11px;
   margin: 0 6px;

@@ -57,13 +57,13 @@
   color: var(--c-primary);
 }
 .sc-modal-title {
-  font-size: 16px; font-weight: 800;
+  font-size: var(--fs-2xl); font-weight: var(--fw-heavy);
   color: var(--c-t1); text-align: center;
-  letter-spacing: -.3px; margin-bottom: 4px;
+  letter-spacing: var(--ls-display); margin-bottom: 4px;
 }
 .sc-modal-sub {
-  font-size: 12px; color: var(--c-t3);
-  text-align: center; line-height: 1.5;
+  font-size: var(--fs-base); color: var(--c-t3);
+  text-align: center; line-height: var(--lh-loose);
   margin-bottom: 20px;
 }
 
@@ -83,12 +83,12 @@
   gap: 8px;
 }
 .sc-piece__slot {
-  font-size: 10px; font-weight: 700;
+  font-size: var(--fs-xs); font-weight: var(--fw-bold);
   letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--c-t3);
 }
 .sc-sep {
-  font-size: 32px; font-weight: 900;
+  font-size: var(--fs-8xl); font-weight: var(--fw-black);
   color: var(--c-t3); line-height: 1;
   margin-top: 8px; align-self: flex-start;
   user-select: none;
@@ -122,12 +122,12 @@
   height: var(--sc-half);
   width: var(--sc-w);
   color: #fff;
-  font-weight: 900;
+  font-weight: var(--fw-black);
   text-align: center;
   padding: .2em .1em;
   -webkit-font-smoothing: antialiased;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-tightest);
   transform: translateZ(0);
   transform-style: preserve-3d;
 }
@@ -227,7 +227,7 @@
   width: 100%;
   padding: 13px 16px;
   border-radius: 11px;
-  font-size: 13px; font-weight: 700;
+  font-size: var(--fs-md); font-weight: var(--fw-bold);
   cursor: pointer; border: none;
   font-family: inherit;
   background: var(--c-primary); color: #fff;

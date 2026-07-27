@@ -12,7 +12,7 @@
 }
 .pay-flow-title {
   flex: 1;
-  font-size: 18px;
+  font-size: var(--fs-3xl);
   font-weight: var(--fw-heavy);
   color: #fff;
   text-align: center;
