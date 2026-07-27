@@ -2,13 +2,13 @@
 .login-hero-brand{display:flex;flex-direction:column;align-items:center;gap:10px}
 .login-hero-logo{display:flex;align-items:center;gap:12px}
 .login-hero-logo svg{width:42px;height:42px;flex-shrink:0}
-.login-hero-logo span{font-size:22px;font-weight:900;color:#fff;letter-spacing:2.5px}
-.login-hero-tagline{font-size:13px;font-weight:400;color:rgba(255,255,255,.52);letter-spacing:.3px;text-align:center;margin:0;line-height:1.4}
+.login-hero-logo span{font-size:var(--fs-5xl);font-weight:var(--fw-black);color:#fff;letter-spacing:var(--ls-widest)}
+.login-hero-tagline{font-size:var(--fs-md);font-weight:400;color:rgba(255,255,255,.52);letter-spacing:var(--ls-wide);text-align:center;margin:0;line-height:var(--lh-normal)}
 
 @media(max-height:700px){
   .login-hero{padding-bottom:calc(75dvh + 16px)}
   .login-hero-brand{gap:7px}
   .login-hero-logo svg{width:34px;height:34px}
-  .login-hero-logo span{font-size:18px}
-  .login-hero-tagline{font-size:11px}
+  .login-hero-logo span{font-size:var(--fs-3xl)}
+  .login-hero-tagline{font-size:var(--fs-sm)}
 }

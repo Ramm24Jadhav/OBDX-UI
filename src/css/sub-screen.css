@@ -7,7 +7,7 @@
 .sub-header:not(.dark) .back-btn{background:var(--c-surface);box-shadow:var(--shadow-sm)}
 .back-btn svg{width:18px;height:18px;color:#fff}
 .sub-header:not(.dark) .back-btn svg{color:var(--c-t1)}
-.sub-header h2{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;flex:1}
+.sub-header h2{font-size:var(--fs-3xl);font-weight:var(--fw-heavy);color:#fff;letter-spacing:var(--ls-display);flex:1}
 .sub-header:not(.dark) h2{color:var(--c-t1)}
 @media(max-width:360px){.sub-header{padding:10px 14px 6px}}
 .rtl .sub-header{flex-direction:row-reverse}

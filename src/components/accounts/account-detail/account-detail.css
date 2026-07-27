@@ -1,28 +1,28 @@
-﻿/* .app-sub-panel / .app-back-btn base styles live in app.css (shared pattern) */
+/* .app-sub-panel / .app-back-btn base styles live in app.css (shared pattern) */
 /* Detail hero */
 .acct-detail-hero{background:linear-gradient(160deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);padding:10px 20px 16px}
 .acct-detail-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .acct-detail-icon{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .acct-detail-icon svg{width:18px;height:18px;color:#fff}
 .acct-detail-meta{flex:1;min-width:0}
-.acct-detail-meta h3{font-size:14px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.acct-detail-meta p{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px;font-family:monospace}
-.acct-bal-big{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:2px}
-.acct-bal-label{font-size:10px;color:rgba(255,255,255,.5);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.acct-detail-meta h3{font-size:var(--fs-lg);font-weight:var(--fw-heavy);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-detail-meta p{font-size:var(--fs-sm);color:rgba(255,255,255,.55);margin-top:1px;font-family:monospace}
+.acct-bal-big{font-size:var(--fs-6xl);font-weight:var(--fw-heavy);color:#fff;letter-spacing:var(--ls-tight);margin-bottom:2px}
+.acct-bal-label{font-size:var(--fs-xs);color:rgba(255,255,255,.5);font-weight:var(--fw-regular);text-transform:uppercase;letter-spacing:var(--ls-wider)}
 .acct-action-row{display:flex;gap:0;margin-top:12px;background:rgba(255,255,255,.08);border-radius:var(--r-lg);overflow:hidden}
 .acct-action-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;cursor:pointer;border:none;background:none;border-right:1px solid rgba(255,255,255,.08);transition:background .15s}
 .acct-action-btn:last-child{border-right:none}
 .acct-action-btn:active{background:rgba(255,255,255,.1)}
 .acct-action-btn svg{width:18px;height:18px;color:rgba(255,255,255,.9)}
-.acct-action-btn span{font-size:10px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.2px}
+.acct-action-btn span{font-size:var(--fs-xs);font-weight:var(--fw-bold);color:rgba(255,255,255,.7);letter-spacing:var(--ls-wide)}
 /* Detail tab row */
 .detail-tabs{display:flex;border-bottom:2px solid var(--c-border);padding:0 20px;background:var(--c-surface)}
-.detail-tab{padding:14px 16px;font-size:13px;font-weight:700;color:var(--c-t3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.detail-tab{padding:14px 16px;font-size:var(--fs-md);font-weight:var(--fw-bold);color:var(--c-t3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
 .detail-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
 /* Legacy acc-detail classes */
 .acc-detail{padding:16px 20px}
 .acc-detail__balance-card{padding:20px;border-radius:var(--r-xl);background:linear-gradient(135deg,var(--c-primary) 0%,var(--c-primary-dd) 100%);margin-bottom:16px}
-.acc-detail__balance-label{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:4px}
-.acc-detail__balance{font-size:28px;font-weight:800;color:#fff}
-.acc-detail__number{font-size:12px;color:rgba(255,255,255,.5);font-family:monospace;margin-top:6px}
+.acc-detail__balance-label{font-size:var(--fs-sm);color:rgba(255,255,255,.6);margin-bottom:4px}
+.acc-detail__balance{font-size:var(--fs-7xl);font-weight:var(--fw-heavy);color:#fff}
+.acc-detail__number{font-size:var(--fs-base);color:rgba(255,255,255,.5);font-family:monospace;margin-top:6px}
 .acc-detail__actions{display:flex;gap:10px}

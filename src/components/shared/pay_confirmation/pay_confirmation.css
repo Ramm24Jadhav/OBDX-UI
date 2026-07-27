@@ -10,8 +10,8 @@
 .conf-icon-wrap { margin-bottom:4px; }
 .conf-icon--spin { animation:conf-icon-spin 1.8s linear infinite; }
 
-.conf-status-title { font-size:22px;font-weight:900;color:#fff;text-align:center;margin:0; }
-.conf-status-sub   { font-size:13px;color:rgba(255,255,255,.75);text-align:center;margin:0; }
+.conf-status-title { font-size:var(--fs-5xl);font-weight:var(--fw-black);color:#fff;text-align:center;margin:0; }
+.conf-status-sub   { font-size:var(--fs-md);color:rgba(255,255,255,.75);text-align:center;margin:0; }
 
 /* Amount card */
 .conf-amount-card {
@@ -19,16 +19,16 @@
   background:linear-gradient(135deg,var(--c-primary) 0%,#C8A45D 100%);
   border-radius:18px;padding:20px;color:#fff;text-align:center;
 }
-.conf-amount-lbl { font-size:10px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px; }
-.conf-amount-val { font-size:32px;font-weight:900;letter-spacing:-.5px;margin-bottom:4px; }
-.conf-amount-to  { font-size:12px;opacity:.8; }
+.conf-amount-lbl { font-size:var(--fs-xs);font-weight:var(--fw-medium);opacity:.75;text-transform:uppercase;letter-spacing:var(--ls-wider);margin-bottom:6px; }
+.conf-amount-val { font-size:var(--fs-8xl);font-weight:var(--fw-black);letter-spacing:var(--ls-tight);margin-bottom:4px; }
+.conf-amount-to  { font-size:var(--fs-base);opacity:.8; }
 
 /* Detail card */
 .conf-detail-card { margin:12px 20px 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;overflow:hidden; }
 .conf-detail-row  { display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--c-border); }
 .conf-detail-row--last { border-bottom:none; }
-.conf-detail-lbl  { font-size:12px;color:var(--c-t3); }
-.conf-detail-val  { font-size:12px;font-weight:700;color:var(--c-t1); }
+.conf-detail-lbl  { font-size:var(--fs-base);color:var(--c-t3); }
+.conf-detail-val  { font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--c-t1); }
 .conf-detail-status--success  { color:#16A34A; }
 .conf-detail-status--failure  { color:#DC2626; }
 .conf-detail-status--pending  { color:#D97706; }
@@ -36,7 +36,7 @@
 
 /* Receipt section */
 .conf-receipt-section { margin:12px 20px 0; }
-.conf-receipt-header  { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--c-t3);margin-bottom:8px;padding:0 2px; }
+.conf-receipt-header  { font-size:var(--fs-xs);font-weight:var(--fw-bold);text-transform:uppercase;letter-spacing:var(--ls-widest);color:var(--c-t3);margin-bottom:8px;padding:0 2px; }
 .conf-receipt-loading { display:flex;flex-direction:column;gap:8px; }
 .conf-skeleton        { height:14px;border-radius:6px;background:var(--c-border);width:100%;animation:conf-shimmer 1.4s ease infinite; }
 @keyframes conf-shimmer { 0%,100%{opacity:.5} 50%{opacity:1} }
@@ -45,8 +45,8 @@
 .conf-receipt-card { background:var(--c-surface);border:1px solid var(--c-border);border-radius:16px;overflow:hidden; }
 .conf-receipt-row  { display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--c-border); }
 .conf-receipt-row--last { border-bottom:none; }
-.conf-receipt-row__lbl { font-size:11px;color:var(--c-t3); }
-.conf-receipt-row__val { font-size:12px;font-weight:700;color:var(--c-t1);text-align:right;max-width:55%; }
+.conf-receipt-row__lbl { font-size:var(--fs-sm);color:var(--c-t3); }
+.conf-receipt-row__val { font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--c-t1);text-align:right;max-width:55%; }
 
 /* Actions */
 .conf-actions { margin:20px 20px 0;display:flex;flex-direction:column;gap:10px; }

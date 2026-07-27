@@ -10,7 +10,7 @@
 .mpin-dot.filled{background:var(--c-primary);border-color:var(--c-primary);transform:scale(1.15)}
 
 /* Error */
-.lb-error{font-size:12px;color:var(--c-error);text-align:center;margin:0.3vh 0;min-height:1.8vh}
+.lb-error{font-size:var(--fs-base);color:var(--c-error);text-align:center;margin:0.3vh 0;min-height:1.8vh}
 
 /* Keypad grid — flex:1 fills remaining height; rows divide it into 4 equal slices */
 .mpin-pad{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:1vh;width:100%}
@@ -23,7 +23,7 @@
   background:var(--c-surface);
   box-shadow:0 1px 4px rgba(0,0,0,.07),0 0 0 1px rgba(0,0,0,.04);
   font-size:2.8vh;
-  font-weight:500;
+  font-weight:var(--fw-regular);
   color:var(--c-t1);
   cursor:pointer;
   display:flex;
@@ -43,9 +43,9 @@
 }
 .mpin-key small{
   font-size:1vh;
-  letter-spacing:1.2px;
+  letter-spacing:var(--ls-widest);
   color:var(--c-t4);
-  font-weight:600;
+  font-weight:var(--fw-medium);
   text-transform:uppercase;
 }
 .mpin-key:active small{color:var(--c-primary)}
@@ -54,6 +54,6 @@
 
 /* Alt method links below the pad */
 .lb-alt-methods{margin-top:1vh;flex-wrap:wrap;justify-content:center;gap:8px}
-.lb-alt-methods span{font-size:12px;color:var(--c-t4)}
-.lb-alt-btn{font-size:12px;font-weight:700;color:var(--c-t3);background:none;border:none;cursor:pointer;padding:4px 2px;transition:color .15s}
+.lb-alt-methods span{font-size:var(--fs-base);color:var(--c-t4)}
+.lb-alt-btn{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--c-t3);background:none;border:none;cursor:pointer;padding:4px 2px;transition:color .15s}
 .lb-alt-btn:hover{color:var(--c-primary)}

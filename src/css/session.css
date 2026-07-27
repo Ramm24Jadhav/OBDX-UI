@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    Session Expired / Suspended Modal  (z-index 960)
    ========================================================== */
 .app-session-modal{position:absolute;inset:0;z-index:960;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s}
@@ -6,6 +6,6 @@
 .app-session-sheet{background:var(--c-surface);border-radius:24px;padding:32px 24px 28px;margin:24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.22);transform:scale(.94);transition:transform .3s cubic-bezier(.32,1,.23,1)}
 .app-session-modal--open .app-session-sheet{transform:scale(1)}
 .session-icon{width:72px;height:72px;border-radius:50%;background:rgba(var(--c-primary-rgb),.08);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.session-title{font-size:20px;font-weight:700;color:var(--c-t1);margin:0 0 10px}
-.session-sub{font-size:14px;color:var(--c-t2);line-height:1.55;margin:0 0 24px}
-.session-action-btn{display:block;width:100%;padding:15px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.01em}
+.session-title{font-size:var(--fs-4xl);font-weight:var(--fw-bold);color:var(--c-t1);margin:0 0 10px}
+.session-sub{font-size:var(--fs-lg);color:var(--c-t2);line-height:var(--lh-loose);margin:0 0 24px}
+.session-action-btn{display:block;width:100%;padding:15px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-size:var(--fs-xl);font-weight:var(--fw-bold);cursor:pointer;letter-spacing:.01em}
