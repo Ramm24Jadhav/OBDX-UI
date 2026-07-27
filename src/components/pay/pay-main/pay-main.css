@@ -62,6 +62,7 @@
 
 /* Transfer type cards */
 .pay-type-card { display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border);background:var(--c-surface);margin-bottom:8px;cursor:pointer;transition:all .2s; }
+.pay-type-card:active { transform:scale(.98); }
 .pay-type-card--active { border-color:var(--c-primary);background:rgba(var(--c-primary-rgb),.04); }
 .pay-type-card__text { flex:1; }
 .pay-type-card__label { display:block;font-size:var(--fs-lg);font-weight:var(--fw-bold);color:var(--c-t1); }
@@ -71,7 +72,7 @@
 
 /* Beneficiary list items */
 .pay-ben-row-item { display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border);cursor:pointer;-webkit-tap-highlight-color:transparent; }
-.pay-ben-row-item:active { background:var(--c-surface); }
+.pay-ben-row-item:active { background:var(--c-surface);transform:scale(.99); }
 .pay-ben-row-item--selected { background:rgba(var(--c-primary-rgb),.04);border-radius:12px; }
 .pay-ben-row-item__avatar { width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--fs-md);font-weight:var(--fw-heavy);color:#fff;flex-shrink:0; }
 .pay-ben-row-item__info { flex:1;min-width:0; }

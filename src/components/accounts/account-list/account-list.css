@@ -9,8 +9,8 @@
 
 /* Account list — spacious row design */
 .acc-cards-list{display:flex;flex-direction:column;gap:10px;padding:12px 16px 0;}
-.acc-card{display:flex;align-items:center;gap:14px;padding:16px 14px;background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);cursor:pointer;transition:opacity .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.acc-card:active{opacity:.75;box-shadow:none}
+.acc-card{display:flex;align-items:center;gap:14px;padding:16px 14px;background:var(--c-surface);border-radius:16px;border:1px solid var(--c-border);cursor:pointer;transition:opacity .15s,box-shadow .15s,transform .15s;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 3px rgba(0,0,0,.05);will-change:transform}
+.acc-card:active{opacity:.75;box-shadow:none;transform:scale(.98)}
 .acc-card-icon-wrap{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .acc-card-icon-wrap svg{width:22px;height:22px}
 .acc-card-body{flex:1;min-width:0}

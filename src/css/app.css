@@ -212,7 +212,7 @@ input[type="text"],input[type="tel"],input[type="email"],input[type="number"],in
 .dash-container{position:relative;height:100%;overflow:hidden}
 .dash-slot{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .22s ease,transform .22s ease;will-change:opacity,transform}
 .dash-slot--active{opacity:1;pointer-events:auto;transform:translateY(0)}
-.app-screen{position:absolute;inset:0;background:var(--c-bg);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-top:var(--status-h);padding-bottom:120px;scrollbar-width:none;display:flex;flex-direction:column;overscroll-behavior:contain;will-change:transform}
+.app-screen{position:absolute;inset:0;background:var(--c-bg);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-top:var(--status-h);padding-bottom:120px;scrollbar-width:none;display:flex;flex-direction:column;overscroll-behavior:none;will-change:transform}
 .app-screen::-webkit-scrollbar{display:none}
 .app-screen--login{padding-top:0;padding-bottom:0}
 
@@ -227,7 +227,8 @@ input[type="text"],input[type="tel"],input[type="email"],input[type="number"],in
   box-shadow:0 12px 40px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.06);
 }
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:none;background:none;cursor:pointer;padding:4px 0;border-radius:18px;transition:background .2s}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:none;background:none;cursor:pointer;padding:4px 0;border-radius:18px;transition:background .2s,opacity .1s,transform .1s;will-change:transform}
+.nav-btn:active{opacity:.6;transform:scale(.92)}
 .nav-btn.active,.nav-btn[aria-selected="true"]{background:rgba(255,255,255,.07)}
 .nav-icon-wrap{position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center}
 .nav-icon-wrap svg{width:20px;height:20px;color:rgba(255,255,255,.35);transition:color .25s}
@@ -324,6 +325,7 @@ input[type="text"],input[type="tel"],input[type="email"],input[type="number"],in
 /* Toggle tabs */
 .toggle-tabs{display:flex;background:var(--c-bg);border-radius:10px;padding:3px;gap:2px}
 .toggle-tab{flex:1;padding:7px;border-radius:8px;border:none;background:transparent;font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--c-t3);cursor:pointer;transition:all .2s}
+.toggle-tab:active{opacity:.7}
 .toggle-tab.active{background:var(--c-surface);color:var(--c-t1);box-shadow:var(--shadow-sm)}
 
 /* Eye button */
@@ -394,8 +396,8 @@ body.sens-hidden .s-num,body.sens-hidden .hero-amount,body.sens-hidden .acc-tota
 .app-sheet-cancel-link{display:block;text-align:center;font-size:var(--fs-md);font-weight:var(--fw-medium);color:var(--c-t3);cursor:pointer;margin-top:12px;padding:8px;background:none;border:none;width:100%}
 
 /* ── buttons ── */
-.app-btn{display:flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:14px;font-size:var(--fs-xl);font-weight:var(--fw-bold);cursor:pointer;border:none;transition:opacity .15s,transform .15s;gap:6px;font-family:inherit;text-align:center;line-height:1}
-.app-btn:active{opacity:.85;transform:scale(.98)}
+.app-btn{display:flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:14px;font-size:var(--fs-xl);font-weight:var(--fw-bold);cursor:pointer;border:none;transition:opacity .12s,transform .12s,background-color .12s;gap:6px;font-family:inherit;text-align:center;line-height:1;will-change:transform}
+.app-btn:active{opacity:.8;transform:scale(.95)}
 .app-btn--primary{background:var(--c-primary);color:#fff}
 .app-btn--ghost{background:transparent;border:1.5px solid var(--c-border);color:var(--c-t1)}
 .app-btn--outline{background:transparent;border:1.5px solid var(--c-primary);color:var(--c-primary)}
